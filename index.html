@@ -1,0 +1,2551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Premium Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            color: #1c1d20;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Center align items vertically */
+            padding: 40px;
+            font-size: 18px;
+            position: relative;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: transparent;
+            color: white;
+            mix-blend-mode: difference;
+            opacity: 1;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .top-nav .links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            /* Center align items vertically */
+        }
+
+        .top-nav .links span {
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .top-nav .links .menu-text {
+            display: none;
+        }
+
+        .top-nav .links span:hover {
+            opacity: 0.5;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 3vw 72px;
+            position: relative;
+            background-color: #e5e5e5;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            transform: translateY(-5vh);
+        }
+
+        /* Location Badge - Left */
+        .location-badge {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #1c1d20;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+        }
+
+        .location-badge .globe-icon {
+            width: 40px;
+            height: 40px;
+            background: #6b6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotateGlobe 3s linear infinite;
+        }
+
+        @keyframes rotateGlobe {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .location-badge .globe-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .location-text {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .location-text span {
+            display: block;
+        }
+
+        /* Hero Photo - Center */
+        .hero-photo-wrapper {
+            width: 100%;
+            max-width: 100%;
+            aspect-ratio: 3/4;
+            position: relative;
+            height: 95vh;
+            max-height: none;
+        }
+
+        .hero-photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transform: scale(1.2);
+        }
+
+        /* Footer Social Buttons (Magnetic) */
+        .footer-social-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .social-btn {
+            width: 70px;
+            height: 70px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-btn svg {
+            width: 30px;
+            height: 30px;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+
+        /* Hover States for Footer Buttons */
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
+        }
+
+        .social-btn:hover {
+            border-color: transparent;
+            transform: scale(1.1);
+        }
+
+        .social-btn:hover::before {
+            transform: scale(1);
+        }
+
+        .social-btn.whatsapp::before {
+            background: #25D366;
+        }
+
+        .social-btn.line::before {
+            background: #00B900;
+        }
+
+        .social-btn.telegram::before {
+            background: #0088cc;
+        }
+
+        .social-btn:hover svg {
+            fill: white;
+            color: white;
+        }
+
+
+        /* Role Text - Right */
+        .hero-role {
+            text-align: right;
+        }
+
+        .hero-role h2 {
+            font-size: clamp(2rem, 4vw, 5rem);
+            font-weight: 300;
+            line-height: 1.2;
+            color: #1c1d20;
+        }
+
+        .hero-arrow {
+            display: flex;
+            justify-content: flex-end;
+            /* Align right to match text desktop */
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .hero-arrow svg {
+            width: 4vw;
+            height: 4vw;
+            min-width: 30px;
+            min-height: 30px;
+            color: #1c1d20;
+        }
+
+        /* WORK SECTION - BENTO GRID STYLE */
+        .work {
+            padding: 100px 0;
+            background: #f1f1f1;
+        }
+
+        .work-header {
+            padding: 0 10vw 60px;
+        }
+
+        .work-header h1 {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 400;
+            color: #1c1d20;
+            margin-bottom: 20px;
+        }
+
+        .work-header p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: #666;
+            max-width: 600px;
+        }
+
+        .work-grid {
+            padding: 0 10vw;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            /* Spacious premium feel */
+        }
+
+        /* Default Project Item Styling for Full View */
+        .project-item {
+            width: 100%;
+            height: 85vh;
+            /* Immersive height */
+            min-height: 600px;
+            /* Resetting grid specific properties implicitly by not using grid */
+        }
+
+        /* Removed specific grid-column/row rules to allow natural stacking */
+
+        /* Premium About Section (Sticky) (ADDED) */
+        .about-me-section {
+            padding: 150px 5vw;
+            background: #fff;
+            position: relative;
+        }
+
+        .about-container-premium {
+            display: flex;
+            align-items: flex-start;
+            /* Crucial for sticky */
+            gap: 5%;
+            position: relative;
+        }
+
+        .about-image-wrap {
+            width: 45%;
+            height: auto;
+            position: sticky;
+            top: 100px;
+            /* Stick 100px from top */
+        }
+
+        .about-sticky-img {
+            width: 100%;
+            height: 80vh;
+            object-fit: cover;
+            /* Sharp premium look, no border radius */
+        }
+
+        .about-text-content {
+            width: 50%;
+            padding-top: 50px;
+            /* Offset slightly */
+            padding-bottom: 100px;
+            /* Scroll space - Reduced */
+        }
+
+        .about-premium-title {
+            font-size: 5vw;
+            line-height: 1;
+            margin-bottom: 60px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .premium-text {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: #333;
+            font-weight: 400;
+        }
+
+        .premium-text strong {
+            color: #000;
+            font-weight: 600;
+        }
+
+        .premium-text.highlight {
+            font-size: 1.8rem;
+            color: #000;
+            margin-top: 60px;
+            border-left: 4px solid #000;
+            padding-left: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .about-container-premium {
+                flex-direction: column;
+            }
+
+            .about-image-wrap {
+                width: 100%;
+                position: relative;
+                top: 0;
+                height: 60vh;
+                margin-bottom: 50px;
+            }
+
+            .about-text-content {
+                width: 100%;
+                padding-bottom: 50px;
+            }
+
+            .about-premium-title {
+                font-size: 12vw;
+            }
+
+            .premium-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        .project-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .project-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border-color: rgba(69, 92, 233, 0.3);
+        }
+
+        .project-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .project-item:hover .project-bg {
+            transform: scale(1.05);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: background 0.4s ease;
+        }
+
+        .project-item:hover .project-overlay {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.85));
+        }
+
+        .project-top {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+
+        .project-number {
+            display: none;
+        }
+
+        .project-year {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1c1d20;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .project-info h2 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 600;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-info p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .project-item:hover .project-info p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* HOVER IMAGE - REMOVED */
+        #hover-image-container {
+            display: none;
+        }
+
+        /* ABOUT ME SECTION */
+        .about-me-section {
+            background: #f1f1f1;
+            color: #1c1d20;
+            padding: 120px 10vw;
+        }
+
+        .about-me-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-me-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .about-me-header h1 {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #1c1d20;
+        }
+
+        .about-me-header p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: #666;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            color: #1c1d20;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #455ce9;
+        }
+
+        /* ACADEMIC HISTORY - BENTO GRID STYLE */
+        /* ACADEMIC HISTORY - PREMIUM LIST STYLE WITH IMAGES */
+        .timeline-section {
+            margin-bottom: 150px;
+            padding: 0 5vw;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            /* Space between cards */
+            width: 100%;
+            border-top: none;
+        }
+
+        .timeline-item {
+            display: flex;
+            /* align-items: stretch; */
+            /* Let height be defined by content/image */
+            align-items: center;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            background: #fff;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            /* Optional: Make them look like cards */
+            /* border-radius: 20px; */
+            /* background: #f9f9f9; */
+            /* overflow: hidden; */
+            padding-bottom: 40px;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            padding-left: 0;
+            /* Reset */
+            background: transparent;
+            /* Reset */
+        }
+
+        .timeline-image-container {
+            width: 25%;
+            height: 200px;
+            /* Fixed height for consistency */
+            flex-shrink: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-right: 40px;
+        }
+
+        .timeline-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .timeline-item:hover .timeline-thumb {
+            transform: scale(1.05);
+            /* Subtle zoom */
+        }
+
+        .timeline-content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .timeline-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 10px;
+            width: 100%;
+        }
+
+        .timeline-year {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+            font-variant-numeric: oldstyle-nums;
+            margin-right: 20px;
+            white-space: nowrap;
+        }
+
+        .timeline-school {
+            font-size: 0.9rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .timeline-title {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 500;
+            color: #1c1d20;
+            letter-spacing: -0.02em;
+            margin-bottom: 0;
+            line-height: 1.2;
+        }
+
+        .timeline-desc {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            max-width: 90%;
+            opacity: 0.8;
+            margin-top: 0;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .timeline-item.active .timeline-desc {
+            margin-top: 15px;
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        /* Rotation for arrow when active */
+        .timeline-item.active .timeline-arrow svg {
+            transform: rotate(180deg);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 30px;
+            opacity: 0;
+            /* Hidden initially or visible? Premium usually visible subtley */
+            opacity: 1;
+            transform: scale(0.9);
+            color: #1c1d20;
+        }
+
+        .timeline-item:hover .timeline-arrow {
+            background: #1c1d20;
+            color: white;
+            transform: scale(1);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-bottom: 30px;
+            }
+
+            .timeline-image-container {
+                width: 100%;
+                height: 200px;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .timeline-content-wrapper {
+                width: 100%;
+            }
+
+            .timeline-header-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .timeline-arrow {
+                display: none;
+            }
+
+            .timeline-desc {
+                max-width: 100%;
+                margin-top: 15px;
+                font-size: 15px;
+            }
+        }
+
+        /* FULLSCREEN TEXT MODAL (MOBILE ONLY) */
+        .text-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            overflow-y: auto;
+        }
+
+        .text-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .text-modal-close {
+            align-self: flex-end;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #1c1d20;
+            margin-bottom: 40px;
+        }
+
+        .text-modal-year {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 500;
+            font-variant-numeric: oldstyle-nums;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .text-modal-school {
+            font-size: 1rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .text-modal-title {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            color: #1c1d20;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .text-modal-desc {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        /* FULLSCREEN IMAGE MODAL */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .image-modal-content {
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .image-modal img {
+            max-width: 85vw;
+            max-height: 75vh;
+            display: block;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-modal-close::before,
+        .image-modal-close::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: white;
+            transition: background 0.3s;
+        }
+
+        .image-modal-close:hover::before,
+        .image-modal-close:hover::after {
+            background: #455ce9;
+        }
+
+        .image-modal-close::before {
+            transform: rotate(45deg);
+        }
+
+        .image-modal-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .image-modal-info {
+            position: absolute;
+            bottom: -80px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+        }
+
+        .image-modal-info h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .image-modal-info p {
+            font-size: 16px;
+            color: #999;
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            padding: 150px 10vw;
+            background-color: #f1f1f1;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .reveal-text {
+            font-size: 3.5vw;
+            line-height: 1.3;
+            color: rgba(28, 29, 32, 0.2);
+            font-weight: 400;
+        }
+
+        .about-image-wrap {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .about-image-wrap img {
+            width: 100%;
+            display: block;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+
+        .about-image-wrap:hover img {
+            filter: grayscale(0%);
+        }
+
+        .spacer {
+            height: 100px;
+        }
+
+        /* MARQUEE */
+        .marquee {
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 60px 0;
+            background: #1c1d20;
+            color: #fff;
+        }
+
+        .marquee-group {
+            display: inline-block;
+            font-size: 10vw;
+            font-weight: 500;
+            text-transform: uppercase;
+            will-change: transform;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* PRELOADER */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #1c1d20;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .preloader-text {
+            font-size: 40px;
+            font-weight: 300;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .preloader-text span {
+            display: none;
+        }
+
+        .preloader-text span.active {
+            display: block;
+        }
+
+        .preloader-svg {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            fill: #1c1d20;
+        }
+
+        /* MENU BUTTON */
+        .menu-button-wrapper {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 2400;
+            /* Visible above content, below overlay (2500) */
+            transform: scale(0);
+            transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .menu-button-wrapper.active {
+            transform: scale(1);
+        }
+
+        .menu-button {
+            width: auto;
+            height: auto;
+            background-color: #1c1d20;
+            border-radius: 50px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            padding: 20px 30px;
+        }
+
+        .menu-button-text {
+            color: white;
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .burger {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .burger .line {
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s;
+        }
+
+        .menu-button.open .line:first-child {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-button.open .line:last-child {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* MENU OVERLAY */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 40vw;
+            height: 100vh;
+            background: #1c1d20;
+            z-index: 2500;
+            transform: translateX(100%);
+            padding: 100px 60px;
+        }
+
+        .menu-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2501;
+        }
+
+        .menu-close::before,
+        .menu-close::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 2px;
+            background: white;
+        }
+
+        .menu-close::before {
+            transform: rotate(45deg);
+        }
+
+        .menu-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .menu-nav p {
+            font-size: 14px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .hr {
+            width: 100%;
+            height: 1px;
+            background: #ffffff20;
+            margin-bottom: 40px;
+        }
+
+        .menu-nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 3vw;
+            font-weight: 400;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            opacity: 0.6;
+        }
+
+        .menu-nav a:hover {
+            opacity: 1;
+            padding-left: 20px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background-color: #1c1d20;
+            color: white;
+            padding: 100px 10vw 40px 10vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .footer-title {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #444;
+        }
+
+        .user-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .footer h2 {
+            font-size: clamp(4rem, 10vw, 12rem);
+            font-weight: 400;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .footer-content {
+            margin-top: 50px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-email,
+        .btn-phone {
+            padding: 25px 40px;
+            border: 1px solid #ffffff50;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .btn-email:hover,
+        .btn-phone:hover {
+            background: #455ce9;
+            border-color: #455ce9;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 100px;
+            border-top: 1px solid #ffffff20;
+            padding-top: 40px;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-info {
+            display: flex;
+            gap: 60px;
+        }
+
+        .footer-info div span {
+            display: block;
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .footer-info div p {
+            font-size: 16px;
+            color: white;
+        }
+
+        .footer-socials span {
+            display: block;
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.6;
+        }
+
+        .magnetic-wrap {
+            display: inline-block;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 20px;
+                color: white;
+                mix-blend-mode: normal;
+                position: fixed;
+                width: 100%;
+                opacity: 1;
+                transform: translateY(0);
+                z-index: 2000;
+                pointer-events: none;
+                align-items: center;
+                /* Fix vertical alignment */
+            }
+
+            .top-nav .logo {
+                font-size: 12px;
+                pointer-events: auto;
+                mix-blend-mode: difference;
+                color: #fff;
+                padding-left: 0;
+                /* Ensure no padding shifting it */
+                line-height: 1;
+                /* Tight line height for alignment */
+            }
+
+            .top-nav .links {
+                display: flex;
+                gap: 20px;
+                align-items: center;
+                /* Fix vertical alignment */
+                pointer-events: auto;
+                mix-blend-mode: difference;
+            }
+
+            .top-nav .links span {
+                font-size: 14px;
+                color: white;
+                display: none;
+            }
+
+            .top-nav .links .menu-text {
+                display: block !important;
+                cursor: pointer;
+                padding: 20px;
+                pointer-events: auto;
+                color: #fff;
+                font-size: 12px;
+                /* Match logo size */
+                line-height: 1;
+                /* Match logo line height */
+                margin-top: 0;
+                /* Reset any potential margins */
+            }
+
+            /* Menu button visible on mobile from start */
+            .menu-button-wrapper {
+                display: none;
+            }
+
+            /* Hero Mobile Layout */
+            .hero {
+                padding: 0;
+                min-height: 100vh;
+                background: #8a8a8a;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 0;
+                text-align: left;
+                padding: 60px 0 40px;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                transform: translateY(0);
+                background: linear-gradient(to bottom, transparent 0%, transparent 55%, #e5e5e5 55%, #e5e5e5 100%);
+            }
+
+            .location-badge {
+                order: 3;
+                margin: 0 20px 0 20px;
+                padding: 12px 20px;
+                gap: 12px;
+                background: transparent;
+                border: 1px solid white;
+                align-self: flex-start;
+            }
+
+            .location-badge .globe-icon {
+                width: 32px;
+                height: 32px;
+                background: transparent;
+            }
+
+            .location-badge .globe-icon svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .location-text {
+                font-size: 12px;
+                color: white;
+            }
+
+            .hero-photo-wrapper {
+                order: 1;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                aspect-ratio: auto;
+                height: 55vh;
+                overflow: visible;
+                position: relative;
+                z-index: 3;
+            }
+
+            .hero-photo-wrapper img {
+                object-position: center top;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+                transform: scale(1);
+            }
+
+            .hero-role {
+                order: 2;
+                text-align: left;
+                margin-top: -60px;
+                padding: 0 20px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .hero-role h2 {
+                font-size: 11vw;
+                font-weight: 400;
+                line-height: 1.1;
+                color: #1c1d20;
+            }
+
+            /* Work Section - Bento Grid */
+            .work {
+                padding: 60px 0;
+            }
+
+            .work-header {
+                padding: 0 20px 40px;
+            }
+
+            .work-header h1 {
+                font-size: 12vw;
+                margin-bottom: 15px;
+            }
+
+            .work-header p {
+                font-size: 16px;
+            }
+
+            .work-grid {
+                padding: 0 20px;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 20px;
+            }
+
+            .project-item:nth-child(1),
+            .project-item:nth-child(2),
+            .project-item:nth-child(3) {
+                grid-column: auto;
+                grid-row: auto;
+                height: 400px;
+            }
+
+            .project-overlay {
+                padding: 25px;
+            }
+
+            .project-number {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .project-year {
+                font-size: 11px;
+                padding: 8px 16px;
+            }
+
+            .project-info h2 {
+                font-size: 6vw;
+            }
+
+            .project-info p {
+                font-size: 13px;
+            }
+
+            #hover-image-container {
+                display: none;
+            }
+
+            /* About Me Section Mobile */
+            .about-me-section {
+                padding: 80px 20px;
+            }
+
+            .about-me-header {
+                margin-bottom: 60px;
+            }
+
+            .about-me-header h1 {
+                font-size: 12vw;
+            }
+
+            .section-title {
+                font-size: 8vw;
+                margin-bottom: 40px;
+            }
+
+            .timeline-section {
+                margin-bottom: 80px;
+            }
+
+            .timeline {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 16px;
+            }
+
+            .timeline-item:nth-child(1),
+            .timeline-item:nth-child(2),
+            .timeline-item:nth-child(3),
+            .timeline-item:nth-child(4) {
+                grid-column: auto;
+                grid-row: auto;
+                height: 350px;
+            }
+
+            .timeline-overlay {
+                padding: 25px;
+            }
+
+            .timeline-date {
+                font-size: 10px;
+                padding: 6px 12px;
+            }
+
+            .timeline-number {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+
+            .timeline-content h3 {
+                font-size: 5vw;
+            }
+
+            .timeline-item:nth-child(1) .timeline-content h3,
+            .timeline-item:nth-child(2) .timeline-content h3 {
+                font-size: 5vw;
+            }
+
+            .timeline-content h4 {
+                font-size: 3.5vw;
+            }
+
+            .timeline-content p {
+                font-size: 12px;
+            }
+
+            .timeline-date {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            .timeline-content h3 {
+                font-size: 6vw;
+                margin-bottom: 8px;
+            }
+
+            .timeline-content h4 {
+                font-size: 4vw;
+                margin-bottom: 15px;
+            }
+
+            .timeline-content p {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            /* About Section */
+            .about {
+                padding: 80px 20px;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .reveal-text {
+                font-size: 7vw;
+            }
+
+            /* Menu */
+            .menu-button-wrapper {
+                display: none;
+            }
+
+            .menu-overlay {
+                width: 100vw;
+                padding: 80px 30px;
+            }
+
+            .menu-nav a {
+                font-size: 10vw;
+            }
+
+            /* Footer */
+            .footer {
+                padding: 80px 20px 30px;
+            }
+
+            .footer h2 {
+                font-size: 15vw;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .btn-email,
+            .btn-phone {
+                width: 100%;
+                text-align: center;
+                padding: 20px;
+                font-size: 1rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .footer-info {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            /* Marquee */
+            .marquee-group {
+                font-size: 15vw;
+            }
+
+            /* Spacer */
+            .spacer {
+                height: 50vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 5vw 40px;
+                min-height: auto;
+                height: auto;
+                display: block;
+            }
+
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                transform: none;
+                gap: 40px;
+                width: 100%;
+            }
+
+            /* Image First */
+            .hero-photo-wrapper {
+                width: 100%;
+                height: 50vh;
+                max-height: 500px;
+                position: relative;
+                order: 1;
+            }
+
+            .hero-photo-wrapper img {
+                transform: scale(1);
+            }
+
+            /* Text Second */
+            .hero-role {
+                order: 2;
+                text-align: center;
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            .hero-role h2 {
+                font-size: 9vw;
+                line-height: 1.2;
+            }
+
+            .hero-arrow {
+                justify-content: center;
+                /* Center align on mobile */
+                margin-bottom: 10px;
+            }
+
+            /* Badge Last */
+            .location-badge {
+                order: 3;
+                width: auto;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="preloader">
+        <div class="preloader-text">
+            <span class="active">Hello</span>
+            <span>Bonjour</span>
+            <span>स्वागत हे</span>
+            <span>Ciao</span>
+            <span>Olá</span>
+            <span>ආයුබෝවන්</span>
+            <span>Сайн уу</span>
+            <span>안녕하세요</span>
+            <span>Xin chào</span>
+            <span>नमस्ते</span>
+            <span>おい</span>
+        </div>
+        <svg class="preloader-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path id="preloader-path" d="M0,0 L100,0 L100,100 L0,100 Z"></path>
+        </svg>
+    </div>
+
+    <div class="menu-button-wrapper">
+        <div class="menu-button magnetic-wrap" onclick="window.toggleMenu()">
+            <span class="menu-button-text">Menu</span>
+            <div class="burger">
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-overlay">
+        <div class="menu-close" onclick="window.toggleMenu()"></div>
+        <div class="menu-nav">
+            <p>Navigation</p>
+            <div class="hr"></div>
+            <a href="#home" class="menu-link" onclick="window.toggleMenu()">Home</a>
+            <a href="#work" class="menu-link" onclick="window.toggleMenu()">Work</a>
+            <a href="#about-me" class="menu-link" onclick="window.toggleMenu()">About</a>
+            <a href="#contact" class="menu-link" onclick="window.toggleMenu()">Contact</a>
+        </div>
+    </div>
+
+    <main id="main">
+        <nav class="top-nav">
+            <div class="logo">© Code by Manoj</div>
+            <div class="links">
+                <span onclick="scrollToSection('work')">Work</span>
+                <span onclick="scrollToSection('about-me')">About</span>
+                <span onclick="scrollToSection('contact')">Contact</span>
+                <span class="menu-text" onclick="window.toggleMenu()">Menu</span>
+            </div>
+
+            <!-- Social Search Bar REMOVED -->
+        </nav>
+
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <!-- Location Badge -->
+                <div class="location-badge">
+                    <div class="globe-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="location-text">
+                        <span>Located</span>
+                        <span>in Japan</span>
+                    </div>
+                </div>
+
+                <!-- Photo -->
+                <div class="hero-photo-wrapper">
+                    <img src="model.png" alt="Manoj" class="hero-photo">
+                </div>
+
+                <!-- Role Text -->
+                <div class="hero-role">
+                    <div class="hero-arrow">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h2>Software Engineer<br>Mobility & Robotics Specialist</h2>
+                </div>
+            </div>
+        </section>
+
+        <section class="work" id="work">
+            <div class="work-header" data-aos="fade-up" data-aos-duration="1000">
+                <h1>Selected Work</h1>
+            </div>
+
+            <!-- Reusing Timeline Styles for Work -->
+            <div class="timeline-section" style="margin-top: 50px;">
+                <div class="timeline">
+
+                    <!-- Project 1 -->
+                    <div class="timeline-item" data-aos="fade-up">
+                        <div class="timeline-image-container"
+                            onclick="openImageModal('SNS_Website.png', 'Social Platform', 'SNS Website')">
+                            <img src="SNS_Website.png" alt="SNS Website" class="timeline-thumb">
+                        </div>
+                        <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
+                            <span class="timeline-school">React • Node.js • MongoDB</span>
+                            <div class="timeline-header-row">
+                                <h3 class="timeline-title">SNS Website</h3>
+                                <span class="timeline-year">2024</span>
+                            </div>
+                            <div class="timeline-desc">
+                                <p>A full-stack social networking platform featuring real-time updates, user
+                                    authentication, and data management.</p>
+                                <br>
+                                <a href="https://241033.daa.jp/sns3/" target="_blank"
+                                    style="color: #455ce9; text-decoration: none; font-weight: 500;">Visit Project
+                                    &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="timeline-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="timeline-image-container"
+                            onclick="openImageModal('egg_timer.png', 'Interactive App', 'Egg Timer')">
+                            <img src="egg_timer.png" alt="Egg Timer" class="timeline-thumb">
+                        </div>
+                        <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
+                            <span class="timeline-school">HTML5 • CSS3 • JS</span>
+                            <div class="timeline-header-row">
+                                <h3 class="timeline-title">Egg Timer</h3>
+                                <span class="timeline-year">2025</span>
+                            </div>
+                            <div class="timeline-desc">
+                                <p>An interactive, perfectly timed culinary companion. Features custom animations and
+                                    precise countdown logic.</p>
+                                <br>
+                                <a href="https://241033.daa.jp/et/" target="_blank"
+                                    style="color: #455ce9; text-decoration: none; font-weight: 500;">Visit Project
+                                    &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="timeline-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="timeline-image-container"
+                            onclick="openImageModal('Salary_Tracker.png', 'Financial App', 'Salary Tracker')">
+                            <img src="Salary_Tracker.png" alt="Salary Tracker" class="timeline-thumb">
+                        </div>
+                        <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
+                            <span class="timeline-school">JavaScript • Chart.js</span>
+                            <div class="timeline-header-row">
+                                <h3 class="timeline-title">Salary Tracker</h3>
+                                <span class="timeline-year">2026</span>
+                            </div>
+                            <div class="timeline-desc">
+                                <p>A robust financial management tool for tracking income and visualizing trends over
+                                    time using dynamic charts.</p>
+                                <br>
+                                <a href="https://241033.daa.jp/salary_jap/auth/login.php" target="_blank"
+                                    style="color: #455ce9; text-decoration: none; font-weight: 500;">Visit Project
+                                    &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="timeline-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="about-me-section" id="about-me">
+            <div class="about-me-container">
+                <div class="about-me-header">
+                    <h1>About Me</h1>
+                    <p>My academic journey and personal story</p>
+                </div>
+
+                <!-- Academic Timeline -->
+                <div class="timeline-section">
+                    <h2 class="section-title">Academic History</h2>
+                    <div class="timeline">
+
+                        <!-- Item 1 -->
+                        <div class="timeline-item" data-aos="fade-up">
+                            <div class="timeline-image-container"
+                                onclick="openImageModal('yosida.png', 'IT Department', 'Hokkaido Cyber Creators College')">
+                                <img src="yosida.png" alt="Hokkaido Cyber Creators College" class="timeline-thumb">
+                            </div>
+                            <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
+                                <span class="timeline-school">Hokkaido Cyber Creators</span>
+                                <div class="timeline-header-row">
+                                    <h3 class="timeline-title">IT Department</h3>
+                                    <span class="timeline-year">2024 — 2026</span>
+                                </div>
+                                <p class="timeline-desc">Specialized in Network, Cloud, and Cybersecurity. Comprehensive
+                                    web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.</p>
+                            </div>
+                            <div class="timeline-arrow">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                            <div class="timeline-image-container"
+                                onclick="openImageModal('hjla.jpg', 'Japanese Language', 'Hokkaido Japanese Language Academy')">
+                                <img src="hjla.jpg" alt="Hokkaido Japanese Language Academy" class="timeline-thumb">
+                            </div>
+                            <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
+                                <span class="timeline-school">Hokkaido JL Academy</span>
+                                <div class="timeline-header-row">
+                                    <h3 class="timeline-title">Japanese Language</h3>
+                                    <span class="timeline-year">2022 — 2024</span>
+                                </div>
+                                <p class="timeline-desc">Achieved JLPT N3 certification. Deep focus on Japanese
+                                    corporate culture, business manners, and volunteer leadership.</p>
+                            </div>
+                            <div class="timeline-arrow">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="timeline-image-container"
+                                onclick="openImageModal('gyan_jyoti.jpg', 'High School', 'Gyan Jyoti Secondary School')">
+                                <img src="gyan_jyoti.jpg" alt="Gyan Jyoti Secondary School" class="timeline-thumb">
+                            </div>
+                            <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
+                                <span class="timeline-school">Gyan Jyoti Secondary</span>
+                                <div class="timeline-header-row">
+                                    <h3 class="timeline-title">High School Education</h3>
+                                    <span class="timeline-year">2016 — 2018</span>
+                                </div>
+                                <p class="timeline-desc">Focused on Computer Science fundamentals, Mathematics, and
+                                    English. Laid the groundwork for international study.</p>
+                            </div>
+                            <div class="timeline-arrow">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="timeline-image-container"
+                                onclick="openImageModal('green_peace.jpg', 'School Education', 'Green Peace Secondary School')">
+                                <img src="green_peace.jpg" alt="Green Peace Secondary School" class="timeline-thumb">
+                            </div>
+                            <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
+                                <span class="timeline-school">Green Peace Secondary</span>
+                                <div class="timeline-header-row">
+                                    <h3 class="timeline-title">Primary Education</h3>
+                                    <span class="timeline-year">2003 — 2016</span>
+                                </div>
+                                <p class="timeline-desc">Built a strong educational foundation with emphasis on core
+                                    subjects and extracurricular activities.</p>
+                            </div>
+                            <div class="timeline-arrow">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium Sticky About Layout -->
+            <div class="about-container-premium">
+                <div class="about-image-wrap">
+                    <img src="about.jpeg" alt="Manoj" class="about-sticky-img">
+                </div>
+                <div class="about-text-content">
+                    <h2 class="about-premium-title" data-aos="fade-up">Driven by<br>Impact.</h2>
+                    <div class="about-bio">
+                        <p class="premium-text" data-aos="fade-up" data-aos-delay="100">
+                            I am a dedicated <strong>Mobility & Robotics Specialist</strong> with a core mission: to
+                            contribute to society through the power of IT.
+                        </p>
+                        <p class="premium-text" data-aos="fade-up" data-aos-delay="200">
+                            My journey is defined by a relentless pursuit of technical excellence—from mastering complex
+                            database architectures to engineering seamless user experiences. I don't just build
+                            software; I engineer solutions that move the world forward.
+                        </p>
+                        <p class="premium-text highlight" data-aos="fade-up" data-aos-delay="300">
+                            Ready to grow together and set new standards in the industry.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Text Modal -->
+            <div class="text-modal" id="textModal">
+                <div class="text-modal-close" onclick="closeTextModal()">&times;</div>
+                <div class="text-modal-content">
+                    <span class="text-modal-year" id="textModalYear"></span>
+                    <span class="text-modal-school" id="textModalSchool"></span>
+                    <h2 class="text-modal-title" id="textModalTitle"></h2>
+                    <p class="text-modal-desc" id="textModalDesc"></p>
+                </div>
+            </div>
+
+            <!-- Image Modal -->
+            <div class="image-modal" id="imageModal">
+                <div class="image-modal-content">
+                    <div class="image-modal-close" onclick="closeImageModal()"></div>
+                    <img id="modalImage" src="" alt="School Image">
+                    <div class="image-modal-info">
+                        <h3 id="modalTitle"></h3>
+                        <p id="modalSubtitle"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="spacer"></section>
+
+        <div class="marquee">
+            <div class="marquee-group">
+                <span>— Manoj — Engineer — Designer — Creative — Manoj — Engineer — Designer — Creative — Manoj —
+                    Engineer— Designer — Creative — Manoj — Engineer— Designer — Creative </span>
+            </div>
+        </div>
+
+        <footer class="footer" id="contact">
+            <div class="footer-container">
+                <div class="footer-header">
+                    <div class="footer-title">
+                        <div class="user-image">
+                            <img src="model.png" alt="Manoj">
+                        </div>
+                        <h2>Let's work</h2>
+                    </div>
+                    <h2>together</h2>
+                </div>
+
+                <div class="footer-content">
+                    <div class="magnetic-wrap">
+                        <div class="btn-email">poudelmanoj604@gmail.com</div>
+                    </div>
+                    <div class="magnetic-wrap">
+                        <div class="btn-phone">+81 80 6385 6232</div>
+                    </div>
+
+                    <!-- Footer Social Buttons -->
+                    <div class="footer-social-row">
+                        <div class="magnetic-wrap">
+                            <a href="https://wa.me/818063856232?text=Hello%2C%20I%20saw%20your%20website"
+                                target="_blank" class="social-btn whatsapp">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="magnetic-wrap">
+                            <a href="https://line.me/ti/p/FDAUJfLRfh" target="_blank" class="social-btn line">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.174-.51.432-.595.065-.023.133-.031.199-.031.211 0 .391.09.51.25l2.443 3.317V8.108c0-.345.279-.63.631-.63.346 0 .626.285.626.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.4 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm11.309-1.816v.002C18.666 5.396 15.682 3 12.001 3c-5.148.002-9.297 3.518-9.297 7.91 0 3.945 3.425 7.234 8.01 7.822.312.068.736.208.843.479.096.242.063.616.03 1.006-.052.56-.245 2.193-.277 2.338-.046.206-.024.417.067.59.103.195.312.302.535.302.137 0 .271-.04.387-.12 1.634-1.127 4.453-3.235 6.075-5.541 2.37-3.363 1.487-6.22 1.301-6.721z" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="magnetic-wrap">
+                            <a href="https://t.me/MANOJPOUDEL9898" target="_blank" class="social-btn telegram">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 11.944 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <div class="footer-info">
+                        <div><span>Version</span>
+                            <p>2026 © Edition</p>
+                        </div>
+                        <div><span>Local Time</span>
+                            <p id="time">00:00 AM GMT+1</p>
+                        </div>
+                    </div>
+                    <div class="footer-socials">
+                        <span>Socials</span>
+                        <div class="social-links">
+                            <a
+                                href="https://www.linkedin.com/in/%E3%83%9D%E3%83%BC%E3%83%87%E3%83%AB-%E3%83%9E%E3%83%8E%E3%82%B8%E3%83%A5%E3%80%80%E3%82%AF%E3%83%9E%E3%83%BC%E3%83%AB-55ab57302/">LinkedIn</a>
+                            <a href="https://www.instagram.com/manojpoudel_/">Instagram</a>
+                            <a href="https://x.com/manojpoudel9256">Twitter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- CRITICAL: Menu Logic Isolated to prevent crashes -->
+    <script>
+        window.menuOpen = false;
+        window.toggleMenu = function () {
+            const menuOverlay = document.querySelector('.menu-overlay');
+            const menuButtonInner = document.querySelector('.menu-button');
+
+            if (!menuOverlay || !menuButtonInner) {
+                console.warn('Menu elements not found in DOM');
+                return;
+            }
+
+            if (!window.menuOpen) {
+                // Use GSAP if available, otherwise fallback to simple CSS
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(menuOverlay, { translateX: 0, duration: 0.5, ease: "power4.out" });
+                } else {
+                    menuOverlay.style.transform = 'translateX(0)';
+                    menuOverlay.style.transition = 'transform 0.5s ease-out';
+                }
+                menuButtonInner.classList.add('open');
+                window.menuOpen = true;
+            } else {
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(menuOverlay, { translateX: "100%", duration: 0.4, ease: "power3.inOut" });
+                } else {
+                    menuOverlay.style.transform = 'translateX(100%)';
+                    menuOverlay.style.transition = 'transform 0.4s ease-in-out';
+                }
+                menuButtonInner.classList.remove('open');
+                window.menuOpen = false;
+            }
+        };
+    </script>
+
+    <!-- CRITICAL: Floating Button Logic Isolated -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const floatBtn = document.querySelector('.menu-button-wrapper');
+            if (floatBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 200) {
+                        floatBtn.classList.add('active');
+                    } else {
+                        floatBtn.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- CRITICAL: Clock Logic Isolated -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function updateClock() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZoneName: 'short'
+                });
+                const timeElement = document.getElementById('time');
+                if (timeElement) {
+                    timeElement.textContent = timeString;
+                    timeElement.style.color = 'white'; // Force color just in case
+                } else {
+                    console.error('Clock element not found!');
+                }
+            }
+            setInterval(updateClock, 1000);
+            updateClock();
+        });
+    </script>
+
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false,
+            mirror: true
+        });
+
+        // Initialize Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Integrate Lenis with ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+
+        // MAGNETIC BUTTONS
+        const magneticButtons = document.querySelectorAll('.magnetic-wrap');
+
+        magneticButtons.forEach(btn => {
+            btn.addEventListener('mousemove', function (e) {
+                const position = btn.getBoundingClientRect();
+                const x = e.clientX - position.left - position.width / 2;
+                const y = e.clientY - position.top - position.height / 2;
+
+                gsap.to(btn, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    ease: "power2.out",
+                    duration: 0.6
+                });
+            });
+
+            btn.addEventListener('mouseleave', function (e) {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    ease: "elastic.out(1, 0.3)",
+                    duration: 0.8
+                });
+            });
+        });
+
+        // PROJECT HOVER IMAGE
+        const projectItems = document.querySelectorAll('.project-item');
+        const hoverContainer = document.querySelector('#hover-image-container');
+        const hoverImage = document.querySelector('#hover-img');
+
+        const projectImages = {
+            'project1': 'SNS_Website.png',
+            'project2': 'Salary_Tracker.png',
+            'project3': 'egg_timer.png'
+        };
+
+        let isHovering = false;
+
+        window.addEventListener('mousemove', (e) => {
+            if (isHovering) {
+                gsap.to(hoverContainer, {
+                    x: e.clientX - 200,
+                    y: e.clientY - 140,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+            }
+        });
+
+        projectItems.forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                const imageKey = item.getAttribute('data-image');
+                hoverImage.src = projectImages[imageKey] || projectImages['project1'];
+                isHovering = true;
+
+                gsap.to(hoverContainer, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            item.addEventListener('mousemove', (e) => {
+                gsap.to(hoverContainer, {
+                    x: e.clientX - 200,
+                    y: e.clientY - 140,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            item.addEventListener('mouseleave', () => {
+                isHovering = false;
+                gsap.to(hoverContainer, {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 0.2,
+                    ease: "power2.in"
+                });
+            });
+        });
+
+        // PRELOADER ANIMATION
+        const words = document.querySelectorAll(".preloader-text span");
+        let currentWordIndex = 0;
+
+        function rotateWords() {
+            if (currentWordIndex < words.length - 1) {
+                words[currentWordIndex].classList.remove("active");
+                currentWordIndex++;
+                words[currentWordIndex].classList.add("active");
+                setTimeout(rotateWords, 200);
+            } else {
+                exitPreloader();
+            }
+        }
+
+        function exitPreloader() {
+            const tl = gsap.timeline();
+
+            tl.to("#preloader-path", {
+                duration: 0.8,
+                attr: { d: "M0,0 L100,0 L100,100 Q50,0 0,100 Z" },
+                ease: "power2.in"
+            })
+                .to(".preloader", {
+                    yPercent: -100,
+                    duration: 0.8,
+                    ease: "power2.inOut"
+                }, "-=0.2")
+                .to(".preloader", {
+                    display: "none"
+                });
+        }
+
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                rotateWords();
+            }, 500);
+        });
+
+        // TOP NAV - No longer hidden on mobile
+        const topNav = document.querySelector('.top-nav');
+
+        // HERO PHOTO PARALLAX
+        gsap.to(".hero-photo", {
+            y: 100,
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // REVEAL TEXT ON SCROLL
+        gsap.to(".reveal-text", {
+            color: "#1c1d20",
+            duration: 1,
+            scrollTrigger: {
+                trigger: ".reveal-text",
+                start: "top 80%",
+                end: "top 20%",
+                scrub: true,
+            }
+        });
+
+        // PERSONAL PHOTO PARALLAX
+        gsap.to(".personal-photo", {
+            y: -100,
+            scrollTrigger: {
+                trigger: ".about",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // PHOTO MOUSE FOLLOW
+        const photo = document.querySelector('.personal-photo');
+
+        document.querySelector('.about').addEventListener('mousemove', (e) => {
+            const rect = document.querySelector('.about').getBoundingClientRect();
+            const moveX = (e.clientX - rect.left - rect.width / 2) * 0.02;
+            const moveY = (e.clientY - rect.top - rect.height / 2) * 0.02;
+
+            gsap.to(photo, {
+                x: moveX,
+                y: moveY,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
+
+        // MENU BUTTON SHOW/HIDE
+        const menuButton = document.querySelector('.menu-button-wrapper');
+        const menuButtonInner = document.querySelector('.menu-button');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        const menuLinks = document.querySelectorAll('.menu-link');
+        const menuText = document.querySelector('.menu-text'); // Restored
+        const menuClose = document.querySelector('.menu-close'); // Restored
+
+        // SHOW FLOATING MENU BUTTON ON SCROLL
+        // Logic moved to isolated script above for reliability
+        // ScrollTrigger definition removed from here
+
+        // MENU OPEN/CLOSE
+        // Logic moved to isolated script above for reliability
+        // window.toggleMenu definition removed from here
+
+        // Floating Button Click
+        if (menuButton) {
+            menuButton.addEventListener('click', window.toggleMenu);
+        }
+
+        // Menu Text Click
+        if (menuText) {
+            menuText.addEventListener('click', window.toggleMenu);
+        }
+
+        // MENU CLOSE BUTTON
+        if (menuClose) {
+            menuClose.addEventListener('click', () => {
+                gsap.to(menuOverlay, {
+                    translateX: "100%",
+                    duration: 0.4,
+                    ease: "power3.inOut"
+                });
+                menuButtonInner.classList.remove('open');
+                window.menuOpen = false;
+            });
+        }
+
+        // Close menu when clicking a link
+        if (menuLinks) {
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.menuOpen) {
+                        gsap.to(menuOverlay, {
+                            translateX: "100%",
+                            duration: 1,
+                            ease: "expo.inOut"
+                        });
+                        menuButtonInner.classList.remove('open');
+                        window.menuOpen = false;
+                    }
+                });
+            });
+        }
+
+        // FOOTER ANIMATION
+        gsap.from(".footer-container", {
+            y: 100,
+            opacity: 0,
+            scrollTrigger: {
+                trigger: ".footer",
+                start: "top 80%",
+                end: "top 50%",
+                scrub: true
+            }
+        });
+
+
+
+        // TIMELINE ACCORDION
+        // TIMELINE INTERACTION (Accordion vs Mobile Modal)
+        function toggleTimeline(element) {
+            // Check if Mobile (< 768px)
+            if (window.innerWidth < 768) {
+                // Open Full Screen Modal
+                const item = element.closest('.timeline-item');
+                const title = item.querySelector('.timeline-title').textContent;
+                const year = item.querySelector('.timeline-year').textContent;
+                const school = item.querySelector('.timeline-school').textContent;
+                const desc = item.querySelector('.timeline-desc').innerHTML; // Use innerHTML to preserve formatting
+
+                openTextModal(year, school, title, desc);
+            } else {
+                // Desktop: Toggle Accordion
+                const item = element.closest('.timeline-item');
+                item.classList.toggle('active');
+            }
+        }
+
+        // TEXT MODAL FUNCTIONS
+        function openTextModal(year, school, title, desc) {
+            document.getElementById('textModalYear').textContent = year;
+            document.getElementById('textModalSchool').textContent = school;
+            document.getElementById('textModalTitle').textContent = title;
+            document.getElementById('textModalDesc').innerHTML = desc; // Inject as HTML
+
+            document.getElementById('textModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling bg
+        }
+
+        function closeTextModal() {
+            document.getElementById('textModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // IMAGE MODAL FUNCTIONS
+        function openImageModal(imageSrc, title, subtitle) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSubtitle = document.getElementById('modalSubtitle');
+
+            modalImage.src = imageSrc;
+            modalTitle.textContent = title;
+            modalSubtitle.textContent = subtitle;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // SMOOTH SCROLL TO SECTION
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                lenis.scrollTo(section, {
+                    offset: 0,
+                    duration: 1.5,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                });
+            }
+        }
+
+        // Close modal on background click
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('imageModal');
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeImageModal();
+                }
+            });
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
