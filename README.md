@@ -46,7 +46,7 @@ Since this is a static site project, no build process or server installation is 
 ├── about.jpeg          # Profile image
 ├── model.png           # Hero image
 ├── SNS_Website.png     # Project screenshot
-├── egg_timer.png       # Project screenshot
+├── budget.png          # Project screenshot (Budget Tracker)
 └── ...                 # Other asset files
 ```
 
