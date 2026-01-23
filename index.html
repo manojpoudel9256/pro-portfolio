@@ -588,7 +588,7 @@
         .timeline-thumb {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             transition: transform 0.7s ease;
         }
 
@@ -1804,20 +1804,21 @@
                     <!-- Project 2 -->
                     <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
                         <div class="timeline-image-container"
-                            onclick="openImageModal('egg_timer.png', 'Interactive App', 'Egg Timer')">
-                            <img src="egg_timer.png" alt="Egg Timer" class="timeline-thumb">
+                            onclick="openImageModal('budget.png', 'Financial App', 'Budget Tracker')">
+                            <img src="budget.png" alt="Budget Tracker" class="timeline-thumb">
                         </div>
                         <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
-                            <span class="timeline-school">HTML5 • CSS3 • JS</span>
+                            <span class="timeline-school">PHP • MySQL • AI</span>
                             <div class="timeline-header-row">
-                                <h3 class="timeline-title">Egg Timer</h3>
-                                <span class="timeline-year">2025</span>
+                                <h3 class="timeline-title">Budget Tracker</h3>
+                                <span class="timeline-year">2026</span>
                             </div>
                             <div class="timeline-desc">
-                                <p>An interactive, perfectly timed culinary companion. Features custom animations and
-                                    precise countdown logic.</p>
+                                <p>A comprehensive, AI-powered personal financial management tool. Track income,
+                                    expenses, set budgets, and visualize your financial health with a modern, responsive
+                                    UI.</p>
                                 <br>
-                                <a href="https://241033.daa.jp/et/" target="_blank"
+                                <a href="https://241033.daa.jp/finance" target="_blank"
                                     style="color: #455ce9; text-decoration: none; font-weight: 500;">Visit Project
                                     &rarr;</a>
                             </div>
@@ -2248,7 +2249,7 @@
         const projectImages = {
             'project1': 'SNS_Website.png',
             'project2': 'Salary_Tracker.png',
-            'project3': 'egg_timer.png'
+            'project3': 'budget.png'
         };
 
         let isHovering = false;
