@@ -2,7 +2,7 @@
 
 A premium, high-performance personal portfolio website built with a focus on smooth interactions, dynamic animations, and responsive design.
 
-![Portfolio Preview](screenshot.png) *(Add a screenshot here)*
+![Portfolio Preview](screenshot.png) 
 
 ## ✨ Key Features
 
