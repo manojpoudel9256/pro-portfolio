@@ -1,0 +1,19 @@
+{
+    "name": "Premium Portfolio",
+    "short_name": "Portfolio",
+    "description": "My professional premium portfolio.",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#1c1d20",
+    "theme_color": "#1c1d20",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "apple-touch-icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

@@ -18,6 +18,8 @@ A premium, high-performance personal portfolio website built with a focus on smo
     *   **Real-time Clock**: Automatically detects and displays the visitor's local time and timezone.
     *   **Preloader**: Multi-language greeting animation.
 *   **Fully Responsive**: Meticulously crafted to look stunning on desktops, tablets, and mobile devices.
+*   **PWA Support**: Installable as a home screen app on iOS/Android with a custom manifest and icon.
+*   **Custom Iconography**: Features a custom-designed, photo-based premium icon for a polished mobile presence.
 
 ## 🛠️ Technologies Used
 

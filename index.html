@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Premium Portfolio</title>
+    <link rel="icon" href="apple-touch-icon.png" type="image/png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <style>
         * {
             margin: 0;
@@ -1771,6 +1774,36 @@
             <!-- Reusing Timeline Styles for Work -->
             <div class="timeline-section" style="margin-top: 50px;">
                 <div class="timeline">
+
+                    <!-- Project Weather Travel Planner -->
+                    <div class="timeline-item" data-aos="fade-up">
+                        <div class="timeline-image-container"
+                            onclick="openImageModal('travel.png', 'Travel App', 'Weather Travel Planner')">
+                            <img src="travel.png" alt="Weather Travel Planner" class="timeline-thumb">
+                        </div>
+                        <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
+                            <span class="timeline-school">React • Node.js • MySQL</span>
+                            <div class="timeline-header-row">
+                                <h3 class="timeline-title">Weather Travel Planner</h3>
+                                <span class="timeline-year">2026</span>
+                            </div>
+                            <div class="timeline-desc">
+                                <p>A full-stack web application designed to help users plan their trips based on optimal
+                                    weather conditions. Features include real-time weather search with detailed metrics,
+                                    5-day forecasts, and smart travel recommendations to ensure the perfect trip.</p>
+                                <br>
+                                <a href="https://github.com/manojpoudel9256/weather-travel-planner.git" target="_blank"
+                                    style="color: #455ce9; text-decoration: none; font-weight: 500;">Visit Project
+                                    &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="timeline-arrow">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </div>
 
                     <!-- Project New -->
                     <div class="timeline-item" data-aos="fade-up">
