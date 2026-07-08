@@ -4,8 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Premium Portfolio</title>
-    <link rel="icon" href="apple-touch-icon.png" type="image/png">
+    <title>Manoj — Software Engineer, Mobility &amp; Robotics</title>
+    <meta name="description"
+        content="Manoj Poudel — Software Engineer specialising in Mobility &amp; Robotics, based in Tokyo, Japan. Selected work, engineering background, and contact.">
+    <meta name="author" content="Manoj Poudel">
+    <meta name="theme-color" content="#141414">
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Manoj — Software Engineer, Mobility &amp; Robotics">
+    <meta property="og:description"
+        content="Software Engineer specialising in Mobility &amp; Robotics, based in Tokyo. Selected work and background.">
+    <meta property="og:image" content="icon-512.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Manoj — Software Engineer, Mobility &amp; Robotics">
+    <meta name="twitter:description" content="Software Engineer specialising in Mobility &amp; Robotics, based in Tokyo.">
+
+    <link rel="icon" href="icon-192.png" type="image/png">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <style>
@@ -291,13 +306,7 @@
 
         /* Removed specific grid-column/row rules to allow natural stacking */
 
-        /* Premium About Section (Sticky) (ADDED) */
-        .about-me-section {
-            padding: 150px 5vw;
-            background: #fff;
-            position: relative;
-        }
-
+        /* Premium About Section (Sticky) */
         .about-container-premium {
             display: flex;
             align-items: flex-start;
@@ -890,43 +899,6 @@
         .image-modal-info p {
             font-size: 16px;
             color: #999;
-        }
-
-        /* ABOUT SECTION */
-        .about {
-            padding: 150px 10vw;
-            background-color: #f1f1f1;
-        }
-
-        .about-container {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .reveal-text {
-            font-size: 3.5vw;
-            line-height: 1.3;
-            color: rgba(28, 29, 32, 0.2);
-            font-weight: 400;
-        }
-
-        .about-image-wrap {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-        .about-image-wrap img {
-            width: 100%;
-            display: block;
-            filter: grayscale(100%);
-            transition: filter 0.5s ease;
-        }
-
-        .about-image-wrap:hover img {
-            filter: grayscale(0%);
         }
 
         .spacer {
@@ -1545,20 +1517,6 @@
                 line-height: 1.6;
             }
 
-            /* About Section */
-            .about {
-                padding: 80px 20px;
-            }
-
-            .about-container {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .reveal-text {
-                font-size: 7vw;
-            }
-
             /* Menu */
             .menu-button-wrapper {
                 display: none;
@@ -1613,9 +1571,8 @@
             .spacer {
                 height: 50vh;
             }
-        }
 
-        @media (max-width: 768px) {
+            /* Hero mobile (consolidated — these override the earlier hero rules in this block) */
             .hero {
                 padding: 100px 5vw 40px;
                 min-height: auto;
@@ -1750,7 +1707,11 @@
 
                 <!-- Photo -->
                 <div class="hero-photo-wrapper">
-                    <img src="model.png" alt="Manoj" class="hero-photo">
+                    <picture>
+                        <source srcset="model.webp" type="image/webp">
+                        <img src="model.png" alt="Portrait of Manoj Poudel" class="hero-photo" width="1100"
+                            height="1100" fetchpriority="high">
+                    </picture>
                 </div>
 
                 <!-- Role Text -->
@@ -1767,7 +1728,7 @@
         </section>
 
         <section class="work" id="work">
-            <div class="work-header" data-aos="fade-up" data-aos-duration="1000">
+            <div class="work-header">
                 <h1>Selected Work</h1>
             </div>
 
@@ -1776,10 +1737,14 @@
                 <div class="timeline">
 
                     <!-- Project Weather Travel Planner -->
-                    <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-item">
                         <div class="timeline-image-container"
-                            onclick="openImageModal('travel.png', 'Travel App', 'Weather Travel Planner')">
-                            <img src="travel.png" alt="Weather Travel Planner" class="timeline-thumb">
+                            onclick="openImageModal('travel.webp', 'Travel App', 'Weather Travel Planner')">
+                            <picture>
+                                <source srcset="travel.webp" type="image/webp">
+                                <img src="travel.png" alt="Weather Travel Planner screenshot" class="timeline-thumb"
+                                    width="946" height="871" loading="lazy">
+                            </picture>
                         </div>
                         <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
                             <span class="timeline-school">React • Node.js • MySQL</span>
@@ -1806,10 +1771,14 @@
                     </div>
 
                     <!-- Project New -->
-                    <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-item">
                         <div class="timeline-image-container"
-                            onclick="openImageModal('studytracker.png', 'Productivity App', 'StudyTrack Pro')">
-                            <img src="studytracker.png" alt="StudyTrack Pro" class="timeline-thumb">
+                            onclick="openImageModal('studytracker.webp', 'Productivity App', 'StudyTrack Pro')">
+                            <picture>
+                                <source srcset="studytracker.webp" type="image/webp">
+                                <img src="studytracker.png" alt="StudyTrack Pro screenshot" class="timeline-thumb"
+                                    width="1200" height="542" loading="lazy">
+                            </picture>
                         </div>
                         <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
                             <span class="timeline-school">React • Node.js • MySQL</span>
@@ -1838,10 +1807,14 @@
 
 
                     <!-- Project 2 -->
-                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="timeline-item">
                         <div class="timeline-image-container"
-                            onclick="openImageModal('budget.png', 'Financial App', 'Budget Tracker')">
-                            <img src="budget.png" alt="Budget Tracker" class="timeline-thumb">
+                            onclick="openImageModal('budget.webp', 'Financial App', 'Budget Tracker')">
+                            <picture>
+                                <source srcset="budget.webp" type="image/webp">
+                                <img src="budget.png" alt="Budget Tracker screenshot" class="timeline-thumb"
+                                    width="960" height="1200" loading="lazy">
+                            </picture>
                         </div>
                         <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
                             <span class="timeline-school">PHP • MySQL • AI</span>
@@ -1868,10 +1841,14 @@
                     </div>
 
                     <!-- Project 3 -->
-                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="timeline-item">
                         <div class="timeline-image-container"
-                            onclick="openImageModal('Salary_Tracker.png', 'Financial App', 'Salary Tracker')">
-                            <img src="Salary_Tracker.png" alt="Salary Tracker" class="timeline-thumb">
+                            onclick="openImageModal('Salary_Tracker.webp', 'Financial App', 'Salary Tracker')">
+                            <picture>
+                                <source srcset="Salary_Tracker.webp" type="image/webp">
+                                <img src="Salary_Tracker.png" alt="Salary Tracker screenshot" class="timeline-thumb"
+                                    width="1200" height="857" loading="lazy">
+                            </picture>
                         </div>
                         <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
                             <span class="timeline-school">JavaScript • Chart.js</span>
@@ -1897,10 +1874,14 @@
                     </div>
 
                     <!-- Project 1 (Moved) -->
-                    <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-item">
                         <div class="timeline-image-container"
-                            onclick="openImageModal('SNS_Website.png', 'Social Platform', 'SNS Website')">
-                            <img src="SNS_Website.png" alt="SNS Website" class="timeline-thumb">
+                            onclick="openImageModal('SNS_Website.webp', 'Social Platform', 'SNS Website')">
+                            <picture>
+                                <source srcset="SNS_Website.webp" type="image/webp">
+                                <img src="SNS_Website.png" alt="SNS Website screenshot" class="timeline-thumb"
+                                    width="1080" height="1080" loading="lazy">
+                            </picture>
                         </div>
                         <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
                             <span class="timeline-school">React • Node.js • MongoDB</span>
@@ -1943,10 +1924,14 @@
                     <div class="timeline">
 
                         <!-- Item 1 -->
-                        <div class="timeline-item" data-aos="fade-up">
+                        <div class="timeline-item">
                             <div class="timeline-image-container"
-                                onclick="openImageModal('yosida.png', 'IT Department', 'Hokkaido Cyber Creators College')">
-                                <img src="yosida.png" alt="Hokkaido Cyber Creators College" class="timeline-thumb">
+                                onclick="openImageModal('yosida.webp', 'IT Department', 'Hokkaido Cyber Creators College')">
+                                <picture>
+                                    <source srcset="yosida.webp" type="image/webp">
+                                    <img src="yosida.png" alt="Hokkaido Cyber Creators College" class="timeline-thumb"
+                                        width="840" height="560" loading="lazy">
+                                </picture>
                             </div>
                             <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
                                 <span class="timeline-school">Hokkaido Cyber Creators</span>
@@ -1966,10 +1951,14 @@
                         </div>
 
                         <!-- Item 2 -->
-                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="timeline-item">
                             <div class="timeline-image-container"
-                                onclick="openImageModal('hjla.jpg', 'Japanese Language', 'Hokkaido Japanese Language Academy')">
-                                <img src="hjla.jpg" alt="Hokkaido Japanese Language Academy" class="timeline-thumb">
+                                onclick="openImageModal('hjla.webp', 'Japanese Language', 'Hokkaido Japanese Language Academy')">
+                                <picture>
+                                    <source srcset="hjla.webp" type="image/webp">
+                                    <img src="hjla.jpg" alt="Hokkaido Japanese Language Academy" class="timeline-thumb"
+                                        width="1000" height="750" loading="lazy">
+                                </picture>
                             </div>
                             <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
                                 <span class="timeline-school">Hokkaido JL Academy</span>
@@ -1989,10 +1978,14 @@
                         </div>
 
                         <!-- Item 3 -->
-                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="timeline-item">
                             <div class="timeline-image-container"
-                                onclick="openImageModal('gyan_jyoti.jpg', 'High School', 'Gyan Jyoti Secondary School')">
-                                <img src="gyan_jyoti.jpg" alt="Gyan Jyoti Secondary School" class="timeline-thumb">
+                                onclick="openImageModal('gyan_jyoti.webp', 'High School', 'Gyan Jyoti Secondary School')">
+                                <picture>
+                                    <source srcset="gyan_jyoti.webp" type="image/webp">
+                                    <img src="gyan_jyoti.jpg" alt="Gyan Jyoti Secondary School" class="timeline-thumb"
+                                        width="1000" height="670" loading="lazy">
+                                </picture>
                             </div>
                             <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
                                 <span class="timeline-school">Gyan Jyoti Secondary</span>
@@ -2012,10 +2005,14 @@
                         </div>
 
                         <!-- Item 4 -->
-                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="timeline-item">
                             <div class="timeline-image-container"
-                                onclick="openImageModal('green_peace.jpg', 'School Education', 'Green Peace Secondary School')">
-                                <img src="green_peace.jpg" alt="Green Peace Secondary School" class="timeline-thumb">
+                                onclick="openImageModal('green_peace.webp', 'School Education', 'Green Peace Secondary School')">
+                                <picture>
+                                    <source srcset="green_peace.webp" type="image/webp">
+                                    <img src="green_peace.jpg" alt="Green Peace Secondary School" class="timeline-thumb"
+                                        width="1000" height="667" loading="lazy">
+                                </picture>
                             </div>
                             <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
                                 <span class="timeline-school">Green Peace Secondary</span>
@@ -2041,21 +2038,25 @@
             <!-- Premium Sticky About Layout -->
             <div class="about-container-premium">
                 <div class="about-image-wrap">
-                    <img src="about.jpeg" alt="Manoj" class="about-sticky-img">
+                    <picture>
+                        <source srcset="about.webp" type="image/webp">
+                        <img src="about.jpeg" alt="Manoj Poudel portrait" class="about-sticky-img" width="824"
+                            height="1100" loading="lazy">
+                    </picture>
                 </div>
                 <div class="about-text-content">
-                    <h2 class="about-premium-title" data-aos="fade-up">Driven by<br>Impact.</h2>
+                    <h2 class="about-premium-title">Driven by<br>Impact.</h2>
                     <div class="about-bio">
-                        <p class="premium-text" data-aos="fade-up" data-aos-delay="100">
+                        <p class="premium-text">
                             I am a dedicated <strong>Mobility & Robotics Specialist</strong> with a core mission: to
                             contribute to society through the power of IT.
                         </p>
-                        <p class="premium-text" data-aos="fade-up" data-aos-delay="200">
+                        <p class="premium-text">
                             My journey is defined by a relentless pursuit of technical excellence—from mastering complex
                             database architectures to engineering seamless user experiences. I don't just build
                             software; I engineer solutions that move the world forward.
                         </p>
-                        <p class="premium-text highlight" data-aos="fade-up" data-aos-delay="300">
+                        <p class="premium-text highlight">
                             Ready to grow together and set new standards in the industry.
                         </p>
                     </div>
@@ -2102,7 +2103,10 @@
                 <div class="footer-header">
                     <div class="footer-title">
                         <div class="user-image">
-                            <img src="model.png" alt="Manoj">
+                            <picture>
+                                <source srcset="model.webp" type="image/webp">
+                                <img src="model.png" alt="Manoj Poudel" width="80" height="80" loading="lazy">
+                            </picture>
                         </div>
                         <h2>Let's work</h2>
                     </div>
@@ -2173,8 +2177,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- CRITICAL: Menu Logic Isolated to prevent crashes -->
     <script>
@@ -2251,14 +2253,6 @@
     </script>
 
     <script>
-        // Initialize AOS (Animate On Scroll)
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: false,
-            mirror: true
-        });
-
         // Initialize Lenis Smooth Scroll
         const lenis = new Lenis({
             duration: 1.2,
@@ -2302,64 +2296,6 @@
                     y: 0,
                     ease: "elastic.out(1, 0.3)",
                     duration: 0.8
-                });
-            });
-        });
-
-        // PROJECT HOVER IMAGE
-        const projectItems = document.querySelectorAll('.project-item');
-        const hoverContainer = document.querySelector('#hover-image-container');
-        const hoverImage = document.querySelector('#hover-img');
-
-        const projectImages = {
-            'project1': 'SNS_Website.png',
-            'project2': 'Salary_Tracker.png',
-            'project3': 'budget.png'
-        };
-
-        let isHovering = false;
-
-        window.addEventListener('mousemove', (e) => {
-            if (isHovering) {
-                gsap.to(hoverContainer, {
-                    x: e.clientX - 200,
-                    y: e.clientY - 140,
-                    duration: 0.4,
-                    ease: "power2.out"
-                });
-            }
-        });
-
-        projectItems.forEach(item => {
-            item.addEventListener('mouseenter', (e) => {
-                const imageKey = item.getAttribute('data-image');
-                hoverImage.src = projectImages[imageKey] || projectImages['project1'];
-                isHovering = true;
-
-                gsap.to(hoverContainer, {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-
-            item.addEventListener('mousemove', (e) => {
-                gsap.to(hoverContainer, {
-                    x: e.clientX - 200,
-                    y: e.clientY - 140,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-
-            item.addEventListener('mouseleave', () => {
-                isHovering = false;
-                gsap.to(hoverContainer, {
-                    opacity: 0,
-                    scale: 0.8,
-                    duration: 0.2,
-                    ease: "power2.in"
                 });
             });
         });
@@ -2415,45 +2351,6 @@
                 end: "bottom top",
                 scrub: true
             }
-        });
-
-        // REVEAL TEXT ON SCROLL
-        gsap.to(".reveal-text", {
-            color: "#1c1d20",
-            duration: 1,
-            scrollTrigger: {
-                trigger: ".reveal-text",
-                start: "top 80%",
-                end: "top 20%",
-                scrub: true,
-            }
-        });
-
-        // PERSONAL PHOTO PARALLAX
-        gsap.to(".personal-photo", {
-            y: -100,
-            scrollTrigger: {
-                trigger: ".about",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-
-        // PHOTO MOUSE FOLLOW
-        const photo = document.querySelector('.personal-photo');
-
-        document.querySelector('.about').addEventListener('mousemove', (e) => {
-            const rect = document.querySelector('.about').getBoundingClientRect();
-            const moveX = (e.clientX - rect.left - rect.width / 2) * 0.02;
-            const moveY = (e.clientY - rect.top - rect.height / 2) * 0.02;
-
-            gsap.to(photo, {
-                x: moveX,
-                y: moveY,
-                duration: 1,
-                ease: "power2.out"
-            });
         });
 
         // MENU BUTTON SHOW/HIDE

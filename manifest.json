@@ -1,16 +1,22 @@
 {
-    "name": "Premium Portfolio",
-    "short_name": "Portfolio",
-    "description": "My professional premium portfolio.",
+    "name": "Manoj Poudel — Software Engineer",
+    "short_name": "Manoj",
+    "description": "Manoj Poudel — Software Engineer, Mobility & Robotics. Portfolio.",
     "start_url": "./index.html",
     "scope": "./",
     "display": "standalone",
-    "background_color": "#1c1d20",
-    "theme_color": "#1c1d20",
+    "background_color": "#141414",
+    "theme_color": "#141414",
     "orientation": "portrait",
     "icons": [
         {
-            "src": "apple-touch-icon.png",
+            "src": "icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icon-512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
