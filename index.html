@@ -88,7 +88,7 @@
             --hairline: rgba(20, 20, 20, 0.10);
             --hairline-strong: rgba(20, 20, 20, 0.18);
 
-            /* Dark surfaces (footer, marquee, menu, preloader) */
+            /* Dark surfaces (footer, marquee, menu, intro) */
             --dark: #141414;
             --dark-2: #1c1c1c;
             --on-dark: #f2f1ee;
@@ -217,12 +217,19 @@
         }
 
         .top-nav .links a,
-        .top-nav .links span {
+        .top-nav .links button {
             cursor: pointer;
             text-decoration: none;
             position: relative;
             padding: 2px 0;
             transition: opacity 0.3s var(--ease);
+            /* button reset */
+            font-family: inherit;
+            font-size: inherit;
+            letter-spacing: inherit;
+            color: inherit;
+            background: none;
+            border: none;
         }
 
         /* animated underline */
@@ -915,43 +922,44 @@
             }
         }
 
-        /* PRELOADER */
-        .preloader {
+        /* INTRO (page-load, ~0.9s, skippable) */
+        .intro {
             position: fixed;
             inset: 0;
-            width: 100%;
-            height: 100vh;
             background: var(--dark);
             color: var(--on-dark);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 9999;
+            will-change: transform;
         }
 
-        .preloader-text {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 400;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .preloader-text span {
+        .intro.done {
             display: none;
         }
 
-        .preloader-text span.active {
+        .intro-line {
             display: block;
+            overflow: hidden;
+            padding-bottom: 0.12em;
         }
 
-        .preloader-svg {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            fill: var(--dark);
+        .intro-name {
+            display: block;
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 7vw, 4.5rem);
+            font-weight: 500;
+            letter-spacing: var(--tracking-display);
+            /* starts below the mask; JS reveals it, then lifts the panel */
+            transform: translateY(105%);
+        }
+
+        /* Reduced motion: never animate or trap the user behind the panel */
+        @media (prefers-reduced-motion: reduce) {
+            .intro {
+                display: none;
+            }
         }
 
         /* MENU BUTTON */
@@ -1275,8 +1283,7 @@
                 mix-blend-mode: difference;
             }
 
-            .top-nav .links a,
-            .top-nav .links span {
+            .top-nav .links a {
                 display: none;
             }
 
@@ -1493,23 +1500,10 @@
 
 <body>
 
-    <div class="preloader">
-        <div class="preloader-text">
-            <span class="active">Hello</span>
-            <span>Bonjour</span>
-            <span>स्वागत हे</span>
-            <span>Ciao</span>
-            <span>Olá</span>
-            <span>ආයුබෝවන්</span>
-            <span>Сайн уу</span>
-            <span>안녕하세요</span>
-            <span>Xin chào</span>
-            <span>नमस्ते</span>
-            <span>おい</span>
+    <div class="intro" id="intro" aria-hidden="true">
+        <div class="intro-inner">
+            <span class="intro-line"><span class="intro-name">Manoj Poudel</span></span>
         </div>
-        <svg class="preloader-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path id="preloader-path" d="M0,0 L100,0 L100,100 L0,100 Z"></path>
-        </svg>
     </div>
 
     <div class="menu-button-wrapper">
@@ -1538,13 +1532,12 @@
         <nav class="top-nav">
             <div class="logo">© Code by Manoj</div>
             <div class="links">
-                <span onclick="scrollToSection('work')">Work</span>
-                <span onclick="scrollToSection('about-me')">About</span>
-                <span onclick="scrollToSection('contact')">Contact</span>
-                <span class="menu-text" onclick="window.toggleMenu()">Menu</span>
+                <a href="#work">Work</a>
+                <a href="#about-me">About</a>
+                <a href="#contact">Contact</a>
+                <button class="menu-text" type="button" aria-label="Open menu"
+                    onclick="window.toggleMenu()">Menu</button>
             </div>
-
-            <!-- Social Search Bar REMOVED -->
         </nav>
 
         <section class="hero" id="home">
@@ -2160,47 +2153,39 @@
             });
         });
 
-        // PRELOADER ANIMATION
-        const words = document.querySelectorAll(".preloader-text span");
-        let currentWordIndex = 0;
+        // INTRO SEQUENCE (~0.9s; skips on repeat visits & reduced-motion)
+        const intro = document.getElementById("intro");
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        function rotateWords() {
-            if (currentWordIndex < words.length - 1) {
-                words[currentWordIndex].classList.remove("active");
-                currentWordIndex++;
-                words[currentWordIndex].classList.add("active");
-                setTimeout(rotateWords, 200);
-            } else {
-                exitPreloader();
+        function finishIntro() {
+            if (intro) intro.classList.add("done");
+            document.body.style.overflow = "";
+        }
+
+        function runIntro() {
+            if (!intro) return;
+            // Skip if already seen this session, or user prefers reduced motion
+            if (sessionStorage.getItem("introSeen") || prefersReducedMotion || typeof gsap === "undefined") {
+                finishIntro();
+                return;
             }
+            sessionStorage.setItem("introSeen", "1");
+            document.body.style.overflow = "hidden";
+            gsap.timeline({ onComplete: finishIntro })
+                .to(".intro-name", { yPercent: -100, duration: 0.55, ease: "expo.out", delay: 0.1 })
+                .to(intro, { yPercent: -100, duration: 0.6, ease: "expo.inOut" }, "+=0.15");
+            // Safety: never trap the user behind the panel if the timeline stalls
+            setTimeout(finishIntro, 2500);
         }
+        runIntro();
 
-        function exitPreloader() {
-            const tl = gsap.timeline();
-
-            tl.to("#preloader-path", {
-                duration: 0.8,
-                attr: { d: "M0,0 L100,0 L100,100 Q50,0 0,100 Z" },
-                ease: "power2.in"
-            })
-                .to(".preloader", {
-                    yPercent: -100,
-                    duration: 0.8,
-                    ease: "power2.inOut"
-                }, "-=0.2")
-                .to(".preloader", {
-                    display: "none"
-                });
-        }
-
-        window.addEventListener("load", () => {
-            setTimeout(() => {
-                rotateWords();
-            }, 500);
+        // TOP NAV smooth-scroll (real anchors + Lenis)
+        document.querySelectorAll('.top-nav .links a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                const target = document.getElementById(a.getAttribute('href').slice(1));
+                if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: 0, duration: 1.2 }); }
+            });
         });
-
-        // TOP NAV - No longer hidden on mobile
-        const topNav = document.querySelector('.top-nav');
 
         // HERO PHOTO PARALLAX
         gsap.to(".hero-photo", {
@@ -2338,18 +2323,6 @@
             const modal = document.getElementById('imageModal');
             modal.classList.remove('active');
             document.body.style.overflow = 'auto';
-        }
-
-        // SMOOTH SCROLL TO SECTION
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                lenis.scrollTo(section, {
-                    offset: 0,
-                    duration: 1.5,
-                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-                });
-            }
         }
 
         // Close modal on background click
