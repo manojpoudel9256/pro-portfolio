@@ -295,6 +295,26 @@
                 object-fit: contain;
                 object-position: center bottom;
             }
+
+            /* Larger location badge on desktop */
+            .hero-badge {
+                padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+                gap: var(--space-3);
+            }
+
+            .hero-badge-text {
+                font-size: var(--fs-200);
+            }
+
+            .hero-badge-globe {
+                width: 52px;
+                height: 52px;
+            }
+
+            .globe3d {
+                width: 40px;
+                height: 40px;
+            }
         }
 
         .hero-scrim {
@@ -336,8 +356,8 @@
         }
 
         .hero-badge-globe {
-            width: 46px;
-            height: 46px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: grid;
             place-items: center;
@@ -347,8 +367,8 @@
         /* CSS 3D-style revolving globe */
         .globe3d {
             position: relative;
-            width: 34px;
-            height: 34px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             overflow: hidden;
             background: radial-gradient(circle at 32% 28%, #7fbaff 0%, #3b82e0 48%, #14509e 78%, #0c3a78 100%);
@@ -2444,61 +2464,10 @@
             });
         });
 
-        // MENU BUTTON SHOW/HIDE
-        const menuButton = document.querySelector('.menu-button-wrapper');
-        const menuButtonInner = document.querySelector('.menu-button');
-        const menuOverlay = document.querySelector('.menu-overlay');
-        const menuLinks = document.querySelectorAll('.menu-link');
-        const menuText = document.querySelector('.menu-text'); // Restored
-        const menuClose = document.querySelector('.menu-close'); // Restored
-
-        // SHOW FLOATING MENU BUTTON ON SCROLL
-        // Logic moved to isolated script above for reliability
-        // ScrollTrigger definition removed from here
-
-        // MENU OPEN/CLOSE
-        // Logic moved to isolated script above for reliability
-        // window.toggleMenu definition removed from here
-
-        // Floating Button Click
-        if (menuButton) {
-            menuButton.addEventListener('click', window.toggleMenu);
-        }
-
-        // Menu Text Click
-        if (menuText) {
-            menuText.addEventListener('click', window.toggleMenu);
-        }
-
-        // MENU CLOSE BUTTON
-        if (menuClose) {
-            menuClose.addEventListener('click', () => {
-                gsap.to(menuOverlay, {
-                    translateX: "100%",
-                    duration: 0.4,
-                    ease: "power3.inOut"
-                });
-                menuButtonInner.classList.remove('open');
-                window.menuOpen = false;
-            });
-        }
-
-        // Close menu when clicking a link
-        if (menuLinks) {
-            menuLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.menuOpen) {
-                        gsap.to(menuOverlay, {
-                            translateX: "100%",
-                            duration: 1,
-                            ease: "expo.inOut"
-                        });
-                        menuButtonInner.classList.remove('open');
-                        window.menuOpen = false;
-                    }
-                });
-            });
-        }
+        // MENU open/close/link handling is done entirely by the inline
+        // onclick="window.toggleMenu()" attributes + the single toggleMenu()
+        // defined in the isolated script above. (Duplicate JS bindings here were
+        // firing handlers twice and breaking the close — removed.)
 
         // FOOTER ANIMATION
         gsap.from(".footer-container", {
