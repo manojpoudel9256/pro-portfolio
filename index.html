@@ -1549,17 +1549,26 @@
                 display: none;
             }
 
-            /* Hero mobile */
+            /* Hero mobile — chrome sits at the bottom, above the name, so the
+               portrait/face in the upper two-thirds stays completely clear */
             .hero-ui {
                 flex-direction: column;
                 align-items: flex-start;
-                justify-content: flex-start;
-                gap: var(--space-4);
-                padding-top: calc(var(--space-8) + var(--space-3));
+                justify-content: flex-end;
+                gap: var(--space-3);
+                padding-bottom: clamp(6.5rem, 26vw, 10rem);
             }
 
             .hero-tagline {
                 text-align: left;
+            }
+
+            .hero-tagline .hero-scrollcue {
+                display: none;
+            }
+
+            .hero-name {
+                bottom: clamp(1.5rem, 6vw, 2.5rem);
             }
 
             .hero-name .hn {
