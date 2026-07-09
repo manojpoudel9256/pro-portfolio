@@ -190,7 +190,7 @@
             border-radius: 2px;
         }
 
-        /* NAVIGATION */
+        /* NAVIGATION — overlays the full-bleed hero */
         .top-nav {
             display: flex;
             justify-content: space-between;
@@ -198,7 +198,10 @@
             padding: var(--space-4) var(--gutter);
             font-family: var(--font-mono);
             font-size: var(--fs-200);
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
             background: transparent;
             color: white;
@@ -256,203 +259,138 @@
             display: none;
         }
 
-        /* HERO SECTION */
+        /* HERO — full-bleed portrait */
         .hero {
-            min-height: 100vh;
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            background: #a9a7a1;
+            /* studio grey behind the cut-out portrait */
+        }
+
+        .hero-photo-bg,
+        .hero-photo-bg img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .hero-photo-bg img {
+            object-fit: cover;
+            object-position: center 12%;
+        }
+
+        .hero-scrim {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(to bottom,
+                    rgba(20, 20, 20, 0.20) 0%,
+                    rgba(20, 20, 20, 0) 20%,
+                    rgba(20, 20, 20, 0) 52%,
+                    rgba(20, 20, 20, 0.48) 100%);
+        }
+
+        .hero-ui {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
             display: flex;
             align-items: center;
-            padding: var(--space-6) var(--gutter) var(--space-8);
-            position: relative;
-            background-color: var(--bg);
+            justify-content: space-between;
+            padding: 0 var(--gutter);
         }
 
-        .hero-grid {
-            width: 100%;
-            max-width: var(--maxw);
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            align-items: center;
-            gap: var(--space-6);
-        }
-
-        .hero-lead {
-            min-width: 0;
-        }
-
-        .hero-name {
-            font-family: var(--font-display);
-            font-size: var(--fs-mega);
-            font-weight: 600;
-            line-height: 0.9;
-            letter-spacing: var(--tracking-display);
-            color: var(--ink);
-            margin-bottom: var(--space-4);
-        }
-
-        .hero-role {
-            font-family: var(--font-display);
-            font-size: clamp(1.25rem, 2.4vw, 1.9rem);
-            font-weight: 400;
-            line-height: 1.15;
-            letter-spacing: -0.01em;
-            color: var(--ink-3);
-            margin-bottom: var(--space-5);
-        }
-
-        .hero-role span {
-            color: var(--ink);
-        }
-
-        .availability {
-            display: inline-flex;
+        .hero-badge {
+            display: flex;
             align-items: center;
             gap: var(--space-2);
-            padding: var(--space-1) var(--space-3);
-            border: 1px solid var(--hairline-strong);
+            background: var(--ink);
+            color: var(--on-dark);
+            padding: var(--space-2) var(--space-2) var(--space-2) var(--space-3);
             border-radius: 50px;
-            max-width: 100%;
-            flex-wrap: wrap;
         }
 
-        .avail-dot {
-            width: 8px;
-            height: 8px;
+        .hero-badge-text {
+            font-family: var(--font-mono);
+            font-size: var(--fs-100);
+            line-height: 1.35;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-badge-globe {
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
-            background: var(--accent);
-            position: relative;
+            background: rgba(242, 241, 238, 0.10);
+            display: grid;
+            place-items: center;
             flex-shrink: 0;
         }
 
-        .avail-dot::after {
-            content: "";
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 1px solid var(--accent);
-            animation: availPulse 2.4s ease-out infinite;
+        .hero-badge-globe svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--on-dark);
         }
 
-        @keyframes availPulse {
-            0% {
-                transform: scale(0.55);
-                opacity: 0.8;
-            }
-
-            100% {
-                transform: scale(1.9);
-                opacity: 0;
-            }
+        .hero-tagline {
+            text-align: right;
+            color: #fff;
         }
 
-        .avail-text,
-        .avail-loc {
-            font-family: var(--font-mono);
-            font-size: var(--fs-200);
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-        }
-
-        .avail-text {
-            color: var(--ink-2);
-        }
-
-        .avail-loc {
-            color: var(--ink-3);
-            padding-left: var(--space-2);
-            border-left: 1px solid var(--hairline-strong);
-        }
-
-        /* Circular portrait with rotating availability badge */
-        .hero-visual {
-            position: relative;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .portrait {
-            position: relative;
-            width: min(38vw, 460px);
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            overflow: visible;
-            will-change: transform;
-        }
-
-        .portrait picture,
-        .portrait img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center 20%;
-            display: block;
-            background: var(--surface);
-        }
-
-        .portrait-badge {
-            position: absolute;
-            width: 34%;
-            aspect-ratio: 1;
-            right: -6%;
-            bottom: 2%;
-            background: var(--ink);
-            border-radius: 50%;
-            display: grid;
-            place-items: center;
-        }
-
-        .portrait-badge svg {
-            width: 100%;
-            height: 100%;
-            animation: badgeSpin 18s linear infinite;
-        }
-
-        .portrait-badge text {
-            font-family: var(--font-mono);
-            font-size: 7px;
-            letter-spacing: 0.14em;
-            fill: var(--on-dark);
-            text-transform: uppercase;
-        }
-
-        @keyframes badgeSpin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .hero-scroll {
-            position: absolute;
-            bottom: var(--space-5);
-            left: var(--gutter);
+        .hero-scrollcue {
             display: inline-flex;
-            align-items: center;
-            gap: var(--space-1);
-            font-family: var(--font-mono);
-            font-size: var(--fs-100);
-            text-transform: uppercase;
-            letter-spacing: var(--tracking-label);
-            color: var(--ink-3);
-            text-decoration: none;
-        }
-
-        .hero-scroll svg {
-            animation: scrollNudge 1.8s var(--ease) infinite;
+            margin-bottom: var(--space-3);
+            color: #fff;
+            opacity: 0.85;
+            animation: scrollNudge 1.9s var(--ease) infinite;
         }
 
         @keyframes scrollNudge {
 
             0%,
             100% {
-                transform: translateY(0);
+                transform: translate(0, 0);
             }
 
             50% {
-                transform: translateY(4px);
+                transform: translate(3px, 3px);
             }
+        }
+
+        .hero-tagline p {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: clamp(1.15rem, 2.2vw, 1.9rem);
+            line-height: 1.2;
+            color: #fff;
+        }
+
+        .hero-name {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: clamp(1.25rem, 2.5vw, 3rem);
+            z-index: 2;
+            margin: 0;
+            padding: 0 var(--gutter);
+            text-align: center;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: clamp(3rem, 13vw, 14rem);
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        .hero-name span {
+            color: rgba(255, 255, 255, 0.55);
+            font-weight: 300;
         }
 
         /* Footer Social Buttons (Magnetic) */
@@ -1331,14 +1269,6 @@
 
         /* ===================== RESPONSIVE ===================== */
         @media (max-width: 1024px) {
-            .hero-grid {
-                gap: var(--space-5);
-            }
-
-            .hero-name {
-                font-size: clamp(3.5rem, 12vw, 7rem);
-            }
-
             .timeline-image-container {
                 width: 26%;
                 height: 150px;
@@ -1384,35 +1314,26 @@
             }
 
             /* Hero mobile */
-            .hero {
-                padding: var(--space-8) var(--gutter) var(--space-7);
-                min-height: 100vh;
-                align-items: center;
+            .hero-ui {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                gap: var(--space-4);
+                padding-top: calc(var(--space-8) + var(--space-3));
             }
 
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-5);
-            }
-
-            .hero-lead {
-                order: 1;
+            .hero-tagline {
+                text-align: left;
             }
 
             .hero-name {
-                font-size: clamp(3rem, 17vw, 5rem);
+                text-align: left;
+                white-space: normal;
+                font-size: clamp(2.5rem, 13vw, 5rem);
+                letter-spacing: -0.03em;
             }
 
-            .hero-visual {
-                order: 2;
-                justify-content: flex-start;
-            }
-
-            .portrait {
-                width: min(58vw, 300px);
-            }
-
-            .hero-scroll {
+            .hero-name span {
                 display: none;
             }
 
@@ -1542,30 +1463,13 @@
             }
         }
 
-        /* Phones (not tablet): drop the location chip to its own line so the
-           availability pill never clips, whatever the exact viewport width. */
-        @media (max-width: 560px) {
-            .avail-loc {
-                flex-basis: 100%;
-                padding-left: 0;
-                border-left: none;
-                margin-top: 2px;
-            }
-        }
-
         @media (max-width: 400px) {
             .hero-name {
-                font-size: clamp(2.75rem, 16vw, 3.5rem);
+                font-size: clamp(2.25rem, 13vw, 3.5rem);
             }
 
-            .availability {
-                padding: var(--space-1) var(--space-2);
-            }
-
-            .avail-text,
-            .avail-loc {
-                font-size: var(--fs-100);
-                letter-spacing: 0;
+            .hero-badge-text {
+                font-size: 0.7rem;
             }
 
             .social-btn {
@@ -1630,45 +1534,38 @@
         </nav>
 
         <section class="hero" id="home">
-            <div class="hero-grid">
-                <div class="hero-lead">
-                    <h1 class="hero-name">Manoj<br>Poudel</h1>
-                    <p class="hero-role">Software Engineer,<br><span>Mobility &amp; Robotics</span></p>
-                    <div class="availability">
-                        <span class="avail-dot" aria-hidden="true"></span>
-                        <span class="avail-text">Open to opportunities</span>
-                        <span class="avail-loc">Tokyo, JST</span>
-                    </div>
+            <!-- Full-bleed portrait background -->
+            <picture class="hero-photo-bg">
+                <source srcset="model.webp" type="image/webp">
+                <img src="model.png" alt="Portrait of Manoj Poudel" width="1100" height="1100" fetchpriority="high">
+            </picture>
+            <div class="hero-scrim" aria-hidden="true"></div>
+
+            <!-- Overlay UI -->
+            <div class="hero-ui">
+                <div class="hero-badge">
+                    <span class="hero-badge-text">Located<br>in Tokyo, Japan</span>
+                    <span class="hero-badge-globe" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="9" />
+                            <path d="M3 12h18" />
+                            <path d="M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18" />
+                        </svg>
+                    </span>
                 </div>
 
-                <div class="hero-visual">
-                    <div class="portrait" id="portrait">
-                        <picture>
-                            <source srcset="model.webp" type="image/webp">
-                            <img src="model.png" alt="Portrait of Manoj Poudel" width="1100" height="1100"
-                                fetchpriority="high">
-                        </picture>
-                        <div class="portrait-badge" aria-hidden="true">
-                            <svg viewBox="0 0 120 120">
-                                <defs>
-                                    <path id="badgeArc"
-                                        d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" />
-                                </defs>
-                                <text>
-                                    <textPath href="#badgeArc">AVAILABLE FOR WORK · TOKYO JST · AVAILABLE FOR WORK ·
-                                        TOKYO JST · </textPath>
-                                </text>
-                            </svg>
-                        </div>
-                    </div>
+                <div class="hero-tagline">
+                    <span class="hero-scrollcue" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M7 7l10 10M17 17V7M17 17H7" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <p>Software Engineer<br><span>Mobility &amp; Robotics</span></p>
                 </div>
             </div>
-            <a class="hero-scroll" href="#work" aria-label="Scroll to work">
-                <span>Scroll</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </a>
+
+            <h1 class="hero-name">Manoj Poudel <span aria-hidden="true">—</span></h1>
         </section>
 
         <section class="work" id="work">
