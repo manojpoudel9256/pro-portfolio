@@ -269,18 +269,32 @@
             /* studio grey behind the cut-out portrait */
         }
 
-        .hero-photo-bg,
-        .hero-photo-bg img {
+        .hero-photo-bg {
             position: absolute;
             inset: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
         }
 
         .hero-photo-bg img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: center 12%;
+            display: block;
+        }
+
+        /* Desktop: show the whole figure at natural size (studio grey fills the
+           sides) instead of width-cropping the square photo into a face close-up */
+        @media (min-width: 769px) {
+            .hero-photo-bg img {
+                width: auto;
+                height: min(94%, 900px);
+                object-fit: contain;
+                object-position: center bottom;
+            }
         }
 
         .hero-scrim {
