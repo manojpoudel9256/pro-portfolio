@@ -541,6 +541,194 @@
             max-width: var(--measure);
         }
 
+        /* Selected Work — cinematic glass case-study cards */
+        .work-grid {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 var(--gutter);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(var(--space-6), 8vw, var(--space-9));
+        }
+
+        .work-card {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: clamp(var(--space-4), 5vw, var(--space-7));
+            align-items: center;
+        }
+
+        .work-card:nth-child(even) .work-cover {
+            order: 2;
+        }
+
+        .work-cover {
+            position: relative;
+            aspect-ratio: 16 / 11;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--c1), var(--c2));
+            display: flex;
+            align-items: flex-end;
+            padding: var(--space-4);
+            box-shadow: 0 20px 50px rgba(20, 20, 20, 0.16);
+            transition: box-shadow 0.45s var(--ease), transform 0.45s var(--ease);
+        }
+
+        .work-card:hover .work-cover {
+            box-shadow: 0 32px 70px rgba(20, 20, 20, 0.26);
+            transform: translateY(-4px);
+        }
+
+        /* cinematic glass sheen + vignette */
+        .work-cover-glass {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                radial-gradient(120% 85% at 12% 8%, rgba(255, 255, 255, 0.30), transparent 52%),
+                radial-gradient(120% 120% at 88% 92%, rgba(0, 0, 0, 0.40), transparent 60%);
+        }
+
+        .work-motif {
+            position: absolute;
+            z-index: 1;
+            right: -4%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52%;
+            max-width: 300px;
+            color: rgba(255, 255, 255, 0.92);
+            opacity: 0.85;
+            filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.25));
+            transition: transform 0.5s var(--ease);
+        }
+
+        .work-card:hover .work-motif {
+            transform: translateY(-50%) scale(1.05) rotate(-3deg);
+        }
+
+        .work-cover-tag {
+            position: relative;
+            z-index: 2;
+            font-family: var(--font-mono);
+            font-size: var(--fs-100);
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-label);
+            color: #fff;
+            background: rgba(20, 20, 20, 0.28);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            padding: var(--space-1) var(--space-2);
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+        }
+
+        .work-meta-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: var(--space-3);
+            margin-bottom: var(--space-2);
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--hairline);
+        }
+
+        .work-title {
+            font-family: var(--font-display);
+            font-size: var(--fs-700);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+        }
+
+        .work-demo,
+        .work-chip {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            vertical-align: middle;
+            margin-left: var(--space-2);
+            padding: 3px 9px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .work-demo {
+            color: var(--accent);
+            background: rgba(255, 77, 2, 0.10);
+            border: 1px solid rgba(255, 77, 2, 0.32);
+        }
+
+        .work-chip {
+            color: var(--ink-3);
+            background: var(--surface);
+            border: 1px solid var(--hairline);
+        }
+
+        .work-year {
+            font-family: var(--font-mono);
+            font-size: var(--fs-200);
+            color: var(--ink-3);
+            white-space: nowrap;
+        }
+
+        .work-stack {
+            font-family: var(--font-mono);
+            font-size: var(--fs-200);
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: var(--space-3);
+        }
+
+        .work-desc {
+            color: var(--ink-2);
+            font-size: var(--fs-400);
+            line-height: var(--lh-body);
+            max-width: var(--measure);
+            margin-bottom: var(--space-4);
+        }
+
+        .work-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+
+        .work-btn {
+            font-family: var(--font-mono);
+            font-size: var(--fs-200);
+            letter-spacing: 0.02em;
+            padding: var(--space-2) var(--space-4);
+            border-radius: 999px;
+            cursor: pointer;
+            border: 1px solid var(--hairline-strong);
+            background: transparent;
+            color: var(--ink);
+            text-decoration: none;
+            transition: all 0.25s var(--ease);
+        }
+
+        .work-btn:hover {
+            border-color: var(--ink);
+            transform: translateY(-2px);
+        }
+
+        .work-btn-primary {
+            background: var(--ink);
+            color: var(--on-dark);
+            border-color: var(--ink);
+        }
+
+        .work-btn-primary:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--accent-ink);
+        }
+
         /* Premium About (Sticky) */
         .about-container-premium {
             display: flex;
@@ -1387,6 +1575,19 @@
                 padding: 0 var(--gutter) var(--space-5);
             }
 
+            .work-card {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
+            }
+
+            .work-card:nth-child(even) .work-cover {
+                order: 0;
+            }
+
+            .work-motif {
+                width: 44%;
+            }
+
             .about-container-premium {
                 flex-direction: column;
             }
@@ -1618,181 +1819,166 @@
                 <h1>Selected Work</h1>
             </div>
 
-            <!-- Reusing Timeline Styles for Work -->
-            <div class="timeline-section" style="margin-top: 50px;">
-                <div class="timeline">
+            <div class="work-grid">
 
-                    <!-- Project Weather Travel Planner -->
-                    <div class="timeline-item">
-                        <div class="timeline-image-container"
-                            onclick="openImageModal('travel.webp', 'Travel App', 'Weather Travel Planner')">
-                            <picture>
-                                <source srcset="travel.webp" type="image/webp">
-                                <img src="travel.png" alt="Weather Travel Planner screenshot" class="timeline-thumb"
-                                    width="946" height="871" loading="lazy">
-                            </picture>
+                <!-- Weather & Travel Planner -->
+                <article class="work-card">
+                    <div class="work-cover" style="--c1:#2b6fd6; --c2:#f0a83c;">
+                        <div class="work-cover-glass"></div>
+                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
+                            stroke-width="3" aria-hidden="true">
+                            <circle cx="46" cy="46" r="18" />
+                            <path d="M46 14v10M46 68v10M14 46h10M68 46h10M24 24l7 7M61 61l7 7M68 24l-7 7M31 61l-7 7"
+                                stroke-linecap="round" />
+                            <path d="M70 82h28a13 13 0 0 0 0-26 18 18 0 0 0-34-5" stroke-linecap="round" />
+                        </svg>
+                        <span class="work-cover-tag">Full-stack · Travel</span>
+                    </div>
+                    <div class="work-meta">
+                        <div class="work-meta-head">
+                            <h3 class="work-title">Weather &amp; Travel Planner</h3>
+                            <span class="work-year">2026</span>
                         </div>
-                        <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
-                            <span class="timeline-school">React • Node.js • MySQL</span>
-                            <div class="timeline-header-row">
-                                <h3 class="timeline-title">Weather Travel Planner</h3>
-                                <span class="timeline-year">2026</span>
-                            </div>
-                            <div class="timeline-desc">
-                                <p>A full-stack web application designed to help users plan their trips based on optimal
-                                    weather conditions. Features include real-time weather search with detailed metrics,
-                                    5-day forecasts, and smart travel recommendations to ensure the perfect trip.</p>
-                                <br>
-                                <a href="https://github.com/manojpoudel9256/weather-travel-planner.git" target="_blank"
-                                    style="color: #455ce9; text-decoration: none; font-weight: 500;">Visit Project
-                                    &rarr;</a>
-                            </div>
-                        </div>
-                        <div class="timeline-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
+                        <p class="work-stack">React · Node.js · MySQL</p>
+                        <p class="work-desc">A full-stack app that recommends destinations by optimal weather —
+                            real-time search, 5-day forecasts, and smart trip suggestions.</p>
+                        <div class="work-actions">
+                            <a class="work-btn work-btn-primary"
+                                href="https://github.com/manojpoudel9256/weather-travel-planner" target="_blank"
+                                rel="noopener">View code ↗</a>
+                            <button class="work-btn" type="button"
+                                onclick="openImageModal('travel.webp', 'Full-stack · Travel', 'Weather &amp; Travel Planner')">View
+                                screenshot</button>
                         </div>
                     </div>
+                </article>
 
-                    <!-- Project New -->
-                    <div class="timeline-item">
-                        <div class="timeline-image-container"
-                            onclick="openImageModal('studytracker.webp', 'Productivity App', 'StudyTrack Pro')">
-                            <picture>
-                                <source srcset="studytracker.webp" type="image/webp">
-                                <img src="studytracker.png" alt="StudyTrack Pro screenshot" class="timeline-thumb"
-                                    width="1200" height="542" loading="lazy">
-                            </picture>
+                <!-- StudyTrack Pro -->
+                <article class="work-card">
+                    <div class="work-cover" style="--c1:#4a3aa7; --c2:#1baf7a;">
+                        <div class="work-cover-glass"></div>
+                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
+                            stroke-width="3" aria-hidden="true">
+                            <path d="M20 96h80" stroke-linecap="round" />
+                            <rect x="28" y="64" width="14" height="28" rx="2" />
+                            <rect x="53" y="46" width="14" height="46" rx="2" />
+                            <rect x="78" y="28" width="14" height="64" rx="2" />
+                            <path d="M24 40l14-12 12 8 22-22" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="work-cover-tag">Productivity</span>
+                    </div>
+                    <div class="work-meta">
+                        <div class="work-meta-head">
+                            <h3 class="work-title">StudyTrack Pro</h3>
+                            <span class="work-year">2026</span>
                         </div>
-                        <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
-                            <span class="timeline-school">React • Node.js • MySQL</span>
-                            <div class="timeline-header-row">
-                                <h3 class="timeline-title">StudyTrack Pro</h3>
-                                <span class="timeline-year">2026</span>
-                            </div>
-                            <div class="timeline-desc">
-                                <p>A modern, full-stack web application designed to help students and professionals
-                                    track their study hours, analyze their productivity, and stay motivated through
-                                    gamification.</p>
-                                <br>
-                                <a href="https://github.com/manojpoudel9256/studytrack-pro.git" target="_blank"
-                                    style="color: #455ce9; text-decoration: none; font-weight: 500;">Visit Project
-                                    &rarr;</a>
-                            </div>
-                        </div>
-                        <div class="timeline-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
+                        <p class="work-stack">React · Node.js · MySQL</p>
+                        <p class="work-desc">A gamified study tracker with real-time analytics, leaderboards, and a
+                            focus timer — productivity turned into a game.</p>
+                        <div class="work-actions">
+                            <a class="work-btn work-btn-primary"
+                                href="https://github.com/manojpoudel9256/studytrack-pro" target="_blank"
+                                rel="noopener">View code ↗</a>
+                            <button class="work-btn" type="button"
+                                onclick="openImageModal('studytracker.webp', 'Productivity', 'StudyTrack Pro')">View
+                                screenshot</button>
                         </div>
                     </div>
+                </article>
 
-
-
-                    <!-- Project 2 -->
-                    <div class="timeline-item">
-                        <div class="timeline-image-container"
-                            onclick="openImageModal('budget.webp', 'Financial App', 'Budget Tracker')">
-                            <picture>
-                                <source srcset="budget.webp" type="image/webp">
-                                <img src="budget.png" alt="Budget Tracker screenshot" class="timeline-thumb"
-                                    width="960" height="1200" loading="lazy">
-                            </picture>
+                <!-- Budget Tracker -->
+                <article class="work-card">
+                    <div class="work-cover" style="--c1:#242424; --c2:#ff4d02;">
+                        <div class="work-cover-glass"></div>
+                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
+                            stroke-width="3" aria-hidden="true">
+                            <ellipse cx="60" cy="34" rx="30" ry="12" />
+                            <path d="M30 34v20c0 6.6 13.4 12 30 12s30-5.4 30-12V34" stroke-linecap="round" />
+                            <path d="M30 54v20c0 6.6 13.4 12 30 12s30-5.4 30-12V54" stroke-linecap="round" />
+                            <path d="M96 20l4 8 8 4-8 4-4 8-4-8-8-4 8-4z" stroke-linejoin="round" />
+                        </svg>
+                        <span class="work-cover-tag">AI · Finance</span>
+                    </div>
+                    <div class="work-meta">
+                        <div class="work-meta-head">
+                            <h3 class="work-title">Budget Tracker <span class="work-demo">Demo · sample data</span></h3>
+                            <span class="work-year">2026</span>
                         </div>
-                        <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
-                            <span class="timeline-school">PHP • MySQL • AI</span>
-                            <div class="timeline-header-row">
-                                <h3 class="timeline-title">Budget Tracker</h3>
-                                <span class="timeline-year">2026</span>
-                            </div>
-                            <div class="timeline-desc">
-                                <p>A comprehensive, AI-powered personal financial management tool. Track income,
-                                    expenses, set budgets, and visualize your financial health with a modern, responsive
-                                    UI.</p>
-                                <br>
-                                <a href="https://241033.daa.jp/finance" target="_blank"
-                                    style="color: #455ce9; text-decoration: none; font-weight: 500;">Visit Project
-                                    &rarr;</a>
-                            </div>
-                        </div>
-                        <div class="timeline-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
+                        <p class="work-stack">PHP · MySQL · Gemini AI</p>
+                        <p class="work-desc">An AI-powered personal finance tool — scan receipts with vision AI, set
+                            budgets, and get spending insights from Gemini.</p>
+                        <div class="work-actions">
+                            <a class="work-btn work-btn-primary" href="https://budget-tracker-v2.vercel.app"
+                                target="_blank" rel="noopener">View live ↗</a>
+                            <button class="work-btn" type="button"
+                                onclick="openImageModal('budget.webp', 'AI · Finance', 'Budget Tracker')">View
+                                screenshot</button>
                         </div>
                     </div>
+                </article>
 
-                    <!-- Project 3 -->
-                    <div class="timeline-item">
-                        <div class="timeline-image-container"
-                            onclick="openImageModal('Salary_Tracker.webp', 'Financial App', 'Salary Tracker')">
-                            <picture>
-                                <source srcset="Salary_Tracker.webp" type="image/webp">
-                                <img src="Salary_Tracker.png" alt="Salary Tracker screenshot" class="timeline-thumb"
-                                    width="1200" height="857" loading="lazy">
-                            </picture>
+                <!-- Salary Tracker -->
+                <article class="work-card">
+                    <div class="work-cover" style="--c1:#0f5132; --c2:#1baf7a;">
+                        <div class="work-cover-glass"></div>
+                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
+                            stroke-width="3" aria-hidden="true">
+                            <path d="M20 96h80" stroke-linecap="round" />
+                            <path d="M22 78l20-22 16 12 22-34" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M80 34h12v12" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="42" cy="56" r="3.5" fill="currentColor" stroke="none" />
+                            <circle cx="58" cy="68" r="3.5" fill="currentColor" stroke="none" />
+                        </svg>
+                        <span class="work-cover-tag">Data · Charts</span>
+                    </div>
+                    <div class="work-meta">
+                        <div class="work-meta-head">
+                            <h3 class="work-title">Salary Tracker <span class="work-demo">Demo · sample data</span></h3>
+                            <span class="work-year">2026</span>
                         </div>
-                        <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
-                            <span class="timeline-school">JavaScript • Chart.js</span>
-                            <div class="timeline-header-row">
-                                <h3 class="timeline-title">Salary Tracker</h3>
-                                <span class="timeline-year">2026</span>
-                            </div>
-                            <div class="timeline-desc">
-                                <p>A robust financial management tool for tracking income and visualizing trends over
-                                    time using dynamic charts.</p>
-                                <br>
-                                <a href="https://241033.daa.jp/salary_jap/auth/login.php" target="_blank"
-                                    style="color: #455ce9; text-decoration: none; font-weight: 500;">Visit Project
-                                    &rarr;</a>
-                            </div>
-                        </div>
-                        <div class="timeline-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
+                        <p class="work-stack">JavaScript · Chart.js</p>
+                        <p class="work-desc">A finance tracker that logs income and visualises earning trends over time
+                            with dynamic, interactive charts.</p>
+                        <div class="work-actions">
+                            <a class="work-btn work-btn-primary" href="https://salary-tracker-v2.vercel.app"
+                                target="_blank" rel="noopener">View live ↗</a>
+                            <button class="work-btn" type="button"
+                                onclick="openImageModal('Salary_Tracker.webp', 'Data · Charts', 'Salary Tracker')">View
+                                screenshot</button>
                         </div>
                     </div>
+                </article>
 
-                    <!-- Project 1 (Moved) -->
-                    <div class="timeline-item">
-                        <div class="timeline-image-container"
-                            onclick="openImageModal('SNS_Website.webp', 'Social Platform', 'SNS Website')">
-                            <picture>
-                                <source srcset="SNS_Website.webp" type="image/webp">
-                                <img src="SNS_Website.png" alt="SNS Website screenshot" class="timeline-thumb"
-                                    width="1080" height="1080" loading="lazy">
-                            </picture>
+                <!-- SNS Website (case study, no live link) -->
+                <article class="work-card">
+                    <div class="work-cover" style="--c1:#7209b7; --c2:#e0559b;">
+                        <div class="work-cover-glass"></div>
+                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
+                            stroke-width="3" aria-hidden="true">
+                            <circle cx="34" cy="40" r="11" />
+                            <circle cx="86" cy="34" r="9" />
+                            <circle cx="74" cy="84" r="12" />
+                            <path d="M44 44l30-6M44 46l26 30M80 42l-4 30" stroke-linecap="round" />
+                        </svg>
+                        <span class="work-cover-tag">Case study · Social</span>
+                    </div>
+                    <div class="work-meta">
+                        <div class="work-meta-head">
+                            <h3 class="work-title">SNS Website <span class="work-chip">Case study</span></h3>
+                            <span class="work-year">2024</span>
                         </div>
-                        <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
-                            <span class="timeline-school">React • Node.js • MongoDB</span>
-                            <div class="timeline-header-row">
-                                <h3 class="timeline-title">SNS Website</h3>
-                                <span class="timeline-year">2024</span>
-                            </div>
-                            <div class="timeline-desc">
-                                <p>A full-stack social networking platform featuring real-time updates, user
-                                    authentication, and data management.</p>
-                                <br>
-                                <a href="https://241033.daa.jp/sns3/" target="_blank"
-                                    style="color: #455ce9; text-decoration: none; font-weight: 500;">Visit Project
-                                    &rarr;</a>
-                            </div>
-                        </div>
-                        <div class="timeline-arrow">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
+                        <p class="work-stack">React · Node.js · MongoDB</p>
+                        <p class="work-desc">A full-stack social networking platform with real-time updates, user
+                            authentication, and post management. Originally hosted on a now-retired server — preserved
+                            here as a case study.</p>
+                        <div class="work-actions">
+                            <button class="work-btn work-btn-primary" type="button"
+                                onclick="openImageModal('SNS_Website.webp', 'Case study · Social', 'SNS Website')">View
+                                screenshot</button>
                         </div>
                     </div>
+                </article>
 
-                </div>
             </div>
         </section>
 
