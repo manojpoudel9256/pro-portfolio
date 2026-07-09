@@ -208,6 +208,7 @@
         .top-nav .logo {
             font-weight: 500;
             letter-spacing: 0.02em;
+            text-decoration: none;
         }
 
         .top-nav .links {
@@ -260,88 +261,146 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: var(--space-4) var(--gutter) var(--space-8);
+            padding: var(--space-6) var(--gutter) var(--space-8);
             position: relative;
             background-color: var(--bg);
         }
 
-        .hero-content {
+        .hero-grid {
             width: 100%;
             max-width: var(--maxw);
             margin: 0 auto;
             display: grid;
-            grid-template-columns: auto 1fr auto;
+            grid-template-columns: 1.05fr 0.95fr;
             align-items: center;
-            gap: var(--space-5);
-            position: relative;
-            transform: translateY(-5vh);
+            gap: var(--space-6);
         }
 
-        /* Location Badge - Left */
-        .location-badge {
-            display: flex;
+        .hero-lead {
+            min-width: 0;
+        }
+
+        .hero-name {
+            font-family: var(--font-display);
+            font-size: var(--fs-mega);
+            font-weight: 600;
+            line-height: 0.9;
+            letter-spacing: var(--tracking-display);
+            color: var(--ink);
+            margin-bottom: var(--space-4);
+        }
+
+        .hero-role {
+            font-family: var(--font-display);
+            font-size: clamp(1.25rem, 2.4vw, 1.9rem);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            color: var(--ink-3);
+            margin-bottom: var(--space-5);
+        }
+
+        .hero-role span {
+            color: var(--ink);
+        }
+
+        .availability {
+            display: inline-flex;
             align-items: center;
             gap: var(--space-2);
-            background: var(--ink);
-            padding: var(--space-2) var(--space-4);
+            padding: var(--space-1) var(--space-3);
+            border: 1px solid var(--hairline-strong);
             border-radius: 50px;
-            color: var(--on-dark);
+            max-width: 100%;
+            flex-wrap: wrap;
         }
 
-        .location-badge .globe-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(242, 241, 238, 0.12);
+        .avail-dot {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: rotateGlobe 8s linear infinite;
+            background: var(--accent);
+            position: relative;
+            flex-shrink: 0;
         }
 
-        @keyframes rotateGlobe {
-            to {
-                transform: rotate(360deg);
+        .avail-dot::after {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px solid var(--accent);
+            animation: availPulse 2.4s ease-out infinite;
+        }
+
+        @keyframes availPulse {
+            0% {
+                transform: scale(0.55);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.9);
+                opacity: 0;
             }
         }
 
-        .location-badge .globe-icon svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--on-dark);
-            stroke-width: 2;
-            fill: none;
-        }
-
-        .location-text {
+        .avail-text,
+        .avail-loc {
             font-family: var(--font-mono);
-            font-size: var(--fs-100);
-            line-height: 1.4;
+            font-size: var(--fs-200);
             letter-spacing: 0.02em;
+            white-space: nowrap;
         }
 
-        .location-text span {
-            display: block;
+        .avail-text {
+            color: var(--ink-2);
         }
 
-        /* Hero Photo - Center */
-        .hero-photo-wrapper {
-            width: 100%;
-            max-width: 100%;
-            aspect-ratio: 3/4;
+        .avail-loc {
+            color: var(--ink-3);
+            padding-left: var(--space-2);
+            border-left: 1px solid var(--hairline-strong);
+        }
+
+        /* Reserved slot for the Step 5 signature 3D element */
+        .hero-visual {
             position: relative;
-            height: 95vh;
-            max-height: none;
-            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .hero-photo-wrapper img {
+        .hero-visual-slot {
+            position: relative;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            object-position: center top;
-            transform: scale(1.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-3);
+            border: 1px solid var(--hairline);
+            border-radius: var(--radius-lg);
+            background: radial-gradient(circle at 50% 42%, rgba(20, 20, 20, 0.035), transparent 68%);
+        }
+
+        .slot-shape {
+            width: 30%;
+            aspect-ratio: 1;
+            border: 1.5px solid var(--hairline-strong);
+            transform: rotate(45deg);
+            border-radius: 10px;
+        }
+
+        .slot-label {
+            font-family: var(--font-mono);
+            font-size: var(--fs-100);
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-label);
+            color: var(--ink-3);
         }
 
         /* Footer Social Buttons (Magnetic) */
@@ -406,34 +465,6 @@
         .social-btn:hover svg {
             fill: white;
             color: white;
-        }
-
-        /* Role Text - Right */
-        .hero-role {
-            text-align: right;
-        }
-
-        .hero-role h2 {
-            font-family: var(--font-display);
-            font-size: clamp(1.6rem, 3.2vw, 2.6rem);
-            font-weight: 500;
-            line-height: var(--lh-snug);
-            letter-spacing: var(--tracking-display);
-            color: var(--ink);
-        }
-
-        .hero-arrow {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: var(--space-2);
-            color: var(--ink);
-        }
-
-        .hero-arrow svg {
-            width: 3vw;
-            height: 3vw;
-            min-width: 28px;
-            min-height: 28px;
         }
 
         /* WORK SECTION */
@@ -1246,12 +1277,12 @@
 
         /* ===================== RESPONSIVE ===================== */
         @media (max-width: 1024px) {
-            .hero-content {
-                gap: var(--space-4);
+            .hero-grid {
+                gap: var(--space-5);
             }
 
-            .hero-photo-wrapper {
-                height: 80vh;
+            .hero-name {
+                font-size: clamp(3.5rem, 12vw, 7rem);
             }
 
             .timeline-image-container {
@@ -1300,50 +1331,36 @@
 
             /* Hero mobile */
             .hero {
-                padding: var(--space-8) var(--gutter) var(--space-6);
-                min-height: auto;
-                height: auto;
-                display: block;
-            }
-
-            .hero-content {
-                display: flex;
-                flex-direction: column;
+                padding: var(--space-8) var(--gutter) var(--space-7);
+                min-height: 100vh;
                 align-items: center;
-                transform: none;
-                gap: var(--space-5);
-                width: 100%;
             }
 
-            .hero-photo-wrapper {
-                width: 100%;
-                height: 60vh;
-                max-height: 520px;
-                aspect-ratio: auto;
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-5);
+            }
+
+            .hero-lead {
                 order: 1;
             }
 
-            .hero-photo-wrapper img {
-                transform: scale(1);
+            .hero-name {
+                font-size: clamp(3rem, 17vw, 5rem);
             }
 
-            .hero-role {
+            .hero-visual {
                 order: 2;
-                text-align: center;
                 width: 100%;
+                max-width: 360px;
+                aspect-ratio: 4 / 3;
+                margin: 0;
             }
 
-            .hero-role h2 {
-                font-size: clamp(2rem, 8vw, 3rem);
-            }
-
-            .hero-arrow {
-                justify-content: center;
-            }
-
-            .location-badge {
-                order: 3;
-                align-self: center;
+            .slot-label {
+                white-space: normal;
+                text-align: center;
+                padding: 0 var(--space-2);
             }
 
             .work {
@@ -1473,8 +1490,26 @@
         }
 
         @media (max-width: 400px) {
-            .hero-photo-wrapper {
-                height: 54vh;
+            .hero-name {
+                font-size: clamp(2.75rem, 16vw, 3.5rem);
+            }
+
+            .availability {
+                padding: var(--space-1) var(--space-2);
+            }
+
+            .avail-text,
+            .avail-loc {
+                font-size: var(--fs-100);
+                letter-spacing: 0;
+            }
+
+            /* very narrow: drop location to its own line so nothing clips */
+            .avail-loc {
+                flex-basis: 100%;
+                padding-left: 0;
+                border-left: none;
+                margin-top: 2px;
             }
 
             .social-btn {
@@ -1530,7 +1565,7 @@
 
     <main id="main">
         <nav class="top-nav">
-            <div class="logo">© Code by Manoj</div>
+            <a class="logo" href="#home">Manoj Poudel</a>
             <div class="links">
                 <a href="#work">Work</a>
                 <a href="#about-me">About</a>
@@ -1541,41 +1576,24 @@
         </nav>
 
         <section class="hero" id="home">
-            <div class="hero-content">
-                <!-- Location Badge -->
-                <div class="location-badge">
-                    <div class="globe-icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="location-text">
-                        <span>Located</span>
-                        <span>in Japan</span>
+            <div class="hero-grid">
+                <div class="hero-lead">
+                    <h1 class="hero-name">Manoj<br>Poudel</h1>
+                    <p class="hero-role">Software Engineer,<br><span>Mobility &amp; Robotics</span></p>
+                    <div class="availability">
+                        <span class="avail-dot" aria-hidden="true"></span>
+                        <span class="avail-text">Open to opportunities</span>
+                        <span class="avail-loc">Tokyo, JST</span>
                     </div>
                 </div>
 
-                <!-- Photo -->
-                <div class="hero-photo-wrapper">
-                    <picture>
-                        <source srcset="model.webp" type="image/webp">
-                        <img src="model.png" alt="Portrait of Manoj Poudel" class="hero-photo" width="1100"
-                            height="1100" fetchpriority="high">
-                    </picture>
-                </div>
-
-                <!-- Role Text -->
-                <div class="hero-role">
-                    <div class="hero-arrow">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.5">
-                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                <!-- Signature 3D element mounts here in Step 5. Space reserved so the
+                     layout does not shift when the canvas is added. -->
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="hero-visual-slot" data-3d-slot>
+                        <span class="slot-shape"></span>
+                        <span class="slot-label">Signature object · in progress</span>
                     </div>
-                    <h2>Software Engineer<br>Mobility & Robotics Specialist</h2>
                 </div>
             </div>
         </section>
@@ -2185,17 +2203,6 @@
                 const target = document.getElementById(a.getAttribute('href').slice(1));
                 if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: 0, duration: 1.2 }); }
             });
-        });
-
-        // HERO PHOTO PARALLAX
-        gsap.to(".hero-photo", {
-            y: 100,
-            scrollTrigger: {
-                trigger: ".hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
         });
 
         // MENU BUTTON SHOW/HIDE
