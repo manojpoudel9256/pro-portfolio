@@ -376,28 +376,6 @@
             color: #fff;
         }
 
-        /* Static hero name across the bottom, overlapping the photo */
-        .hero-name {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: clamp(1.25rem, 2.5vw, 3rem);
-            z-index: 2;
-            margin: 0;
-            padding: 0 var(--gutter);
-            font-family: var(--font-display);
-            font-weight: 600;
-            font-size: clamp(3rem, 12.5vw, 13.5rem);
-            line-height: 0.9;
-            letter-spacing: -0.04em;
-            color: #fff;
-            white-space: nowrap;
-        }
-
-        .hero-name span {
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.5);
-        }
 
         /* Footer Social Buttons (Magnetic) */
         .footer-social-row {
@@ -1281,53 +1259,6 @@
             }
         }
 
-        /* INTRO (page-load, ~0.9s, skippable) */
-        .intro {
-            position: fixed;
-            inset: 0;
-            background: var(--dark);
-            color: var(--on-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            will-change: transform;
-        }
-
-        .intro.done {
-            display: none;
-        }
-
-        .intro-inner {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            overflow: hidden;
-            padding: 4px;
-        }
-
-        .intro-word {
-            font-family: var(--font-display);
-            font-size: clamp(1.75rem, 5vw, 3rem);
-            font-weight: 500;
-            letter-spacing: -0.02em;
-        }
-
-        .intro-rule {
-            display: block;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        /* Reduced motion: never animate or trap the user behind the panel */
-        @media (prefers-reduced-motion: reduce) {
-            .intro {
-                display: none;
-            }
-        }
-
         /* MENU BUTTON */
         .menu-button-wrapper {
             position: fixed;
@@ -1674,13 +1605,6 @@
                 display: none;
             }
 
-            .hero-name {
-                bottom: clamp(1.5rem, 6vw, 2.5rem);
-                white-space: normal;
-                font-size: clamp(2.5rem, 13vw, 5rem);
-                letter-spacing: -0.03em;
-            }
-
             .work {
                 padding: var(--space-7) 0;
             }
@@ -1821,10 +1745,6 @@
         }
 
         @media (max-width: 400px) {
-            .hero-name {
-                font-size: clamp(2.25rem, 13vw, 3.5rem);
-            }
-
             .social-btn {
                 width: 60px;
                 height: 60px;
@@ -1847,13 +1767,6 @@
 </head>
 
 <body>
-
-    <div class="intro" id="intro" aria-hidden="true">
-        <div class="intro-inner">
-            <span class="intro-word">Manoj Poudel</span>
-            <span class="intro-rule"></span>
-        </div>
-    </div>
 
     <div class="menu-button-wrapper">
         <div class="menu-button magnetic-wrap" onclick="window.toggleMenu()">
@@ -1910,7 +1823,6 @@
                 </div>
             </div>
 
-            <h1 class="hero-name">Manoj Poudel<span aria-hidden="true"> —</span></h1>
         </section>
 
         <section class="work" id="work">
@@ -2451,58 +2363,7 @@
             });
         });
 
-        // INTRO SEQUENCE (~0.9s; skips on repeat visits & reduced-motion)
-        // Hardened: never touches body overflow (the overlay covers the page
-        // anyway), sessionStorage is try/caught (throws in iOS private mode),
-        // and the safety timeout is registered BEFORE anything that can fail —
-        // so the page can never be left scroll-locked.
-        const intro = document.getElementById("intro");
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        function finishIntro() {
-            if (intro) intro.classList.add("done");
-            document.body.style.overflow = "";
-            document.documentElement.style.overflow = "";
-            // One-time hero entrance as the intro lifts
-            if (!finishIntro.played) {
-                finishIntro.played = true;
-                if (typeof gsap !== "undefined" && !prefersReducedMotion) {
-                    gsap.from(".hero-tagline", {
-                        y: 26, opacity: 0, duration: 0.8, ease: "power3.out", delay: 0.05, clearProps: "all"
-                    });
-                    gsap.from(".hero-name", {
-                        y: 44, opacity: 0, duration: 0.9, ease: "power3.out", delay: 0.15, clearProps: "all"
-                    });
-                }
-            }
-        }
-
-        const storage = {
-            get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
-            set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) { /* private mode */ } }
-        };
-
-        function runIntro() {
-            if (!intro) return;
-            // Skip if already seen this session, or user prefers reduced motion
-            if (storage.get("introSeen") || prefersReducedMotion || typeof gsap === "undefined") {
-                finishIntro();
-                return;
-            }
-            // Safety first: whatever happens below, the intro always clears
-            setTimeout(finishIntro, 2600);
-            storage.set("introSeen", "1");
-
-            // Short, elegant wordmark reveal: name rises from a mask, an accent
-            // rule draws underneath, then the panel wipes up to reveal the hero.
-            const word = intro.querySelector(".intro-word");
-            const rule = intro.querySelector(".intro-rule");
-            gsap.timeline({ onComplete: finishIntro })
-                .from(word, { yPercent: 120, opacity: 0, duration: 0.7, ease: "power4.out" })
-                .fromTo(rule, { width: 0 }, { width: 150, duration: 0.5, ease: "power2.inOut" }, "-=0.15")
-                .to(intro, { yPercent: -100, duration: 0.7, ease: "expo.inOut" }, "+=0.35");
-        }
-        runIntro();
 
         // TOP NAV smooth-scroll (real anchors + Lenis)
         document.querySelectorAll('.top-nav .links a[href^="#"]').forEach(a => {
