@@ -441,10 +441,194 @@
             color: white;
         }
 
-        /* TOOLS MARQUEE — two full-bleed rows, opposite directions */
+        /* ============ PRELOADER — Sun · Peak · Signal ============ */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(20px, 4vw, 34px);
+            background: var(--dark);
+            overflow: hidden;
+            transition: opacity .7s ease, transform .9s cubic-bezier(.76, 0, .24, 1),
+                visibility 0s linear .9s;
+        }
+
+        /* soft graphite grain / vignette so the dark feels premium, not flat */
+        .preloader::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(60% 60% at 50% 46%, rgba(255, 77, 2, .10), transparent 70%);
+        }
+
+        .preloader.pl-done {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-4%);
+        }
+
+        .pl-stage {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(16px, 3vw, 24px);
+        }
+
+        .pl-mark {
+            width: clamp(128px, 22vw, 184px);
+            height: auto;
+            overflow: visible;
+        }
+
+        .pl-sun {
+            fill: var(--accent);
+            opacity: 0;
+            transform-box: view-box;
+            transform-origin: 100px 104px;
+            transform: scale(.3);
+            filter: drop-shadow(0 0 22px rgba(255, 77, 2, .55));
+            animation: plSun 2.4s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+        .pl-node {
+            fill: #fff;
+            opacity: 0;
+            transform-box: view-box;
+            transform-origin: 100px 104px;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, .9));
+            animation: plNodeIn .5s ease .5s forwards, plOrbit 2s linear .5s infinite;
+        }
+
+        .pl-peak {
+            stroke: #f5f1e8;
+            stroke-width: 7;
+            stroke-dasharray: 320;
+            stroke-dashoffset: 320;
+            animation: plDraw 1.1s cubic-bezier(.65, 0, .35, 1) .25s forwards;
+        }
+
+        .pl-horizon {
+            stroke: rgba(245, 241, 232, .35);
+            stroke-width: 2;
+            stroke-dasharray: 160;
+            stroke-dashoffset: 160;
+            animation: plDraw 1s ease .9s forwards;
+        }
+
+        .pl-greet {
+            font-family: var(--font-mono);
+            font-size: clamp(1.1rem, 3.4vw, 1.55rem);
+            letter-spacing: .12em;
+            color: #f5f1e8;
+            min-height: 1.4em;
+            opacity: 0;
+            animation: plGreetIn .6s ease .6s forwards;
+        }
+
+        .pl-progress {
+            position: relative;
+            z-index: 1;
+            width: clamp(140px, 40vw, 260px);
+            height: 2px;
+            border-radius: 999px;
+            background: rgba(245, 241, 232, .14);
+            overflow: hidden;
+        }
+
+        .pl-bar {
+            display: block;
+            height: 100%;
+            width: 0;
+            border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 12px rgba(255, 77, 2, .7);
+            transition: width .25s ease;
+        }
+
+        @keyframes plSun {
+            0% {
+                opacity: 0;
+                transform: scale(.3);
+            }
+
+            55% {
+                opacity: .95;
+                transform: scale(1.04);
+            }
+
+            100% {
+                opacity: .9;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes plNodeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes plOrbit {
+            from {
+                transform: rotate(0deg) translateX(52px) rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg) translateX(52px) rotate(-360deg);
+            }
+        }
+
+        @keyframes plDraw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes plGreetIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .pl-sun,
+            .pl-node,
+            .pl-peak,
+            .pl-horizon,
+            .pl-greet {
+                animation-duration: .01ms !important;
+                animation-delay: 0s !important;
+            }
+
+            .pl-node {
+                animation: plNodeIn .01ms forwards !important;
+            }
+        }
+
+        /* TOOLS MARQUEE — two rows, opposite directions (in About) */
+        .stack-inner {
+            margin-top: clamp(var(--space-6), 9vw, var(--space-8));
+        }
+
         .stack {
             position: relative;
-            padding: clamp(var(--space-6), 9vw, var(--space-8)) 0;
+            margin-top: var(--space-5);
+            padding: clamp(var(--space-5), 5vw, var(--space-6)) 0;
+            border-radius: var(--radius-lg, 20px);
             background: var(--bg);
             overflow: hidden;
         }
@@ -1984,6 +2168,25 @@
 
 <body>
 
+    <!-- PRELOADER — Sun · Peak · Signal (Nepal + Japan + IT/AI) -->
+    <div id="preloader" class="preloader" role="status" aria-label="Loading">
+        <div class="pl-stage">
+            <svg class="pl-mark" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+                <!-- rising sun: Japan crimson / Nepal — a soft glowing disc -->
+                <circle class="pl-sun" cx="100" cy="104" r="34" />
+                <!-- orbiting AI node -->
+                <circle class="pl-node" cx="100" cy="104" r="4.5" />
+                <!-- mountain peaks: Himalaya of Nepal / Fuji of Japan, forming an M -->
+                <path class="pl-peak" d="M28 150 L74 84 L100 118 L128 68 L172 150"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <!-- horizon / signal line -->
+                <path class="pl-horizon" d="M22 150 H178" stroke-linecap="round" />
+            </svg>
+            <div class="pl-greet" id="plGreet" aria-hidden="true">नमस्ते</div>
+        </div>
+        <div class="pl-progress"><span id="plBar" class="pl-bar"></span></div>
+    </div>
+
     <div class="menu-button-wrapper">
         <div class="menu-button magnetic-wrap" onclick="window.toggleMenu()">
             <span class="menu-button-text">Menu</span>
@@ -2074,14 +2277,6 @@
                 </div>
             </div>
 
-        </section>
-
-        <!-- Tools & tech — infinite two-row logo marquee -->
-        <section class="stack" aria-label="Tools &amp; technologies">
-            <div class="logo-marquee">
-                <div class="logo-track" id="logoTrack"></div>
-                <div class="logo-track logo-track-rev" id="logoTrack2"></div>
-            </div>
         </section>
 
         <section class="work" id="work">
@@ -2335,6 +2530,17 @@
 
                     </div>
                 </div>
+
+                <!-- Tools & tech — infinite two-row logo marquee -->
+                <div class="stack-inner">
+                    <h2 class="section-title">Tools &amp; Technologies</h2>
+                    <section class="stack" aria-label="Tools and technologies">
+                        <div class="logo-marquee">
+                            <div class="logo-track" id="logoTrack"></div>
+                            <div class="logo-track logo-track-rev" id="logoTrack2"></div>
+                        </div>
+                    </section>
+                </div>
             </div>
 
             <!-- Premium Sticky About Layout -->
@@ -2475,6 +2681,79 @@
             </div>
         </footer>
     </main>
+
+    <!-- PRELOADER controller — greeting cycle, progress, graceful dismiss -->
+    <script>
+        (function () {
+            var pre = document.getElementById('preloader');
+            if (!pre) return;
+
+            // ?nopreload=1 skips it (handy for testing / deep links)
+            if (new URLSearchParams(location.search).get('nopreload')) {
+                pre.parentNode.removeChild(pre);
+                document.documentElement.style.overflow = '';
+                return;
+            }
+
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var greetEl = document.getElementById('plGreet');
+            var bar = document.getElementById('plBar');
+
+            // Nepal → Japan → global: who Manoj is, in three scripts
+            var GREETS = ['नमस्ते', 'こんにちは', 'Hello'];
+            var gi = 0, greetTimer = null;
+
+            // lock scroll while the preloader is up
+            document.documentElement.style.overflow = 'hidden';
+
+            if (!reduce) {
+                greetEl.textContent = GREETS[0];
+                greetTimer = setInterval(function () {
+                    gi = (gi + 1) % GREETS.length;
+                    greetEl.style.opacity = '0';
+                    setTimeout(function () {
+                        greetEl.textContent = GREETS[gi];
+                        greetEl.style.opacity = '1';
+                    }, 130);
+                }, 520);
+            } else {
+                greetEl.textContent = 'Hello';
+            }
+
+            // progress bar creeps to ~90%, then completes on dismiss
+            var pct = 0;
+            var prog = setInterval(function () {
+                pct = Math.min(pct + Math.random() * 16 + 6, 90);
+                bar.style.width = pct + '%';
+            }, 180);
+
+            var START = Date.now();
+            var MIN = reduce ? 300 : 1800; // let the sun rise & peaks draw
+
+            function dismiss() {
+                clearInterval(prog);
+                bar.style.width = '100%';
+                clearInterval(greetTimer);
+                setTimeout(function () {
+                    pre.classList.add('pl-done');
+                    document.documentElement.style.overflow = '';
+                    setTimeout(function () {
+                        if (pre.parentNode) pre.parentNode.removeChild(pre);
+                    }, 950);
+                }, 240);
+            }
+
+            function ready() {
+                var wait = Math.max(0, MIN - (Date.now() - START));
+                setTimeout(dismiss, wait);
+            }
+
+            if (document.readyState === 'complete') ready();
+            else window.addEventListener('load', ready);
+            // hard safety net so the page is never trapped behind the loader
+            setTimeout(dismiss, 6000);
+        })();
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
