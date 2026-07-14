@@ -151,9 +151,23 @@
             box-sizing: border-box;
         }
 
+        /* clip (not hidden): hidden makes html/body a scroll container on iOS,
+           which can swallow touch scrolling; clip only crops the overflow */
+        html,
+        body {
+            overflow-x: clip;
+        }
+
+        @supports not (overflow-x: clip) {
+
+            html,
+            body {
+                overflow-x: hidden;
+            }
+        }
+
         html {
             background: var(--bg);
-            overflow-x: hidden;
         }
 
         body {
@@ -164,7 +178,6 @@
             line-height: var(--lh-body);
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
-            overflow-x: hidden;
             width: 100%;
             max-width: 100%;
         }
@@ -266,6 +279,8 @@
         .hero {
             position: relative;
             height: 100vh;
+            /* small-viewport unit: matches the true visible area on mobile (iOS URL bar) */
+            height: 100svh;
             min-height: 600px;
             overflow: hidden;
             background: #a9a7a1;
@@ -325,10 +340,10 @@
             inset: 0;
             pointer-events: none;
             background: linear-gradient(to bottom,
-                    rgba(20, 20, 20, 0.20) 0%,
-                    rgba(20, 20, 20, 0) 20%,
+                    rgba(20, 20, 20, 0.30) 0%,
+                    rgba(20, 20, 20, 0) 22%,
                     rgba(20, 20, 20, 0) 52%,
-                    rgba(20, 20, 20, 0.48) 100%);
+                    rgba(20, 20, 20, 0.50) 100%);
         }
 
         .hero-ui {
@@ -863,6 +878,123 @@
             width: 48px;
             height: 2px;
             background: var(--accent);
+        }
+
+        /* EXPERIENCE — career timeline (role + phase milestones) */
+        .xp-item {
+            border: 1px solid var(--hairline);
+            border-radius: var(--radius-lg);
+            background: var(--elevated);
+            padding: clamp(var(--space-4), 4vw, var(--space-6));
+        }
+
+        .xp-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            padding-bottom: var(--space-3);
+            margin-bottom: var(--space-4);
+            border-bottom: 1px solid var(--hairline);
+        }
+
+        .xp-org {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: var(--fs-100);
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-label);
+            color: var(--ink-3);
+            margin-bottom: var(--space-1);
+        }
+
+        .xp-role {
+            font-family: var(--font-display);
+            font-size: var(--fs-600);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: var(--lh-snug);
+        }
+
+        .xp-years {
+            font-family: var(--font-mono);
+            font-size: var(--fs-200);
+            color: var(--accent);
+            white-space: nowrap;
+            padding-top: 6px;
+        }
+
+        .xp-phases {
+            list-style: none;
+            position: relative;
+        }
+
+        .xp-phases li {
+            display: flex;
+            gap: clamp(var(--space-3), 4vw, var(--space-6));
+            position: relative;
+            padding: 0 0 var(--space-4) var(--space-4);
+        }
+
+        .xp-phases li:last-child {
+            padding-bottom: 0;
+        }
+
+        /* rail + node */
+        .xp-phases li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            bottom: -10px;
+            width: 1px;
+            background: var(--hairline-strong);
+        }
+
+        .xp-phases li:last-child::before {
+            display: none;
+        }
+
+        .xp-phases li::after {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 6px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .xp-when {
+            font-family: var(--font-mono);
+            font-size: var(--fs-200);
+            color: var(--ink-3);
+            min-width: 82px;
+            white-space: nowrap;
+            padding-top: 1px;
+        }
+
+        .xp-phases h4 {
+            font-family: var(--font-display);
+            font-size: var(--fs-400);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--space-1);
+        }
+
+        .xp-phases p {
+            color: var(--ink-2);
+            font-size: var(--fs-300);
+            max-width: var(--measure);
+        }
+
+        @media (max-width: 768px) {
+            .xp-phases li {
+                flex-direction: column;
+                gap: var(--space-1);
+            }
         }
 
         /* TIMELINE (Work + Academic) */
@@ -2019,12 +2151,54 @@
             <div class="about-me-container">
                 <div class="about-me-header">
                     <h1>About Me</h1>
-                    <p>My academic journey and personal story</p>
+                    <p>Experience, education, and the story so far</p>
                 </div>
 
-                <!-- Academic Timeline -->
+                <!-- Experience -->
                 <div class="timeline-section">
-                    <h2 class="section-title">Academic History</h2>
+                    <h2 class="section-title">Experience</h2>
+                    <div class="xp">
+                        <article class="xp-item">
+                            <div class="xp-head">
+                                <div>
+                                    <span class="xp-org">Japanese engineering company · Tokyo</span>
+                                    <h3 class="xp-role">Software Developer — Mobility &amp; Robotics</h3>
+                                </div>
+                                <span class="xp-years">Apr 2026 — Present</span>
+                            </div>
+                            <ol class="xp-phases">
+                                <li>
+                                    <span class="xp-when">Apr 2026</span>
+                                    <div>
+                                        <h4>Unreal Engine development</h4>
+                                        <p>First core mission: real-time 3D development in Unreal Engine for
+                                            mobility &amp; robotics simulation.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="xp-when">2026</span>
+                                    <div>
+                                        <h4>Python scripting &amp; automation</h4>
+                                        <p>Pipeline tooling and scripting in Python — automating workflows around
+                                            the simulation environment.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="xp-when">Now</span>
+                                    <div>
+                                        <h4>Blender 3D modelling</h4>
+                                        <p>Expanding into 3D asset creation and modelling workflows in Blender —
+                                            closing the loop from model to engine.</p>
+                                    </div>
+                                </li>
+                            </ol>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="timeline-section">
+                    <h2 class="section-title">Education</h2>
                     <div class="timeline">
 
                         <!-- Item 1 -->
@@ -2081,60 +2255,6 @@
                             </div>
                         </div>
 
-                        <!-- Item 3 -->
-                        <div class="timeline-item">
-                            <div class="timeline-image-container"
-                                onclick="openImageModal('gyan_jyoti.webp', 'High School', 'Gyan Jyoti Secondary School')">
-                                <picture>
-                                    <source srcset="gyan_jyoti.webp" type="image/webp">
-                                    <img src="gyan_jyoti.webp" alt="Gyan Jyoti Secondary School" class="timeline-thumb"
-                                        width="1000" height="670" loading="lazy">
-                                </picture>
-                            </div>
-                            <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
-                                <span class="timeline-school">Gyan Jyoti Secondary</span>
-                                <div class="timeline-header-row">
-                                    <h3 class="timeline-title">High School Education</h3>
-                                    <span class="timeline-year">2016 — 2018</span>
-                                </div>
-                                <p class="timeline-desc">Focused on Computer Science fundamentals, Mathematics, and
-                                    English. Laid the groundwork for international study.</p>
-                            </div>
-                            <div class="timeline-arrow">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <!-- Item 4 -->
-                        <div class="timeline-item">
-                            <div class="timeline-image-container"
-                                onclick="openImageModal('green_peace.webp', 'School Education', 'Green Peace Secondary School')">
-                                <picture>
-                                    <source srcset="green_peace.webp" type="image/webp">
-                                    <img src="green_peace.webp" alt="Green Peace Secondary School" class="timeline-thumb"
-                                        width="1000" height="667" loading="lazy">
-                                </picture>
-                            </div>
-                            <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
-                                <span class="timeline-school">Green Peace Secondary</span>
-                                <div class="timeline-header-row">
-                                    <h3 class="timeline-title">Primary Education</h3>
-                                    <span class="timeline-year">2003 — 2016</span>
-                                </div>
-                                <p class="timeline-desc">Built a strong educational foundation with emphasis on core
-                                    subjects and extracurricular activities.</p>
-                            </div>
-                            <div class="timeline-arrow">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -2156,9 +2276,9 @@
                             contribute to society through the power of IT.
                         </p>
                         <p class="premium-text">
-                            My journey is defined by a relentless pursuit of technical excellence—from mastering complex
-                            database architectures to engineering seamless user experiences. I don't just build
-                            software; I engineer solutions that move the world forward.
+                            Today that means building real-time 3D in <strong>Unreal Engine</strong>, automating
+                            pipelines with <strong>Python</strong>, and modelling assets in <strong>Blender</strong> —
+                            engineering the tools that move mobility and robotics forward.
                         </p>
                         <p class="premium-text highlight">
                             Ready to grow together and set new standards in the industry.
@@ -2426,23 +2546,46 @@
         });
 
         // INTRO SEQUENCE (~0.9s; skips on repeat visits & reduced-motion)
+        // Hardened: never touches body overflow (the overlay covers the page
+        // anyway), sessionStorage is try/caught (throws in iOS private mode),
+        // and the safety timeout is registered BEFORE anything that can fail —
+        // so the page can never be left scroll-locked.
         const intro = document.getElementById("intro");
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         function finishIntro() {
             if (intro) intro.classList.add("done");
             document.body.style.overflow = "";
+            document.documentElement.style.overflow = "";
+            // One-time hero entrance as the intro lifts
+            if (!finishIntro.played) {
+                finishIntro.played = true;
+                if (typeof gsap !== "undefined" && !prefersReducedMotion) {
+                    gsap.from(".hero-badge, .hero-tagline", {
+                        y: 26, opacity: 0, duration: 0.8, ease: "power3.out", stagger: 0.12, delay: 0.05, clearProps: "all"
+                    });
+                    gsap.from(".hero-name", {
+                        y: 44, opacity: 0, duration: 0.9, ease: "power3.out", delay: 0.15, clearProps: "all"
+                    });
+                }
+            }
         }
+
+        const storage = {
+            get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+            set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) { /* private mode */ } }
+        };
 
         function runIntro() {
             if (!intro) return;
             // Skip if already seen this session, or user prefers reduced motion
-            if (sessionStorage.getItem("introSeen") || prefersReducedMotion || typeof gsap === "undefined") {
+            if (storage.get("introSeen") || prefersReducedMotion || typeof gsap === "undefined") {
                 finishIntro();
                 return;
             }
-            sessionStorage.setItem("introSeen", "1");
-            document.body.style.overflow = "hidden";
+            // Safety first: whatever happens below, the intro always clears
+            setTimeout(finishIntro, 3200);
+            storage.set("introSeen", "1");
 
             const greetings = ["Hello", "こんにちは", "नमस्ते", "Bonjour", "Hola"];
             const el = document.getElementById("introGreeting");
@@ -2453,9 +2596,6 @@
                     .to(el, { opacity: 0, y: -14, duration: 0.12, ease: "power2.in", delay: i === greetings.length - 1 ? 0.1 : 0.13 });
             });
             tl.to(intro, { yPercent: -100, duration: 0.6, ease: "expo.inOut" });
-
-            // Safety: never trap the user behind the panel if the timeline stalls
-            setTimeout(finishIntro, 3200);
         }
         runIntro();
 
@@ -2540,7 +2680,7 @@
         function closeImageModal() {
             const modal = document.getElementById('imageModal');
             modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = '';
         }
 
         // Close modal on background click
