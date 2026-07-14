@@ -314,6 +314,13 @@
                 object-position: center bottom;
             }
 
+            /* Desktop nav: crisp dark ink on the light-grey hero top
+               (mix-blend difference was rendering it muddy/hard to read) */
+            .top-nav {
+                mix-blend-mode: normal;
+                color: var(--ink);
+            }
+
             /* Larger location badge on desktop */
             .hero-badge {
                 padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
@@ -2204,10 +2211,10 @@
                         <!-- Item 1 -->
                         <div class="timeline-item">
                             <div class="timeline-image-container"
-                                onclick="openImageModal('yosida.webp', 'IT Department', 'Hokkaido Cyber Creators College')">
+                                onclick="openImageModal('yoshida.webp', 'IT Department', 'Hokkaido Cyber Creators College')">
                                 <picture>
-                                    <source srcset="yosida.webp" type="image/webp">
-                                    <img src="yosida.webp" alt="Hokkaido Cyber Creators College" class="timeline-thumb"
+                                    <source srcset="yoshida.webp" type="image/webp">
+                                    <img src="yoshida.webp" alt="Hokkaido Cyber Creators College" class="timeline-thumb"
                                         width="840" height="560" loading="lazy">
                                 </picture>
                             </div>
