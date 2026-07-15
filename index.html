@@ -630,7 +630,7 @@
             }
         }
 
-        /* TOOLS MARQUEE — two rows, opposite directions (in About) */
+        /* TOOLS MARQUEE — four rows, alternating directions (in About) */
         .stack-inner {
             margin-top: clamp(var(--space-6), 9vw, var(--space-8));
         }
@@ -672,7 +672,7 @@
         .logo-marquee {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 10px;
             -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
             mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
         }
@@ -680,14 +680,23 @@
         .logo-track {
             display: flex;
             width: max-content;
-            gap: 16px;
-            animation: logoScroll 48s linear infinite;
+            gap: 10px;
+            animation: logoScroll 46s linear infinite;
             will-change: transform;
         }
 
         .logo-track-rev {
-            animation-duration: 56s;
+            animation-duration: 54s;
             animation-direction: reverse;
+        }
+
+        /* stagger the extra rows so they never line up */
+        #logoTrack3 {
+            animation-duration: 62s;
+        }
+
+        #logoTrack4 {
+            animation-duration: 50s;
         }
 
         .logo-marquee:hover .logo-track {
@@ -708,8 +717,8 @@
             flex: 0 0 auto;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 11px 22px 11px 11px;
+            gap: 8px;
+            padding: 6px 14px 6px 6px;
             border-radius: 999px;
             background: var(--elevated);
             border: 1px solid var(--hairline);
@@ -717,9 +726,9 @@
         }
 
         .logo-ico {
-            width: 46px;
-            height: 46px;
-            border-radius: 13px;
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
             flex: 0 0 auto;
             background: #fff;
             display: grid;
@@ -728,14 +737,14 @@
         }
 
         .logo-ico img {
-            width: 27px;
-            height: 27px;
+            width: 19px;
+            height: 19px;
             display: block;
         }
 
         .logo-chip b {
             font-weight: 600;
-            font-size: 0.98rem;
+            font-size: 0.8rem;
             color: var(--ink);
             white-space: nowrap;
             letter-spacing: -0.01em;
@@ -1955,17 +1964,23 @@
                 padding: 0 var(--gutter) var(--space-5);
             }
 
-            /* Compact 2-up grid on mobile so 2–4 projects are visible at once */
+            /* Premium single-column cards on mobile — each project is an
+               elevated card: full-bleed cover on top, details below */
             .work-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-3);
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-5);
             }
 
             .work-card {
-                display: flex;
-                flex-direction: column;
-                gap: var(--space-2);
+                display: block;
+                width: 100%;
+                min-width: 0;
+                background: var(--elevated);
+                border: 1px solid var(--hairline);
+                border-radius: var(--radius-lg);
+                overflow: hidden;
+                box-shadow: 0 14px 34px rgba(20, 20, 20, 0.09);
             }
 
             .work-card:nth-child(even) .work-cover {
@@ -1973,48 +1988,55 @@
             }
 
             .work-cover {
-                aspect-ratio: 4 / 3;
-                padding: var(--space-2);
+                aspect-ratio: 16 / 10;
+                border-radius: 0;
+                padding: var(--space-3);
             }
 
             .work-motif {
-                width: 52%;
+                width: 44%;
             }
 
             .work-index {
-                top: var(--space-2);
-                left: var(--space-2);
+                top: var(--space-3);
+                left: var(--space-3);
+            }
+
+            .work-meta {
+                padding: var(--space-4);
             }
 
             .work-title {
-                font-size: var(--fs-500);
+                font-size: var(--fs-600);
             }
 
-            .work-demo,
             .work-chip {
                 display: none;
             }
 
             .work-desc {
-                display: none;
+                display: block;
+                font-size: var(--fs-300);
+                max-width: 100%;
+                margin-bottom: var(--space-4);
             }
 
             .work-meta-head {
-                margin-bottom: var(--space-1);
-                padding-bottom: var(--space-1);
+                margin-bottom: var(--space-2);
+                padding-bottom: var(--space-2);
             }
 
             .work-stack {
-                margin-bottom: var(--space-2);
+                margin-bottom: var(--space-3);
             }
 
             .work-btn {
-                padding: var(--space-1) var(--space-3);
-                font-size: var(--fs-100);
+                padding: var(--space-2) var(--space-4);
+                font-size: var(--fs-200);
             }
 
             .work-actions {
-                gap: var(--space-1);
+                gap: var(--space-2);
             }
 
             .about-container-premium {
@@ -2526,6 +2548,8 @@
                         <div class="logo-marquee">
                             <div class="logo-track" id="logoTrack"></div>
                             <div class="logo-track logo-track-rev" id="logoTrack2"></div>
+                            <div class="logo-track" id="logoTrack3"></div>
+                            <div class="logo-track logo-track-rev" id="logoTrack4"></div>
                         </div>
                     </section>
                 </div>
@@ -2914,12 +2938,16 @@
                 ["css3", "CSS3"], ["git", "Git"], ["github", "GitHub"]
             ];
             const chip = ([f, n]) =>
-                `<span class="logo-chip"><span class="logo-ico"><img src="logos/${f}.svg" alt="" loading="lazy" width="26" height="26"></span><b>${n}</b></span>`;
-            const row1 = LOGOS.map(chip).join("");
-            const row2 = [...LOGOS].reverse().map(chip).join("");
-            const t1 = document.getElementById("logoTrack"), t2 = document.getElementById("logoTrack2");
-            if (t1) t1.innerHTML = row1 + row1;
-            if (t2) t2.innerHTML = row2 + row2;
+                `<span class="logo-chip"><span class="logo-ico"><img src="logos/${f}.svg" alt="" loading="lazy" width="19" height="19"></span><b>${n}</b></span>`;
+            // four rows, each a different rotation of the list so they never align
+            const rot = (arr, n) => arr.slice(n).concat(arr.slice(0, n));
+            const rows = [LOGOS, rot(LOGOS, 4), rot(LOGOS, 8), rot(LOGOS, 11)];
+            ["logoTrack", "logoTrack2", "logoTrack3", "logoTrack4"].forEach((id, i) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const html = rows[i].map(chip).join("");
+                el.innerHTML = html + html; // duplicate for a seamless loop
+            });
         })();
 
         // SELECTED WORK — scroll reveal (skip under reduced motion)
