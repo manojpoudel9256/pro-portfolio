@@ -1537,37 +1537,6 @@
             height: var(--space-7);
         }
 
-        /* MARQUEE */
-        .marquee {
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
-            padding: var(--space-5) 0;
-            background: var(--dark);
-            color: var(--on-dark);
-        }
-
-        .marquee-group {
-            display: inline-block;
-            font-family: var(--font-display);
-            font-size: 9vw;
-            font-weight: 500;
-            letter-spacing: var(--tracking-display);
-            text-transform: uppercase;
-            will-change: transform;
-            animation: marquee 30s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
         /* MENU BUTTON */
         .menu-button-wrapper {
             position: fixed;
@@ -2157,10 +2126,6 @@
                 gap: var(--space-3);
             }
 
-            .marquee-group {
-                font-size: 14vw;
-            }
-
             .spacer {
                 height: var(--space-5);
             }
@@ -2621,13 +2586,6 @@
 
 
         <section class="spacer"></section>
-
-        <div class="marquee">
-            <div class="marquee-group">
-                <span>— Manoj — Engineer — Designer — Creative — Manoj — Engineer — Designer — Creative — Manoj —
-                    Engineer— Designer — Creative — Manoj — Engineer— Designer — Creative </span>
-            </div>
-        </div>
 
         <footer class="footer" id="contact">
             <div class="footer-container">
