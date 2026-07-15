@@ -376,6 +376,16 @@
             color: #fff;
         }
 
+        .hero-tagline .hero-meta {
+            margin-top: var(--space-2);
+            font-family: var(--font-mono);
+            font-weight: 400;
+            font-size: clamp(0.7rem, 1.5vw, 0.82rem);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.82);
+        }
+
 
         /* Footer Social Buttons (Magnetic) */
         .footer-social-row {
@@ -529,6 +539,7 @@
             color: #f5f1e8;
             min-height: 1.4em;
             opacity: 0;
+            transition: opacity .35s ease;
             animation: plGreetIn .6s ease .6s forwards;
         }
 
@@ -1938,14 +1949,21 @@
                 display: none;
             }
 
-            /* Hero mobile — chrome sits at the bottom, above the name, so the
-               portrait/face in the upper two-thirds stays completely clear */
+            /* Hero mobile — show the WHOLE figure (zoomed out, full quality),
+               blending into the studio grey, with the labels below the photo */
+            .hero-photo-bg img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center 20%;
+            }
+
             .hero-ui {
                 flex-direction: column;
                 align-items: flex-start;
                 justify-content: flex-end;
                 gap: var(--space-3);
-                padding-bottom: clamp(6.5rem, 26vw, 10rem);
+                padding-bottom: clamp(4.5rem, 16vw, 7rem);
             }
 
             .hero-tagline {
@@ -1954,6 +1972,10 @@
 
             .hero-tagline .hero-scrollcue {
                 display: none;
+            }
+
+            .hero-tagline .hero-meta {
+                color: rgba(255, 255, 255, 0.9);
             }
 
             .work {
@@ -2274,6 +2296,7 @@
                         </svg>
                     </span>
                     <p>Software Engineer<br><span>Mobility &amp; Robotics</span></p>
+                    <p class="hero-meta">Unreal Engine · Python · Blender 3D</p>
                 </div>
             </div>
 
@@ -2709,13 +2732,20 @@
             if (!reduce) {
                 greetEl.textContent = GREETS[0];
                 greetTimer = setInterval(function () {
-                    gi = (gi + 1) % GREETS.length;
+                    gi++;
                     greetEl.style.opacity = '0';
                     setTimeout(function () {
-                        greetEl.textContent = GREETS[gi];
-                        greetEl.style.opacity = '1';
-                    }, 130);
-                }, 520);
+                        // play each greeting once, then leave it faded out
+                        if (gi < GREETS.length) {
+                            greetEl.textContent = GREETS[gi];
+                            greetEl.style.opacity = '1';
+                        }
+                    }, 170);
+                    if (gi >= GREETS.length) { // shown all → stop, stays gone
+                        clearInterval(greetTimer);
+                        greetTimer = null;
+                    }
+                }, 720);
             } else {
                 greetEl.textContent = 'Hello';
             }
@@ -2728,7 +2758,7 @@
             }, 180);
 
             var START = Date.now();
-            var MIN = reduce ? 300 : 2700; // let the sun rise & peaks draw
+            var MIN = reduce ? 300 : 3400; // let the sun rise, peaks draw, greetings finish
 
             function dismiss() {
                 clearInterval(prog);
