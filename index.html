@@ -670,17 +670,35 @@
         }
 
         .logo-marquee {
+            position: relative;
             display: flex;
             flex-direction: column;
             gap: 10px;
-            -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-            mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-            /* promote to its own GPU layer so the masked, animated rows
-               rasterize immediately (fixes iOS "invisible until tap") */
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            overflow: hidden;
+        }
+
+        /* edge fade via gradient overlays instead of mask-image — masks force a
+           single GPU layer that mobile rasterizes top-down (only top rows show
+           until you tap). Overlays keep every row painting from the start. */
+        .logo-marquee::before,
+        .logo-marquee::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 7%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .logo-marquee::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--bg), transparent);
+        }
+
+        .logo-marquee::after {
+            right: 0;
+            background: linear-gradient(270deg, var(--bg), transparent);
         }
 
         .logo-track {
@@ -688,9 +706,6 @@
             width: max-content;
             gap: 10px;
             animation: logoScroll 46s linear infinite;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            will-change: transform;
         }
 
         .logo-track-rev {
