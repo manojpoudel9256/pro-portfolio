@@ -675,6 +675,12 @@
             gap: 10px;
             -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
             mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+            /* promote to its own GPU layer so the masked, animated rows
+               rasterize immediately (fixes iOS "invisible until tap") */
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
         .logo-track {
@@ -682,6 +688,8 @@
             width: max-content;
             gap: 10px;
             animation: logoScroll 46s linear infinite;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
             will-change: transform;
         }
 
@@ -2938,7 +2946,7 @@
                 ["css3", "CSS3"], ["git", "Git"], ["github", "GitHub"]
             ];
             const chip = ([f, n]) =>
-                `<span class="logo-chip"><span class="logo-ico"><img src="logos/${f}.svg" alt="" loading="lazy" width="19" height="19"></span><b>${n}</b></span>`;
+                `<span class="logo-chip"><span class="logo-ico"><img src="logos/${f}.svg" alt="" loading="eager" decoding="async" width="19" height="19"></span><b>${n}</b></span>`;
             // four rows, each a different rotation of the list so they never align
             const rot = (arr, n) => arr.slice(n).concat(arr.slice(0, n));
             const rows = [LOGOS, rot(LOGOS, 4), rot(LOGOS, 8), rot(LOGOS, 11)];
