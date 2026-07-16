@@ -782,115 +782,145 @@
             }
         }
 
-        /* WORK SECTION */
+        /* WORK SECTION — dark showcase grid */
         .work {
             padding: var(--section-pad) 0;
-            background: var(--surface);
+            background: #101012;
+            color: #e9e7e2;
         }
 
         .work-header {
             padding: 0 var(--gutter) var(--space-6);
             max-width: var(--maxw);
             margin: 0 auto;
+            text-align: center;
+        }
+
+        .work-kicker {
+            display: inline-grid;
+            place-items: center;
+            width: 52px;
+            height: 52px;
+            margin-bottom: var(--space-3);
+            border-radius: 14px;
+            color: var(--accent);
+            background: rgba(255, 77, 2, 0.10);
+            border: 1px solid rgba(255, 77, 2, 0.30);
         }
 
         .work-header h1 {
             font-size: var(--fs-display);
             font-weight: 600;
-            color: var(--ink);
+            color: #f5f3ee;
             margin-bottom: var(--space-3);
+        }
+
+        .work-header h1 em {
+            font-style: normal;
+            color: var(--accent);
         }
 
         .work-header p {
             font-size: var(--fs-500);
-            color: var(--ink-2);
-            max-width: var(--measure);
+            color: rgba(233, 231, 226, 0.62);
+            max-width: 46ch;
+            margin: 0 auto;
         }
 
-        /* Selected Work — cinematic glass case-study cards */
+        /* filter pills */
+        .work-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-2);
+            margin-top: var(--space-5);
+        }
+
+        .wf-btn {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: var(--fs-300);
+            color: rgba(233, 231, 226, 0.75);
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 12px;
+            padding: 10px 22px;
+            cursor: pointer;
+            transition: all 0.25s var(--ease);
+        }
+
+        .wf-btn:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .wf-btn.active {
+            color: #fff;
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 8px 24px rgba(255, 77, 2, 0.35);
+        }
+
+        /* 3-up responsive card grid */
         .work-grid {
             max-width: var(--maxw);
             margin: 0 auto;
             padding: 0 var(--gutter);
-            display: flex;
-            flex-direction: column;
-            gap: clamp(var(--space-6), 8vw, var(--space-9));
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
         }
 
         .work-card {
-            display: grid;
-            grid-template-columns: 1.05fr 0.95fr;
-            gap: clamp(var(--space-4), 5vw, var(--space-7));
-            align-items: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
+                box-shadow 0.35s var(--ease);
         }
 
-        .work-card:nth-child(even) .work-cover {
-            order: 2;
+        .work-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
         }
 
+        .work-card.wf-hide {
+            display: none;
+        }
+
+        /* cover art */
         .work-cover {
             position: relative;
-            aspect-ratio: 16 / 11;
-            border-radius: var(--radius-lg);
+            aspect-ratio: 16 / 10;
+            margin: var(--space-2);
+            border-radius: 12px;
             overflow: hidden;
             background: linear-gradient(135deg, var(--c1), var(--c2));
-            display: flex;
-            align-items: flex-end;
-            padding: var(--space-4);
-            box-shadow: 0 20px 50px rgba(20, 20, 20, 0.16);
-            transition: box-shadow 0.45s var(--ease), transform 0.45s var(--ease);
         }
 
-        .work-card:hover .work-cover {
-            box-shadow: 0 32px 70px rgba(20, 20, 20, 0.26);
-            transform: translateY(-4px);
-        }
-
-        /* shine sweep on hover */
-        .work-cover::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            pointer-events: none;
-            background: linear-gradient(115deg, transparent 32%, rgba(255, 255, 255, 0.28) 48%, transparent 60%);
-            transform: translateX(-130%);
-            transition: transform 0.75s var(--ease);
-        }
-
-        .work-card:hover .work-cover::after {
-            transform: translateX(130%);
-        }
-
-        .work-index {
-            position: absolute;
-            z-index: 2;
-            top: var(--space-3);
-            left: var(--space-4);
-            font-family: var(--font-mono);
-            font-size: var(--fs-200);
-            letter-spacing: 0.12em;
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        /* cinematic glass sheen + vignette */
         .work-cover-glass {
             position: absolute;
             inset: 0;
             z-index: 1;
             background:
-                radial-gradient(120% 85% at 12% 8%, rgba(255, 255, 255, 0.30), transparent 52%),
-                radial-gradient(120% 120% at 88% 92%, rgba(0, 0, 0, 0.40), transparent 60%);
+                radial-gradient(120% 85% at 12% 8%, rgba(255, 255, 255, 0.26), transparent 52%),
+                radial-gradient(120% 120% at 88% 92%, rgba(0, 0, 0, 0.42), transparent 60%);
         }
 
         .work-motif {
             position: absolute;
             z-index: 1;
-            right: -4%;
+            right: 4%;
             top: 50%;
             transform: translateY(-50%);
-            width: 52%;
-            max-width: 300px;
+            width: 46%;
+            max-width: 190px;
             color: rgba(255, 255, 255, 0.92);
             opacity: 0.85;
             filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.25));
@@ -898,128 +928,157 @@
         }
 
         .work-card:hover .work-motif {
-            transform: translateY(-50%) scale(1.05) rotate(-3deg);
+            transform: translateY(-50%) scale(1.06) rotate(-3deg);
         }
 
-        .work-cover-tag {
-            position: relative;
+        /* floating circular icon badge (top-left of cover) */
+        .work-badge {
+            position: absolute;
             z-index: 2;
-            font-family: var(--font-mono);
-            font-size: var(--fs-100);
-            text-transform: uppercase;
-            letter-spacing: var(--tracking-label);
+            top: 14px;
+            left: 14px;
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
             color: #fff;
-            background: rgba(20, 20, 20, 0.28);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            padding: var(--space-1) var(--space-2);
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.28);
+            background: linear-gradient(135deg, var(--accent), #ff7a3d);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
         }
 
-        .work-meta-head {
+        /* screenshot-openable covers */
+        .work-cover.has-shot {
+            cursor: zoom-in;
+        }
+
+        .work-shot-hint {
+            position: absolute;
+            z-index: 2;
+            right: 12px;
+            bottom: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #fff;
+            background: rgba(16, 16, 18, 0.55);
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+            padding: 4px 10px;
+            pointer-events: none;
+        }
+
+        /* card body */
+        .work-body {
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: var(--space-3);
-            margin-bottom: var(--space-2);
-            padding-bottom: var(--space-2);
-            border-bottom: 1px solid var(--hairline);
+            flex-direction: column;
+            flex: 1;
+            padding: var(--space-3) var(--space-4) var(--space-4);
         }
 
         .work-title {
             font-family: var(--font-display);
-            font-size: var(--fs-700);
+            font-size: var(--fs-600);
             font-weight: 500;
-            letter-spacing: -0.02em;
-            line-height: 1.05;
-        }
-
-        .work-demo,
-        .work-chip {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            vertical-align: middle;
-            margin-left: var(--space-2);
-            padding: 3px 9px;
-            border-radius: 999px;
-            white-space: nowrap;
-        }
-
-        .work-demo {
-            color: var(--accent);
-            background: rgba(255, 77, 2, 0.10);
-            border: 1px solid rgba(255, 77, 2, 0.32);
-        }
-
-        .work-chip {
-            color: var(--ink-3);
-            background: var(--surface);
-            border: 1px solid var(--hairline);
-        }
-
-        .work-year {
-            font-family: var(--font-mono);
-            font-size: var(--fs-200);
-            color: var(--ink-3);
-            white-space: nowrap;
-        }
-
-        .work-stack {
-            font-family: var(--font-mono);
-            font-size: var(--fs-200);
-            color: var(--ink-3);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: var(--space-3);
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+            color: #f5f3ee;
+            margin-bottom: var(--space-2);
         }
 
         .work-desc {
-            color: var(--ink-2);
-            font-size: var(--fs-400);
+            color: rgba(233, 231, 226, 0.62);
+            font-size: var(--fs-300);
             line-height: var(--lh-body);
-            max-width: var(--measure);
-            margin-bottom: var(--space-4);
+            margin-bottom: var(--space-3);
         }
 
-        .work-actions {
+        .work-tagrow {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: var(--space-2);
+            margin-top: auto;
+        }
+
+        .work-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-2);
+            gap: 6px;
         }
 
-        .work-btn {
+        .tag {
             font-family: var(--font-mono);
-            font-size: var(--fs-200);
+            font-size: 0.66rem;
+            font-weight: 500;
             letter-spacing: 0.02em;
-            padding: var(--space-2) var(--space-4);
+            padding: 4px 10px;
             border-radius: 999px;
-            cursor: pointer;
-            border: 1px solid var(--hairline-strong);
+            white-space: nowrap;
+            color: var(--tg, #e9e7e2);
+            background: color-mix(in srgb, var(--tg, #e9e7e2) 13%, transparent);
+            border: 1px solid color-mix(in srgb, var(--tg, #e9e7e2) 30%, transparent);
+        }
+
+        /* corner arrow link */
+        .work-arrow {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: var(--accent);
             background: transparent;
-            color: var(--ink);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             text-decoration: none;
             transition: all 0.25s var(--ease);
         }
 
-        .work-btn:hover {
-            border-color: var(--ink);
-            transform: translateY(-2px);
-        }
-
-        .work-btn-primary {
-            background: var(--ink);
-            color: var(--on-dark);
-            border-color: var(--ink);
-        }
-
-        .work-btn-primary:hover {
+        .work-arrow:hover {
             background: var(--accent);
             border-color: var(--accent);
-            color: var(--accent-ink);
+            color: #fff;
+            transform: translate(2px, -2px);
+        }
+
+        /* view-more CTA */
+        .work-more {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: var(--space-6) var(--gutter) 0;
+            text-align: center;
+        }
+
+        .work-more a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: var(--fs-400);
+            color: var(--accent);
+            background: transparent;
+            border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+            border-radius: 999px;
+            padding: 14px 34px;
+            text-decoration: none;
+            transition: all 0.25s var(--ease);
+        }
+
+        .work-more a:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(255, 77, 2, 0.35);
+        }
+
+        @media (max-width: 1024px) {
+            .work-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         /* Premium About (Sticky) */
@@ -1987,79 +2046,24 @@
                 padding: 0 var(--gutter) var(--space-5);
             }
 
-            /* Premium single-column cards on mobile — each project is an
-               elevated card: full-bleed cover on top, details below */
+            /* single-column dark cards on mobile */
             .work-grid {
-                display: flex;
-                flex-direction: column;
-                gap: var(--space-5);
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
             }
 
-            .work-card {
-                display: block;
-                width: 100%;
-                min-width: 0;
-                background: var(--elevated);
-                border: 1px solid var(--hairline);
-                border-radius: var(--radius-lg);
-                overflow: hidden;
-                box-shadow: 0 14px 34px rgba(20, 20, 20, 0.09);
+            .work-filters {
+                gap: var(--space-1);
             }
 
-            .work-card:nth-child(even) .work-cover {
-                order: 0;
-            }
-
-            .work-cover {
-                aspect-ratio: 16 / 10;
-                border-radius: 0;
-                padding: var(--space-3);
-            }
-
-            .work-motif {
-                width: 44%;
-            }
-
-            .work-index {
-                top: var(--space-3);
-                left: var(--space-3);
-            }
-
-            .work-meta {
-                padding: var(--space-4);
-            }
-
-            .work-title {
-                font-size: var(--fs-600);
-            }
-
-            .work-chip {
-                display: none;
-            }
-
-            .work-desc {
-                display: block;
-                font-size: var(--fs-300);
-                max-width: 100%;
-                margin-bottom: var(--space-4);
-            }
-
-            .work-meta-head {
-                margin-bottom: var(--space-2);
-                padding-bottom: var(--space-2);
-            }
-
-            .work-stack {
-                margin-bottom: var(--space-3);
-            }
-
-            .work-btn {
-                padding: var(--space-2) var(--space-4);
+            .wf-btn {
                 font-size: var(--fs-200);
+                padding: 8px 16px;
+                border-radius: 10px;
             }
 
-            .work-actions {
-                gap: var(--space-2);
+            .work-body {
+                padding: var(--space-3);
             }
 
             .about-container-premium {
@@ -2314,46 +2318,69 @@
 
         <section class="work" id="work">
             <div class="work-header">
-                <h1>Selected Work</h1>
+                <span class="work-kicker" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="7" width="18" height="13" rx="2" />
+                        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18" />
+                    </svg>
+                </span>
+                <h1>Selected <em>Work</em></h1>
+                <p>A selection of projects I've worked on — each one a unique challenge and solution.</p>
+                <div class="work-filters" role="group" aria-label="Filter projects">
+                    <button class="wf-btn active" type="button" data-filter="all">All</button>
+                    <button class="wf-btn" type="button" data-filter="web">Web Development</button>
+                    <button class="wf-btn" type="button" data-filter="3d">3D &amp; Design</button>
+                    <button class="wf-btn" type="button" data-filter="ai">AI &amp; Vision</button>
+                </div>
             </div>
 
             <div class="work-grid">
 
                 <!-- 1 · GLB Optimizer -->
-                <article class="work-card">
+                <article class="work-card" data-cat="3d">
                     <div class="work-cover" style="--c1:#141414; --c2:#2b6fd6;">
                         <div class="work-cover-glass"></div>
-                        <span class="work-index" aria-hidden="true">01</span>
                         <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
                             stroke-width="3" aria-hidden="true">
                             <path d="M60 18 L98 40 V80 L60 102 L22 80 V40 Z" stroke-linejoin="round" />
                             <path d="M60 18 V60 M60 60 L98 40 M60 60 L22 40 M60 60 V102" stroke-linejoin="round"
                                 opacity="0.75" />
                         </svg>
-                        <span class="work-cover-tag">3D pipeline · UE5</span>
+                        <span class="work-badge" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                <path d="M3.3 7L12 12l8.7-5M12 22V12" />
+                            </svg>
+                        </span>
                     </div>
-                    <div class="work-meta">
-                        <div class="work-meta-head">
-                            <h3 class="work-title">GLB Optimizer</h3>
-                            <span class="work-year">2026</span>
-                        </div>
-                        <p class="work-stack">Node.js · Three.js · glTF</p>
-                        <p class="work-desc">A 100% local, browser-based tool that compresses <code>.glb</code> 3D
-                            models for Unreal Engine 5 — with a real-time 3D viewer, side-by-side before/after
-                            comparison, and a per-mesh inspector. Nothing ever leaves your machine.</p>
-                        <div class="work-actions">
-                            <a class="work-btn work-btn-primary"
-                                href="https://github.com/manojpoudel9256/GLBOptimizer" target="_blank"
-                                rel="noopener">View code ↗</a>
+                    <div class="work-body">
+                        <h3 class="work-title">GLB Optimizer</h3>
+                        <p class="work-desc">A 100% local, browser-based tool that compresses .glb 3D models for
+                            Unreal Engine 5 — real-time viewer, before/after comparison, per-mesh inspector.</p>
+                        <div class="work-tagrow">
+                            <div class="work-tags">
+                                <span class="tag" style="--tg:#8cc84b">Node.js</span>
+                                <span class="tag" style="--tg:#e9e7e2">Three.js</span>
+                                <span class="tag" style="--tg:#87c540">glTF</span>
+                                <span class="tag" style="--tg:#4d9de0">Unreal Engine 5</span>
+                            </div>
+                            <a class="work-arrow" href="https://github.com/manojpoudel9256/GLBOptimizer"
+                                target="_blank" rel="noopener" aria-label="View GLB Optimizer code on GitHub">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M9 7h8v8" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </article>
 
                 <!-- 2 · Realtime Face Recognition -->
-                <article class="work-card">
+                <article class="work-card" data-cat="ai">
                     <div class="work-cover" style="--c1:#4a3aa7; --c2:#0f8a6a;">
                         <div class="work-cover-glass"></div>
-                        <span class="work-index" aria-hidden="true">02</span>
                         <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
                             stroke-width="3" aria-hidden="true">
                             <path d="M28 44 V32 a4 4 0 0 1 4-4 H44 M76 28 H88 a4 4 0 0 1 4 4 V44 M92 76 V88 a4 4 0 0 1 -4 4 H76 M44 92 H32 a4 4 0 0 1 -4-4 V76"
@@ -2361,30 +2388,41 @@
                             <circle cx="60" cy="58" r="16" />
                             <path d="M40 86 a20 20 0 0 1 40 0" stroke-linecap="round" />
                         </svg>
-                        <span class="work-cover-tag">Computer vision</span>
+                        <span class="work-badge" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2" />
+                                <circle cx="12" cy="11" r="3" />
+                                <path d="M7 18a5 5 0 0 1 10 0" />
+                            </svg>
+                        </span>
                     </div>
-                    <div class="work-meta">
-                        <div class="work-meta-head">
-                            <h3 class="work-title">Realtime Face Recognition</h3>
-                            <span class="work-year">2025</span>
-                        </div>
-                        <p class="work-stack">Python · OpenCV</p>
-                        <p class="work-desc">A fast, real-time face-recognition system built from scratch — live camera
-                            capture, a training pipeline, and confidence-based recognition. Configurable end-to-end
-                            without touching the code.</p>
-                        <div class="work-actions">
-                            <a class="work-btn work-btn-primary"
-                                href="https://github.com/manojpoudel9256/realtime-face-recognition" target="_blank"
-                                rel="noopener">View code ↗</a>
+                    <div class="work-body">
+                        <h3 class="work-title">Realtime Face Recognition</h3>
+                        <p class="work-desc">A real-time face-recognition system built from scratch — live camera
+                            capture, a training pipeline, and confidence-based recognition.</p>
+                        <div class="work-tagrow">
+                            <div class="work-tags">
+                                <span class="tag" style="--tg:#4b9fe1">Python</span>
+                                <span class="tag" style="--tg:#ff5f5f">OpenCV</span>
+                            </div>
+                            <a class="work-arrow" href="https://github.com/manojpoudel9256/realtime-face-recognition"
+                                target="_blank" rel="noopener"
+                                aria-label="View Realtime Face Recognition code on GitHub">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M9 7h8v8" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </article>
 
                 <!-- 3 · AI Budget Tracker -->
-                <article class="work-card">
-                    <div class="work-cover" style="--c1:#242424; --c2:#ff4d02;">
+                <article class="work-card" data-cat="web ai">
+                    <div class="work-cover has-shot" style="--c1:#242424; --c2:#ff4d02;"
+                        onclick="openImageModal('budget.webp', 'AI · Finance', 'AI Budget Tracker')">
                         <div class="work-cover-glass"></div>
-                        <span class="work-index" aria-hidden="true">03</span>
                         <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
                             stroke-width="3" aria-hidden="true">
                             <ellipse cx="60" cy="34" rx="30" ry="12" />
@@ -2392,34 +2430,41 @@
                             <path d="M30 54v20c0 6.6 13.4 12 30 12s30-5.4 30-12V54" stroke-linecap="round" />
                             <path d="M96 20l4 8 8 4-8 4-4 8-4-8-8-4 8-4z" stroke-linejoin="round" />
                         </svg>
-                        <span class="work-cover-tag">AI · Finance</span>
+                        <span class="work-badge" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4M3 5v14a2 2 0 0 0 2 2h16v-5" />
+                                <path d="M18 12a2 2 0 0 0 0 4h4v-4z" />
+                            </svg>
+                        </span>
+                        <span class="work-shot-hint">Screenshot</span>
                     </div>
-                    <div class="work-meta">
-                        <div class="work-meta-head">
-                            <h3 class="work-title">AI Budget Tracker <span class="work-demo">Demo · sample data</span>
-                            </h3>
-                            <span class="work-year">2026</span>
-                        </div>
-                        <p class="work-stack">PHP · MySQL · Gemini AI</p>
+                    <div class="work-body">
+                        <h3 class="work-title">AI Budget Tracker</h3>
                         <p class="work-desc">A personal finance tool that reads receipts with Gemini vision AI, sets
-                            budgets, and generates spending insights — turning raw photos into structured, analysed
-                            data.</p>
-                        <div class="work-actions">
-                            <a class="work-btn work-btn-primary"
-                                href="https://github.com/manojpoudel9256/budget-tracker" target="_blank"
-                                rel="noopener">View code ↗</a>
-                            <button class="work-btn" type="button"
-                                onclick="openImageModal('budget.webp', 'AI · Finance', 'AI Budget Tracker')">View
-                                screenshot</button>
+                            budgets, and generates spending insights from raw photos.</p>
+                        <div class="work-tagrow">
+                            <div class="work-tags">
+                                <span class="tag" style="--tg:#8892bf">PHP</span>
+                                <span class="tag" style="--tg:#4db3d4">MySQL</span>
+                                <span class="tag" style="--tg:#a78bfa">Gemini AI</span>
+                            </div>
+                            <a class="work-arrow" href="https://github.com/manojpoudel9256/budget-tracker"
+                                target="_blank" rel="noopener" aria-label="View AI Budget Tracker code on GitHub">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M9 7h8v8" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </article>
 
                 <!-- 4 · Weather & Travel Planner -->
-                <article class="work-card">
-                    <div class="work-cover" style="--c1:#2b6fd6; --c2:#f0a83c;">
+                <article class="work-card" data-cat="web">
+                    <div class="work-cover has-shot" style="--c1:#2b6fd6; --c2:#f0a83c;"
+                        onclick="openImageModal('travel.webp', 'Full-stack · Travel', 'Weather &amp; Travel Planner')">
                         <div class="work-cover-glass"></div>
-                        <span class="work-index" aria-hidden="true">04</span>
                         <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
                             stroke-width="3" aria-hidden="true">
                             <circle cx="46" cy="46" r="18" />
@@ -2427,28 +2472,43 @@
                                 stroke-linecap="round" />
                             <path d="M70 82h28a13 13 0 0 0 0-26 18 18 0 0 0-34-5" stroke-linecap="round" />
                         </svg>
-                        <span class="work-cover-tag">Full-stack · Travel</span>
+                        <span class="work-badge" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
+                            </svg>
+                        </span>
+                        <span class="work-shot-hint">Screenshot</span>
                     </div>
-                    <div class="work-meta">
-                        <div class="work-meta-head">
-                            <h3 class="work-title">Weather &amp; Travel Planner</h3>
-                            <span class="work-year">2026</span>
-                        </div>
-                        <p class="work-stack">React · Node.js · MySQL</p>
+                    <div class="work-body">
+                        <h3 class="work-title">Weather &amp; Travel Planner</h3>
                         <p class="work-desc">A full-stack app that recommends destinations by optimal weather —
-                            real-time search, 5-day forecasts, bilingual EN/日本語, and deep-linkable favourite
-                            cities.</p>
-                        <div class="work-actions">
-                            <a class="work-btn work-btn-primary"
-                                href="https://github.com/manojpoudel9256/weather-travel-planner" target="_blank"
-                                rel="noopener">View code ↗</a>
-                            <button class="work-btn" type="button"
-                                onclick="openImageModal('travel.webp', 'Full-stack · Travel', 'Weather &amp; Travel Planner')">View
-                                screenshot</button>
+                            real-time search, 5-day forecasts, bilingual EN/日本語.</p>
+                        <div class="work-tagrow">
+                            <div class="work-tags">
+                                <span class="tag" style="--tg:#61dafb">React</span>
+                                <span class="tag" style="--tg:#8cc84b">Node.js</span>
+                                <span class="tag" style="--tg:#4db3d4">MySQL</span>
+                            </div>
+                            <a class="work-arrow" href="https://github.com/manojpoudel9256/weather-travel-planner"
+                                target="_blank" rel="noopener"
+                                aria-label="View Weather and Travel Planner code on GitHub">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M9 7h8v8" />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </article>
 
+            </div>
+
+            <div class="work-more">
+                <a href="https://github.com/manojpoudel9256?tab=repositories" target="_blank" rel="noopener">
+                    View More Projects <span aria-hidden="true">→</span>
+                </a>
             </div>
         </section>
 
@@ -2971,6 +3031,21 @@
                 const html = rows[i].map(chip).join("");
                 el.innerHTML = html + html; // duplicate for a seamless loop
             });
+        })();
+
+        // SELECTED WORK — category filters
+        (function () {
+            const btns = document.querySelectorAll(".wf-btn");
+            const cards = document.querySelectorAll(".work-card");
+            btns.forEach(btn => btn.addEventListener("click", () => {
+                btns.forEach(b => b.classList.toggle("active", b === btn));
+                const f = btn.dataset.filter;
+                cards.forEach(c => {
+                    const show = f === "all" || (c.dataset.cat || "").split(" ").includes(f);
+                    c.classList.toggle("wf-hide", !show);
+                });
+                if (window.ScrollTrigger) ScrollTrigger.refresh();
+            }));
         })();
 
         // SELECTED WORK — scroll reveal (skip under reduced motion)
