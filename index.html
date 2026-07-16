@@ -459,7 +459,7 @@
             color: white;
         }
 
-        /* ============ PRELOADER — minimal greeting sweep ============ */
+        /* ============ PRELOADER — Save Our Planet ============ */
         .preloader {
             position: fixed;
             inset: 0;
@@ -481,36 +481,127 @@
             border-radius: 0 0 50% 50% / 0 0 12vh 12vh;
         }
 
-        .pl-word {
+        .pl-scene {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 14px;
+            gap: clamp(18px, 3.4vw, 28px);
+        }
+
+        .preloader.pl-done .pl-scene {
+            transition: opacity .3s ease;
+            opacity: 0;
+        }
+
+        .ep {
+            width: clamp(120px, 20vw, 168px);
+            height: auto;
+            overflow: visible;
+        }
+
+        /* planet outline draws itself */
+        .ep-globe {
+            fill: none;
+            stroke: #f5f1e8;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-dasharray: 327;
+            stroke-dashoffset: 327;
+            animation: epDraw .9s cubic-bezier(.65, 0, .35, 1) forwards;
+        }
+
+        /* ocean waves inside the planet */
+        .ep-sea {
+            opacity: 0;
+            animation: epFade .5s ease .55s forwards;
+        }
+
+        .ep-wave {
+            animation: epWave 3.4s linear infinite;
+        }
+
+        .ep-wave2 {
+            animation-duration: 5s;
+            animation-direction: reverse;
+        }
+
+        /* sprout grows from the top of the planet */
+        .ep-sprout {
+            transform-box: view-box;
+            transform-origin: 100px 58px;
+            transform: scale(0);
+            animation: epGrow .8s cubic-bezier(.34, 1.56, .64, 1) 1s forwards;
+        }
+
+        .ep-stem {
+            stroke: #45c07a;
+            stroke-width: 3;
+            stroke-linecap: round;
+            fill: none;
+        }
+
+        .ep-leaf {
+            fill: #45c07a;
+        }
+
+        /* soft green/blue glow behind the planet */
+        .ep-glow {
+            fill: none;
+            stroke: rgba(69, 192, 122, 0.16);
+            stroke-width: 14;
+            opacity: 0;
+            animation: epFade .8s ease .9s forwards;
+        }
+
+        .pl-msg {
             font-family: var(--font-body);
             font-weight: 500;
-            font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+            font-size: clamp(1.15rem, 3vw, 1.6rem);
             letter-spacing: -0.01em;
             color: #f5f1e8;
+            min-height: 1.5em;
             opacity: 0;
-            animation: plWordIn .5s ease .15s forwards;
+            transition: opacity .3s ease;
+            animation: epMsgIn .5s ease .35s forwards;
         }
 
-        .pl-word i {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--accent);
-            flex: 0 0 auto;
+        .pl-msg em {
+            font-style: normal;
+            color: #45c07a;
         }
 
-        .preloader.pl-done .pl-word {
-            transition: opacity .25s ease;
-            opacity: 0;
+        @keyframes epDraw {
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
-        @keyframes plWordIn {
+        @keyframes epFade {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes epWave {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-48px);
+            }
+        }
+
+        @keyframes epGrow {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes epMsgIn {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(8px);
             }
 
             to {
@@ -530,9 +621,18 @@
                 opacity: 0;
             }
 
-            .pl-word {
-                animation-duration: .01ms;
-                animation-delay: 0s;
+            .ep-globe,
+            .ep-sea,
+            .ep-sprout,
+            .ep-glow,
+            .pl-msg {
+                animation-duration: .01ms !important;
+                animation-delay: 0s !important;
+            }
+
+            .ep-wave,
+            .ep-wave2 {
+                animation: none;
             }
         }
 
@@ -2082,9 +2182,35 @@
 
 <body>
 
-    <!-- PRELOADER — minimal greeting sweep (नमस्ते → こんにちは → Hello) -->
+    <!-- PRELOADER — Save Our Planet: earth draws in, ocean waves, a sprout grows -->
     <div id="preloader" class="preloader" role="status" aria-label="Loading">
-        <p class="pl-word" aria-hidden="true"><i></i><span id="plWord">नमस्ते</span></p>
+        <div class="pl-scene">
+            <svg class="ep" viewBox="0 0 200 200" aria-hidden="true">
+                <defs>
+                    <clipPath id="epClip">
+                        <circle cx="100" cy="110" r="50.5" />
+                    </clipPath>
+                </defs>
+                <!-- soft halo -->
+                <circle class="ep-glow" cx="100" cy="110" r="60" />
+                <!-- ocean inside the planet -->
+                <g class="ep-sea" clip-path="url(#epClip)">
+                    <path class="ep-wave" fill="rgba(77, 157, 224, 0.55)"
+                        d="M4 124 q12 -8 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 v60 H4 z" />
+                    <path class="ep-wave ep-wave2" fill="rgba(47, 111, 176, 0.75)"
+                        d="M4 132 q12 -7 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 v60 H4 z" />
+                </g>
+                <!-- planet outline -->
+                <circle class="ep-globe" cx="100" cy="110" r="52" />
+                <!-- sprout -->
+                <g class="ep-sprout">
+                    <path class="ep-stem" d="M100 58 V36" />
+                    <path class="ep-leaf" d="M100 44 C92 44 85 38 84 29 C93 29 99 35 100 44 Z" />
+                    <path class="ep-leaf" d="M100 50 C108 50 115 44 116 35 C107 35 101 41 100 50 Z" />
+                </g>
+            </svg>
+            <p class="pl-msg" id="plMsg" aria-hidden="true">Save our <em>planet</em></p>
+        </div>
     </div>
 
     <div class="menu-button-wrapper">
@@ -2648,11 +2774,15 @@
             }
 
             var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            var wordEl = document.getElementById('plWord');
+            var msgEl = document.getElementById('plMsg');
 
-            // Nepal → Japan → global: who Manoj is, in three scripts
-            var GREETS = ['नमस्ते', 'こんにちは', 'Hello'];
-            var gi = 0, wordTimer = null, done = false;
+            // awareness messages — each shown once (highlighted word in green)
+            var MSGS = [
+                'Save our <em>planet</em>',
+                'Plant more <em>trees</em>',
+                'Protect our <em>oceans</em>'
+            ];
+            var mi = 0, msgTimer = null, done = false;
 
             // lock scroll while the preloader is up
             document.documentElement.style.overflow = 'hidden';
@@ -2660,7 +2790,7 @@
             function dismiss() {
                 if (done) return;
                 done = true;
-                clearInterval(wordTimer);
+                clearInterval(msgTimer);
                 pre.classList.add('pl-done');
                 document.documentElement.style.overflow = '';
                 setTimeout(function () {
@@ -2669,23 +2799,26 @@
             }
 
             if (reduce) {
-                wordEl.textContent = 'Hello';
-                setTimeout(dismiss, 300);
+                setTimeout(dismiss, 350);
             } else {
-                // flick through the greetings once, then sweep up
-                wordTimer = setInterval(function () {
-                    gi++;
-                    if (gi < GREETS.length) {
-                        wordEl.textContent = GREETS[gi];
+                // cycle the messages once with a soft cross-fade, then sweep up
+                msgTimer = setInterval(function () {
+                    mi++;
+                    if (mi < MSGS.length) {
+                        msgEl.style.opacity = '0';
+                        setTimeout(function () {
+                            msgEl.innerHTML = MSGS[mi];
+                            msgEl.style.opacity = '1';
+                        }, 220);
                     } else {
-                        setTimeout(dismiss, 200); // brief hold on "Hello"
-                        clearInterval(wordTimer);
+                        clearInterval(msgTimer);
+                        setTimeout(dismiss, 300); // brief hold on the last message
                     }
-                }, 400);
+                }, 900);
             }
 
             // hard safety net so the page is never trapped behind the loader
-            setTimeout(dismiss, 4000);
+            setTimeout(dismiss, 5000);
         })();
     </script>
 
