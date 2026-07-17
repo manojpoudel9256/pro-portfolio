@@ -760,11 +760,10 @@
             }
         }
 
-        /* WORK SECTION — dark showcase grid */
+        /* WORK SECTION — light showcase grid */
         .work {
             padding: var(--section-pad) 0;
-            background: #101012;
-            color: #e9e7e2;
+            background: var(--surface);
         }
 
         .work-header {
@@ -789,7 +788,7 @@
         .work-header h1 {
             font-size: var(--fs-display);
             font-weight: 600;
-            color: #f5f3ee;
+            color: var(--ink);
             margin-bottom: var(--space-3);
         }
 
@@ -800,7 +799,7 @@
 
         .work-header p {
             font-size: var(--fs-500);
-            color: rgba(233, 231, 226, 0.62);
+            color: var(--ink-2);
             max-width: 46ch;
             margin: 0 auto;
         }
@@ -818,9 +817,9 @@
             font-family: var(--font-body);
             font-weight: 500;
             font-size: var(--fs-300);
-            color: rgba(233, 231, 226, 0.75);
-            background: rgba(255, 255, 255, 0.045);
-            border: 1px solid rgba(255, 255, 255, 0.09);
+            color: var(--ink-2);
+            background: var(--elevated);
+            border: 1px solid var(--hairline);
             border-radius: 12px;
             padding: 10px 22px;
             cursor: pointer;
@@ -828,8 +827,8 @@
         }
 
         .wf-btn:hover {
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.22);
+            color: var(--ink);
+            border-color: var(--hairline-strong);
             transform: translateY(-1px);
         }
 
@@ -854,18 +853,19 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            background: rgba(255, 255, 255, 0.035);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--elevated);
+            border: 1px solid var(--hairline);
             border-radius: 18px;
             overflow: hidden;
+            box-shadow: 0 10px 28px rgba(20, 20, 20, 0.07);
             transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
                 box-shadow 0.35s var(--ease);
         }
 
         .work-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
+            border-color: var(--hairline-strong);
+            box-shadow: 0 24px 54px rgba(20, 20, 20, 0.16);
         }
 
         .work-card.wf-hide {
@@ -963,12 +963,12 @@
             font-weight: 500;
             letter-spacing: -0.01em;
             line-height: 1.1;
-            color: #f5f3ee;
+            color: var(--ink);
             margin-bottom: var(--space-2);
         }
 
         .work-desc {
-            color: rgba(233, 231, 226, 0.62);
+            color: var(--ink-2);
             font-size: var(--fs-300);
             line-height: var(--lh-body);
             margin-bottom: var(--space-3);
@@ -996,9 +996,9 @@
             padding: 4px 10px;
             border-radius: 999px;
             white-space: nowrap;
-            color: var(--tg, #e9e7e2);
-            background: color-mix(in srgb, var(--tg, #e9e7e2) 13%, transparent);
-            border: 1px solid color-mix(in srgb, var(--tg, #e9e7e2) 30%, transparent);
+            color: var(--tg, var(--ink-2));
+            background: color-mix(in srgb, var(--tg, var(--ink-2)) 9%, transparent);
+            border: 1px solid color-mix(in srgb, var(--tg, var(--ink-2)) 26%, transparent);
         }
 
         /* corner arrow link */
@@ -1011,7 +1011,7 @@
             border-radius: 50%;
             color: var(--accent);
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid var(--hairline-strong);
             text-decoration: none;
             transition: all 0.25s var(--ease);
         }
@@ -2024,10 +2024,10 @@
                 padding: 0 var(--gutter) var(--space-5);
             }
 
-            /* single-column dark cards on mobile */
+            /* single-column light cards on mobile — compact & thumb-friendly */
             .work-grid {
                 grid-template-columns: 1fr;
-                gap: var(--space-4);
+                gap: var(--space-3);
             }
 
             .work-filters {
@@ -2040,8 +2040,29 @@
                 border-radius: 10px;
             }
 
+            .work-cover {
+                aspect-ratio: 16 / 9;
+            }
+
+            .work-motif {
+                width: 34%;
+            }
+
             .work-body {
                 padding: var(--space-3);
+            }
+
+            .work-title {
+                font-size: var(--fs-500);
+            }
+
+            .work-desc {
+                margin-bottom: var(--space-2);
+            }
+
+            .work-arrow {
+                width: 44px;
+                height: 44px;
             }
 
             .about-container-premium {
@@ -2351,10 +2372,10 @@
                             Unreal Engine 5 — real-time viewer, before/after comparison, per-mesh inspector.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
-                                <span class="tag" style="--tg:#8cc84b">Node.js</span>
-                                <span class="tag" style="--tg:#e9e7e2">Three.js</span>
-                                <span class="tag" style="--tg:#87c540">glTF</span>
-                                <span class="tag" style="--tg:#4d9de0">Unreal Engine 5</span>
+                                <span class="tag" style="--tg:#43853d">Node.js</span>
+                                <span class="tag" style="--tg:#444444">Three.js</span>
+                                <span class="tag" style="--tg:#5f8f21">glTF</span>
+                                <span class="tag" style="--tg:#2b6fd6">Unreal Engine 5</span>
                             </div>
                             <a class="work-arrow" href="https://github.com/manojpoudel9256/GLBOptimizer"
                                 target="_blank" rel="noopener" aria-label="View GLB Optimizer code on GitHub">
@@ -2393,8 +2414,8 @@
                             capture, a training pipeline, and confidence-based recognition.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
-                                <span class="tag" style="--tg:#4b9fe1">Python</span>
-                                <span class="tag" style="--tg:#ff5f5f">OpenCV</span>
+                                <span class="tag" style="--tg:#2f6ea5">Python</span>
+                                <span class="tag" style="--tg:#c43535">OpenCV</span>
                             </div>
                             <a class="work-arrow" href="https://github.com/manojpoudel9256/realtime-face-recognition"
                                 target="_blank" rel="noopener"
@@ -2435,9 +2456,9 @@
                             budgets, and generates spending insights from raw photos.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
-                                <span class="tag" style="--tg:#8892bf">PHP</span>
-                                <span class="tag" style="--tg:#4db3d4">MySQL</span>
-                                <span class="tag" style="--tg:#a78bfa">Gemini AI</span>
+                                <span class="tag" style="--tg:#5c65a0">PHP</span>
+                                <span class="tag" style="--tg:#00758f">MySQL</span>
+                                <span class="tag" style="--tg:#6d4fd1">Gemini AI</span>
                             </div>
                             <a class="work-arrow" href="https://github.com/manojpoudel9256/budget-tracker"
                                 target="_blank" rel="noopener" aria-label="View AI Budget Tracker code on GitHub">
@@ -2477,13 +2498,208 @@
                             real-time search, 5-day forecasts, bilingual EN/日本語.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
-                                <span class="tag" style="--tg:#61dafb">React</span>
-                                <span class="tag" style="--tg:#8cc84b">Node.js</span>
-                                <span class="tag" style="--tg:#4db3d4">MySQL</span>
+                                <span class="tag" style="--tg:#087ea4">React</span>
+                                <span class="tag" style="--tg:#43853d">Node.js</span>
+                                <span class="tag" style="--tg:#00758f">MySQL</span>
                             </div>
                             <a class="work-arrow" href="https://github.com/manojpoudel9256/weather-travel-planner"
                                 target="_blank" rel="noopener"
                                 aria-label="View Weather and Travel Planner code on GitHub">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M9 7h8v8" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5 · GLB Analyzer -->
+                <article class="work-card" data-cat="3d">
+                    <div class="work-cover" style="--c1:#232345; --c2:#7c5cff;">
+                        <div class="work-cover-glass"></div>
+                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
+                            stroke-width="3" aria-hidden="true">
+                            <circle cx="52" cy="52" r="26" />
+                            <path d="M72 72 L94 94" stroke-linecap="round" stroke-width="5" />
+                            <path d="M52 38 L64 45 V59 L52 66 L40 59 V45 Z" stroke-linejoin="round" />
+                        </svg>
+                        <span class="work-badge" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="7" />
+                                <path d="M21 21l-4.3-4.3" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="work-body">
+                        <h3 class="work-title">GLB Analyzer</h3>
+                        <p class="work-desc">A Node toolkit that inspects .glb models — mesh, texture, and size
+                            reports — plus a UE5-safe compression pipeline.</p>
+                        <div class="work-tagrow">
+                            <div class="work-tags">
+                                <span class="tag" style="--tg:#43853d">Node.js</span>
+                                <span class="tag" style="--tg:#5f8f21">glTF</span>
+                                <span class="tag" style="--tg:#2b6fd6">Unreal Engine 5</span>
+                            </div>
+                            <a class="work-arrow" href="https://github.com/manojpoudel9256/GLBAnalyzer"
+                                target="_blank" rel="noopener" aria-label="View GLB Analyzer code on GitHub">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M9 7h8v8" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 6 · StudyTrack Pro -->
+                <article class="work-card" data-cat="web">
+                    <div class="work-cover" style="--c1:#0e4f3d; --c2:#39b26f;">
+                        <div class="work-cover-glass"></div>
+                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
+                            stroke-width="3" aria-hidden="true">
+                            <path d="M24 96 V64 M48 96 V44 M72 96 V56 M96 96 V32" stroke-linecap="round"
+                                stroke-width="7" />
+                            <path d="M20 30 L52 22 L44 50" stroke-linecap="round" stroke-linejoin="round"
+                                opacity="0" />
+                        </svg>
+                        <span class="work-badge" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 6.5C10 4.8 7.3 4 4 4v14c3.3 0 6 .8 8 2.5 2-1.7 4.7-2.5 8-2.5V4c-3.3 0-6 .8-8 2.5zM12 6.5V20.5" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="work-body">
+                        <h3 class="work-title">StudyTrack Pro</h3>
+                        <p class="work-desc">A gamified study tracker — focus timer, streaks and XP, interactive
+                            analytics charts, and a weather-adaptive UI in EN/日本語.</p>
+                        <div class="work-tagrow">
+                            <div class="work-tags">
+                                <span class="tag" style="--tg:#8f7500">JavaScript</span>
+                                <span class="tag" style="--tg:#d64c72">Chart.js</span>
+                            </div>
+                            <a class="work-arrow" href="https://github.com/manojpoudel9256/studytrack-pro"
+                                target="_blank" rel="noopener" aria-label="View StudyTrack Pro code on GitHub">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M9 7h8v8" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 7 · Salary Tracker -->
+                <article class="work-card" data-cat="web">
+                    <div class="work-cover" style="--c1:#1d3a63; --c2:#4d9de0;">
+                        <div class="work-cover-glass"></div>
+                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
+                            stroke-width="3" aria-hidden="true">
+                            <circle cx="60" cy="60" r="34" />
+                            <path d="M48 44 L60 60 L72 44 M60 60 V78 M50 64 H70 M50 71 H70" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <span class="work-badge" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="6" width="20" height="12" rx="2" />
+                                <circle cx="12" cy="12" r="2.6" />
+                                <path d="M6 12h.01M18 12h.01" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="work-body">
+                        <h3 class="work-title">Salary Tracker</h3>
+                        <p class="work-desc">A bilingual salary tracker for part-time work in Japan — shifts, hourly
+                            wages, and monthly income at a glance.</p>
+                        <div class="work-tagrow">
+                            <div class="work-tags">
+                                <span class="tag" style="--tg:#5c65a0">PHP</span>
+                                <span class="tag" style="--tg:#00758f">MySQL</span>
+                            </div>
+                            <a class="work-arrow" href="https://github.com/manojpoudel9256/salary-tracker-jap"
+                                target="_blank" rel="noopener" aria-label="View Salary Tracker code on GitHub">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M9 7h8v8" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 8 · Gorkhali Portfolio (YouTube) -->
+                <article class="work-card" data-cat="web">
+                    <div class="work-cover" style="--c1:#7a1d1d; --c2:#e0563a;">
+                        <div class="work-cover-glass"></div>
+                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
+                            stroke-width="3" aria-hidden="true">
+                            <rect x="22" y="34" width="76" height="52" rx="14" />
+                            <path d="M52 48 L74 60 L52 72 Z" fill="currentColor" stroke="none" />
+                        </svg>
+                        <span class="work-badge" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="6 3 20 12 6 21 6 3" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="work-body">
+                        <h3 class="work-title">Gorkhali Portfolio</h3>
+                        <p class="work-desc">The bilingual site for my YouTube channel — live subscriber stats,
+                            featured videos, and EN/日本語 switching.</p>
+                        <div class="work-tagrow">
+                            <div class="work-tags">
+                                <span class="tag" style="--tg:#e34c26">HTML5</span>
+                                <span class="tag" style="--tg:#1572b6">CSS3</span>
+                                <span class="tag" style="--tg:#8f7500">JavaScript</span>
+                            </div>
+                            <a class="work-arrow" href="https://github.com/manojpoudel9256/gorkhali-portfolio"
+                                target="_blank" rel="noopener" aria-label="View Gorkhali Portfolio code on GitHub">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M9 7h8v8" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 9 · Image Compressor Pro -->
+                <article class="work-card" data-cat="web">
+                    <div class="work-cover" style="--c1:#143c3c; --c2:#12b3a8;">
+                        <div class="work-cover-glass"></div>
+                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
+                            stroke-width="3" aria-hidden="true">
+                            <rect x="24" y="28" width="72" height="56" rx="8" />
+                            <circle cx="44" cy="46" r="6" />
+                            <path d="M24 76 L48 56 L66 70 L80 60 L96 72" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M60 94 V108 M52 101 L60 109 L68 101" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <span class="work-badge" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="3" />
+                                <circle cx="8.5" cy="8.5" r="1.6" />
+                                <path d="M21 15l-5-5L5 21" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="work-body">
+                        <h3 class="work-title">Image Compressor Pro</h3>
+                        <p class="work-desc">A privacy-first image optimizer that runs entirely in the browser —
+                            batch compression, smart quality presets, no uploads.</p>
+                        <div class="work-tagrow">
+                            <div class="work-tags">
+                                <span class="tag" style="--tg:#8f7500">JavaScript</span>
+                                <span class="tag" style="--tg:#555555">Canvas API</span>
+                            </div>
+                            <a class="work-arrow" href="https://github.com/manojpoudel9256/ImageCompressorPro"
+                                target="_blank" rel="noopener" aria-label="View Image Compressor Pro code on GitHub">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M7 17L17 7M9 7h8v8" />
