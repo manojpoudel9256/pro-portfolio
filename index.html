@@ -1441,6 +1441,121 @@
             border-color: var(--ink);
         }
 
+        /* EDUCATION — premium slide-in cards */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4);
+        }
+
+        .edu-card {
+            background: var(--elevated);
+            border: 1px solid var(--hairline);
+            border-radius: 18px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 28px rgba(20, 20, 20, 0.07);
+            transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
+                box-shadow 0.35s var(--ease);
+        }
+
+        .edu-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--hairline-strong);
+            box-shadow: 0 24px 54px rgba(20, 20, 20, 0.16);
+        }
+
+        .edu-photo {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+        }
+
+        .edu-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s var(--ease);
+        }
+
+        .edu-card:hover .edu-photo img {
+            transform: scale(1.06);
+        }
+
+        /* soft scrim so the year chip reads on any photo */
+        .edu-photo::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(20, 20, 20, 0.38), transparent 42%);
+            pointer-events: none;
+        }
+
+        .edu-year {
+            position: absolute;
+            z-index: 2;
+            left: 14px;
+            bottom: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            letter-spacing: 0.08em;
+            color: #fff;
+            background: rgba(16, 16, 18, 0.5);
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+            padding: 4px 11px;
+        }
+
+        .edu-body {
+            padding: var(--space-4);
+        }
+
+        .edu-school {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: var(--fs-100);
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-label);
+            color: var(--ink-3);
+            margin-bottom: var(--space-1);
+        }
+
+        .edu-title {
+            font-family: var(--font-display);
+            font-size: var(--fs-600);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: var(--space-2);
+        }
+
+        .edu-desc {
+            color: var(--ink-2);
+            font-size: var(--fs-300);
+            line-height: var(--lh-body);
+            margin-bottom: var(--space-3);
+        }
+
+        .edu-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: var(--font-mono);
+            font-size: var(--fs-200);
+            color: var(--accent);
+        }
+
+        .edu-more svg {
+            transition: transform 0.3s var(--ease);
+        }
+
+        .edu-card:hover .edu-more svg {
+            transform: translateX(4px);
+        }
+
         /* FULLSCREEN TEXT MODAL (MOBILE) */
         .text-modal {
             position: fixed;
@@ -2106,6 +2221,16 @@
             .work-arrow svg {
                 width: 13px;
                 height: 13px;
+            }
+
+            /* Education cards stack on mobile */
+            .edu-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-3);
+            }
+
+            .edu-body {
+                padding: var(--space-3);
             }
 
             .about-container-premium {
@@ -2811,64 +2936,58 @@
                     </div>
                 </div>
 
-                <!-- Education -->
+                <!-- Education — premium slide-in cards -->
                 <div class="timeline-section">
                     <h2 class="section-title">Education</h2>
-                    <div class="timeline">
+                    <div class="edu-grid">
 
-                        <!-- Item 1 -->
-                        <div class="timeline-item">
-                            <div class="timeline-image-container"
-                                onclick="openImageModal('yoshida.webp', 'IT Department', 'Hokkaido Cyber Creators College')">
+                        <article class="edu-card"
+                            onclick="openImageModal('yoshida.webp', 'IT Department', 'Hokkaido Cyber Creators College')">
+                            <div class="edu-photo">
                                 <picture>
                                     <source srcset="yoshida.webp" type="image/webp">
-                                    <img src="yoshida.webp" alt="Hokkaido Cyber Creators College" class="timeline-thumb"
-                                        width="840" height="560" loading="lazy">
+                                    <img src="yoshida.webp" alt="Hokkaido Cyber Creators College" width="840"
+                                        height="560" loading="lazy">
                                 </picture>
+                                <span class="edu-year">2024 — 2026</span>
                             </div>
-                            <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
-                                <span class="timeline-school">Hokkaido Cyber Creators</span>
-                                <div class="timeline-header-row">
-                                    <h3 class="timeline-title">IT Department</h3>
-                                    <span class="timeline-year">2024 — 2026</span>
-                                </div>
-                                <p class="timeline-desc">Specialized in Network, Cloud, and Cybersecurity. Comprehensive
+                            <div class="edu-body">
+                                <span class="edu-school">Hokkaido Cyber Creators</span>
+                                <h3 class="edu-title">IT Department</h3>
+                                <p class="edu-desc">Specialized in Network, Cloud, and Cybersecurity. Comprehensive
                                     web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.</p>
+                                <span class="edu-more">View photo
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14M13 6l6 6-6 6" />
+                                    </svg>
+                                </span>
                             </div>
-                            <div class="timeline-arrow">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
-                            </div>
-                        </div>
+                        </article>
 
-                        <!-- Item 2 -->
-                        <div class="timeline-item">
-                            <div class="timeline-image-container"
-                                onclick="openImageModal('hjla.webp', 'Japanese Language', 'Hokkaido Japanese Language Academy')">
+                        <article class="edu-card"
+                            onclick="openImageModal('hjla.webp', 'Japanese Language', 'Hokkaido Japanese Language Academy')">
+                            <div class="edu-photo">
                                 <picture>
                                     <source srcset="hjla.webp" type="image/webp">
-                                    <img src="hjla.webp" alt="Hokkaido Japanese Language Academy" class="timeline-thumb"
-                                        width="1000" height="750" loading="lazy">
+                                    <img src="hjla.webp" alt="Hokkaido Japanese Language Academy" width="1000"
+                                        height="750" loading="lazy">
                                 </picture>
+                                <span class="edu-year">2022 — 2024</span>
                             </div>
-                            <div class="timeline-content-wrapper" onclick="toggleTimeline(this)">
-                                <span class="timeline-school">Hokkaido JL Academy</span>
-                                <div class="timeline-header-row">
-                                    <h3 class="timeline-title">Japanese Language</h3>
-                                    <span class="timeline-year">2022 — 2024</span>
-                                </div>
-                                <p class="timeline-desc">Achieved JLPT N3 certification. Deep focus on Japanese
+                            <div class="edu-body">
+                                <span class="edu-school">Hokkaido JL Academy</span>
+                                <h3 class="edu-title">Japanese Language</h3>
+                                <p class="edu-desc">Achieved JLPT N3 certification. Deep focus on Japanese
                                     corporate culture, business manners, and volunteer leadership.</p>
+                                <span class="edu-more">View photo
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14M13 6l6 6-6 6" />
+                                    </svg>
+                                </span>
                             </div>
-                            <div class="timeline-arrow">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
-                            </div>
-                        </div>
+                        </article>
 
                     </div>
                 </div>
@@ -3318,6 +3437,17 @@
                     y: 60,
                     opacity: 0,
                     duration: 0.9,
+                    ease: "power3.out",
+                    scrollTrigger: { trigger: card, start: "top 85%" }
+                });
+            });
+
+            // EDUCATION — cards slide in from opposite sides
+            gsap.utils.toArray(".edu-card").forEach((card, i) => {
+                gsap.from(card, {
+                    x: i % 2 === 0 ? -90 : 90,
+                    opacity: 0,
+                    duration: 1,
                     ease: "power3.out",
                     scrollTrigger: { trigger: card, start: "top 85%" }
                 });
