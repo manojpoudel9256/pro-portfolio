@@ -220,7 +220,11 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: transparent;
+            /* slightly dark, blurred backdrop so the nav reads on any section */
+            background: linear-gradient(to bottom, rgba(16, 16, 20, 0.44), rgba(16, 16, 20, 0.14));
+            -webkit-backdrop-filter: blur(12px) saturate(1.15);
+            backdrop-filter: blur(12px) saturate(1.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
         }
 
         .top-nav .logo {
@@ -228,7 +232,8 @@
             font-weight: 600;
             font-size: 1.15rem;
             letter-spacing: 0.01em;
-            color: var(--ink);
+            color: #fff;
+            text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
             text-decoration: none;
             white-space: nowrap;
         }
@@ -378,12 +383,6 @@
                 object-position: center bottom;
             }
 
-            /* Desktop nav: crisp dark ink on the light-grey hero top
-               (mix-blend difference was rendering it muddy/hard to read) */
-            .top-nav {
-                mix-blend-mode: normal;
-                color: var(--ink);
-            }
         }
 
         .hero-scrim {
@@ -1785,8 +1784,10 @@
             height: var(--space-7);
         }
 
-        /* MENU BUTTON */
+        /* MENU BUTTON — floating menu trigger, no longer needed now that the
+           pill nav is sticky (desktop) and the nav has a Menu button (mobile) */
         .menu-button-wrapper {
+            display: none !important;
             position: fixed;
             top: var(--space-3);
             right: var(--space-3);
