@@ -704,32 +704,34 @@
             margin-top: clamp(var(--space-6), 9vw, var(--space-8));
         }
 
+        /* full-bleed dark premium band — one row across the whole screen */
         .stack {
             position: relative;
             margin-top: var(--space-5);
-            padding: clamp(var(--space-5), 5vw, var(--space-6)) 0;
-            border-radius: var(--radius-lg, 20px);
-            background: var(--bg);
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            padding: clamp(30px, 4.5vw, 52px) 0;
+            background: #131313;
             overflow: hidden;
         }
 
-        /* subtle drifting aura behind the logos */
+        /* subtle drifting aura behind the logos (tuned for the dark band) */
         .stack::before {
             content: "";
             position: absolute;
-            inset: -25%;
+            inset: -30%;
             z-index: 0;
             pointer-events: none;
             background:
-                radial-gradient(34% 48% at 24% 42%, rgba(255, 77, 2, 0.07), transparent 70%),
-                radial-gradient(40% 55% at 80% 58%, rgba(20, 20, 20, 0.05), transparent 72%);
-            filter: blur(18px);
+                radial-gradient(38% 70% at 18% 50%, rgba(255, 77, 2, 0.16), transparent 70%),
+                radial-gradient(42% 75% at 84% 50%, rgba(124, 92, 255, 0.12), transparent 72%);
+            filter: blur(26px);
             animation: auraDrift 26s ease-in-out infinite alternate;
         }
 
         @keyframes auraDrift {
             to {
-                transform: translate3d(5%, -4%, 0) scale(1.12);
+                transform: translate3d(5%, -3%, 0) scale(1.14);
             }
         }
 
@@ -741,59 +743,55 @@
         .logo-marquee {
             position: relative;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
             overflow: hidden;
         }
 
-        /* edge fade via gradient overlays instead of mask-image — masks force a
-           single GPU layer that mobile rasterizes top-down (only top rows show
-           until you tap). Overlays keep every row painting from the start. */
+        /* edge fade via gradient overlays fading into the dark band */
         .logo-marquee::before,
         .logo-marquee::after {
             content: "";
             position: absolute;
             top: 0;
             bottom: 0;
-            width: 7%;
+            width: 9%;
             z-index: 3;
             pointer-events: none;
         }
 
         .logo-marquee::before {
             left: 0;
-            background: linear-gradient(90deg, var(--bg), transparent);
+            background: linear-gradient(90deg, #131313, transparent);
         }
 
         .logo-marquee::after {
             right: 0;
-            background: linear-gradient(270deg, var(--bg), transparent);
+            background: linear-gradient(270deg, #131313, transparent);
         }
 
-        /* tracks are moved by a requestAnimationFrame driver in JS — CSS
-           keyframe animations on these proved unreliable on mobile Safari */
+        /* moved by a requestAnimationFrame driver in JS */
         .logo-track {
             display: flex;
             width: max-content;
-            gap: 10px;
+            gap: 14px;
         }
 
+        /* thick dark premium chips */
         .logo-chip {
             flex: 0 0 auto;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 14px 6px 6px;
+            gap: 13px;
+            padding: 11px 24px 11px 11px;
             border-radius: 999px;
-            background: var(--elevated);
-            border: 1px solid var(--hairline);
-            box-shadow: var(--shadow);
+            background: rgba(255, 255, 255, 0.055);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
         }
 
         .logo-ico {
-            width: 32px;
-            height: 32px;
-            border-radius: 9px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             flex: 0 0 auto;
             background: #fff;
             display: grid;
@@ -802,15 +800,15 @@
         }
 
         .logo-ico img {
-            width: 19px;
-            height: 19px;
+            width: 25px;
+            height: 25px;
             display: block;
         }
 
         .logo-chip b {
             font-weight: 600;
-            font-size: 0.8rem;
-            color: var(--ink);
+            font-size: 1rem;
+            color: #f2f1ee;
             white-space: nowrap;
             letter-spacing: -0.01em;
         }
@@ -3107,9 +3105,6 @@
                     <section class="stack" aria-label="Tools and technologies">
                         <div class="logo-marquee">
                             <div class="logo-track" id="logoTrack"></div>
-                            <div class="logo-track logo-track-rev" id="logoTrack2"></div>
-                            <div class="logo-track" id="logoTrack3"></div>
-                            <div class="logo-track logo-track-rev" id="logoTrack4"></div>
                         </div>
                     </section>
                 </div>
@@ -3488,19 +3483,16 @@
                 ["vscode", "VS Code"], ["figma", "Figma"], ["vercel", "Vercel"]
             ];
             const chip = ([f, n]) =>
-                `<span class="logo-chip"><span class="logo-ico"><img src="logos/${f}.svg" alt="" loading="eager" decoding="async" width="19" height="19"></span><b>${n}</b></span>`;
-            // four rows, each a different rotation of the list so they never align
-            const rot = (arr, n) => arr.slice(n).concat(arr.slice(0, n));
-            const rows = [LOGOS, rot(LOGOS, 6), rot(LOGOS, 12), rot(LOGOS, 18)];
-            const speeds = [55, -48, 62, -45]; // px/sec; negative scrolls the other way
+                `<span class="logo-chip"><span class="logo-ico"><img src="logos/${f}.svg" alt="" loading="eager" decoding="async" width="25" height="25"></span><b>${n}</b></span>`;
+            // single full-width row, driven right-to-left
             const tracks = [];
-            ["logoTrack", "logoTrack2", "logoTrack3", "logoTrack4"].forEach((id, i) => {
-                const el = document.getElementById(id);
+            (function () {
+                const el = document.getElementById("logoTrack");
                 if (!el) return;
-                const html = rows[i].map(chip).join("");
-                el.innerHTML = html + html; // duplicate for a seamless loop
-                tracks.push({ el: el, speed: speeds[i], x: 0, half: 0 });
-            });
+                const html = LOGOS.map(chip).join("");
+                el.innerHTML = html + html; // duplicated for a seamless loop
+                tracks.push({ el: el, speed: 48, x: 0, half: 0 });
+            })();
             if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
             function measure() {
@@ -3515,7 +3507,7 @@
                 const dt = Math.min((now - last) / 1000, 0.05); // clamp tab-switch jumps
                 last = now;
                 for (const t of tracks) {
-                    if (!t.half) continue;
+                    if (!t.half) { t.half = t.el.scrollWidth / 2; if (!t.half) continue; }
                     t.x -= t.speed * dt;
                     if (t.x <= -t.half) t.x += t.half;   // wrap forward scroll
                     if (t.x > 0) t.x -= t.half;          // wrap reverse scroll
@@ -3679,7 +3671,7 @@
                     aboutTitle: "About Me", aboutSubtitle: "Experience, education, and the story so far",
                     expTitle: "Experience",
                     xpOrg: "Japanese engineering company · Tokyo",
-                    xpRole: "Software Developer — Mobility &amp; Robotics",
+                    xpRole: "Software Developer — Mobility & Robotics",
                     xpYears: "Apr 2026 — Present",
                     xp1When: "Apr 2026", xp1Title: "Unreal Engine development",
                     xp1Desc: "First core mission: real-time 3D development in Unreal Engine for mobility & robotics simulation.",
