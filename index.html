@@ -207,72 +207,136 @@
         }
 
         /* NAVIGATION — overlays the full-bleed hero */
+        /* ===== Pill / capsule top nav (sticky) ===== */
         .top-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: var(--space-4) var(--gutter);
-            font-family: var(--font-mono);
-            font-size: var(--fs-200);
-            position: absolute;
+            gap: var(--space-3);
+            padding: clamp(12px, 1.8vw, 20px) var(--gutter);
+            font-family: var(--font-body);
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
+            z-index: 1000;
             background: transparent;
-            color: white;
-            mix-blend-mode: difference;
         }
 
         .top-nav .logo {
-            font-weight: 500;
-            letter-spacing: 0.02em;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 0.01em;
+            color: var(--ink);
             text-decoration: none;
+            white-space: nowrap;
         }
 
-        .top-nav .links {
+        /* capsule holding the section links */
+        .nav-pill {
             display: flex;
-            gap: var(--space-4);
             align-items: center;
+            gap: 2px;
+            background: rgba(20, 20, 20, 0.82);
+            -webkit-backdrop-filter: blur(16px) saturate(1.3);
+            backdrop-filter: blur(16px) saturate(1.3);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 999px;
+            padding: 5px;
+            box-shadow: 0 14px 36px rgba(20, 20, 20, 0.22);
         }
 
-        .top-nav .links a,
-        .top-nav .links button {
-            cursor: pointer;
+        .np-link {
+            padding: 9px 21px;
+            border-radius: 999px;
+            color: rgba(242, 241, 238, 0.68);
             text-decoration: none;
-            position: relative;
-            padding: 2px 0;
-            transition: opacity 0.3s var(--ease);
-            /* button reset */
-            font-family: inherit;
-            font-size: inherit;
-            letter-spacing: inherit;
-            color: inherit;
-            background: none;
-            border: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+            transition: color 0.25s var(--ease), background 0.3s var(--ease);
         }
 
-        /* animated underline */
-        .top-nav .links a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -2px;
-            width: 100%;
-            height: 1px;
-            background: currentColor;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s var(--ease);
+        .np-link:hover {
+            color: #fff;
         }
 
-        .top-nav .links a:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
+        .np-link.active {
+            background: var(--bg);
+            color: var(--ink);
         }
 
-        .top-nav .links .menu-text {
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        /* language toggle — flag + label pill */
+        .lang-toggle,
+        .menu-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 15px;
+            border-radius: 999px;
+            cursor: pointer;
+            background: rgba(20, 20, 20, 0.82);
+            -webkit-backdrop-filter: blur(16px) saturate(1.3);
+            backdrop-filter: blur(16px) saturate(1.3);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            color: var(--on-dark);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.02em;
+            box-shadow: 0 14px 36px rgba(20, 20, 20, 0.18);
+            transition: transform 0.2s var(--ease), color 0.2s var(--ease);
+        }
+
+        .lang-toggle:hover,
+        .menu-text:hover {
+            transform: translateY(-1px);
+            color: #fff;
+        }
+
+        .lang-flag {
+            font-size: 1.05rem;
+            line-height: 1;
+        }
+
+        /* menu (hamburger text) button — desktop hidden, mobile shown */
+        .top-nav .menu-text {
             display: none;
+        }
+
+        /* language button inside the mobile menu overlay */
+        .menu-lang {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: var(--space-3);
+            padding: 12px 20px;
+            border-radius: 999px;
+            cursor: pointer;
+            background: var(--elevated);
+            border: 1px solid var(--hairline);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: border-color 0.25s var(--ease), transform 0.2s var(--ease);
+        }
+
+        .menu-lang:hover {
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .menu-lang .lang-flag {
+            font-size: 1.2rem;
         }
 
         /* HERO — full-bleed portrait */
@@ -2067,35 +2131,25 @@
         @media (max-width: 768px) {
             .top-nav {
                 padding: var(--space-3) var(--gutter);
-                mix-blend-mode: normal;
                 position: fixed;
                 width: 100%;
                 z-index: 2000;
-                pointer-events: none;
                 align-items: center;
             }
 
-            .top-nav .logo {
-                pointer-events: auto;
-                mix-blend-mode: difference;
-                color: #fff;
-            }
-
-            .top-nav .links {
-                gap: var(--space-3);
-                pointer-events: auto;
-                mix-blend-mode: difference;
-            }
-
-            .top-nav .links a {
+            /* hide the full pill nav; show a menu button that opens the overlay */
+            .nav-pill {
                 display: none;
             }
 
-            .top-nav .links .menu-text {
-                display: block !important;
-                cursor: pointer;
-                pointer-events: auto;
-                color: #fff;
+            .top-nav .menu-text {
+                display: inline-flex;
+            }
+
+            /* on mobile the language toggle lives inside the menu overlay
+               (.menu-lang), so the nav stays clean: just logo + Menu */
+            .nav-right .lang-toggle {
+                display: none;
             }
 
             .menu-button-wrapper {
@@ -2415,7 +2469,7 @@
     <div class="menu-overlay">
         <div class="menu-close" onclick="window.toggleMenu()"></div>
         <div class="menu-nav">
-            <p>Navigation</p>
+            <p data-i18n="navLabel">Navigation</p>
             <div class="hr"></div>
             <a href="#home" class="menu-link" onclick="window.toggleMenu()">
                 <span class="menu-ico" aria-hidden="true">
@@ -2423,7 +2477,7 @@
                         <path d="M4 11.5 12 5l8 6.5M6 10v9h12v-9" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </span>
-                <span class="menu-label">Home</span>
+                <span class="menu-label" data-i18n="navHome">Home</span>
                 <span class="menu-arrow" aria-hidden="true">→</span>
             </a>
             <a href="#work" class="menu-link" onclick="window.toggleMenu()">
@@ -2433,7 +2487,7 @@
                         <path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7" stroke-linecap="round" />
                     </svg>
                 </span>
-                <span class="menu-label">Work</span>
+                <span class="menu-label" data-i18n="navWork">Work</span>
                 <span class="menu-arrow" aria-hidden="true">→</span>
             </a>
             <a href="#about-me" class="menu-link" onclick="window.toggleMenu()">
@@ -2443,7 +2497,7 @@
                         <path d="M5 20a7 7 0 0 1 14 0" stroke-linecap="round" />
                     </svg>
                 </span>
-                <span class="menu-label">About</span>
+                <span class="menu-label" data-i18n="navAbout">About</span>
                 <span class="menu-arrow" aria-hidden="true">→</span>
             </a>
             <a href="#contact" class="menu-link" onclick="window.toggleMenu()">
@@ -2453,21 +2507,33 @@
                         <path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </span>
-                <span class="menu-label">Contact</span>
+                <span class="menu-label" data-i18n="navContact">Contact</span>
                 <span class="menu-arrow" aria-hidden="true">→</span>
             </a>
+            <button class="menu-lang" type="button" onclick="window.toggleLang()">
+                <span class="lang-flag" id="langFlagM">🇯🇵</span>
+                <span id="langLabelM">日本語</span>
+            </button>
         </div>
     </div>
 
     <main id="main">
         <nav class="top-nav">
             <a class="logo" href="#home">Manoj Poudel</a>
-            <div class="links">
-                <a href="#work">Work</a>
-                <a href="#about-me">About</a>
-                <a href="#contact">Contact</a>
+            <div class="nav-pill">
+                <a href="#home" class="np-link" data-nav data-i18n="navHome">Home</a>
+                <a href="#work" class="np-link" data-nav data-i18n="navWork">Work</a>
+                <a href="#about-me" class="np-link" data-nav data-i18n="navAbout">About</a>
+                <a href="#contact" class="np-link" data-nav data-i18n="navContact">Contact</a>
+            </div>
+            <div class="nav-right">
+                <button class="lang-toggle" type="button" onclick="window.toggleLang()"
+                    aria-label="Switch language">
+                    <span class="lang-flag" id="langFlag">🇯🇵</span>
+                    <span class="lang-label" id="langLabel">日本語</span>
+                </button>
                 <button class="menu-text" type="button" aria-label="Open menu"
-                    onclick="window.toggleMenu()">Menu</button>
+                    onclick="window.toggleMenu()"><span data-i18n="navMenu">Menu</span></button>
             </div>
         </nav>
 
@@ -2488,7 +2554,7 @@
                             <path d="M7 7l10 10M17 17V7M17 17H7" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </span>
-                    <p>Software Engineer<br><span>Mobility &amp; Robotics</span></p>
+                    <p data-i18n-html="heroTagline">Software Engineer<br><span>Mobility &amp; Robotics</span></p>
                     <p class="hero-meta">Unreal Engine · Python · Blender 3D</p>
                 </div>
             </div>
@@ -2504,13 +2570,13 @@
                         <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18" />
                     </svg>
                 </span>
-                <h1>Selected <em>Work</em></h1>
-                <p>A selection of projects I've worked on — each one a unique challenge and solution.</p>
+                <h1 data-i18n-html="workTitle">Selected <em>Work</em></h1>
+                <p data-i18n="workSubtitle">A selection of projects I've worked on — each one a unique challenge and solution.</p>
                 <div class="work-filters" role="group" aria-label="Filter projects">
-                    <button class="wf-btn active" type="button" data-filter="all">All</button>
-                    <button class="wf-btn" type="button" data-filter="web">Web Development</button>
-                    <button class="wf-btn" type="button" data-filter="3d">3D &amp; Design</button>
-                    <button class="wf-btn" type="button" data-filter="ai">AI &amp; Vision</button>
+                    <button class="wf-btn active" type="button" data-filter="all" data-i18n="filterAll">All</button>
+                    <button class="wf-btn" type="button" data-filter="web" data-i18n="filterWeb">Web Development</button>
+                    <button class="wf-btn" type="button" data-filter="3d" data-i18n="filter3d">3D &amp; Design</button>
+                    <button class="wf-btn" type="button" data-filter="ai" data-i18n="filterAi">AI &amp; Vision</button>
                 </div>
             </div>
 
@@ -2536,7 +2602,7 @@
                     </div>
                     <div class="work-body">
                         <h3 class="work-title">GLB Optimizer</h3>
-                        <p class="work-desc">A 100% local, browser-based tool that compresses .glb 3D models for
+                        <p class="work-desc" data-i18n="descGlbOpt">A 100% local, browser-based tool that compresses .glb 3D models for
                             Unreal Engine 5 — real-time viewer, before/after comparison, per-mesh inspector.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
@@ -2574,11 +2640,11 @@
                                 <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
                             </svg>
                         </span>
-                        <span class="work-shot-hint">Live demo ↗</span>
+                        <span class="work-shot-hint" data-i18n="hintLiveDemo">Live demo ↗</span>
                     </div>
                     <div class="work-body">
                         <h3 class="work-title">EVEREST — Travel Experience</h3>
-                        <p class="work-desc">A cinematic travel landing page — 340 scroll-scrubbed film frames fly
+                        <p class="work-desc" data-i18n="descEverest">A cinematic travel landing page — 340 scroll-scrubbed film frames fly
                             you from an airplane window at golden hour to the roof of the world.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
@@ -2619,7 +2685,7 @@
                     </div>
                     <div class="work-body">
                         <h3 class="work-title">Realtime Face Recognition</h3>
-                        <p class="work-desc">A real-time face-recognition system built from scratch — live camera
+                        <p class="work-desc" data-i18n="descFace">A real-time face-recognition system built from scratch — live camera
                             capture, a training pipeline, and confidence-based recognition.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
@@ -2657,11 +2723,11 @@
                                 <path d="M18 12a2 2 0 0 0 0 4h4v-4z" />
                             </svg>
                         </span>
-                        <span class="work-shot-hint">Screenshot</span>
+                        <span class="work-shot-hint" data-i18n="hintScreenshot">Screenshot</span>
                     </div>
                     <div class="work-body">
                         <h3 class="work-title">AI Budget Tracker</h3>
-                        <p class="work-desc">A personal finance tool that reads receipts with Gemini vision AI, sets
+                        <p class="work-desc" data-i18n="descBudget">A personal finance tool that reads receipts with Gemini vision AI, sets
                             budgets, and generates spending insights from raw photos.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
@@ -2699,11 +2765,11 @@
                                 <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
                             </svg>
                         </span>
-                        <span class="work-shot-hint">Screenshot</span>
+                        <span class="work-shot-hint" data-i18n="hintScreenshot">Screenshot</span>
                     </div>
                     <div class="work-body">
                         <h3 class="work-title">Weather &amp; Travel Planner</h3>
-                        <p class="work-desc">A full-stack app that recommends destinations by optimal weather —
+                        <p class="work-desc" data-i18n="descWeather">A full-stack app that recommends destinations by optimal weather —
                             real-time search, 5-day forecasts, bilingual EN/日本語.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
@@ -2743,7 +2809,7 @@
                     </div>
                     <div class="work-body">
                         <h3 class="work-title">GLB Analyzer</h3>
-                        <p class="work-desc">A Node toolkit that inspects .glb models — mesh, texture, and size
+                        <p class="work-desc" data-i18n="descGlbAna">A Node toolkit that inspects .glb models — mesh, texture, and size
                             reports — plus a UE5-safe compression pipeline.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
@@ -2782,7 +2848,7 @@
                     </div>
                     <div class="work-body">
                         <h3 class="work-title">StudyTrack Pro</h3>
-                        <p class="work-desc">A gamified study tracker — focus timer, streaks and XP, interactive
+                        <p class="work-desc" data-i18n="descStudy">A gamified study tracker — focus timer, streaks and XP, interactive
                             analytics charts, and a weather-adaptive UI in EN/日本語.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
@@ -2821,7 +2887,7 @@
                     </div>
                     <div class="work-body">
                         <h3 class="work-title">Salary Tracker</h3>
-                        <p class="work-desc">A bilingual salary tracker for part-time work in Japan — shifts, hourly
+                        <p class="work-desc" data-i18n="descSalary">A bilingual salary tracker for part-time work in Japan — shifts, hourly
                             wages, and monthly income at a glance.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
@@ -2857,7 +2923,7 @@
                     </div>
                     <div class="work-body">
                         <h3 class="work-title">Gorkhali Portfolio</h3>
-                        <p class="work-desc">The bilingual site for my YouTube channel — live subscriber stats,
+                        <p class="work-desc" data-i18n="descGorkhali">The bilingual site for my YouTube channel — live subscriber stats,
                             featured videos, and EN/日本語 switching.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
@@ -2900,7 +2966,7 @@
                     </div>
                     <div class="work-body">
                         <h3 class="work-title">Image Compressor Pro</h3>
-                        <p class="work-desc">A privacy-first image optimizer that runs entirely in the browser —
+                        <p class="work-desc" data-i18n="descImgComp">A privacy-first image optimizer that runs entirely in the browser —
                             batch compression, smart quality presets, no uploads.</p>
                         <div class="work-tagrow">
                             <div class="work-tags">
@@ -2922,7 +2988,7 @@
 
             <div class="work-more">
                 <a href="https://github.com/manojpoudel9256?tab=repositories" target="_blank" rel="noopener">
-                    View More Projects <span aria-hidden="true">→</span>
+                    <span data-i18n="workMore">View More Projects</span> <span aria-hidden="true">→</span>
                 </a>
             </div>
         </section>
@@ -2931,44 +2997,44 @@
         <section class="about-me-section" id="about-me">
             <div class="about-me-container">
                 <div class="about-me-header">
-                    <h1>About Me</h1>
-                    <p>Experience, education, and the story so far</p>
+                    <h1 data-i18n="aboutTitle">About Me</h1>
+                    <p data-i18n="aboutSubtitle">Experience, education, and the story so far</p>
                 </div>
 
                 <!-- Experience -->
                 <div class="timeline-section">
-                    <h2 class="section-title">Experience</h2>
+                    <h2 class="section-title" data-i18n="expTitle">Experience</h2>
                     <div class="xp">
                         <article class="xp-item">
                             <div class="xp-head">
                                 <div>
-                                    <span class="xp-org">Japanese engineering company · Tokyo</span>
-                                    <h3 class="xp-role">Software Developer — Mobility &amp; Robotics</h3>
+                                    <span class="xp-org" data-i18n="xpOrg">Japanese engineering company · Tokyo</span>
+                                    <h3 class="xp-role" data-i18n="xpRole">Software Developer — Mobility &amp; Robotics</h3>
                                 </div>
-                                <span class="xp-years">Apr 2026 — Present</span>
+                                <span class="xp-years" data-i18n="xpYears">Apr 2026 — Present</span>
                             </div>
                             <ol class="xp-phases">
                                 <li>
-                                    <span class="xp-when">Apr 2026</span>
+                                    <span class="xp-when" data-i18n="xp1When">Apr 2026</span>
                                     <div>
-                                        <h4>Unreal Engine development</h4>
-                                        <p>First core mission: real-time 3D development in Unreal Engine for
+                                        <h4 data-i18n="xp1Title">Unreal Engine development</h4>
+                                        <p data-i18n="xp1Desc">First core mission: real-time 3D development in Unreal Engine for
                                             mobility &amp; robotics simulation.</p>
                                     </div>
                                 </li>
                                 <li>
-                                    <span class="xp-when">2026</span>
+                                    <span class="xp-when" data-i18n="xp2When">2026</span>
                                     <div>
-                                        <h4>Python scripting &amp; automation</h4>
-                                        <p>Pipeline tooling and scripting in Python — automating workflows around
+                                        <h4 data-i18n="xp2Title">Python scripting &amp; automation</h4>
+                                        <p data-i18n="xp2Desc">Pipeline tooling and scripting in Python — automating workflows around
                                             the simulation environment.</p>
                                     </div>
                                 </li>
                                 <li>
-                                    <span class="xp-when">Now</span>
+                                    <span class="xp-when" data-i18n="xp3When">Now</span>
                                     <div>
-                                        <h4>Blender 3D modelling</h4>
-                                        <p>Expanding into 3D asset creation and modelling workflows in Blender —
+                                        <h4 data-i18n="xp3Title">Blender 3D modelling</h4>
+                                        <p data-i18n="xp3Desc">Expanding into 3D asset creation and modelling workflows in Blender —
                                             closing the loop from model to engine.</p>
                                     </div>
                                 </li>
@@ -2979,7 +3045,7 @@
 
                 <!-- Education — premium slide-in cards -->
                 <div class="timeline-section">
-                    <h2 class="section-title">Education</h2>
+                    <h2 class="section-title" data-i18n="eduTitle">Education</h2>
                     <div class="edu-grid">
 
                         <article class="edu-card"
@@ -2994,10 +3060,10 @@
                             </div>
                             <div class="edu-body">
                                 <span class="edu-school">Hokkaido Cyber Creators</span>
-                                <h3 class="edu-title">IT Department</h3>
-                                <p class="edu-desc">Specialized in Network, Cloud, and Cybersecurity. Comprehensive
+                                <h3 class="edu-title" data-i18n="edu1Title">IT Department</h3>
+                                <p class="edu-desc" data-i18n="edu1Desc">Specialized in Network, Cloud, and Cybersecurity. Comprehensive
                                     web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.</p>
-                                <span class="edu-more">View photo
+                                <span class="edu-more"><span data-i18n="viewPhoto">View photo</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M5 12h14M13 6l6 6-6 6" />
@@ -3019,10 +3085,10 @@
                             </div>
                             <div class="edu-body">
                                 <span class="edu-school">Hokkaido JL Academy</span>
-                                <h3 class="edu-title">Japanese Language</h3>
-                                <p class="edu-desc">Achieved JLPT N3 certification. Deep focus on Japanese
+                                <h3 class="edu-title" data-i18n="edu2Title">Japanese Language</h3>
+                                <p class="edu-desc" data-i18n="edu2Desc">Achieved JLPT N3 certification. Deep focus on Japanese
                                     corporate culture, business manners, and volunteer leadership.</p>
-                                <span class="edu-more">View photo
+                                <span class="edu-more"><span data-i18n="viewPhoto">View photo</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M5 12h14M13 6l6 6-6 6" />
@@ -3036,7 +3102,7 @@
 
                 <!-- Tools & tech — infinite two-row logo marquee -->
                 <div class="stack-inner">
-                    <h2 class="section-title">Tools &amp; Technologies</h2>
+                    <h2 class="section-title" data-i18n="toolsTitle">Tools &amp; Technologies</h2>
                     <section class="stack" aria-label="Tools and technologies">
                         <div class="logo-marquee">
                             <div class="logo-track" id="logoTrack"></div>
@@ -3058,18 +3124,18 @@
                     </picture>
                 </div>
                 <div class="about-text-content">
-                    <h2 class="about-premium-title">Driven by<br>Impact.</h2>
+                    <h2 class="about-premium-title" data-i18n-html="bioHeadline">Driven by<br>Impact.</h2>
                     <div class="about-bio">
-                        <p class="premium-text">
+                        <p class="premium-text" data-i18n-html="bioP1">
                             I am a dedicated <strong>Mobility & Robotics Specialist</strong> with a core mission: to
                             contribute to society through the power of IT.
                         </p>
-                        <p class="premium-text">
+                        <p class="premium-text" data-i18n-html="bioP2">
                             Today that means building real-time 3D in <strong>Unreal Engine</strong>, automating
                             pipelines with <strong>Python</strong>, and modelling assets in <strong>Blender</strong> —
                             engineering the tools that move mobility and robotics forward.
                         </p>
-                        <p class="premium-text highlight">
+                        <p class="premium-text highlight" data-i18n="bioP3">
                             Ready to grow together and set new standards in the industry.
                         </p>
                     </div>
@@ -3114,9 +3180,9 @@
                                 <img src="model.webp" alt="Manoj Poudel" width="80" height="80" loading="lazy">
                             </picture>
                         </div>
-                        <h2>Let's work</h2>
+                        <h2 data-i18n="footWork">Let's work</h2>
                     </div>
-                    <h2>together</h2>
+                    <h2 data-i18n="footTogether">together</h2>
                 </div>
 
                 <div class="footer-content">
@@ -3159,15 +3225,15 @@
 
                 <div class="footer-bottom">
                     <div class="footer-info">
-                        <div><span>Version</span>
+                        <div><span data-i18n="footVersion">Version</span>
                             <p>2026 © Edition</p>
                         </div>
-                        <div><span>Local Time</span>
+                        <div><span data-i18n="footLocalTime">Local Time</span>
                             <p id="time">00:00 AM GMT+1</p>
                         </div>
                     </div>
                     <div class="footer-socials">
-                        <span>Socials</span>
+                        <span data-i18n="footSocials">Socials</span>
                         <div class="social-links">
                             <a
                                 href="https://www.linkedin.com/in/%E3%83%9D%E3%83%BC%E3%83%87%E3%83%AB-%E3%83%9E%E3%83%8E%E3%82%B8%E3%83%A5%E3%80%80%E3%82%AF%E3%83%9E%E3%83%BC%E3%83%AB-55ab57302/">LinkedIn</a>
@@ -3197,11 +3263,13 @@
             var msgEl = document.getElementById('plMsg');
 
             // awareness messages — each shown once (highlighted word in green)
-            var MSGS = [
-                'Save our <em>planet</em>',
-                'Plant more <em>trees</em>',
-                'Protect our <em>oceans</em>'
-            ];
+            var _pl = 'en';
+            try { var _s = localStorage.getItem('pp_lang'); if (_s === 'ja' || _s === 'en') _pl = _s; } catch (e) { }
+            var _q = new URLSearchParams(location.search).get('lang');
+            if (_q === 'ja' || _q === 'en') _pl = _q;
+            var MSGS = _pl === 'ja'
+                ? ['地球を<em>守ろう</em>', '木を<em>植えよう</em>', '海を<em>守ろう</em>']
+                : ['Save our <em>planet</em>', 'Plant more <em>trees</em>', 'Protect our <em>oceans</em>'];
             var mi = 0, msgTimer = null, done = false;
 
             // lock scroll while the preloader is up
@@ -3392,7 +3460,7 @@
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         // TOP NAV smooth-scroll (real anchors + Lenis)
-        document.querySelectorAll('.top-nav .links a[href^="#"]').forEach(a => {
+        document.querySelectorAll('.top-nav a[href^="#"]').forEach(a => {
             a.addEventListener('click', (e) => {
                 const target = document.getElementById(a.getAttribute('href').slice(1));
                 if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: 0, duration: 1.2 }); }
@@ -3583,6 +3651,144 @@
                 closeImageModal();
             }
         });
+    </script>
+
+    <!-- ===== i18n — English / 日本語 (authentic Japanese, not machine-translated) ===== -->
+    <script>
+        (function () {
+            const I18N = {
+                en: {
+                    navHome: "Home", navWork: "Work", navAbout: "About", navContact: "Contact",
+                    navMenu: "Menu", navLabel: "Navigation",
+                    heroTagline: "Software Engineer<br><span>Mobility &amp; Robotics</span>",
+                    workTitle: "Selected <em>Work</em>",
+                    workSubtitle: "A selection of projects I've worked on — each one a unique challenge and solution.",
+                    filterAll: "All", filterWeb: "Web Development", filter3d: "3D & Design", filterAi: "AI & Vision",
+                    hintLiveDemo: "Live demo ↗", hintScreenshot: "Screenshot", workMore: "View More Projects",
+                    descGlbOpt: "A 100% local, browser-based tool that compresses .glb 3D models for Unreal Engine 5 — real-time viewer, before/after comparison, per-mesh inspector.",
+                    descEverest: "A cinematic travel landing page — 340 scroll-scrubbed film frames fly you from an airplane window at golden hour to the roof of the world.",
+                    descFace: "A real-time face-recognition system built from scratch — live camera capture, a training pipeline, and confidence-based recognition.",
+                    descBudget: "A personal finance tool that reads receipts with Gemini vision AI, sets budgets, and generates spending insights from raw photos.",
+                    descWeather: "A full-stack app that recommends destinations by optimal weather — real-time search, 5-day forecasts, bilingual EN/日本語.",
+                    descGlbAna: "A Node toolkit that inspects .glb models — mesh, texture, and size reports — plus a UE5-safe compression pipeline.",
+                    descStudy: "A gamified study tracker — focus timer, streaks and XP, interactive analytics charts, and a weather-adaptive UI in EN/日本語.",
+                    descSalary: "A bilingual salary tracker for part-time work in Japan — shifts, hourly wages, and monthly income at a glance.",
+                    descGorkhali: "The bilingual site for my YouTube channel — live subscriber stats, featured videos, and EN/日本語 switching.",
+                    descImgComp: "A privacy-first image optimizer that runs entirely in the browser — batch compression, smart quality presets, no uploads.",
+                    aboutTitle: "About Me", aboutSubtitle: "Experience, education, and the story so far",
+                    expTitle: "Experience",
+                    xpOrg: "Japanese engineering company · Tokyo",
+                    xpRole: "Software Developer — Mobility &amp; Robotics",
+                    xpYears: "Apr 2026 — Present",
+                    xp1When: "Apr 2026", xp1Title: "Unreal Engine development",
+                    xp1Desc: "First core mission: real-time 3D development in Unreal Engine for mobility & robotics simulation.",
+                    xp2When: "2026", xp2Title: "Python scripting & automation",
+                    xp2Desc: "Pipeline tooling and scripting in Python — automating workflows around the simulation environment.",
+                    xp3When: "Now", xp3Title: "Blender 3D modelling",
+                    xp3Desc: "Expanding into 3D asset creation and modelling workflows in Blender — closing the loop from model to engine.",
+                    eduTitle: "Education",
+                    edu1Title: "IT Department",
+                    edu1Desc: "Specialized in Network, Cloud, and Cybersecurity. Comprehensive web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.",
+                    edu2Title: "Japanese Language",
+                    edu2Desc: "Achieved JLPT N3 certification. Deep focus on Japanese corporate culture, business manners, and volunteer leadership.",
+                    viewPhoto: "View photo", toolsTitle: "Tools & Technologies",
+                    bioHeadline: "Driven by<br>Impact.",
+                    bioP1: "I am a dedicated <strong>Mobility & Robotics Specialist</strong> with a core mission: to contribute to society through the power of IT.",
+                    bioP2: "Today that means building real-time 3D in <strong>Unreal Engine</strong>, automating pipelines with <strong>Python</strong>, and modelling assets in <strong>Blender</strong> — engineering the tools that move mobility and robotics forward.",
+                    bioP3: "Ready to grow together and set new standards in the industry.",
+                    footWork: "Let's work", footTogether: "together",
+                    footVersion: "Version", footLocalTime: "Local Time", footSocials: "Socials"
+                },
+                ja: {
+                    navHome: "ホーム", navWork: "実績", navAbout: "プロフィール", navContact: "お問い合わせ",
+                    navMenu: "メニュー", navLabel: "ナビゲーション",
+                    heroTagline: "ソフトウェアエンジニア<br><span>モビリティ＆ロボティクス</span>",
+                    workTitle: "代表的な<em>実績</em>",
+                    workSubtitle: "これまで手がけたプロジェクトの一部です。どれも独自の課題と、その解決策が詰まっています。",
+                    filterAll: "すべて", filterWeb: "Web開発", filter3d: "3D・デザイン", filterAi: "AI・ビジョン",
+                    hintLiveDemo: "ライブデモ ↗", hintScreenshot: "スクリーンショット", workMore: "その他のプロジェクトを見る",
+                    descGlbOpt: "Unreal Engine 5 向けに .glb 3Dモデルを圧縮する、完全ローカル・ブラウザ完結型ツール。リアルタイムビューア、圧縮前後の比較、メッシュ単位のインスペクターを搭載。",
+                    descEverest: "映画のような旅のランディングページ。スクロールに連動する340枚のフレームが、夕暮れの機窓から世界の頂へと誘います。",
+                    descFace: "ゼロから構築したリアルタイム顔認識システム。ライブカメラ映像の取得、学習パイプライン、信頼度ベースの認識を実装。",
+                    descBudget: "Gemini のビジョンAIでレシートを読み取る家計管理ツール。予算設定から、写真をもとにした支出分析までを自動化。",
+                    descWeather: "最適な天気から旅先を提案するフルスタックアプリ。リアルタイム検索、5日間予報、英語・日本語のバイリンガル対応。",
+                    descGlbAna: ".glb モデルを解析する Node 製ツールキット。メッシュ・テクスチャ・サイズのレポートに加え、UE5対応の圧縮パイプラインを提供。",
+                    descStudy: "ゲーム感覚の学習トラッカー。集中タイマー、連続記録とXP、インタラクティブな分析グラフを、天気に応じて変化するUIと英語・日本語で提供。",
+                    descSalary: "日本でのアルバイト向けバイリンガル給料管理アプリ。シフト、時給、月収をひと目で把握できます。",
+                    descGorkhali: "自身のYouTubeチャンネル向けバイリンガルサイト。登録者数のライブ表示、注目動画、英語・日本語の切り替えに対応。",
+                    descImgComp: "プライバシー重視の画像最適化ツール。すべてブラウザ内で完結し、一括圧縮とスマートな品質プリセットを搭載、アップロード不要。",
+                    aboutTitle: "プロフィール", aboutSubtitle: "経歴・学歴、そしてこれまでの歩み",
+                    expTitle: "職歴",
+                    xpOrg: "日本のエンジニアリング企業 · 東京",
+                    xpRole: "ソフトウェア開発者 — モビリティ＆ロボティクス",
+                    xpYears: "2026年4月 — 現在",
+                    xp1When: "2026年4月", xp1Title: "Unreal Engine 開発",
+                    xp1Desc: "最初の主要ミッションは、モビリティ・ロボティクスのシミュレーション向けに Unreal Engine でリアルタイム3D開発を行うこと。",
+                    xp2When: "2026年", xp2Title: "Python スクリプティング＆自動化",
+                    xp2Desc: "Python によるパイプラインツールの開発とスクリプティング。シミュレーション環境まわりのワークフローを自動化。",
+                    xp3When: "現在", xp3Title: "Blender 3Dモデリング",
+                    xp3Desc: "Blender での3Dアセット制作・モデリングへと領域を拡大し、モデルからエンジンまでを一気通貫でつないでいます。",
+                    eduTitle: "学歴",
+                    edu1Title: "IT学科",
+                    edu1Desc: "ネットワーク・クラウド・サイバーセキュリティを専攻。Java、HTML/CSS、JS、PHP、Linux など幅広いWeb開発カリキュラムを修了。",
+                    edu2Title: "日本語学科",
+                    edu2Desc: "JLPT N3 を取得。日本の企業文化・ビジネスマナー、そしてボランティアでのリーダーシップに注力。",
+                    viewPhoto: "写真を見る", toolsTitle: "ツール＆テクノロジー",
+                    bioHeadline: "社会に<br>インパクトを。",
+                    bioP1: "私は<strong>モビリティ＆ロボティクスのスペシャリスト</strong>として、ITの力で社会に貢献することを使命としています。",
+                    bioP2: "具体的には、<strong>Unreal Engine</strong> でのリアルタイム3D開発、<strong>Python</strong> によるパイプラインの自動化、<strong>Blender</strong> でのアセット制作を通じて、モビリティとロボティクスを前進させるツールをつくっています。",
+                    bioP3: "共に成長し、業界に新たな基準を打ち立てていきます。",
+                    footWork: "一緒に", footTogether: "つくろう。",
+                    footVersion: "バージョン", footLocalTime: "現地時間", footSocials: "SNS"
+                }
+            };
+
+            function applyLang(l) {
+                const t = I18N[l] || I18N.en;
+                document.documentElement.lang = (l === "ja") ? "ja" : "en";
+                document.querySelectorAll("[data-i18n]").forEach(el => {
+                    const v = t[el.dataset.i18n]; if (v != null) el.textContent = v;
+                });
+                document.querySelectorAll("[data-i18n-html]").forEach(el => {
+                    const v = t[el.dataset.i18nHtml]; if (v != null) el.innerHTML = v;
+                });
+                // toggle button shows the language you'll switch TO
+                const other = (l === "ja")
+                    ? { flag: "🇬🇧", label: "English" }
+                    : { flag: "🇯🇵", label: "日本語" };
+                ["langFlag", "langFlagM"].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = other.flag; });
+                ["langLabel", "langLabelM"].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = other.label; });
+                window.__lang = l;
+                try { localStorage.setItem("pp_lang", l); } catch (e) { }
+            }
+
+            window.toggleLang = function () {
+                applyLang(window.__lang === "ja" ? "en" : "ja");
+            };
+
+            // boot: ?lang= param wins, then saved preference, else English
+            let start = "en";
+            try { const s = localStorage.getItem("pp_lang"); if (s === "ja" || s === "en") start = s; } catch (e) { }
+            const q = new URLSearchParams(location.search).get("lang");
+            if (q === "ja" || q === "en") start = q;
+            applyLang(start);
+
+            // scroll-spy: highlight the active pill link
+            const links = Array.from(document.querySelectorAll(".np-link[data-nav]"));
+            function setActive(id) {
+                links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+            }
+            setActive("home");
+            const secs = links
+                .map(a => document.getElementById(a.getAttribute("href").slice(1)))
+                .filter(Boolean);
+            if ("IntersectionObserver" in window && secs.length) {
+                const io = new IntersectionObserver(entries => {
+                    entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+                }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+                secs.forEach(s => io.observe(s));
+            }
+        })();
     </script>
 </body>
 
