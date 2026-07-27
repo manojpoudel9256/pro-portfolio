@@ -4,6 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- apply saved theme before paint to avoid a flash -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("pp_theme");
+                var q = new URLSearchParams(location.search).get("theme");
+                if (q === "dark" || q === "light") t = q;
+                if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+                document.documentElement.setAttribute("data-theme", t);
+            } catch (e) { }
+        })();
+    </script>
     <title>Manoj — Software Engineer, Mobility &amp; Robotics</title>
     <meta name="description"
         content="Manoj Poudel — Software Engineer specialising in Mobility &amp; Robotics, based in Tokyo, Japan. Selected work, engineering background, and contact.">
@@ -143,6 +155,36 @@
             /* Motion */
             --ease: cubic-bezier(0.22, 1, 0.36, 1);
             --dur: 0.7s;
+
+            color-scheme: light;
+        }
+
+        /* ===== Dark theme — token overrides (everything token-based flips) ===== */
+        html[data-theme="dark"] {
+            --bg: #0f0f11;
+            --surface: #15151a;
+            --elevated: #1c1c22;
+            --ink: #f3f2ee;
+            --ink-2: #b7b5ad;
+            --ink-3: #8b897f;
+            --hairline: rgba(243, 242, 238, 0.12);
+            --hairline-strong: rgba(243, 242, 238, 0.22);
+            --dark: #1c1c22;
+            --accent: #ff5f22;
+            color-scheme: dark;
+        }
+
+        /* smooth cross-fade when switching themes */
+        html.theme-anim,
+        html.theme-anim body,
+        html.theme-anim .work,
+        html.theme-anim .about-me-section,
+        html.theme-anim .work-card,
+        html.theme-anim .edu-card,
+        html.theme-anim .stack,
+        html.theme-anim .logo-chip,
+        html.theme-anim .menu-overlay {
+            transition: background-color 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
         }
 
         * {
@@ -269,8 +311,8 @@
         }
 
         .np-link.active {
-            background: var(--bg);
-            color: var(--ink);
+            background: #f2f1ee;
+            color: #141414;
         }
 
         .nav-right {
@@ -279,9 +321,10 @@
             gap: var(--space-2);
         }
 
-        /* language toggle — flag + label pill */
+        /* nav control pills — language, theme, menu (fixed dark capsule look) */
         .lang-toggle,
-        .menu-text {
+        .menu-text,
+        .theme-toggle {
             display: inline-flex;
             align-items: center;
             gap: 7px;
@@ -301,8 +344,34 @@
             transition: transform 0.2s var(--ease), color 0.2s var(--ease);
         }
 
+        .theme-toggle {
+            padding: 9px;
+            width: 38px;
+            height: 38px;
+            justify-content: center;
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* show moon in light mode (→ switch to dark), sun in dark mode */
+        .theme-toggle .ico-sun {
+            display: none;
+        }
+
+        html[data-theme="dark"] .theme-toggle .ico-moon {
+            display: none;
+        }
+
+        html[data-theme="dark"] .theme-toggle .ico-sun {
+            display: block;
+        }
+
         .lang-toggle:hover,
-        .menu-text:hover {
+        .menu-text:hover,
+        .theme-toggle:hover {
             transform: translateY(-1px);
             color: #fff;
         }
@@ -351,6 +420,34 @@
 
         .menu-lang .lang-flag {
             font-size: 1.2rem;
+        }
+
+        .menu-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: var(--space-5);
+        }
+
+        .menu-controls .menu-lang {
+            margin-top: 0;
+        }
+
+        .menu-theme .ico-sun {
+            display: none;
+        }
+
+        .menu-theme svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        html[data-theme="dark"] .menu-theme .ico-moon {
+            display: none;
+        }
+
+        html[data-theme="dark"] .menu-theme .ico-sun {
+            display: block;
         }
 
         /* HERO — full-bleed portrait */
@@ -2212,9 +2309,10 @@
                 display: inline-flex;
             }
 
-            /* on mobile the language toggle lives inside the menu overlay
-               (.menu-lang), so the nav stays clean: just logo + Menu */
-            .nav-right .lang-toggle {
+            /* on mobile the language + theme toggles live inside the menu
+               overlay, so the nav stays clean: just logo + Menu */
+            .nav-right .lang-toggle,
+            .nav-right .theme-toggle {
                 display: none;
             }
 
@@ -2576,10 +2674,25 @@
                 <span class="menu-label" data-i18n="navContact">Contact</span>
                 <span class="menu-arrow" aria-hidden="true">→</span>
             </a>
-            <button class="menu-lang" type="button" onclick="window.toggleLang()">
-                <span class="lang-flag" id="langFlagM">🇯🇵</span>
-                <span id="langLabelM">日本語</span>
-            </button>
+            <div class="menu-controls">
+                <button class="menu-lang" type="button" onclick="window.toggleLang()">
+                    <span class="lang-flag" id="langFlagM">🇯🇵</span>
+                    <span id="langLabelM">日本語</span>
+                </button>
+                <button class="menu-lang menu-theme" type="button" onclick="window.toggleTheme()"
+                    aria-label="Toggle dark mode">
+                    <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                    </svg>
+                    <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4.2" />
+                        <path d="M12 2v2.2M12 19.8V22M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2 12h2.2M19.8 12H22M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6" />
+                    </svg>
+                    <span id="themeLabelM">Dark</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -2593,6 +2706,18 @@
                 <a href="#contact" class="np-link" data-nav data-i18n="navContact">Contact</a>
             </div>
             <div class="nav-right">
+                <button class="theme-toggle" type="button" onclick="window.toggleTheme()"
+                    aria-label="Toggle dark mode">
+                    <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                    </svg>
+                    <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4.2" />
+                        <path d="M12 2v2.2M12 19.8V22M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2 12h2.2M19.8 12H22M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6" />
+                    </svg>
+                </button>
                 <button class="lang-toggle" type="button" onclick="window.toggleLang()"
                     aria-label="Switch language">
                     <span class="lang-flag" id="langFlag">🇯🇵</span>
@@ -3386,6 +3511,28 @@
                 window.menuOpen = false;
             }
         };
+    </script>
+
+    <!-- THEME toggle (light / dark) -->
+    <script>
+        (function () {
+            function syncThemeUI() {
+                var dark = document.documentElement.getAttribute("data-theme") === "dark";
+                var lm = document.getElementById("themeLabelM");
+                if (lm) lm.textContent = dark ? "Light" : "Dark";
+                var meta = document.querySelector('meta[name="theme-color"]');
+                if (meta) meta.setAttribute("content", dark ? "#0f0f11" : "#f2f1ee");
+            }
+            window.toggleTheme = function () {
+                var cur = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+                var next = cur === "dark" ? "light" : "dark";
+                document.documentElement.classList.add("theme-anim");
+                document.documentElement.setAttribute("data-theme", next);
+                try { localStorage.setItem("pp_theme", next); } catch (e) { }
+                syncThemeUI();
+            };
+            syncThemeUI();
+        })();
     </script>
 
     <!-- Portrait cursor parallax (subtle; pointer + reduced-motion aware) -->
