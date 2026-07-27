@@ -322,17 +322,26 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            margin-top: var(--space-3);
-            padding: 12px 20px;
+            margin-top: var(--space-5);
+            padding: 13px 22px;
             border-radius: 999px;
             cursor: pointer;
+            align-self: flex-start;
             background: var(--elevated);
             border: 1px solid var(--hairline);
             color: var(--ink);
             font-family: var(--font-body);
             font-weight: 600;
             font-size: 0.95rem;
-            transition: border-color 0.25s var(--ease), transform 0.2s var(--ease);
+            opacity: 0;
+            transform: translateX(24px);
+            transition: border-color 0.25s var(--ease), transform 0.5s var(--ease), opacity 0.5s var(--ease);
+        }
+
+        .menu-overlay.is-open .menu-lang {
+            opacity: 1;
+            transform: none;
+            transition-delay: 0.36s;
         }
 
         .menu-lang:hover {
@@ -704,18 +713,21 @@
             margin-top: clamp(var(--space-6), 9vw, var(--space-8));
         }
 
-        /* full-bleed dark premium band — one row across the whole screen */
+        /* full-bleed marquee band — one row across the whole screen.
+           Theme-adaptive & translucent: colours derive from --ink/--bg tokens,
+           so it stays subtle in light mode and will invert cleanly once a dark
+           theme redefines those tokens. */
         .stack {
             position: relative;
             margin-top: var(--space-5);
             width: 100vw;
             margin-left: calc(50% - 50vw);
             padding: clamp(30px, 4.5vw, 52px) 0;
-            background: #131313;
+            background: color-mix(in srgb, var(--ink) 4%, transparent);
             overflow: hidden;
         }
 
-        /* subtle drifting aura behind the logos (tuned for the dark band) */
+        /* subtle drifting accent aura behind the logos */
         .stack::before {
             content: "";
             position: absolute;
@@ -723,8 +735,8 @@
             z-index: 0;
             pointer-events: none;
             background:
-                radial-gradient(38% 70% at 18% 50%, rgba(255, 77, 2, 0.16), transparent 70%),
-                radial-gradient(42% 75% at 84% 50%, rgba(124, 92, 255, 0.12), transparent 72%);
+                radial-gradient(38% 70% at 18% 50%, rgba(255, 77, 2, 0.10), transparent 70%),
+                radial-gradient(42% 75% at 84% 50%, rgba(124, 92, 255, 0.08), transparent 72%);
             filter: blur(26px);
             animation: auraDrift 26s ease-in-out infinite alternate;
         }
@@ -746,7 +758,7 @@
             overflow: hidden;
         }
 
-        /* edge fade via gradient overlays fading into the dark band */
+        /* edge fade — blends into whatever the section background is */
         .logo-marquee::before,
         .logo-marquee::after {
             content: "";
@@ -760,12 +772,12 @@
 
         .logo-marquee::before {
             left: 0;
-            background: linear-gradient(90deg, #131313, transparent);
+            background: linear-gradient(90deg, var(--bg), transparent);
         }
 
         .logo-marquee::after {
             right: 0;
-            background: linear-gradient(270deg, #131313, transparent);
+            background: linear-gradient(270deg, var(--bg), transparent);
         }
 
         /* moved by a requestAnimationFrame driver in JS */
@@ -775,7 +787,7 @@
             gap: 14px;
         }
 
-        /* thick dark premium chips */
+        /* thick, translucent, theme-aware chips */
         .logo-chip {
             flex: 0 0 auto;
             display: inline-flex;
@@ -783,9 +795,10 @@
             gap: 13px;
             padding: 11px 24px 11px 11px;
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.055);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+            background: color-mix(in srgb, var(--ink) 6%, transparent);
+            border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
         }
 
         .logo-ico {
@@ -793,6 +806,7 @@
             height: 42px;
             border-radius: 12px;
             flex: 0 0 auto;
+            /* white tile keeps every logo crisp on light OR dark backgrounds */
             background: #fff;
             display: grid;
             place-items: center;
@@ -808,7 +822,7 @@
         .logo-chip b {
             font-weight: 600;
             font-size: 1rem;
-            color: #f2f1ee;
+            color: var(--ink);
             white-space: nowrap;
             letter-spacing: -0.01em;
         }
@@ -1840,43 +1854,72 @@
         }
 
         /* MENU OVERLAY */
+        /* ===== Premium slide-in menu (theme-adaptive) ===== */
         .menu-overlay {
             position: fixed;
             top: 0;
             right: 0;
-            width: 40vw;
+            width: min(440px, 100vw);
             height: 100vh;
-            /* frosted glass — the page blurs through it */
-            background: color-mix(in srgb, var(--dark) 66%, transparent);
-            -webkit-backdrop-filter: blur(26px) saturate(1.25);
-            backdrop-filter: blur(26px) saturate(1.25);
-            border-left: 1px solid var(--on-dark-hairline);
-            box-shadow: -20px 0 60px rgba(0, 0, 0, 0.28);
+            height: 100dvh;
+            background: var(--bg);
+            border-left: 1px solid var(--hairline);
+            box-shadow: -30px 0 80px rgba(20, 20, 20, 0.20);
             z-index: 2500;
             transform: translateX(100%);
-            padding: var(--space-9) var(--space-7);
+            padding: clamp(24px, 7vw, 52px) clamp(24px, 6vw, 46px);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        /* soft accent glow in the corner for a premium feel */
+        .menu-overlay::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(50% 34% at 88% 8%, rgba(255, 77, 2, 0.10), transparent 70%),
+                radial-gradient(60% 40% at 6% 96%, rgba(124, 92, 255, 0.08), transparent 72%);
+        }
+
+        .menu-overlay>* {
+            position: relative;
+            z-index: 1;
         }
 
         .menu-close {
             position: absolute;
-            top: var(--space-3);
-            right: var(--space-3);
-            width: 40px;
-            height: 40px;
+            top: clamp(18px, 5vw, 30px);
+            right: clamp(18px, 5vw, 30px);
+            width: 44px;
+            height: 44px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
+            border: 1px solid var(--hairline);
+            background: var(--elevated);
             z-index: 2501;
+            transition: transform 0.3s var(--ease), border-color 0.25s var(--ease);
+        }
+
+        .menu-close:hover {
+            transform: rotate(90deg);
+            border-color: var(--accent);
         }
 
         .menu-close::before,
         .menu-close::after {
             content: '';
             position: absolute;
-            width: 25px;
+            width: 18px;
             height: 2px;
-            background: var(--on-dark);
+            border-radius: 2px;
+            background: var(--ink);
         }
 
         .menu-close::before {
@@ -1887,10 +1930,15 @@
             transform: rotate(-45deg);
         }
 
+        .menu-nav {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
         .menu-nav p {
             font-family: var(--font-mono);
             font-size: var(--fs-100);
-            color: var(--on-dark-2);
+            color: var(--ink-3, var(--ink-2));
             text-transform: uppercase;
             letter-spacing: var(--tracking-label);
             margin-bottom: var(--space-2);
@@ -1899,46 +1947,66 @@
         .hr {
             width: 100%;
             height: 1px;
-            background: var(--on-dark-hairline);
-            margin-bottom: var(--space-6);
+            background: var(--hairline);
+            margin-bottom: var(--space-4);
         }
 
         .menu-nav a {
             display: flex;
             align-items: center;
             gap: var(--space-3);
-            color: var(--on-dark);
+            color: var(--ink);
             text-decoration: none;
             font-family: var(--font-display);
-            font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+            font-size: clamp(1.7rem, 8vw, 2.3rem);
             font-weight: 500;
-            letter-spacing: var(--tracking-display);
-            padding: var(--space-3) 0;
-            border-bottom: 1px solid var(--on-dark-hairline);
-            opacity: 0.72;
-            transition: opacity 0.35s var(--ease), padding-left 0.35s var(--ease), color 0.35s var(--ease);
+            letter-spacing: -0.01em;
+            padding: clamp(15px, 2.5vh, 22px) 0;
+            border-bottom: 1px solid var(--hairline);
+            /* staggered entrance */
+            opacity: 0;
+            transform: translateX(24px);
+            transition: color 0.3s var(--ease), padding-left 0.35s var(--ease),
+                opacity 0.5s var(--ease), transform 0.5s var(--ease);
         }
 
-        .menu-nav a:last-child {
-            border-bottom: none;
+        .menu-overlay.is-open .menu-nav a {
+            opacity: 1;
+            transform: none;
+        }
+
+        .menu-overlay.is-open .menu-nav a:nth-of-type(1) {
+            transition-delay: 0.12s;
+        }
+
+        .menu-overlay.is-open .menu-nav a:nth-of-type(2) {
+            transition-delay: 0.18s;
+        }
+
+        .menu-overlay.is-open .menu-nav a:nth-of-type(3) {
+            transition-delay: 0.24s;
+        }
+
+        .menu-overlay.is-open .menu-nav a:nth-of-type(4) {
+            transition-delay: 0.30s;
         }
 
         .menu-ico {
-            width: 44px;
-            height: 44px;
+            width: 46px;
+            height: 46px;
             flex: 0 0 auto;
             display: grid;
             place-items: center;
             border-radius: 13px;
-            border: 1px solid var(--on-dark-hairline);
-            background: rgba(242, 241, 238, 0.06);
-            color: var(--on-dark);
+            border: 1px solid var(--hairline);
+            background: var(--elevated);
+            color: var(--ink);
             transition: transform 0.4s var(--ease), background 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
         }
 
         .menu-ico svg {
-            width: 21px;
-            height: 21px;
+            width: 22px;
+            height: 22px;
         }
 
         .menu-label {
@@ -1953,7 +2021,6 @@
         }
 
         .menu-nav a:hover {
-            opacity: 1;
             padding-left: var(--space-2);
             color: var(--accent);
         }
@@ -3110,34 +3177,6 @@
                 </div>
             </div>
 
-            <!-- Premium Sticky About Layout -->
-            <div class="about-container-premium">
-                <div class="about-image-wrap">
-                    <picture>
-                        <source srcset="about.webp" type="image/webp">
-                        <img src="about.webp" alt="Manoj Poudel portrait" class="about-sticky-img" width="824"
-                            height="1100" loading="lazy">
-                    </picture>
-                </div>
-                <div class="about-text-content">
-                    <h2 class="about-premium-title" data-i18n-html="bioHeadline">Driven by<br>Impact.</h2>
-                    <div class="about-bio">
-                        <p class="premium-text" data-i18n-html="bioP1">
-                            I am a dedicated <strong>Mobility & Robotics Specialist</strong> with a core mission: to
-                            contribute to society through the power of IT.
-                        </p>
-                        <p class="premium-text" data-i18n-html="bioP2">
-                            Today that means building real-time 3D in <strong>Unreal Engine</strong>, automating
-                            pipelines with <strong>Python</strong>, and modelling assets in <strong>Blender</strong> —
-                            engineering the tools that move mobility and robotics forward.
-                        </p>
-                        <p class="premium-text highlight" data-i18n="bioP3">
-                            Ready to grow together and set new standards in the industry.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
             <!-- Mobile Text Modal -->
             <div class="text-modal" id="textModal">
                 <div class="text-modal-close" onclick="closeTextModal()">&times;</div>
@@ -3331,6 +3370,8 @@
                     menuOverlay.style.transition = 'transform 0.5s ease-out';
                 }
                 menuButtonInner.classList.add('open');
+                menuOverlay.classList.add('is-open');
+                document.documentElement.style.overflow = 'hidden';
                 window.menuOpen = true;
             } else {
                 if (typeof gsap !== 'undefined') {
@@ -3340,6 +3381,8 @@
                     menuOverlay.style.transition = 'transform 0.4s ease-in-out';
                 }
                 menuButtonInner.classList.remove('open');
+                menuOverlay.classList.remove('is-open');
+                document.documentElement.style.overflow = '';
                 window.menuOpen = false;
             }
         };
