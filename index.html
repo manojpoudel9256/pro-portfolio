@@ -2134,10 +2134,16 @@
             transform: translateX(0);
         }
 
-        /* FOOTER */
+        /* FOOTER — theme-adaptive.
+           Remap the "on-dark" surface tokens locally so every descendant
+           (buttons, form, socials, bottom bar) follows light/dark automatically. */
         .footer {
-            background-color: var(--dark);
-            color: var(--on-dark);
+            background-color: var(--surface);
+            color: var(--ink);
+            --on-dark: var(--ink);
+            --on-dark-2: var(--ink-2);
+            --on-dark-hairline: var(--hairline);
+            --dark-2: var(--elevated);
             padding: var(--section-pad) var(--gutter) var(--space-5);
             min-height: 100vh;
             display: flex;
@@ -2237,9 +2243,9 @@
             width: 100%;
             font-family: var(--font-body);
             font-size: var(--fs-300);
-            color: var(--on-dark);
-            background: rgba(242, 241, 238, 0.05);
-            border: 1px solid var(--on-dark-hairline);
+            color: var(--ink);
+            background: color-mix(in srgb, var(--ink) 5%, transparent);
+            border: 1px solid var(--hairline);
             border-radius: 14px;
             padding: 14px 16px;
             transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
@@ -2248,14 +2254,14 @@
 
         .cf-field input::placeholder,
         .cf-field textarea::placeholder {
-            color: rgba(242, 241, 238, 0.38);
+            color: var(--ink-3);
         }
 
         .cf-field input:focus,
         .cf-field textarea:focus {
             outline: none;
             border-color: var(--accent);
-            background: rgba(242, 241, 238, 0.08);
+            background: color-mix(in srgb, var(--ink) 8%, transparent);
         }
 
         .cf-submit {
@@ -2298,6 +2304,7 @@
             line-height: 1.5;
             min-height: 1.2em;
             margin: 0;
+            transition: opacity 0.45s var(--ease);
         }
 
         .cf-status.ok {
@@ -4156,10 +4163,26 @@
                 const statusEl = document.getElementById("cfStatus");
                 const btn = form.querySelector(".cf-submit");
                 const btnLabel = form.querySelector(".cf-submit-label");
+                function showStatus(msg, cls) {
+                    clearTimeout(window.__cfHide);
+                    statusEl.style.opacity = "1";
+                    statusEl.textContent = msg;
+                    statusEl.className = "cf-status " + cls;
+                    // auto-dismiss after a few seconds (fade out, then clear)
+                    window.__cfHide = setTimeout(() => {
+                        statusEl.style.opacity = "0";
+                        setTimeout(() => {
+                            statusEl.textContent = "";
+                            statusEl.className = "cf-status";
+                            statusEl.style.opacity = "";
+                        }, 450);
+                    }, 4000);
+                }
                 form.addEventListener("submit", async (e) => {
                     e.preventDefault();
                     const t = I18N[window.__lang] || I18N.en;
-                    statusEl.textContent = ""; statusEl.className = "cf-status";
+                    clearTimeout(window.__cfHide);
+                    statusEl.textContent = ""; statusEl.className = "cf-status"; statusEl.style.opacity = "1";
                     const orig = btnLabel.textContent;
                     btn.disabled = true; btnLabel.textContent = t.formSending;
                     try {
@@ -4170,15 +4193,12 @@
                         });
                         if (res.ok) {
                             form.reset();
-                            statusEl.textContent = t.formOk;
-                            statusEl.classList.add("ok");
+                            showStatus(t.formOk, "ok");
                         } else {
-                            statusEl.textContent = t.formErr;
-                            statusEl.classList.add("err");
+                            showStatus(t.formErr, "err");
                         }
                     } catch (err) {
-                        statusEl.textContent = t.formErr;
-                        statusEl.classList.add("err");
+                        showStatus(t.formErr, "err");
                     } finally {
                         btn.disabled = false; btnLabel.textContent = orig;
                     }
