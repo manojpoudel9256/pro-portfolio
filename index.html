@@ -2185,6 +2185,135 @@
             margin: 0;
         }
 
+        /* contact form (posts to Formspree, lands in Gmail) */
+        .contact-form {
+            margin-top: var(--space-6);
+            max-width: 620px;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .cf-title {
+            font-family: var(--font-mono);
+            font-size: var(--fs-100);
+            text-transform: uppercase;
+            letter-spacing: var(--tracking-label);
+            color: var(--on-dark-2);
+            margin: 0;
+        }
+
+        .cf-hp {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+
+        .cf-row {
+            display: flex;
+            gap: var(--space-3);
+        }
+
+        .cf-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cf-field>span {
+            font-family: var(--font-mono);
+            font-size: var(--fs-100);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--on-dark-2);
+        }
+
+        .cf-field input,
+        .cf-field textarea {
+            width: 100%;
+            font-family: var(--font-body);
+            font-size: var(--fs-300);
+            color: var(--on-dark);
+            background: rgba(242, 241, 238, 0.05);
+            border: 1px solid var(--on-dark-hairline);
+            border-radius: 14px;
+            padding: 14px 16px;
+            transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+            resize: vertical;
+        }
+
+        .cf-field input::placeholder,
+        .cf-field textarea::placeholder {
+            color: rgba(242, 241, 238, 0.38);
+        }
+
+        .cf-field input:focus,
+        .cf-field textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(242, 241, 238, 0.08);
+        }
+
+        .cf-submit {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            background: var(--accent);
+            color: var(--accent-ink);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: var(--fs-300);
+            transition: transform 0.2s var(--ease), box-shadow 0.25s var(--ease), opacity 0.2s var(--ease);
+        }
+
+        .cf-submit svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        .cf-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255, 77, 2, 0.35);
+        }
+
+        .cf-submit:disabled {
+            opacity: 0.6;
+            cursor: default;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .cf-status {
+            font-size: var(--fs-200);
+            font-weight: 500;
+            line-height: 1.5;
+            min-height: 1.2em;
+            margin: 0;
+        }
+
+        .cf-status.ok {
+            color: #4ade80;
+        }
+
+        .cf-status.err {
+            color: #ff6a4d;
+        }
+
+        @media (max-width: 560px) {
+            .cf-row {
+                flex-direction: column;
+            }
+        }
+
         .footer-content {
             margin-top: var(--space-6);
             display: flex;
@@ -3346,6 +3475,37 @@
                     <h2 data-i18n="footTogether">together</h2>
                 </div>
 
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/mqernonn"
+                    method="POST">
+                    <p class="cf-title" data-i18n="formTitle">Send a message</p>
+                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+                        class="cf-hp">
+                    <div class="cf-row">
+                        <label class="cf-field">
+                            <span data-i18n="formName">Name</span>
+                            <input type="text" name="name" required data-i18n-ph="phName" placeholder="Your name">
+                        </label>
+                        <label class="cf-field">
+                            <span data-i18n="formEmail">Email</span>
+                            <input type="email" name="email" required data-i18n-ph="phEmail"
+                                placeholder="you@example.com">
+                        </label>
+                    </div>
+                    <label class="cf-field">
+                        <span data-i18n="formMsg">Message</span>
+                        <textarea name="message" rows="4" required data-i18n-ph="phMsg"
+                            placeholder="How can I help?"></textarea>
+                    </label>
+                    <button type="submit" class="cf-submit">
+                        <span class="cf-submit-label" data-i18n="formSend">Send message</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                        </svg>
+                    </button>
+                    <p class="cf-status" id="cfStatus" role="status" aria-live="polite"></p>
+                </form>
+
                 <div class="footer-content">
                     <div class="magnetic-wrap">
                         <div class="btn-email">poudelmanoj604@gmail.com</div>
@@ -3885,7 +4045,12 @@
                     bioP2: "Today that means building real-time 3D in <strong>Unreal Engine</strong>, automating pipelines with <strong>Python</strong>, and modelling assets in <strong>Blender</strong> — engineering the tools that move mobility and robotics forward.",
                     bioP3: "Ready to grow together and set new standards in the industry.",
                     footWork: "Let's work", footTogether: "together",
-                    footVersion: "Version", footLocalTime: "Local Time", footSocials: "Socials"
+                    footVersion: "Version", footLocalTime: "Local Time", footSocials: "Socials",
+                    formTitle: "Send a message", formName: "Name", formEmail: "Email", formMsg: "Message",
+                    phName: "Your name", phEmail: "you@example.com", phMsg: "How can I help?",
+                    formSend: "Send message", formSending: "Sending…",
+                    formOk: "Thank you! Your message has been sent — I'll get back to you soon.",
+                    formErr: "Something went wrong. Please try again, or email me directly."
                 },
                 ja: {
                     navHome: "ホーム", navWork: "実績", navAbout: "プロフィール", navContact: "お問い合わせ",
@@ -3927,7 +4092,12 @@
                     bioP2: "具体的には、<strong>Unreal Engine</strong> でのリアルタイム3D開発、<strong>Python</strong> によるパイプラインの自動化、<strong>Blender</strong> でのアセット制作を通じて、モビリティとロボティクスを前進させるツールをつくっています。",
                     bioP3: "共に成長し、業界に新たな基準を打ち立てていきます。",
                     footWork: "一緒に", footTogether: "つくろう。",
-                    footVersion: "バージョン", footLocalTime: "現地時間", footSocials: "SNS"
+                    footVersion: "バージョン", footLocalTime: "現地時間", footSocials: "SNS",
+                    formTitle: "メッセージを送る", formName: "お名前", formEmail: "メール", formMsg: "メッセージ",
+                    phName: "お名前", phEmail: "you@example.com", phMsg: "ご相談・ご用件をどうぞ",
+                    formSend: "送信する", formSending: "送信中…",
+                    formOk: "ありがとうございます！メッセージを送信しました。追ってご連絡します。",
+                    formErr: "エラーが発生しました。もう一度お試しいただくか、直接メールでご連絡ください。"
                 }
             };
 
@@ -3939,6 +4109,9 @@
                 });
                 document.querySelectorAll("[data-i18n-html]").forEach(el => {
                     const v = t[el.dataset.i18nHtml]; if (v != null) el.innerHTML = v;
+                });
+                document.querySelectorAll("[data-i18n-ph]").forEach(el => {
+                    const v = t[el.dataset.i18nPh]; if (v != null) el.placeholder = v;
                 });
                 // toggle button shows the language you'll switch TO
                 const other = (l === "ja")
@@ -3975,6 +4148,41 @@
                     entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
                 }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
                 secs.forEach(s => io.observe(s));
+            }
+
+            // ===== Contact form — Formspree AJAX (no page redirect) =====
+            const form = document.getElementById("contactForm");
+            if (form) {
+                const statusEl = document.getElementById("cfStatus");
+                const btn = form.querySelector(".cf-submit");
+                const btnLabel = form.querySelector(".cf-submit-label");
+                form.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const t = I18N[window.__lang] || I18N.en;
+                    statusEl.textContent = ""; statusEl.className = "cf-status";
+                    const orig = btnLabel.textContent;
+                    btn.disabled = true; btnLabel.textContent = t.formSending;
+                    try {
+                        const res = await fetch(form.action, {
+                            method: "POST",
+                            body: new FormData(form),
+                            headers: { "Accept": "application/json" }
+                        });
+                        if (res.ok) {
+                            form.reset();
+                            statusEl.textContent = t.formOk;
+                            statusEl.classList.add("ok");
+                        } else {
+                            statusEl.textContent = t.formErr;
+                            statusEl.classList.add("err");
+                        }
+                    } catch (err) {
+                        statusEl.textContent = t.formErr;
+                        statusEl.classList.add("err");
+                    } finally {
+                        btn.disabled = false; btnLabel.textContent = orig;
+                    }
+                });
             }
         })();
     </script>
