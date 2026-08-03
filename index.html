@@ -960,18 +960,6 @@
             text-align: center;
         }
 
-        .work-kicker {
-            display: inline-grid;
-            place-items: center;
-            width: 52px;
-            height: 52px;
-            margin-bottom: var(--space-3);
-            border-radius: 14px;
-            color: var(--accent);
-            background: rgba(255, 77, 2, 0.10);
-            border: 1px solid rgba(255, 77, 2, 0.30);
-        }
-
         .work-header h1 {
             font-size: var(--fs-display);
             font-weight: 600;
@@ -979,9 +967,10 @@
             margin-bottom: var(--space-3);
         }
 
+        /* match the rest of the site — headings are single-colour graphite */
         .work-header h1 em {
             font-style: normal;
-            color: var(--accent);
+            color: var(--ink);
         }
 
         .work-header p {
@@ -1007,7 +996,7 @@
             color: var(--ink-2);
             background: var(--elevated);
             border: 1px solid var(--hairline);
-            border-radius: 12px;
+            border-radius: 999px;
             padding: 10px 22px;
             cursor: pointer;
             transition: all 0.25s var(--ease);
@@ -2521,7 +2510,7 @@
             .wf-btn {
                 font-size: var(--fs-200);
                 padding: 8px 16px;
-                border-radius: 10px;
+                border-radius: 999px;
             }
 
             .work-card {
@@ -2905,13 +2894,6 @@
 
         <section class="work" id="work">
             <div class="work-header">
-                <span class="work-kicker" aria-hidden="true">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="7" width="18" height="13" rx="2" />
-                        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18" />
-                    </svg>
-                </span>
                 <h1 data-i18n-html="workTitle">Selected <em>Work</em></h1>
                 <p data-i18n="workSubtitle">A selection of projects I've worked on — each one a unique challenge and solution.</p>
                 <div class="work-filters" role="group" aria-label="Filter projects">
