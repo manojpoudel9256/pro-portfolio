@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- serif display face for the Selected Work section (matches reference) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <!-- apply saved theme before paint to avoid a flash -->
     <script>
         (function () {
@@ -83,6 +88,7 @@
             --font-display: "Clash Display", "Helvetica Neue", Arial, sans-serif;
             --font-body: "Satoshi", "Helvetica Neue", Arial, sans-serif;
             --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+            --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
 
             /* Palette — near-monochrome, one accent */
             --bg: #f2f1ee;
@@ -976,11 +982,11 @@
         }
 
         .pw-title {
-            font-family: var(--font-display);
+            font-family: var(--font-serif);
             font-size: var(--fs-display);
             font-weight: 600;
-            line-height: 1.02;
-            letter-spacing: -0.02em;
+            line-height: 1.04;
+            letter-spacing: 0;
             color: var(--ink);
         }
 
@@ -1069,9 +1075,10 @@
             max-width: var(--maxw);
             margin: var(--space-6) auto 0;
             padding: 0 var(--gutter);
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-4);
+            display: grid;
+            grid-template-columns: 1.7fr 1fr 1fr;
+            gap: var(--space-3);
+            align-items: stretch;
         }
 
         /* hover one card → dim the others */
@@ -1083,6 +1090,8 @@
 
         .pw-card {
             position: relative;
+            display: flex;
+            flex-direction: column;
             background: var(--elevated);
             border: 1px solid var(--hairline);
             border-radius: var(--radius-lg);
@@ -1108,102 +1117,79 @@
             display: none;
         }
 
-        /* hero (Everest) */
-        .pw-hero {
-            display: block;
-        }
-
-        .pw-hero-media {
+        /* full-bleed cover — grows so the row's cards match height */
+        .pw-cover {
             position: relative;
-            aspect-ratio: 21 / 9;
+            flex: 1 1 auto;
+            min-height: clamp(300px, 30vw, 460px);
             overflow: hidden;
             background: var(--surface);
         }
 
-        .pw-hero-media img {
+        .pw-cover img {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top;
+            object-position: top center;
             transition: transform 0.7s var(--ease);
         }
 
-        .pw-hero:hover .pw-hero-media img {
+        .pw-card:hover .pw-cover img {
             transform: scale(1.04);
         }
 
-        .pw-hero-info {
-            padding: var(--space-4) var(--space-5) var(--space-5);
-        }
-
-        /* Website / App pill on the media */
-        .pw-tagpill {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            z-index: 2;
-            font-family: var(--font-mono);
-            font-size: 0.62rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #fff;
-            background: rgba(16, 16, 18, 0.55);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.28);
-            border-radius: 999px;
-            padding: 6px 13px;
+        /* body */
+        .pw-body {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            padding: var(--space-4);
         }
 
         .pw-name {
-            font-family: var(--font-display);
-            font-size: var(--fs-600);
-            font-weight: 500;
-            letter-spacing: -0.01em;
-            line-height: 1.1;
+            font-family: var(--font-serif);
+            font-size: var(--fs-500);
+            font-weight: 600;
+            letter-spacing: 0;
+            line-height: 1.15;
             color: var(--ink);
-            margin-bottom: var(--space-2);
         }
 
         .pw-desc {
             color: var(--ink-2);
             font-size: var(--fs-300);
             line-height: var(--lh-body);
-            margin-bottom: var(--space-3);
         }
 
-        .pw-foot {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: var(--space-3);
-        }
-
-        .pw-chips {
+        .pw-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
+            margin-top: var(--space-1);
         }
 
         .pw-chip {
-            font-family: var(--font-mono);
-            font-size: 0.64rem;
+            font-family: var(--font-body);
+            font-size: 0.72rem;
             font-weight: 500;
-            letter-spacing: 0.02em;
-            padding: 4px 10px;
+            letter-spacing: 0.01em;
+            padding: 5px 13px;
             border-radius: 999px;
             color: var(--ink-2);
-            background: color-mix(in srgb, var(--ink) 6%, transparent);
-            border: 1px solid var(--hairline);
+            background: transparent;
+            border: 1px solid var(--hairline-strong);
             white-space: nowrap;
         }
 
-        .pw-cue {
-            flex: 0 0 auto;
+        .pw-view {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
+            align-self: flex-end;
+            margin-top: var(--space-2);
             font-family: var(--font-body);
             font-weight: 600;
             font-size: var(--fs-300);
@@ -1212,65 +1198,27 @@
             transition: gap 0.25s var(--ease);
         }
 
-        .pw-card:hover .pw-cue {
-            gap: 12px;
+        .pw-card:hover .pw-view {
+            gap: 13px;
         }
 
-        /* two app cards */
-        .pw-apps {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-4);
-        }
-
-        .pw-app {
-            display: flex;
-        }
-
-        .pw-app-media {
-            position: relative;
-            flex: 0 0 46%;
-            display: grid;
-            place-items: center;
-            padding: var(--space-4);
-            overflow: hidden;
-            background: radial-gradient(120% 100% at 50% 0%,
-                    color-mix(in srgb, var(--accent) 12%, var(--surface)), var(--surface));
-            border-right: 1px solid var(--hairline);
-        }
-
-        .pw-app-media img {
-            width: 100%;
-            max-width: 188px;
-            max-height: 300px;
-            object-fit: contain;
-            border-radius: 14px;
-            box-shadow: 0 16px 44px rgba(20, 20, 20, 0.22);
-            transition: transform 0.6s var(--ease);
-        }
-
-        .pw-app:hover .pw-app-media img {
-            transform: translateY(-6px) scale(1.02);
-        }
-
-        .pw-app-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: var(--space-4);
-        }
-
-        .pw-app-info .pw-foot {
-            margin-top: auto;
-        }
-
+        /* tablet — tighten the row */
         @media (max-width: 1024px) {
-            .pw-app-media {
-                flex-basis: 42%;
+            .pw-projects {
+                grid-template-columns: 1.5fr 1fr 1fr;
+                gap: var(--space-2);
             }
 
-            .pw-app-media img {
-                max-width: 150px;
+            .pw-cover {
+                min-height: clamp(230px, 32vw, 380px);
+            }
+
+            .pw-name {
+                font-size: var(--fs-400);
+            }
+
+            .pw-body {
+                padding: var(--space-3);
             }
         }
 
@@ -1301,6 +1249,7 @@
             width: min(920px, 100%);
             max-height: 90vh;
             overflow-y: auto;
+            overscroll-behavior: contain;
             background: var(--bg);
             border: 1px solid var(--hairline);
             border-radius: var(--radius-lg);
@@ -3050,7 +2999,9 @@
 
             .pw-projects {
                 margin-top: var(--space-5);
-                gap: var(--space-3);
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-4);
             }
 
             /* no hover-dim on touch */
@@ -3060,47 +3011,49 @@
                 filter: none;
             }
 
-            .pw-hero-media {
-                aspect-ratio: 16 / 10;
-            }
-
-            .pw-hero-info {
-                padding: var(--space-3) var(--space-4) var(--space-4);
-            }
-
-            .pw-apps {
-                grid-template-columns: 1fr;
-                gap: var(--space-3);
-            }
-
-            .pw-app {
-                flex-direction: column;
-            }
-
-            .pw-app-media {
+            /* Everest — full-width card, cover on top */
+            /* Everest — cover matches the image ratio so the whole site shows */
+            .pw-hero .pw-cover {
                 flex: none;
-                width: 100%;
-                padding: var(--space-4) var(--space-4) var(--space-4);
-                border-right: none;
-                border-bottom: 1px solid var(--hairline);
+                aspect-ratio: 1600 / 805;
+                min-height: 0;
             }
 
-            .pw-app-media img {
-                max-width: 200px;
-                max-height: 300px;
+            /* app cards — image left, text right (matches reference) */
+            .pw-app {
+                flex-direction: row;
             }
 
-            .pw-app-info {
-                padding: var(--space-3) var(--space-4) var(--space-4);
+            .pw-app .pw-cover {
+                flex: 0 0 47%;
+                min-height: 0;
+                align-self: stretch;
+                border-right: 1px solid var(--hairline);
+                background: var(--surface);
+            }
+
+            /* show the WHOLE app screen (no zoomed crop) */
+            .pw-app .pw-cover img {
+                object-fit: contain;
+                object-position: center;
+                padding: var(--space-2);
+            }
+
+            .pw-app .pw-body {
+                flex: 1 1 auto;
+                justify-content: center;
             }
 
             .pw-name {
                 font-size: var(--fs-500);
             }
 
-            .pw-foot {
-                flex-wrap: wrap;
-                gap: var(--space-2);
+            .pw-body {
+                padding: var(--space-4);
+            }
+
+            .pw-view {
+                margin-top: var(--space-3);
             }
 
             /* project modal on mobile */
@@ -3487,86 +3440,79 @@
                     onclick="openProject('everest')"
                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('everest')}"
                     aria-label="Open Everest Travel Experience details">
-                    <div class="pw-hero-media">
+                    <div class="pw-cover">
                         <img src="travelsite.webp" alt="Everest travel website" width="1600" height="805"
                             loading="lazy">
-                        <span class="pw-tagpill" data-i18n="kindWebsite">Website</span>
                     </div>
-                    <div class="pw-hero-info">
+                    <div class="pw-body">
                         <h3 class="pw-name" data-i18n="pjEverestName">Everest Travel Experience</h3>
-                        <p class="pw-desc" data-i18n="pjEverestShort">A cinematic Himalaya expedition website —
-                            scroll-driven hero, curated tours, bilingual EN / 日本語.</p>
-                        <div class="pw-foot">
-                            <div class="pw-chips">
-                                <span class="pw-chip">HTML5</span>
-                                <span class="pw-chip">Tailwind CSS</span>
-                                <span class="pw-chip">JavaScript</span>
-                            </div>
-                            <span class="pw-cue"><span data-i18n="viewDetails">View details</span>
-                                <span aria-hidden="true">→</span></span>
+                        <p class="pw-desc" data-i18n="pjEverestShort">A premium travel website for curated Himalayan
+                            adventures and expeditions.</p>
+                        <div class="pw-tags">
+                            <span class="pw-chip">UI/UX Design</span>
+                            <span class="pw-chip">Web Design</span>
+                            <span class="pw-chip">Figma</span>
+                            <span class="pw-chip">Webflow</span>
                         </div>
+                        <span class="pw-view"><span data-i18n="workViewProject">View project</span>
+                            <span aria-hidden="true">→</span></span>
                     </div>
                 </article>
 
-                <div class="pw-apps">
+                <!-- PERSONAL FINANCE APP -->
+                <article class="pw-card pw-app" data-cat="apps uiux" role="button" tabindex="0"
+                    onclick="openProject('budget')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('budget')}"
+                    aria-label="Open Personal Finance App details">
+                    <div class="pw-cover">
+                        <img src="budgettracker.webp" alt="Personal Finance App" width="900" height="1599"
+                            loading="lazy">
+                    </div>
+                    <div class="pw-body">
+                        <h3 class="pw-name" data-i18n="pjBudgetName">Personal Finance App</h3>
+                        <p class="pw-desc" data-i18n="pjBudgetShort">A smart finance app for budgeting, tracking,
+                            and insights.</p>
+                        <div class="pw-tags">
+                            <span class="pw-chip">iOS</span>
+                            <span class="pw-chip">Android</span>
+                            <span class="pw-chip">UI/UX</span>
+                            <span class="pw-chip">Figma</span>
+                        </div>
+                        <span class="pw-view"><span data-i18n="workViewProject">View project</span>
+                            <span aria-hidden="true">→</span></span>
+                    </div>
+                </article>
 
-                    <!-- PERSONAL FINANCE APP -->
-                    <article class="pw-card pw-app" data-cat="apps uiux" role="button" tabindex="0"
-                        onclick="openProject('budget')"
-                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('budget')}"
-                        aria-label="Open Personal Finance App details">
-                        <div class="pw-app-media">
-                            <img src="budgettracker.webp" alt="Personal Finance App" width="900" height="1599"
-                                loading="lazy">
-                            <span class="pw-tagpill" data-i18n="kindApp">App</span>
+                <!-- SALARY TRACKER APP -->
+                <article class="pw-card pw-app" data-cat="apps uiux" role="button" tabindex="0"
+                    onclick="openProject('salary')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('salary')}"
+                    aria-label="Open Salary Tracker App details">
+                    <div class="pw-cover">
+                        <img src="salarytracker.webp" alt="Salary Tracker App" width="900" height="1599"
+                            loading="lazy">
+                    </div>
+                    <div class="pw-body">
+                        <h3 class="pw-name" data-i18n="pjSalaryName">Salary Tracker App</h3>
+                        <p class="pw-desc" data-i18n="pjSalaryShort">A payroll and remittance app for tracking
+                            earnings and transfers.</p>
+                        <div class="pw-tags">
+                            <span class="pw-chip">iOS</span>
+                            <span class="pw-chip">Android</span>
+                            <span class="pw-chip">UI/UX</span>
+                            <span class="pw-chip">Figma</span>
                         </div>
-                        <div class="pw-app-info">
-                            <h3 class="pw-name" data-i18n="pjBudgetName">Personal Finance App</h3>
-                            <p class="pw-desc" data-i18n="pjBudgetShort">Track income &amp; expenses, scan receipts,
-                                and get AI spending insights — a polished mobile finance app.</p>
-                            <div class="pw-foot">
-                                <div class="pw-chips">
-                                    <span class="pw-chip">React</span>
-                                    <span class="pw-chip">Gemini AI</span>
-                                </div>
-                                <span class="pw-cue"><span data-i18n="viewDetails">View details</span>
-                                    <span aria-hidden="true">→</span></span>
-                            </div>
-                        </div>
-                    </article>
+                        <span class="pw-view"><span data-i18n="workViewProject">View project</span>
+                            <span aria-hidden="true">→</span></span>
+                    </div>
+                </article>
 
-                    <!-- SALARY TRACKER APP -->
-                    <article class="pw-card pw-app" data-cat="apps uiux" role="button" tabindex="0"
-                        onclick="openProject('salary')"
-                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('salary')}"
-                        aria-label="Open Salary Tracker App details">
-                        <div class="pw-app-media">
-                            <img src="salarytracker.webp" alt="Salary Tracker App" width="900" height="1599"
-                                loading="lazy">
-                            <span class="pw-tagpill" data-i18n="kindApp">App</span>
-                        </div>
-                        <div class="pw-app-info">
-                            <h3 class="pw-name" data-i18n="pjSalaryName">Salary Tracker App</h3>
-                            <p class="pw-desc" data-i18n="pjSalaryShort">A bilingual salary &amp; remittance tracker —
-                                earnings, money sent home, balances and charts at a glance.</p>
-                            <div class="pw-foot">
-                                <div class="pw-chips">
-                                    <span class="pw-chip">React</span>
-                                    <span class="pw-chip">Recharts</span>
-                                </div>
-                                <span class="pw-cue"><span data-i18n="viewDetails">View details</span>
-                                    <span aria-hidden="true">→</span></span>
-                            </div>
-                        </div>
-                    </article>
-
-                </div>
             </div>
         </section>
 
         <!-- PROJECT DETAIL MODAL -->
         <div class="proj-modal" id="projModal" aria-hidden="true">
-            <div class="proj-dialog" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+            <div class="proj-dialog" role="dialog" aria-modal="true" aria-labelledby="pmTitle" data-lenis-prevent>
                 <button class="proj-close" type="button" onclick="closeProject()" aria-label="Close">&times;</button>
                 <div class="proj-media" id="pmMedia">
                     <img id="pmImg" src="" alt="">
@@ -4137,6 +4083,7 @@
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true
         });
+        window.lenis = lenis;
 
         function raf(time) {
             lenis.raf(time);
@@ -4533,6 +4480,7 @@
             m.classList.add("active");
             m.setAttribute("aria-hidden", "false");
             document.body.style.overflow = "hidden";
+            if (window.lenis) window.lenis.stop();
         }
 
         function closeProject() {
@@ -4541,6 +4489,7 @@
             m.classList.remove("active");
             m.setAttribute("aria-hidden", "true");
             document.body.style.overflow = "";
+            if (window.lenis) window.lenis.start();
             _openProj = null;
         }
 
@@ -4572,14 +4521,15 @@
                     filterAll: "All", filterWeb: "Web Development", filter3d: "3D & Design", filterAi: "AI & Vision",
                     hintLiveDemo: "Live demo ↗", hintScreenshot: "Screenshot", workMore: "View More Projects",
                     workKicker: "Portfolio", workTitle2: "Selected Work", workViewAll: "View all projects",
+                    workViewProject: "View project",
                     filterWebShort: "Web", filterApps: "Apps", filterUiux: "UI/UX",
                     kindWebsite: "Website", kindApp: "App", viewDetails: "View details",
                     pjEverestName: "Everest Travel Experience",
-                    pjEverestShort: "A cinematic Himalaya expedition website — scroll-driven hero, curated tours, bilingual EN / 日本語.",
+                    pjEverestShort: "A premium travel website for curated Himalayan adventures and expeditions.",
                     pjBudgetName: "Personal Finance App",
-                    pjBudgetShort: "Track income & expenses, scan receipts, and get AI spending insights — a polished mobile finance app.",
+                    pjBudgetShort: "A smart finance app for budgeting, tracking, and insights.",
                     pjSalaryName: "Salary Tracker App",
-                    pjSalaryShort: "A bilingual salary & remittance tracker — earnings, money sent home, balances and charts at a glance.",
+                    pjSalaryShort: "A payroll and remittance app for tracking earnings and transfers.",
                     descGlbOpt: "A 100% local, browser-based tool that compresses .glb 3D models for Unreal Engine 5 — real-time viewer, before/after comparison, per-mesh inspector.",
                     descEverest: "A cinematic travel landing page — 340 scroll-scrubbed film frames fly you from an airplane window at golden hour to the roof of the world.",
                     descFace: "A real-time face-recognition system built from scratch — live camera capture, a training pipeline, and confidence-based recognition.",
@@ -4637,14 +4587,15 @@
                     filterAll: "すべて", filterWeb: "Web開発", filter3d: "3D・デザイン", filterAi: "AI・ビジョン",
                     hintLiveDemo: "ライブデモ ↗", hintScreenshot: "スクリーンショット", workMore: "その他のプロジェクトを見る",
                     workKicker: "ポートフォリオ", workTitle2: "代表的な実績", workViewAll: "すべてのプロジェクトを見る",
+                    workViewProject: "プロジェクトを見る",
                     filterWebShort: "Web", filterApps: "アプリ", filterUiux: "UI/UX",
                     kindWebsite: "ウェブサイト", kindApp: "アプリ", viewDetails: "詳しく見る",
                     pjEverestName: "エベレスト・トラベル体験",
-                    pjEverestShort: "映画のようなヒマラヤ遠征サイト。スクロール連動のヒーロー、厳選ツアー、英語・日本語対応。",
+                    pjEverestShort: "厳選されたヒマラヤの冒険と遠征のためのプレミアムな旅行ウェブサイト。",
                     pjBudgetName: "家計管理アプリ",
-                    pjBudgetShort: "収支の記録、レシートのスキャン、AIによる支出分析まで。洗練されたモバイル家計簿アプリ。",
+                    pjBudgetShort: "予算管理・記録・分析のためのスマートな家計簿アプリ。",
                     pjSalaryName: "給料トラッカーアプリ",
-                    pjSalaryShort: "バイリンガルの給料・送金管理アプリ。収入、仕送り、残高、グラフをひと目で。",
+                    pjSalaryShort: "収入と送金を管理する給与・送金アプリ。",
                     descGlbOpt: "Unreal Engine 5 向けに .glb 3Dモデルを圧縮する、完全ローカル・ブラウザ完結型ツール。リアルタイムビューア、圧縮前後の比較、メッシュ単位のインスペクターを搭載。",
                     descEverest: "映画のような旅のランディングページ。スクロールに連動する340枚のフレームが、夕暮れの機窓から世界の頂へと誘います。",
                     descFace: "ゼロから構築したリアルタイム顔認識システム。ライブカメラ映像の取得、学習パイプライン、信頼度ベースの認識を実装。",
