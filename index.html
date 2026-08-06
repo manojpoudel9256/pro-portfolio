@@ -153,6 +153,8 @@
 
             /* Layout */
             --maxw: 1440px;
+            --pw-maxw: 1700px;
+            /* Selected Work uses a wider frame so the cards fill more of the screen */
             --gutter: clamp(1.25rem, 5vw, 6rem);
             --section-pad: clamp(6rem, 12vw, 10rem);
             --radius: 16px;
@@ -961,7 +963,7 @@
 
         /* ── header row ───────────────────────────── */
         .pw-head {
-            max-width: var(--maxw);
+            max-width: var(--pw-maxw);
             margin: 0 auto;
             padding: 0 var(--gutter);
             display: flex;
@@ -1036,7 +1038,7 @@
 
         /* ── filter pills ─────────────────────────── */
         .pw-filters {
-            max-width: var(--maxw);
+            max-width: var(--pw-maxw);
             margin: var(--space-5) auto 0;
             padding: 0 var(--gutter);
             display: flex;
@@ -1072,7 +1074,7 @@
 
         /* ── projects layout ──────────────────────── */
         .pw-projects {
-            max-width: var(--maxw);
+            max-width: var(--pw-maxw);
             margin: var(--space-6) auto 0;
             padding: 0 var(--gutter);
             display: grid;
