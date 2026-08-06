@@ -3011,7 +3011,6 @@
                 filter: none;
             }
 
-            /* Everest — full-width card, cover on top */
             /* Everest — cover matches the image ratio so the whole site shows */
             .pw-hero .pw-cover {
                 flex: none;
@@ -3019,32 +3018,63 @@
                 min-height: 0;
             }
 
-            /* app cards — image left, text right (matches reference) */
+            /* app cards — compact image-left / text-right (matches reference) */
             .pw-app {
                 flex-direction: row;
             }
 
             .pw-app .pw-cover {
-                flex: 0 0 47%;
+                flex: 0 0 42%;
                 min-height: 0;
                 align-self: stretch;
                 border-right: 1px solid var(--hairline);
-                background: var(--surface);
             }
 
-            /* show the WHOLE app screen (no zoomed crop) */
+            /* image fills the column from the top — no empty space, no side-crop */
             .pw-app .pw-cover img {
-                object-fit: contain;
-                object-position: center;
-                padding: var(--space-2);
+                object-fit: cover;
+                object-position: top center;
             }
 
+            /* keep the text compact so the card doesn't stretch tall */
             .pw-app .pw-body {
                 flex: 1 1 auto;
                 justify-content: center;
+                gap: var(--space-1);
+                padding: var(--space-3);
             }
 
-            .pw-name {
+            .pw-app .pw-name {
+                font-size: var(--fs-400);
+                line-height: 1.12;
+            }
+
+            .pw-app .pw-desc {
+                font-size: var(--fs-200);
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .pw-app .pw-tags {
+                gap: 6px;
+                margin-top: 2px;
+            }
+
+            .pw-app .pw-chip {
+                font-size: 0.62rem;
+                padding: 3px 9px;
+            }
+
+            .pw-app .pw-view {
+                margin-top: var(--space-2);
+                font-size: var(--fs-200);
+            }
+
+            /* Everest (full-width) title stays larger */
+            .pw-hero .pw-name {
                 font-size: var(--fs-500);
             }
 
@@ -3075,8 +3105,12 @@
                 max-height: 340px;
             }
 
+            .proj-modal {
+                padding: var(--space-2);
+            }
+
             .proj-content {
-                padding: var(--space-4) var(--space-4) var(--space-5);
+                padding: var(--space-4) var(--space-3) var(--space-5);
             }
 
             .proj-title {
