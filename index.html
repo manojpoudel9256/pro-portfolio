@@ -179,7 +179,7 @@
         html.theme-anim body,
         html.theme-anim .work,
         html.theme-anim .about-me-section,
-        html.theme-anim .work-card,
+        html.theme-anim .pw-card,
         html.theme-anim .edu-card,
         html.theme-anim .stack,
         html.theme-anim .logo-chip,
@@ -953,43 +953,92 @@
             background: var(--surface);
         }
 
-        .work-header {
-            padding: 0 var(--gutter) var(--space-6);
+        /* ── header row ───────────────────────────── */
+        .pw-head {
             max-width: var(--maxw);
             margin: 0 auto;
-            text-align: center;
+            padding: 0 var(--gutter);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: var(--space-5);
         }
 
-        .work-header h1 {
+        .pw-kicker {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .pw-title {
+            font-family: var(--font-display);
             font-size: var(--fs-display);
             font-weight: 600;
-            color: var(--ink);
-            margin-bottom: var(--space-3);
-        }
-
-        /* match the rest of the site — headings are single-colour graphite */
-        .work-header h1 em {
-            font-style: normal;
+            line-height: 1.02;
+            letter-spacing: -0.02em;
             color: var(--ink);
         }
 
-        .work-header p {
+        .pw-sub {
+            margin-top: var(--space-3);
+            max-width: 54ch;
             font-size: var(--fs-500);
+            line-height: var(--lh-body);
             color: var(--ink-2);
-            max-width: 46ch;
-            margin: 0 auto;
         }
 
-        /* filter pills */
-        .work-filters {
+        .pw-viewall {
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: var(--fs-300);
+            color: var(--ink);
+            background: var(--elevated);
+            border: 1px solid var(--hairline-strong);
+            border-radius: 999px;
+            padding: 12px 22px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.25s var(--ease);
+        }
+
+        .pw-viewall svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.25s var(--ease);
+        }
+
+        .pw-viewall:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255, 77, 2, 0.3);
+        }
+
+        .pw-viewall:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* ── filter pills ─────────────────────────── */
+        .pw-filters {
+            max-width: var(--maxw);
+            margin: var(--space-5) auto 0;
+            padding: 0 var(--gutter);
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: var(--space-2);
-            margin-top: var(--space-5);
         }
 
-        .wf-btn {
+        .pw-fbtn {
             font-family: var(--font-body);
             font-weight: 500;
             font-size: var(--fs-300);
@@ -997,143 +1046,117 @@
             background: var(--elevated);
             border: 1px solid var(--hairline);
             border-radius: 999px;
-            padding: 10px 22px;
+            padding: 9px 20px;
             cursor: pointer;
             transition: all 0.25s var(--ease);
         }
 
-        .wf-btn:hover {
+        .pw-fbtn:hover {
             color: var(--ink);
             border-color: var(--hairline-strong);
             transform: translateY(-1px);
         }
 
-        .wf-btn.active {
+        .pw-fbtn.active {
             color: #fff;
             background: var(--accent);
             border-color: var(--accent);
-            box-shadow: 0 8px 24px rgba(255, 77, 2, 0.35);
+            box-shadow: 0 8px 24px rgba(255, 77, 2, 0.32);
         }
 
-        /* 3-up responsive card grid */
-        .work-grid {
+        /* ── projects layout ──────────────────────── */
+        .pw-projects {
             max-width: var(--maxw);
-            margin: 0 auto;
+            margin: var(--space-6) auto 0;
             padding: 0 var(--gutter);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            flex-direction: column;
             gap: var(--space-4);
         }
 
-        .work-card {
+        /* hover one card → dim the others */
+        .pw-projects:hover .pw-card:not(:hover) {
+            opacity: 0.42;
+            transform: scale(0.988);
+            filter: saturate(0.85);
+        }
+
+        .pw-card {
             position: relative;
-            display: flex;
-            flex-direction: column;
             background: var(--elevated);
             border: 1px solid var(--hairline);
-            border-radius: 18px;
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 10px 28px rgba(20, 20, 20, 0.07);
-            transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
-                box-shadow 0.35s var(--ease);
+            cursor: pointer;
+            box-shadow: 0 12px 34px rgba(20, 20, 20, 0.08);
+            transition: opacity 0.4s var(--ease), transform 0.5s var(--ease),
+                box-shadow 0.4s var(--ease), border-color 0.4s var(--ease), filter 0.4s var(--ease);
         }
 
-        .work-card:hover {
-            transform: translateY(-6px);
+        .pw-card:hover {
             border-color: var(--hairline-strong);
-            box-shadow: 0 24px 54px rgba(20, 20, 20, 0.16);
+            box-shadow: 0 30px 70px rgba(20, 20, 20, 0.18);
+            transform: translateY(-4px);
         }
 
-        .work-card.wf-hide {
+        .pw-card:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .pw-card.pw-hide {
             display: none;
         }
 
-        /* cover art */
-        .work-cover {
+        /* hero (Everest) */
+        .pw-hero {
+            display: block;
+        }
+
+        .pw-hero-media {
             position: relative;
-            aspect-ratio: 16 / 10;
-            margin: var(--space-2);
-            border-radius: 12px;
+            aspect-ratio: 21 / 9;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--c1), var(--c2));
+            background: var(--surface);
         }
 
-        .work-cover-glass {
+        .pw-hero-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.7s var(--ease);
+        }
+
+        .pw-hero:hover .pw-hero-media img {
+            transform: scale(1.04);
+        }
+
+        .pw-hero-info {
+            padding: var(--space-4) var(--space-5) var(--space-5);
+        }
+
+        /* Website / App pill on the media */
+        .pw-tagpill {
             position: absolute;
-            inset: 0;
-            z-index: 1;
-            background:
-                radial-gradient(120% 85% at 12% 8%, rgba(255, 255, 255, 0.26), transparent 52%),
-                radial-gradient(120% 120% at 88% 92%, rgba(0, 0, 0, 0.42), transparent 60%);
-        }
-
-        .work-motif {
-            position: absolute;
-            z-index: 1;
-            right: 4%;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 46%;
-            max-width: 190px;
-            color: rgba(255, 255, 255, 0.92);
-            opacity: 0.85;
-            filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.25));
-            transition: transform 0.5s var(--ease);
-        }
-
-        .work-card:hover .work-motif {
-            transform: translateY(-50%) scale(1.06) rotate(-3deg);
-        }
-
-        /* floating circular icon badge (top-left of cover) */
-        .work-badge {
-            position: absolute;
+            top: 16px;
+            left: 16px;
             z-index: 2;
-            top: 14px;
-            left: 14px;
-            display: grid;
-            place-items: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            color: #fff;
-            background: linear-gradient(135deg, var(--accent), #ff7a3d);
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
-        }
-
-        /* screenshot-openable covers */
-        .work-cover.has-shot {
-            cursor: zoom-in;
-        }
-
-        .work-shot-hint {
-            position: absolute;
-            z-index: 2;
-            right: 12px;
-            bottom: 12px;
             font-family: var(--font-mono);
             font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
             color: #fff;
             background: rgba(16, 16, 18, 0.55);
-            -webkit-backdrop-filter: blur(6px);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 999px;
-            padding: 4px 10px;
-            pointer-events: none;
+            padding: 6px 13px;
         }
 
-        /* card body */
-        .work-body {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            padding: var(--space-3) var(--space-4) var(--space-4);
-        }
-
-        .work-title {
+        .pw-name {
             font-family: var(--font-display);
             font-size: var(--fs-600);
             font-weight: 500;
@@ -1143,96 +1166,394 @@
             margin-bottom: var(--space-2);
         }
 
-        .work-desc {
+        .pw-desc {
             color: var(--ink-2);
             font-size: var(--fs-300);
             line-height: var(--lh-body);
             margin-bottom: var(--space-3);
         }
 
-        .work-tagrow {
+        .pw-foot {
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: space-between;
-            gap: var(--space-2);
-            margin-top: auto;
+            gap: var(--space-3);
         }
 
-        .work-tags {
+        .pw-chips {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
         }
 
-        .tag {
+        .pw-chip {
             font-family: var(--font-mono);
-            font-size: 0.66rem;
+            font-size: 0.64rem;
             font-weight: 500;
             letter-spacing: 0.02em;
             padding: 4px 10px;
             border-radius: 999px;
+            color: var(--ink-2);
+            background: color-mix(in srgb, var(--ink) 6%, transparent);
+            border: 1px solid var(--hairline);
             white-space: nowrap;
-            color: var(--tg, var(--ink-2));
-            background: color-mix(in srgb, var(--tg, var(--ink-2)) 9%, transparent);
-            border: 1px solid color-mix(in srgb, var(--tg, var(--ink-2)) 26%, transparent);
         }
 
-        /* corner arrow link */
-        .work-arrow {
+        .pw-cue {
             flex: 0 0 auto;
-            display: grid;
-            place-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: var(--accent);
-            background: transparent;
-            border: 1px solid var(--hairline-strong);
-            text-decoration: none;
-            transition: all 0.25s var(--ease);
-        }
-
-        .work-arrow:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #fff;
-            transform: translate(2px, -2px);
-        }
-
-        /* view-more CTA */
-        .work-more {
-            max-width: var(--maxw);
-            margin: 0 auto;
-            padding: var(--space-6) var(--gutter) 0;
-            text-align: center;
-        }
-
-        .work-more a {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
             font-family: var(--font-body);
-            font-weight: 500;
-            font-size: var(--fs-400);
+            font-weight: 600;
+            font-size: var(--fs-300);
             color: var(--accent);
-            background: transparent;
-            border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
-            border-radius: 999px;
-            padding: 14px 34px;
-            text-decoration: none;
-            transition: all 0.25s var(--ease);
+            white-space: nowrap;
+            transition: gap 0.25s var(--ease);
         }
 
-        .work-more a:hover {
-            background: var(--accent);
-            color: #fff;
-            box-shadow: 0 10px 30px rgba(255, 77, 2, 0.35);
+        .pw-card:hover .pw-cue {
+            gap: 12px;
+        }
+
+        /* two app cards */
+        .pw-apps {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4);
+        }
+
+        .pw-app {
+            display: flex;
+        }
+
+        .pw-app-media {
+            position: relative;
+            flex: 0 0 46%;
+            display: grid;
+            place-items: center;
+            padding: var(--space-4);
+            overflow: hidden;
+            background: radial-gradient(120% 100% at 50% 0%,
+                    color-mix(in srgb, var(--accent) 12%, var(--surface)), var(--surface));
+            border-right: 1px solid var(--hairline);
+        }
+
+        .pw-app-media img {
+            width: 100%;
+            max-width: 188px;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 14px;
+            box-shadow: 0 16px 44px rgba(20, 20, 20, 0.22);
+            transition: transform 0.6s var(--ease);
+        }
+
+        .pw-app:hover .pw-app-media img {
+            transform: translateY(-6px) scale(1.02);
+        }
+
+        .pw-app-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-4);
+        }
+
+        .pw-app-info .pw-foot {
+            margin-top: auto;
         }
 
         @media (max-width: 1024px) {
-            .work-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .pw-app-media {
+                flex-basis: 42%;
             }
+
+            .pw-app-media img {
+                max-width: 150px;
+            }
+        }
+
+        /* ── project detail modal ─────────────────── */
+        .proj-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4);
+            background: color-mix(in srgb, #000 62%, transparent);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s var(--ease), visibility 0.35s var(--ease);
+        }
+
+        .proj-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .proj-dialog {
+            position: relative;
+            width: min(920px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: var(--bg);
+            border: 1px solid var(--hairline);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.5);
+            transform: translateY(24px) scale(0.98);
+            transition: transform 0.4s var(--ease);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .proj-modal.active .proj-dialog {
+            transform: none;
+        }
+
+        .proj-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 3;
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border: none;
+            border-radius: 50%;
+            background: rgba(16, 16, 18, 0.55);
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+            transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+        }
+
+        .proj-close:hover {
+            background: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .proj-media {
+            width: 100%;
+            max-height: 340px;
+            overflow: hidden;
+            background: var(--surface);
+            border-bottom: 1px solid var(--hairline);
+        }
+
+        .proj-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+
+        .proj-media.is-app {
+            max-height: none;
+            display: grid;
+            place-items: center;
+            padding: var(--space-5);
+            background: radial-gradient(120% 90% at 50% 0%,
+                    color-mix(in srgb, var(--accent) 12%, var(--surface)), var(--surface));
+        }
+
+        .proj-media.is-app img {
+            width: auto;
+            height: auto;
+            max-width: 240px;
+            max-height: 420px;
+            border-radius: 18px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .proj-content {
+            padding: var(--space-5) clamp(1.25rem, 4vw, 2.5rem) var(--space-6);
+        }
+
+        .proj-kind {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .proj-title {
+            font-family: var(--font-display);
+            font-size: var(--fs-700);
+            font-weight: 600;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: var(--space-3);
+        }
+
+        .proj-desc {
+            font-size: var(--fs-400);
+            line-height: var(--lh-body);
+            color: var(--ink-2);
+            margin-bottom: var(--space-4);
+        }
+
+        .proj-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-bottom: var(--space-5);
+        }
+
+        .proj-live,
+        .proj-open {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: var(--fs-300);
+            text-decoration: none;
+            border-radius: 999px;
+            padding: 13px 26px;
+            transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
+                background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+        }
+
+        .proj-live svg,
+        .proj-open svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .proj-live {
+            color: #fff;
+            background: var(--accent);
+            border: 1px solid var(--accent);
+            box-shadow: 0 12px 30px rgba(255, 77, 2, 0.32);
+        }
+
+        .proj-live:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(255, 77, 2, 0.42);
+        }
+
+        .proj-open {
+            color: var(--ink);
+            background: transparent;
+            border: 1px solid var(--hairline-strong);
+        }
+
+        .proj-open:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .proj-h {
+            font-family: var(--font-body);
+            font-size: var(--fs-200);
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+            margin: 0 0 var(--space-3);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--hairline);
+        }
+
+        .proj-stack {
+            list-style: none;
+            margin: 0 0 var(--space-2);
+            padding: 0;
+            display: grid;
+            gap: var(--space-3);
+        }
+
+        .proj-stack li {
+            display: flex;
+            gap: var(--space-3);
+            align-items: flex-start;
+        }
+
+        .proj-stack .ps-name {
+            flex: 0 0 auto;
+            min-width: 148px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: var(--fs-300);
+            color: var(--ink);
+        }
+
+        .proj-stack .ps-fn {
+            color: var(--ink-2);
+            font-size: var(--fs-300);
+            line-height: var(--lh-body);
+        }
+
+        .proj-install {
+            margin-top: var(--space-2);
+        }
+
+        .proj-note {
+            font-size: var(--fs-300);
+            color: var(--ink-2);
+            line-height: var(--lh-body);
+            margin-bottom: var(--space-4);
+        }
+
+        .proj-steps {
+            margin: 0 0 var(--space-4);
+            padding: 0;
+            list-style: none;
+            counter-reset: step;
+            display: grid;
+            gap: var(--space-3);
+        }
+
+        .proj-steps li {
+            position: relative;
+            padding-left: 46px;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            font-size: var(--fs-300);
+            line-height: var(--lh-body);
+            color: var(--ink-2);
+        }
+
+        .proj-steps li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: color-mix(in srgb, var(--accent) 14%, transparent);
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 0.82rem;
+            border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+        }
+
+        .proj-steps li strong {
+            color: var(--ink);
+            font-weight: 600;
         }
 
         /* Premium About (Sticky) */
@@ -2689,92 +3010,133 @@
                 padding: var(--space-7) 0;
             }
 
-            .work-header {
-                padding: 0 var(--gutter) var(--space-5);
+            .pw-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-4);
             }
 
-            /* compact 2-up grid on mobile — 2–4 projects visible at once */
-            .work-grid {
-                grid-template-columns: 1fr 1fr;
+            .pw-title {
+                font-size: clamp(2rem, 11vw, 3rem);
+            }
+
+            .pw-sub {
+                font-size: var(--fs-400);
+            }
+
+            .pw-viewall {
+                padding: 11px 20px;
+                font-size: var(--fs-200);
+            }
+
+            .pw-filters {
+                margin-top: var(--space-4);
+                gap: var(--space-1);
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .pw-filters::-webkit-scrollbar {
+                display: none;
+            }
+
+            .pw-fbtn {
+                font-size: var(--fs-200);
+                padding: 8px 16px;
+                white-space: nowrap;
+            }
+
+            .pw-projects {
+                margin-top: var(--space-5);
+                gap: var(--space-3);
+            }
+
+            /* no hover-dim on touch */
+            .pw-projects:hover .pw-card:not(:hover) {
+                opacity: 1;
+                transform: none;
+                filter: none;
+            }
+
+            .pw-hero-media {
+                aspect-ratio: 16 / 10;
+            }
+
+            .pw-hero-info {
+                padding: var(--space-3) var(--space-4) var(--space-4);
+            }
+
+            .pw-apps {
+                grid-template-columns: 1fr;
+                gap: var(--space-3);
+            }
+
+            .pw-app {
+                flex-direction: column;
+            }
+
+            .pw-app-media {
+                flex: none;
+                width: 100%;
+                padding: var(--space-4) var(--space-4) var(--space-4);
+                border-right: none;
+                border-bottom: 1px solid var(--hairline);
+            }
+
+            .pw-app-media img {
+                max-width: 200px;
+                max-height: 300px;
+            }
+
+            .pw-app-info {
+                padding: var(--space-3) var(--space-4) var(--space-4);
+            }
+
+            .pw-name {
+                font-size: var(--fs-500);
+            }
+
+            .pw-foot {
+                flex-wrap: wrap;
                 gap: var(--space-2);
             }
 
-            .work-filters {
-                gap: var(--space-1);
+            /* project modal on mobile */
+            .proj-dialog {
+                max-height: 92vh;
+                border-radius: 20px;
             }
 
-            .wf-btn {
-                font-size: var(--fs-200);
-                padding: 8px 16px;
-                border-radius: 999px;
+            .proj-media {
+                max-height: 240px;
             }
 
-            .work-card {
-                border-radius: 14px;
+            .proj-media.is-app {
+                padding: var(--space-4);
             }
 
-            .work-cover {
-                aspect-ratio: 4 / 3;
-                margin: 6px;
-                border-radius: 9px;
+            .proj-media.is-app img {
+                max-width: 190px;
+                max-height: 340px;
             }
 
-            .work-motif {
-                width: 46%;
+            .proj-content {
+                padding: var(--space-4) var(--space-4) var(--space-5);
             }
 
-            .work-badge {
-                width: 32px;
-                height: 32px;
-                top: 8px;
-                left: 8px;
+            .proj-title {
+                font-size: var(--fs-600);
             }
 
-            .work-badge svg {
-                width: 15px;
-                height: 15px;
+            .proj-stack li {
+                flex-direction: column;
+                gap: 3px;
             }
 
-            .work-shot-hint {
-                display: none;
-            }
-
-            .work-body {
-                padding: 10px 12px 12px;
-            }
-
-            .work-title {
-                font-size: var(--fs-400);
-                margin-bottom: var(--space-1);
-            }
-
-            /* hide long copy — covers + titles carry the story on small screens */
-            .work-desc {
-                display: none;
-            }
-
-            .work-tags {
-                gap: 4px;
-            }
-
-            .tag {
-                font-size: 0.56rem;
-                padding: 3px 7px;
-            }
-
-            /* keep it to two tags per card on mobile */
-            .work-tags .tag:nth-child(n+3) {
-                display: none;
-            }
-
-            .work-arrow {
-                width: 34px;
-                height: 34px;
-            }
-
-            .work-arrow svg {
-                width: 13px;
-                height: 13px;
+            .proj-stack .ps-name {
+                min-width: 0;
             }
 
             /* Education cards stack on mobile */
@@ -3094,429 +3456,151 @@
         </section>
 
         <section class="work" id="work">
-            <div class="work-header">
-                <h1 data-i18n-html="workTitle">Selected <em>Work</em></h1>
-                <p data-i18n="workSubtitle">A selection of projects I've worked on — each one a unique challenge and solution.</p>
-                <div class="work-filters" role="group" aria-label="Filter projects">
-                    <button class="wf-btn active" type="button" data-filter="all" data-i18n="filterAll">All</button>
-                    <button class="wf-btn" type="button" data-filter="web" data-i18n="filterWeb">Web Development</button>
-                    <button class="wf-btn" type="button" data-filter="3d" data-i18n="filter3d">3D &amp; Design</button>
-                    <button class="wf-btn" type="button" data-filter="ai" data-i18n="filterAi">AI &amp; Vision</button>
+            <div class="pw-head">
+                <div class="pw-head-lead">
+                    <span class="pw-kicker" data-i18n="workKicker">Portfolio</span>
+                    <h2 class="pw-title" data-i18n="workTitle2">Selected Work</h2>
+                    <p class="pw-sub" data-i18n="workSubtitle">A curated selection of products and digital
+                        experiences designed to solve real problems with clarity and elegance.</p>
                 </div>
-            </div>
-
-            <div class="work-grid">
-
-                <!-- 1 · GLB Optimizer -->
-                <article class="work-card" data-cat="3d">
-                    <div class="work-cover" style="--c1:#141414; --c2:#2b6fd6;">
-                        <div class="work-cover-glass"></div>
-                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
-                            stroke-width="3" aria-hidden="true">
-                            <path d="M60 18 L98 40 V80 L60 102 L22 80 V40 Z" stroke-linejoin="round" />
-                            <path d="M60 18 V60 M60 60 L98 40 M60 60 L22 40 M60 60 V102" stroke-linejoin="round"
-                                opacity="0.75" />
-                        </svg>
-                        <span class="work-badge" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                                <path d="M3.3 7L12 12l8.7-5M12 22V12" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="work-body">
-                        <h3 class="work-title">GLB Optimizer</h3>
-                        <p class="work-desc" data-i18n="descGlbOpt">A 100% local, browser-based tool that compresses .glb 3D models for
-                            Unreal Engine 5 — real-time viewer, before/after comparison, per-mesh inspector.</p>
-                        <div class="work-tagrow">
-                            <div class="work-tags">
-                                <span class="tag" style="--tg:#43853d">Node.js</span>
-                                <span class="tag" style="--tg:#444444">Three.js</span>
-                                <span class="tag" style="--tg:#5f8f21">glTF</span>
-                                <span class="tag" style="--tg:#2b6fd6">Unreal Engine 5</span>
-                            </div>
-                            <a class="work-arrow" href="https://github.com/manojpoudel9256/GLBOptimizer"
-                                target="_blank" rel="noopener" aria-label="View GLB Optimizer code on GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- EVEREST — cinematic travel site -->
-                <article class="work-card" data-cat="web">
-                    <div class="work-cover has-shot" style="--c1:#0b2a4a; --c2:#e8833a;"
-                        onclick="window.open('https://travel-site-delta-five.vercel.app', '_blank', 'noopener')">
-                        <div class="work-cover-glass"></div>
-                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
-                            stroke-width="3" aria-hidden="true">
-                            <path d="M14 92 L46 42 L62 66 L80 34 L106 92 Z" stroke-linejoin="round" />
-                            <path d="M80 34 L74 44 L86 44 Z" fill="currentColor" stroke="none" opacity="0.9" />
-                            <path d="M18 26 h26 M50 26 l10 -8 M50 26 l10 8" stroke-linecap="round"
-                                stroke-linejoin="round" opacity="0.8" />
-                        </svg>
-                        <span class="work-badge" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
-                            </svg>
-                        </span>
-                        <span class="work-shot-hint" data-i18n="hintLiveDemo">Live demo ↗</span>
-                    </div>
-                    <div class="work-body">
-                        <h3 class="work-title">EVEREST — Travel Experience</h3>
-                        <p class="work-desc" data-i18n="descEverest">A cinematic travel landing page — 340 scroll-scrubbed film frames fly
-                            you from an airplane window at golden hour to the roof of the world.</p>
-                        <div class="work-tagrow">
-                            <div class="work-tags">
-                                <span class="tag" style="--tg:#e34c26">HTML5</span>
-                                <span class="tag" style="--tg:#0d7d90">Tailwind CSS</span>
-                                <span class="tag" style="--tg:#8f7500">JavaScript</span>
-                            </div>
-                            <a class="work-arrow" href="https://github.com/manojpoudel9256/travel_site"
-                                target="_blank" rel="noopener" aria-label="View EVEREST travel site code on GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 2 · Realtime Face Recognition -->
-                <article class="work-card" data-cat="ai">
-                    <div class="work-cover" style="--c1:#4a3aa7; --c2:#0f8a6a;">
-                        <div class="work-cover-glass"></div>
-                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
-                            stroke-width="3" aria-hidden="true">
-                            <path d="M28 44 V32 a4 4 0 0 1 4-4 H44 M76 28 H88 a4 4 0 0 1 4 4 V44 M92 76 V88 a4 4 0 0 1 -4 4 H76 M44 92 H32 a4 4 0 0 1 -4-4 V76"
-                                stroke-linecap="round" />
-                            <circle cx="60" cy="58" r="16" />
-                            <path d="M40 86 a20 20 0 0 1 40 0" stroke-linecap="round" />
-                        </svg>
-                        <span class="work-badge" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2" />
-                                <circle cx="12" cy="11" r="3" />
-                                <path d="M7 18a5 5 0 0 1 10 0" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="work-body">
-                        <h3 class="work-title">Realtime Face Recognition</h3>
-                        <p class="work-desc" data-i18n="descFace">A real-time face-recognition system built from scratch — live camera
-                            capture, a training pipeline, and confidence-based recognition.</p>
-                        <div class="work-tagrow">
-                            <div class="work-tags">
-                                <span class="tag" style="--tg:#2f6ea5">Python</span>
-                                <span class="tag" style="--tg:#c43535">OpenCV</span>
-                            </div>
-                            <a class="work-arrow" href="https://github.com/manojpoudel9256/realtime-face-recognition"
-                                target="_blank" rel="noopener"
-                                aria-label="View Realtime Face Recognition code on GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 3 · AI Budget Tracker -->
-                <article class="work-card" data-cat="web ai">
-                    <div class="work-cover has-shot" style="--c1:#242424; --c2:#ff4d02;"
-                        onclick="openImageModal('budget.webp', 'AI · Finance', 'AI Budget Tracker')">
-                        <div class="work-cover-glass"></div>
-                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
-                            stroke-width="3" aria-hidden="true">
-                            <ellipse cx="60" cy="34" rx="30" ry="12" />
-                            <path d="M30 34v20c0 6.6 13.4 12 30 12s30-5.4 30-12V34" stroke-linecap="round" />
-                            <path d="M30 54v20c0 6.6 13.4 12 30 12s30-5.4 30-12V54" stroke-linecap="round" />
-                            <path d="M96 20l4 8 8 4-8 4-4 8-4-8-8-4 8-4z" stroke-linejoin="round" />
-                        </svg>
-                        <span class="work-badge" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4M3 5v14a2 2 0 0 0 2 2h16v-5" />
-                                <path d="M18 12a2 2 0 0 0 0 4h4v-4z" />
-                            </svg>
-                        </span>
-                        <span class="work-shot-hint" data-i18n="hintScreenshot">Screenshot</span>
-                    </div>
-                    <div class="work-body">
-                        <h3 class="work-title">AI Budget Tracker</h3>
-                        <p class="work-desc" data-i18n="descBudget">A personal finance tool that reads receipts with Gemini vision AI, sets
-                            budgets, and generates spending insights from raw photos.</p>
-                        <div class="work-tagrow">
-                            <div class="work-tags">
-                                <span class="tag" style="--tg:#5c65a0">PHP</span>
-                                <span class="tag" style="--tg:#00758f">MySQL</span>
-                                <span class="tag" style="--tg:#6d4fd1">Gemini AI</span>
-                            </div>
-                            <a class="work-arrow" href="https://github.com/manojpoudel9256/budget-tracker"
-                                target="_blank" rel="noopener" aria-label="View AI Budget Tracker code on GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 4 · Weather & Travel Planner -->
-                <article class="work-card" data-cat="web">
-                    <div class="work-cover has-shot" style="--c1:#2b6fd6; --c2:#f0a83c;"
-                        onclick="openImageModal('travel.webp', 'Full-stack · Travel', 'Weather &amp; Travel Planner')">
-                        <div class="work-cover-glass"></div>
-                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
-                            stroke-width="3" aria-hidden="true">
-                            <circle cx="46" cy="46" r="18" />
-                            <path d="M46 14v10M46 68v10M14 46h10M68 46h10M24 24l7 7M61 61l7 7M68 24l-7 7M31 61l-7 7"
-                                stroke-linecap="round" />
-                            <path d="M70 82h28a13 13 0 0 0 0-26 18 18 0 0 0-34-5" stroke-linecap="round" />
-                        </svg>
-                        <span class="work-badge" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="9" />
-                                <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
-                            </svg>
-                        </span>
-                        <span class="work-shot-hint" data-i18n="hintScreenshot">Screenshot</span>
-                    </div>
-                    <div class="work-body">
-                        <h3 class="work-title">Weather &amp; Travel Planner</h3>
-                        <p class="work-desc" data-i18n="descWeather">A full-stack app that recommends destinations by optimal weather —
-                            real-time search, 5-day forecasts, bilingual EN/日本語.</p>
-                        <div class="work-tagrow">
-                            <div class="work-tags">
-                                <span class="tag" style="--tg:#087ea4">React</span>
-                                <span class="tag" style="--tg:#43853d">Node.js</span>
-                                <span class="tag" style="--tg:#00758f">MySQL</span>
-                            </div>
-                            <a class="work-arrow" href="https://github.com/manojpoudel9256/weather-travel-planner"
-                                target="_blank" rel="noopener"
-                                aria-label="View Weather and Travel Planner code on GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 5 · GLB Analyzer -->
-                <article class="work-card" data-cat="3d">
-                    <div class="work-cover" style="--c1:#232345; --c2:#7c5cff;">
-                        <div class="work-cover-glass"></div>
-                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
-                            stroke-width="3" aria-hidden="true">
-                            <circle cx="52" cy="52" r="26" />
-                            <path d="M72 72 L94 94" stroke-linecap="round" stroke-width="5" />
-                            <path d="M52 38 L64 45 V59 L52 66 L40 59 V45 Z" stroke-linejoin="round" />
-                        </svg>
-                        <span class="work-badge" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="7" />
-                                <path d="M21 21l-4.3-4.3" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="work-body">
-                        <h3 class="work-title">GLB Analyzer</h3>
-                        <p class="work-desc" data-i18n="descGlbAna">A Node toolkit that inspects .glb models — mesh, texture, and size
-                            reports — plus a UE5-safe compression pipeline.</p>
-                        <div class="work-tagrow">
-                            <div class="work-tags">
-                                <span class="tag" style="--tg:#43853d">Node.js</span>
-                                <span class="tag" style="--tg:#5f8f21">glTF</span>
-                                <span class="tag" style="--tg:#2b6fd6">Unreal Engine 5</span>
-                            </div>
-                            <a class="work-arrow" href="https://github.com/manojpoudel9256/GLBAnalyzer"
-                                target="_blank" rel="noopener" aria-label="View GLB Analyzer code on GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 6 · StudyTrack Pro -->
-                <article class="work-card" data-cat="web">
-                    <div class="work-cover" style="--c1:#0e4f3d; --c2:#39b26f;">
-                        <div class="work-cover-glass"></div>
-                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
-                            stroke-width="3" aria-hidden="true">
-                            <path d="M24 96 V64 M48 96 V44 M72 96 V56 M96 96 V32" stroke-linecap="round"
-                                stroke-width="7" />
-                            <path d="M20 30 L52 22 L44 50" stroke-linecap="round" stroke-linejoin="round"
-                                opacity="0" />
-                        </svg>
-                        <span class="work-badge" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 6.5C10 4.8 7.3 4 4 4v14c3.3 0 6 .8 8 2.5 2-1.7 4.7-2.5 8-2.5V4c-3.3 0-6 .8-8 2.5zM12 6.5V20.5" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="work-body">
-                        <h3 class="work-title">StudyTrack Pro</h3>
-                        <p class="work-desc" data-i18n="descStudy">A gamified study tracker — focus timer, streaks and XP, interactive
-                            analytics charts, and a weather-adaptive UI in EN/日本語.</p>
-                        <div class="work-tagrow">
-                            <div class="work-tags">
-                                <span class="tag" style="--tg:#8f7500">JavaScript</span>
-                                <span class="tag" style="--tg:#d64c72">Chart.js</span>
-                            </div>
-                            <a class="work-arrow" href="https://github.com/manojpoudel9256/studytrack-pro"
-                                target="_blank" rel="noopener" aria-label="View StudyTrack Pro code on GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 7 · Salary Tracker -->
-                <article class="work-card" data-cat="web">
-                    <div class="work-cover" style="--c1:#1d3a63; --c2:#4d9de0;">
-                        <div class="work-cover-glass"></div>
-                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
-                            stroke-width="3" aria-hidden="true">
-                            <circle cx="60" cy="60" r="34" />
-                            <path d="M48 44 L60 60 L72 44 M60 60 V78 M50 64 H70 M50 71 H70" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        <span class="work-badge" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="6" width="20" height="12" rx="2" />
-                                <circle cx="12" cy="12" r="2.6" />
-                                <path d="M6 12h.01M18 12h.01" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="work-body">
-                        <h3 class="work-title">Salary Tracker</h3>
-                        <p class="work-desc" data-i18n="descSalary">A bilingual salary tracker for part-time work in Japan — shifts, hourly
-                            wages, and monthly income at a glance.</p>
-                        <div class="work-tagrow">
-                            <div class="work-tags">
-                                <span class="tag" style="--tg:#5c65a0">PHP</span>
-                                <span class="tag" style="--tg:#00758f">MySQL</span>
-                            </div>
-                            <a class="work-arrow" href="https://github.com/manojpoudel9256/salary-tracker-jap"
-                                target="_blank" rel="noopener" aria-label="View Salary Tracker code on GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 8 · Gorkhali Portfolio (YouTube) -->
-                <article class="work-card" data-cat="web">
-                    <div class="work-cover" style="--c1:#7a1d1d; --c2:#e0563a;">
-                        <div class="work-cover-glass"></div>
-                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
-                            stroke-width="3" aria-hidden="true">
-                            <rect x="22" y="34" width="76" height="52" rx="14" />
-                            <path d="M52 48 L74 60 L52 72 Z" fill="currentColor" stroke="none" />
-                        </svg>
-                        <span class="work-badge" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <polygon points="6 3 20 12 6 21 6 3" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="work-body">
-                        <h3 class="work-title">Gorkhali Portfolio</h3>
-                        <p class="work-desc" data-i18n="descGorkhali">The bilingual site for my YouTube channel — live subscriber stats,
-                            featured videos, and EN/日本語 switching.</p>
-                        <div class="work-tagrow">
-                            <div class="work-tags">
-                                <span class="tag" style="--tg:#e34c26">HTML5</span>
-                                <span class="tag" style="--tg:#1572b6">CSS3</span>
-                                <span class="tag" style="--tg:#8f7500">JavaScript</span>
-                            </div>
-                            <a class="work-arrow" href="https://github.com/manojpoudel9256/gorkhali-portfolio"
-                                target="_blank" rel="noopener" aria-label="View Gorkhali Portfolio code on GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 9 · Image Compressor Pro -->
-                <article class="work-card" data-cat="web">
-                    <div class="work-cover" style="--c1:#143c3c; --c2:#12b3a8;">
-                        <div class="work-cover-glass"></div>
-                        <svg class="work-motif" viewBox="0 0 120 120" fill="none" stroke="currentColor"
-                            stroke-width="3" aria-hidden="true">
-                            <rect x="24" y="28" width="72" height="56" rx="8" />
-                            <circle cx="44" cy="46" r="6" />
-                            <path d="M24 76 L48 56 L66 70 L80 60 L96 72" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M60 94 V108 M52 101 L60 109 L68 101" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        <span class="work-badge" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="3" />
-                                <circle cx="8.5" cy="8.5" r="1.6" />
-                                <path d="M21 15l-5-5L5 21" />
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="work-body">
-                        <h3 class="work-title">Image Compressor Pro</h3>
-                        <p class="work-desc" data-i18n="descImgComp">A privacy-first image optimizer that runs entirely in the browser —
-                            batch compression, smart quality presets, no uploads.</p>
-                        <div class="work-tagrow">
-                            <div class="work-tags">
-                                <span class="tag" style="--tg:#8f7500">JavaScript</span>
-                                <span class="tag" style="--tg:#555555">Canvas API</span>
-                            </div>
-                            <a class="work-arrow" href="https://github.com/manojpoudel9256/ImageCompressorPro"
-                                target="_blank" rel="noopener" aria-label="View Image Compressor Pro code on GitHub">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 17L17 7M9 7h8v8" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
-
-            <div class="work-more">
-                <a href="https://github.com/manojpoudel9256?tab=repositories" target="_blank" rel="noopener">
-                    <span data-i18n="workMore">View More Projects</span> <span aria-hidden="true">→</span>
+                <a class="pw-viewall" href="https://github.com/manojpoudel9256?tab=repositories" target="_blank"
+                    rel="noopener">
+                    <span data-i18n="workViewAll">View all projects</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
                 </a>
             </div>
+
+            <div class="pw-filters" role="group" aria-label="Filter projects">
+                <button class="pw-fbtn active" type="button" data-filter="all" data-i18n="filterAll">All</button>
+                <button class="pw-fbtn" type="button" data-filter="web" data-i18n="filterWebShort">Web</button>
+                <button class="pw-fbtn" type="button" data-filter="apps" data-i18n="filterApps">Apps</button>
+                <button class="pw-fbtn" type="button" data-filter="uiux" data-i18n="filterUiux">UI/UX</button>
+            </div>
+
+            <div class="pw-projects">
+
+                <!-- EVEREST — large feature card -->
+                <article class="pw-card pw-hero" data-cat="web uiux" role="button" tabindex="0"
+                    onclick="openProject('everest')"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('everest')}"
+                    aria-label="Open Everest Travel Experience details">
+                    <div class="pw-hero-media">
+                        <img src="travelsite.webp" alt="Everest travel website" width="1600" height="805"
+                            loading="lazy">
+                        <span class="pw-tagpill" data-i18n="kindWebsite">Website</span>
+                    </div>
+                    <div class="pw-hero-info">
+                        <h3 class="pw-name" data-i18n="pjEverestName">Everest Travel Experience</h3>
+                        <p class="pw-desc" data-i18n="pjEverestShort">A cinematic Himalaya expedition website —
+                            scroll-driven hero, curated tours, bilingual EN / 日本語.</p>
+                        <div class="pw-foot">
+                            <div class="pw-chips">
+                                <span class="pw-chip">HTML5</span>
+                                <span class="pw-chip">Tailwind CSS</span>
+                                <span class="pw-chip">JavaScript</span>
+                            </div>
+                            <span class="pw-cue"><span data-i18n="viewDetails">View details</span>
+                                <span aria-hidden="true">→</span></span>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="pw-apps">
+
+                    <!-- PERSONAL FINANCE APP -->
+                    <article class="pw-card pw-app" data-cat="apps uiux" role="button" tabindex="0"
+                        onclick="openProject('budget')"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('budget')}"
+                        aria-label="Open Personal Finance App details">
+                        <div class="pw-app-media">
+                            <img src="budgettracker.webp" alt="Personal Finance App" width="900" height="1599"
+                                loading="lazy">
+                            <span class="pw-tagpill" data-i18n="kindApp">App</span>
+                        </div>
+                        <div class="pw-app-info">
+                            <h3 class="pw-name" data-i18n="pjBudgetName">Personal Finance App</h3>
+                            <p class="pw-desc" data-i18n="pjBudgetShort">Track income &amp; expenses, scan receipts,
+                                and get AI spending insights — a polished mobile finance app.</p>
+                            <div class="pw-foot">
+                                <div class="pw-chips">
+                                    <span class="pw-chip">React</span>
+                                    <span class="pw-chip">Gemini AI</span>
+                                </div>
+                                <span class="pw-cue"><span data-i18n="viewDetails">View details</span>
+                                    <span aria-hidden="true">→</span></span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- SALARY TRACKER APP -->
+                    <article class="pw-card pw-app" data-cat="apps uiux" role="button" tabindex="0"
+                        onclick="openProject('salary')"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('salary')}"
+                        aria-label="Open Salary Tracker App details">
+                        <div class="pw-app-media">
+                            <img src="salarytracker.webp" alt="Salary Tracker App" width="900" height="1599"
+                                loading="lazy">
+                            <span class="pw-tagpill" data-i18n="kindApp">App</span>
+                        </div>
+                        <div class="pw-app-info">
+                            <h3 class="pw-name" data-i18n="pjSalaryName">Salary Tracker App</h3>
+                            <p class="pw-desc" data-i18n="pjSalaryShort">A bilingual salary &amp; remittance tracker —
+                                earnings, money sent home, balances and charts at a glance.</p>
+                            <div class="pw-foot">
+                                <div class="pw-chips">
+                                    <span class="pw-chip">React</span>
+                                    <span class="pw-chip">Recharts</span>
+                                </div>
+                                <span class="pw-cue"><span data-i18n="viewDetails">View details</span>
+                                    <span aria-hidden="true">→</span></span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
         </section>
+
+        <!-- PROJECT DETAIL MODAL -->
+        <div class="proj-modal" id="projModal" aria-hidden="true">
+            <div class="proj-dialog" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+                <button class="proj-close" type="button" onclick="closeProject()" aria-label="Close">&times;</button>
+                <div class="proj-media" id="pmMedia">
+                    <img id="pmImg" src="" alt="">
+                </div>
+                <div class="proj-content">
+                    <span class="proj-kind" id="pmKind"></span>
+                    <h3 class="proj-title" id="pmTitle"></h3>
+                    <p class="proj-desc" id="pmDesc"></p>
+                    <div class="proj-actions">
+                        <a class="proj-live" id="pmLive" href="#" target="_blank" rel="noopener">
+                            <span></span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M7 17L17 7M9 7h8v8" />
+                            </svg>
+                        </a>
+                    </div>
+                    <h4 class="proj-h" id="pmBuilt"></h4>
+                    <ul class="proj-stack" id="pmStack"></ul>
+                    <div class="proj-install" id="pmInstall">
+                        <h4 class="proj-h" id="pmInstallTitle"></h4>
+                        <p class="proj-note" id="pmInstallNote"></p>
+                        <ol class="proj-steps" id="pmSteps"></ol>
+                        <a class="proj-open" id="pmOpen" href="#" target="_blank" rel="noopener">
+                            <span></span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M7 17L17 7M9 7h8v8" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <section class="about-me-section" id="about-me">
@@ -4161,14 +4245,14 @@
 
         // SELECTED WORK — category filters
         (function () {
-            const btns = document.querySelectorAll(".wf-btn");
-            const cards = document.querySelectorAll(".work-card");
+            const btns = document.querySelectorAll(".pw-fbtn");
+            const cards = document.querySelectorAll(".pw-card");
             btns.forEach(btn => btn.addEventListener("click", () => {
                 btns.forEach(b => b.classList.toggle("active", b === btn));
                 const f = btn.dataset.filter;
                 cards.forEach(c => {
                     const show = f === "all" || (c.dataset.cat || "").split(" ").includes(f);
-                    c.classList.toggle("wf-hide", !show);
+                    c.classList.toggle("pw-hide", !show);
                 });
                 if (window.ScrollTrigger) ScrollTrigger.refresh();
             }));
@@ -4176,7 +4260,7 @@
 
         // SELECTED WORK — scroll reveal (skip under reduced motion)
         if (!prefersReducedMotion) {
-            gsap.utils.toArray(".work-card").forEach((card) => {
+            gsap.utils.toArray(".pw-card").forEach((card) => {
                 gsap.from(card, {
                     y: 60,
                     opacity: 0,
@@ -4285,6 +4369,194 @@
                 closeImageModal();
             }
         });
+
+        // ===== PROJECT DETAIL MODAL (Selected Work) =====
+        const PT = {
+            en: {
+                website: "Website", app: "Installable Web App",
+                builtWith: "Built with", live: "View live", open: "Open the app",
+                installTitle: "Use it as an app on your iPhone",
+                installNote: "This is a web app — no App Store needed. Add it to your home screen and it opens full-screen, just like a native app.",
+                steps: [
+                    "Open the app link above in <strong>Safari</strong> on your iPhone.",
+                    "Tap the <strong>Share</strong> button — the square with an arrow pointing up — in the toolbar.",
+                    "Scroll down and tap <strong>“Add to Home Screen.”</strong>",
+                    "Tap <strong>“Add”</strong> in the top-right corner.",
+                    "The app icon now sits on your home screen — tap it to launch it full-screen anytime."
+                ]
+            },
+            ja: {
+                website: "ウェブサイト", app: "インストール可能なウェブアプリ",
+                builtWith: "使用技術", live: "ライブを見る", open: "アプリを開く",
+                installTitle: "iPhoneでアプリのように使う",
+                installNote: "これはウェブアプリなので App Store は不要です。ホーム画面に追加すると、ネイティブアプリのように全画面で起動します。",
+                steps: [
+                    "iPhoneの<strong>Safari</strong>で上のアプリのリンクを開きます。",
+                    "ツールバーの<strong>共有</strong>ボタン（上向き矢印付きの四角）をタップします。",
+                    "下にスクロールして<strong>「ホーム画面に追加」</strong>をタップします。",
+                    "右上の<strong>「追加」</strong>をタップします。",
+                    "ホーム画面にアイコンが追加されます。タップすればいつでも全画面で起動できます。"
+                ]
+            }
+        };
+
+        const PROJECTS = {
+            everest: {
+                img: "travelsite.webp", cover: true, type: "website",
+                live: "https://travel-site-delta-five.vercel.app/",
+                en: {
+                    title: "Everest Travel Experience",
+                    desc: "A cinematic marketing website for Mount Everest expeditions. It sells curated Himalayan adventure tours through an immersive, scroll-driven hero, tour highlights, expert-guide sections and a bilingual EN / 日本語 interface — designed to make visitors feel the journey before they book it.",
+                    stack: [
+                        ["HTML5", "Builds the semantic structure and content of every section of the site."],
+                        ["Tailwind CSS", "Utility-first styling for the clean, fully responsive layout across phone, tablet and desktop."],
+                        ["JavaScript", "Powers interactivity — the language toggle, smooth scroll effects and the animated hero."],
+                        ["Vercel", "Hosts and delivers the site globally so it loads fast anywhere."]
+                    ]
+                },
+                ja: {
+                    title: "エベレスト・トラベル体験",
+                    desc: "エベレスト遠征のための、映画のようなマーケティングサイト。没入感のあるスクロール連動ヒーロー、ツアー紹介、専門ガイドの解説、英語・日本語のバイリンガル対応で、厳選されたヒマラヤ・アドベンチャーツアーを訴求します。予約する前に「旅」を体感してもらうためのデザインです。",
+                    stack: [
+                        ["HTML5", "サイト各セクションのセマンティックな構造とコンテンツを構築します。"],
+                        ["Tailwind CSS", "ユーティリティファーストのスタイリングで、スマホ・タブレット・PCに対応するクリーンなレスポンシブレイアウトを実現します。"],
+                        ["JavaScript", "言語切り替え、スムーズなスクロール演出、アニメーションするヒーローなどのインタラクションを担当します。"],
+                        ["Vercel", "サイトを世界中へ高速配信するホスティングです。"]
+                    ]
+                }
+            },
+            budget: {
+                img: "budgettracker.webp", cover: false, type: "app",
+                live: "https://budget-tracker-v2-gamma.vercel.app/",
+                en: {
+                    title: "Personal Finance App",
+                    desc: "A personal finance app that shows your money at a glance — balance, income and expenses on an elegant card, plus recent activity. You can add transactions, scan a receipt with your camera, set monthly budgets, and ask an AI advisor for spending insights. Built mobile-first, so it feels like a native app on your phone.",
+                    stack: [
+                        ["React", "Builds the fast, component-based interface and keeps the screen in sync with your data."],
+                        ["Vite", "The build tool and dev server — bundles the app and gives instant reloads while developing."],
+                        ["Tailwind CSS", "Utility-first styling for the polished, responsive mobile design."],
+                        ["Gemini AI (vision)", "Reads receipts from a photo and powers the AI Advisor’s spending insights."],
+                        ["Browser storage (localStorage)", "Keeps your transactions and budgets privately on your own device."],
+                        ["Vercel", "Hosts the app and serves it instantly worldwide."]
+                    ]
+                },
+                ja: {
+                    title: "家計管理アプリ",
+                    desc: "お金の状況をひと目で把握できる家計管理アプリ。残高・収入・支出を美しいカードに表示し、最近のアクティビティも確認できます。取引の追加、カメラでのレシート読み取り、月次予算の設定、AIアドバイザーへの支出相談まで可能。モバイルファーストで、スマホでネイティブアプリのように使えます。",
+                    stack: [
+                        ["React", "コンポーネントベースの高速なUIを構築し、データと画面を常に同期します。"],
+                        ["Vite", "ビルドツール兼開発サーバー。アプリをバンドルし、開発中は即時リロードを提供します。"],
+                        ["Tailwind CSS", "洗練されたレスポンシブなモバイルデザインのためのユーティリティファーストなスタイリングです。"],
+                        ["Gemini AI（ビジョン）", "写真からレシートを読み取り、AIアドバイザーの支出分析を実現します。"],
+                        ["ブラウザストレージ（localStorage）", "取引や予算のデータを端末内にプライベートに保存します。"],
+                        ["Vercel", "アプリを世界中へ瞬時に配信するホスティングです。"]
+                    ]
+                }
+            },
+            salary: {
+                img: "salarytracker.webp", cover: false, type: "app",
+                live: "https://salary-tracker-v3-six.vercel.app/",
+                en: {
+                    title: "Salary Tracker App",
+                    desc: "A bilingual salary & remittance tracker built for working in Japan. See your total earnings, how much you’ve sent home, your remaining balance and the percentage sent — plus recent salaries, remittances and charts. Supports EN / 日本語 and light / dark themes, mobile-first.",
+                    stack: [
+                        ["React", "Builds the interactive, component-based interface for salaries, remittances and stats."],
+                        ["Vite", "Fast build tool and dev server that bundles and runs the app."],
+                        ["Tailwind CSS", "Utility-first styling for the clean, responsive layout and light / dark themes."],
+                        ["Recharts", "Renders the earnings and remittance charts on the Charts screen."],
+                        ["Browser storage (localStorage)", "Saves your salary and remittance records privately on your device."],
+                        ["Vercel", "Hosts and delivers the app globally."]
+                    ]
+                },
+                ja: {
+                    title: "給料トラッカーアプリ",
+                    desc: "日本で働く人のためのバイリンガル給料・送金管理アプリ。総収入、仕送り額、残高、送金の割合に加え、最近の給料・送金・グラフを確認できます。英語・日本語とライト／ダークテーマに対応し、モバイルファースト設計です。",
+                    stack: [
+                        ["React", "給料・送金・統計を扱うインタラクティブなコンポーネントUIを構築します。"],
+                        ["Vite", "アプリをバンドルして動かす、高速なビルドツール兼開発サーバーです。"],
+                        ["Tailwind CSS", "クリーンでレスポンシブなレイアウトと、ライト／ダークテーマのためのスタイリングです。"],
+                        ["Recharts", "チャート画面で収入・送金のグラフを描画します。"],
+                        ["ブラウザストレージ（localStorage）", "給料・送金の記録を端末内にプライベートに保存します。"],
+                        ["Vercel", "アプリを世界中に配信するホスティングです。"]
+                    ]
+                }
+            }
+        };
+
+        let _openProj = null;
+
+        function renderProject() {
+            const id = _openProj; if (!id) return;
+            const p = PROJECTS[id]; if (!p) return;
+            const lang = (window.__lang === "ja") ? "ja" : "en";
+            const t = PT[lang]; const c = p[lang];
+            const media = document.getElementById("pmMedia");
+            const img = document.getElementById("pmImg");
+            img.src = p.img; img.alt = c.title;
+            media.classList.toggle("is-app", !p.cover);
+            document.getElementById("pmKind").textContent = (p.type === "app") ? t.app : t.website;
+            document.getElementById("pmTitle").textContent = c.title;
+            document.getElementById("pmDesc").textContent = c.desc;
+            const live = document.getElementById("pmLive");
+            live.href = p.live;
+            live.querySelector("span").textContent = t.live;
+            document.getElementById("pmBuilt").textContent = t.builtWith;
+            const stack = document.getElementById("pmStack");
+            stack.innerHTML = "";
+            c.stack.forEach(function (row) {
+                const li = document.createElement("li");
+                const n = document.createElement("span"); n.className = "ps-name"; n.textContent = row[0];
+                const f = document.createElement("span"); f.className = "ps-fn"; f.textContent = row[1];
+                li.appendChild(n); li.appendChild(f); stack.appendChild(li);
+            });
+            const install = document.getElementById("pmInstall");
+            if (p.type === "app") {
+                install.style.display = "";
+                document.getElementById("pmInstallTitle").textContent = t.installTitle;
+                document.getElementById("pmInstallNote").textContent = t.installNote;
+                const steps = document.getElementById("pmSteps");
+                steps.innerHTML = "";
+                t.steps.forEach(function (s) { const li = document.createElement("li"); li.innerHTML = "<span>" + s + "</span>"; steps.appendChild(li); });
+                const open = document.getElementById("pmOpen");
+                open.href = p.live;
+                open.querySelector("span").textContent = t.open;
+            } else {
+                install.style.display = "none";
+            }
+        }
+
+        function openProject(id) {
+            if (!PROJECTS[id]) return;
+            _openProj = id;
+            renderProject();
+            const m = document.getElementById("projModal");
+            m.classList.add("active");
+            m.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeProject() {
+            const m = document.getElementById("projModal");
+            if (!m) return;
+            m.classList.remove("active");
+            m.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+            _openProj = null;
+        }
+
+        window.__refreshProjModal = function () {
+            const m = document.getElementById("projModal");
+            if (m && m.classList.contains("active")) renderProject();
+        };
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const m = document.getElementById("projModal");
+            if (m) m.addEventListener("click", function (e) { if (e.target === m) closeProject(); });
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && document.getElementById("projModal").classList.contains("active")) closeProject();
+        });
     </script>
 
     <!-- ===== i18n — English / 日本語 (authentic Japanese, not machine-translated) ===== -->
@@ -4296,9 +4568,18 @@
                     navMenu: "Menu", navLabel: "Navigation",
                     heroTagline: "Software Engineer<br><span>Mobility &amp; Robotics</span>",
                     workTitle: "Selected <em>Work</em>",
-                    workSubtitle: "A selection of projects I've worked on — each one a unique challenge and solution.",
+                    workSubtitle: "A curated selection of products and digital experiences designed to solve real problems with clarity and elegance.",
                     filterAll: "All", filterWeb: "Web Development", filter3d: "3D & Design", filterAi: "AI & Vision",
                     hintLiveDemo: "Live demo ↗", hintScreenshot: "Screenshot", workMore: "View More Projects",
+                    workKicker: "Portfolio", workTitle2: "Selected Work", workViewAll: "View all projects",
+                    filterWebShort: "Web", filterApps: "Apps", filterUiux: "UI/UX",
+                    kindWebsite: "Website", kindApp: "App", viewDetails: "View details",
+                    pjEverestName: "Everest Travel Experience",
+                    pjEverestShort: "A cinematic Himalaya expedition website — scroll-driven hero, curated tours, bilingual EN / 日本語.",
+                    pjBudgetName: "Personal Finance App",
+                    pjBudgetShort: "Track income & expenses, scan receipts, and get AI spending insights — a polished mobile finance app.",
+                    pjSalaryName: "Salary Tracker App",
+                    pjSalaryShort: "A bilingual salary & remittance tracker — earnings, money sent home, balances and charts at a glance.",
                     descGlbOpt: "A 100% local, browser-based tool that compresses .glb 3D models for Unreal Engine 5 — real-time viewer, before/after comparison, per-mesh inspector.",
                     descEverest: "A cinematic travel landing page — 340 scroll-scrubbed film frames fly you from an airplane window at golden hour to the roof of the world.",
                     descFace: "A real-time face-recognition system built from scratch — live camera capture, a training pipeline, and confidence-based recognition.",
@@ -4352,9 +4633,18 @@
                     navMenu: "メニュー", navLabel: "ナビゲーション",
                     heroTagline: "ソフトウェアエンジニア<br><span>モビリティ＆ロボティクス</span>",
                     workTitle: "代表的な<em>実績</em>",
-                    workSubtitle: "これまで手がけたプロジェクトの一部です。どれも独自の課題と、その解決策が詰まっています。",
+                    workSubtitle: "現実の課題を、明快さとエレガンスで解決するために設計したプロダクトとデジタル体験の厳選集です。",
                     filterAll: "すべて", filterWeb: "Web開発", filter3d: "3D・デザイン", filterAi: "AI・ビジョン",
                     hintLiveDemo: "ライブデモ ↗", hintScreenshot: "スクリーンショット", workMore: "その他のプロジェクトを見る",
+                    workKicker: "ポートフォリオ", workTitle2: "代表的な実績", workViewAll: "すべてのプロジェクトを見る",
+                    filterWebShort: "Web", filterApps: "アプリ", filterUiux: "UI/UX",
+                    kindWebsite: "ウェブサイト", kindApp: "アプリ", viewDetails: "詳しく見る",
+                    pjEverestName: "エベレスト・トラベル体験",
+                    pjEverestShort: "映画のようなヒマラヤ遠征サイト。スクロール連動のヒーロー、厳選ツアー、英語・日本語対応。",
+                    pjBudgetName: "家計管理アプリ",
+                    pjBudgetShort: "収支の記録、レシートのスキャン、AIによる支出分析まで。洗練されたモバイル家計簿アプリ。",
+                    pjSalaryName: "給料トラッカーアプリ",
+                    pjSalaryShort: "バイリンガルの給料・送金管理アプリ。収入、仕送り、残高、グラフをひと目で。",
                     descGlbOpt: "Unreal Engine 5 向けに .glb 3Dモデルを圧縮する、完全ローカル・ブラウザ完結型ツール。リアルタイムビューア、圧縮前後の比較、メッシュ単位のインスペクターを搭載。",
                     descEverest: "映画のような旅のランディングページ。スクロールに連動する340枚のフレームが、夕暮れの機窓から世界の頂へと誘います。",
                     descFace: "ゼロから構築したリアルタイム顔認識システム。ライブカメラ映像の取得、学習パイプライン、信頼度ベースの認識を実装。",
@@ -4425,6 +4715,7 @@
                 ["langLabel", "langLabelM"].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = other.label; });
                 window.__lang = l;
                 try { localStorage.setItem("pp_lang", l); } catch (e) { }
+                if (window.__refreshProjModal) window.__refreshProjModal();
             }
 
             window.toggleLang = function () {
