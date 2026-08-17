@@ -761,12 +761,32 @@
                 align-items: flex-start;
             }
 
+            .hero-title {
+                font-size: clamp(1.9rem, 5.4vw, 2.9rem);
+            }
+
             .hero-photo-card {
-                max-width: 420px;
+                max-width: 460px;
             }
         }
 
         @media (max-width: 560px) {
+            /* compact headline so it reads like the reference (≈3 lines) */
+            .hero-badge {
+                font-size: 0.64rem;
+                letter-spacing: 0.12em;
+                padding: 6px 12px;
+            }
+
+            .hero-title {
+                font-size: clamp(1.6rem, 7vw, 2.15rem);
+                line-height: 1.08;
+            }
+
+            .hero-lead {
+                font-size: 0.95rem;
+            }
+
             .hero-cta {
                 flex-direction: column;
                 align-items: stretch;
@@ -802,9 +822,34 @@
                 font-size: 0.72rem;
             }
 
+            /* compact landscape portrait — head & shoulders, like the reference */
             .hero-photo-card {
-                max-width: 340px;
+                max-width: 100%;
+                width: 100%;
+                aspect-ratio: 16 / 11;
                 border-radius: 22px;
+            }
+
+            .hero-photo-card picture {
+                position: absolute;
+                inset: 0;
+                height: auto;
+                align-items: stretch;
+                justify-content: stretch;
+            }
+
+            .hero-photo-card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center 25%;
+            }
+
+            .hero-photo-glow {
+                top: 50%;
+                bottom: auto;
+                transform: translate(-50%, -50%);
+                width: 92%;
             }
         }
 
