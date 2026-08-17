@@ -3153,18 +3153,11 @@
                 display: inline-flex;
             }
 
-            /* keep theme + language toggles in the nav on mobile (like the reference) */
+            /* theme + language toggles live inside the menu overlay on mobile,
+               so the nav stays clean: just logo + Menu */
             .nav-right .lang-toggle,
             .nav-right .theme-toggle {
-                display: inline-flex;
-            }
-
-            .nav-right {
-                gap: 8px;
-            }
-
-            .top-nav .menu-text {
-                padding: 8px 12px;
+                display: none;
             }
 
             .menu-button-wrapper {
