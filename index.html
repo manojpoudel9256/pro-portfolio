@@ -270,11 +270,11 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            /* slightly dark, blurred backdrop so the nav reads on any section */
-            background: linear-gradient(to bottom, rgba(16, 16, 20, 0.44), rgba(16, 16, 20, 0.14));
-            -webkit-backdrop-filter: blur(12px) saturate(1.15);
-            backdrop-filter: blur(12px) saturate(1.15);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            /* theme-adaptive translucent bar — light over light, dark over dark */
+            background: color-mix(in srgb, var(--bg) 82%, transparent);
+            -webkit-backdrop-filter: blur(14px) saturate(1.2);
+            backdrop-filter: blur(14px) saturate(1.2);
+            border-bottom: 1px solid var(--hairline);
         }
 
         .top-nav .logo {
@@ -282,8 +282,7 @@
             font-weight: 600;
             font-size: 1.05rem;
             letter-spacing: 0.01em;
-            color: #fff;
-            text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+            color: var(--ink);
             text-decoration: none;
             white-space: nowrap;
         }
@@ -293,19 +292,17 @@
             display: flex;
             align-items: center;
             gap: 2px;
-            background: rgba(20, 20, 20, 0.82);
-            -webkit-backdrop-filter: blur(16px) saturate(1.3);
-            backdrop-filter: blur(16px) saturate(1.3);
-            border: 1px solid rgba(255, 255, 255, 0.10);
+            background: transparent;
+            border: 1px solid transparent;
             border-radius: 999px;
             padding: 4px;
-            box-shadow: 0 14px 36px rgba(20, 20, 20, 0.22);
+            box-shadow: none;
         }
 
         .np-link {
             padding: 7px 18px;
             border-radius: 999px;
-            color: rgba(242, 241, 238, 0.68);
+            color: var(--ink-2);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.86rem;
@@ -315,12 +312,12 @@
         }
 
         .np-link:hover {
-            color: #fff;
+            color: var(--ink);
         }
 
         .np-link.active {
-            background: #f2f1ee;
-            color: #141414;
+            background: color-mix(in srgb, var(--ink) 7%, transparent);
+            color: var(--ink);
         }
 
         .nav-right {
@@ -339,17 +336,17 @@
             padding: 8px 13px;
             border-radius: 999px;
             cursor: pointer;
-            background: rgba(20, 20, 20, 0.82);
-            -webkit-backdrop-filter: blur(16px) saturate(1.3);
-            backdrop-filter: blur(16px) saturate(1.3);
-            border: 1px solid rgba(255, 255, 255, 0.10);
-            color: var(--on-dark);
+            background: var(--elevated);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--hairline);
+            color: var(--ink);
             font-family: var(--font-body);
             font-weight: 600;
             font-size: 0.82rem;
             letter-spacing: 0.02em;
-            box-shadow: 0 14px 36px rgba(20, 20, 20, 0.18);
-            transition: transform 0.2s var(--ease), color 0.2s var(--ease);
+            box-shadow: 0 6px 18px rgba(20, 20, 20, 0.06);
+            transition: transform 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
         }
 
         .theme-toggle {
@@ -381,7 +378,8 @@
         .menu-text:hover,
         .theme-toggle:hover {
             transform: translateY(-1px);
-            color: #fff;
+            color: var(--ink);
+            border-color: var(--hairline-strong);
         }
 
         .lang-flag {
@@ -458,117 +456,356 @@
             display: block;
         }
 
-        /* HERO — full-bleed portrait */
+        /* HERO — two-column intro */
         .hero {
             position: relative;
-            height: 100vh;
-            /* small-viewport unit: matches the true visible area on mobile (iOS URL bar) */
-            height: 100svh;
-            min-height: 600px;
+            background: var(--bg);
             overflow: hidden;
-            background: #a9a7a1;
-            /* studio grey behind the cut-out portrait */
+            padding: clamp(96px, 14vh, 150px) 0 clamp(44px, 7vh, 80px);
         }
 
-        .hero-photo-bg {
-            position: absolute;
-            inset: 0;
+        .hero-inner {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 var(--gutter);
+            display: grid;
+            grid-template-columns: 1.06fr 0.94fr;
+            grid-template-areas:
+                "content visual"
+                "rest    visual";
+            grid-template-rows: auto auto;
+            align-items: start;
+            column-gap: clamp(2rem, 5vw, 5.5rem);
+            row-gap: clamp(1.6rem, 3vw, 2.4rem);
+        }
+
+        .hero-content {
+            grid-area: content;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: clamp(1rem, 1.8vw, 1.5rem);
+        }
+
+        .hero-rest {
+            grid-area: rest;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1.3rem, 2.4vw, 1.9rem);
+        }
+
+        .hero-visual {
+            grid-area: visual;
+            align-self: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* badge */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 10%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+            border-radius: 999px;
+            padding: 7px 15px;
+        }
+
+        .hero-badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.1rem, 4.8vw, 3.9rem);
+            font-weight: 600;
+            line-height: 1.06;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+        }
+
+        .hero-title .hero-accent {
+            color: var(--accent);
+        }
+
+        .hero-lead {
+            font-size: clamp(1rem, 1.3vw, 1.18rem);
+            line-height: 1.6;
+            color: var(--ink-2);
+            max-width: 46ch;
+        }
+
+        /* tech chips */
+        .hero-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hero-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            background: var(--elevated);
+            border: 1px solid var(--hairline);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 14px rgba(20, 20, 20, 0.05);
+        }
+
+        .hero-chip img,
+        .hero-chip svg {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 auto;
+        }
+
+        .hero-chip svg {
+            color: var(--ink-2);
+        }
+
+        /* CTA buttons */
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 26px;
+            border-radius: 14px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
+                background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease);
+        }
+
+        .hero-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .hero-btn-primary {
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent), #ff7a3d);
+            box-shadow: 0 14px 34px rgba(255, 77, 2, 0.32);
+        }
+
+        .hero-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 44px rgba(255, 77, 2, 0.42);
+        }
+
+        .hero-btn-ghost {
+            color: var(--ink);
+            background: var(--elevated);
+            border: 1px solid var(--hairline-strong);
+        }
+
+        .hero-btn-ghost:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* stat cards */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .hero-stat {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 16px;
+            border-radius: 16px;
+            background: var(--elevated);
+            border: 1px solid var(--hairline);
+            box-shadow: 0 6px 20px rgba(20, 20, 20, 0.05);
+        }
+
+        .hero-stat-ico {
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 12%, transparent);
+        }
+
+        .hero-stat-ico svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .hero-stat-txt {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .hero-stat-num {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1.3rem;
+            line-height: 1.1;
+            color: var(--ink);
+        }
+
+        .hero-stat-label {
+            font-size: 0.8rem;
+            line-height: 1.2;
+            color: var(--ink-2);
+            margin-top: 2px;
+        }
+
+        /* portrait card */
+        .hero-photo-card {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            aspect-ratio: 1 / 1.04;
+            border-radius: 28px;
+            background: linear-gradient(160deg,
+                    color-mix(in srgb, var(--accent) 6%, var(--elevated)), var(--elevated));
+            border: 1px solid var(--hairline);
+            box-shadow: 0 30px 80px rgba(20, 20, 20, 0.12);
+            overflow: hidden;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            overflow: hidden;
         }
 
-        .hero-photo-bg img {
+        .hero-photo-glow {
+            position: absolute;
+            left: 50%;
+            bottom: -6%;
+            transform: translateX(-50%);
+            width: 84%;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            z-index: 0;
+            background: radial-gradient(circle at 50% 42%,
+                    color-mix(in srgb, var(--accent) 20%, transparent), transparent 60%);
+        }
+
+        .hero-dots {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            object-position: center 12%;
-            display: block;
+            z-index: 0;
+            color: color-mix(in srgb, var(--ink) 22%, transparent);
         }
 
-        /* Desktop: show the whole figure at natural size (studio grey fills the
-           sides) instead of width-cropping the square photo into a face close-up */
-        @media (min-width: 769px) {
-            .hero-photo-bg img {
-                width: auto;
-                height: min(94%, 900px);
-                object-fit: contain;
-                object-position: center bottom;
-            }
-
-        }
-
-        .hero-scrim {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            background: linear-gradient(to bottom,
-                    rgba(20, 20, 20, 0.30) 0%,
-                    rgba(20, 20, 20, 0) 22%,
-                    rgba(20, 20, 20, 0) 52%,
-                    rgba(20, 20, 20, 0.50) 100%);
-        }
-
-        .hero-ui {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
+        .hero-photo-card picture {
+            position: relative;
+            z-index: 1;
             display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding: 0 var(--gutter);
+            align-items: flex-end;
+            justify-content: center;
+            height: 97%;
         }
 
-        .hero-tagline {
-            text-align: right;
-            color: #fff;
+        .hero-photo-card img {
+            width: auto;
+            height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            object-position: center bottom;
+            filter: drop-shadow(0 18px 36px rgba(20, 20, 20, 0.18));
         }
 
-        .hero-scrollcue {
-            display: inline-flex;
-            margin-bottom: var(--space-3);
-            color: #fff;
-            opacity: 0.85;
-            animation: scrollNudge 1.9s var(--ease) infinite;
-        }
-
-        @keyframes scrollNudge {
-
-            0%,
-            100% {
-                transform: translate(0, 0);
+        /* ---- responsive: stack to one column ---- */
+        @media (max-width: 920px) {
+            .hero {
+                padding-top: clamp(88px, 12vh, 120px);
             }
 
-            50% {
-                transform: translate(3px, 3px);
+            .hero-inner {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "content"
+                    "visual"
+                    "rest";
+                row-gap: clamp(1.5rem, 4vw, 2.1rem);
+            }
+
+            .hero-content {
+                align-items: flex-start;
+            }
+
+            .hero-photo-card {
+                max-width: 420px;
             }
         }
 
-        .hero-tagline p {
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: clamp(1.7rem, 3.4vw, 3rem);
-            letter-spacing: -0.01em;
-            line-height: 1.15;
-            color: #fff;
-            text-shadow: 0 2px 26px rgba(0, 0, 0, 0.45);
-        }
+        @media (max-width: 560px) {
+            .hero-cta {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+            }
 
-        .hero-tagline p span {
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-        }
+            .hero-btn {
+                width: 100%;
+            }
 
-        .hero-tagline .hero-meta {
-            margin-top: var(--space-1);
-            font-family: var(--font-mono);
-            font-weight: 500;
-            font-size: clamp(0.85rem, 1.7vw, 1rem);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.92);
-            text-shadow: 0 1px 14px rgba(0, 0, 0, 0.5);
+            .hero-stats {
+                gap: 8px;
+            }
+
+            .hero-stat {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 12px;
+            }
+
+            .hero-stat-ico {
+                width: 38px;
+                height: 38px;
+                border-radius: 10px;
+            }
+
+            .hero-stat-num {
+                font-size: 1.15rem;
+            }
+
+            .hero-stat-label {
+                font-size: 0.72rem;
+            }
+
+            .hero-photo-card {
+                max-width: 340px;
+                border-radius: 22px;
+            }
         }
 
 
@@ -2916,46 +3153,25 @@
                 display: inline-flex;
             }
 
-            /* on mobile the language + theme toggles live inside the menu
-               overlay, so the nav stays clean: just logo + Menu */
+            /* keep theme + language toggles in the nav on mobile (like the reference) */
             .nav-right .lang-toggle,
             .nav-right .theme-toggle {
-                display: none;
+                display: inline-flex;
+            }
+
+            .nav-right {
+                gap: 8px;
+            }
+
+            .top-nav .menu-text {
+                padding: 8px 12px;
             }
 
             .menu-button-wrapper {
                 display: none;
             }
 
-            /* Hero mobile — show the WHOLE figure (zoomed out, full quality),
-               blending into the studio grey, with the labels below the photo */
-            .hero-photo-bg img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                /* sit the figure lower so it meets the tagline (less empty grey) */
-                object-position: center 60%;
-            }
-
-            .hero-ui {
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: flex-end;
-                gap: var(--space-2);
-                padding-bottom: clamp(2.25rem, 7vw, 3.5rem);
-            }
-
-            .hero-tagline {
-                text-align: left;
-            }
-
-            .hero-tagline .hero-scrollcue {
-                display: none;
-            }
-
-            .hero-tagline .hero-meta {
-                color: rgba(255, 255, 255, 0.9);
-            }
+            /* hero mobile layout is handled in the hero block above */
 
             .work {
                 padding: var(--space-7) 0;
@@ -3421,27 +3637,134 @@
         </nav>
 
         <section class="hero" id="home">
-            <!-- Full-bleed portrait background -->
-            <picture class="hero-photo-bg">
-                <source srcset="model.webp" type="image/webp">
-                <img src="model.webp" alt="Portrait of Manoj Poudel" width="1800" height="1800" fetchpriority="high">
-            </picture>
-            <div class="hero-scrim" aria-hidden="true"></div>
+            <div class="hero-inner">
 
-            <!-- Overlay UI -->
-            <div class="hero-ui">
-                <div class="hero-tagline">
-                    <span class="hero-scrollcue" aria-hidden="true">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.5">
-                            <path d="M7 7l10 10M17 17V7M17 17H7" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                <!-- LEFT: intro -->
+                <div class="hero-content">
+                    <span class="hero-badge">
+                        <span class="hero-badge-dot" aria-hidden="true"></span>
+                        <span data-i18n="heroBadge">Software Engineer</span>
                     </span>
-                    <p data-i18n-html="heroTagline">Software Engineer<br><span>Mobility &amp; Robotics</span></p>
-                    <p class="hero-meta">Unreal Engine · Python · Blender 3D</p>
+                    <h1 class="hero-title" data-i18n-html="heroTitle">Designing software for mobility, robotics &amp;
+                        <span class="hero-accent">immersive experiences.</span>
+                    </h1>
+                    <p class="hero-lead" data-i18n="heroLead">I build practical digital solutions with Unreal Engine,
+                        Python, Blender, and modern development tools.</p>
                 </div>
-            </div>
 
+                <!-- RIGHT: portrait -->
+                <div class="hero-visual">
+                    <div class="hero-photo-card">
+                        <span class="hero-photo-glow" aria-hidden="true"></span>
+                        <svg class="hero-dots" viewBox="0 0 400 420" fill="none" aria-hidden="true">
+                            <path d="M40 250 L120 150 L210 60 L300 130 L360 70" stroke="currentColor"
+                                stroke-width="1" opacity="0.5" />
+                            <path d="M70 360 L150 300 L250 340 L340 280" stroke="currentColor" stroke-width="1"
+                                opacity="0.4" />
+                            <circle cx="40" cy="250" r="3.5" fill="currentColor" />
+                            <circle cx="120" cy="150" r="3" fill="currentColor" />
+                            <circle cx="210" cy="60" r="4" fill="currentColor" />
+                            <circle cx="300" cy="130" r="3" fill="currentColor" />
+                            <circle cx="360" cy="70" r="3.5" fill="currentColor" />
+                            <circle cx="70" cy="360" r="3" fill="currentColor" />
+                            <circle cx="250" cy="340" r="3.5" fill="currentColor" />
+                            <circle cx="340" cy="280" r="3" fill="currentColor" />
+                        </svg>
+                        <picture>
+                            <source srcset="model.webp" type="image/webp">
+                            <img src="model.webp" alt="Manoj Poudel" width="1800" height="1800"
+                                fetchpriority="high">
+                        </picture>
+                    </div>
+                </div>
+
+                <!-- LEFT (below): skills, actions, stats -->
+                <div class="hero-rest">
+                    <div class="hero-stack">
+                        <span class="hero-chip"><img src="logos/unrealengine.svg" alt="" width="18" height="18"
+                                loading="eager"> Unreal Engine</span>
+                        <span class="hero-chip"><img src="logos/python.svg" alt="" width="18" height="18"
+                                loading="eager"> Python</span>
+                        <span class="hero-chip"><img src="logos/blender.svg" alt="" width="18" height="18"
+                                loading="eager"> Blender 3D</span>
+                        <span class="hero-chip">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="7" y="3" width="10" height="18" rx="2" />
+                                <path d="M11 18h2" />
+                            </svg> UI/UX
+                        </span>
+                        <span class="hero-chip">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                <path d="M3.3 7L12 12l8.7-5M12 22V12" />
+                            </svg> 3D Models
+                        </span>
+                    </div>
+
+                    <div class="hero-cta">
+                        <a href="#work" class="hero-btn hero-btn-primary" data-nav>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            <span data-i18n="heroViewProjects">View Projects</span>
+                        </a>
+                        <a href="#contact" class="hero-btn hero-btn-ghost" data-nav>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                            </svg>
+                            <span data-i18n="heroContactMe">Contact Me</span>
+                        </a>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-ico" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                                    <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                                </svg>
+                            </span>
+                            <span class="hero-stat-txt">
+                                <span class="hero-stat-num" data-i18n="heroStat1Num">3+</span>
+                                <span class="hero-stat-label" data-i18n="heroStat1">Years Experience</span>
+                            </span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-ico" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2z" />
+                                </svg>
+                            </span>
+                            <span class="hero-stat-txt">
+                                <span class="hero-stat-num" data-i18n="heroStat2Num">20+</span>
+                                <span class="hero-stat-label" data-i18n="heroStat2">Projects</span>
+                            </span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-ico" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 18h6M10 22h4" />
+                                    <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z" />
+                                </svg>
+                            </span>
+                            <span class="hero-stat-txt">
+                                <span class="hero-stat-num" data-i18n="heroStat3Num">Creative</span>
+                                <span class="hero-stat-label" data-i18n="heroStat3">Problem Solver</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
         <section class="work" id="work">
@@ -4163,8 +4486,8 @@
 
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        // TOP NAV smooth-scroll (real anchors + Lenis)
-        document.querySelectorAll('.top-nav a[href^="#"]').forEach(a => {
+        // TOP NAV + hero CTA smooth-scroll (real anchors + Lenis)
+        document.querySelectorAll('.top-nav a[href^="#"], .hero-btn[href^="#"]').forEach(a => {
             a.addEventListener('click', (e) => {
                 const target = document.getElementById(a.getAttribute('href').slice(1));
                 if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: 0, duration: 1.2 }); }
@@ -4552,6 +4875,13 @@
                     navHome: "Home", navWork: "Work", navAbout: "About", navContact: "Contact",
                     navMenu: "Menu", navLabel: "Navigation",
                     heroTagline: "Software Engineer<br><span>Mobility &amp; Robotics</span>",
+                    heroBadge: "Software Engineer",
+                    heroTitle: 'Designing software for mobility, robotics &amp; <span class="hero-accent">immersive experiences.</span>',
+                    heroLead: "I build practical digital solutions with Unreal Engine, Python, Blender, and modern development tools.",
+                    heroViewProjects: "View Projects", heroContactMe: "Contact Me",
+                    heroStat1Num: "3+", heroStat1: "Years Experience",
+                    heroStat2Num: "20+", heroStat2: "Projects",
+                    heroStat3Num: "Creative", heroStat3: "Problem Solver",
                     workTitle: "Selected <em>Work</em>",
                     workSubtitle: "A curated selection of products and digital experiences designed to solve real problems with clarity and elegance.",
                     filterAll: "All", filterWeb: "Web Development", filter3d: "3D & Design", filterAi: "AI & Vision",
@@ -4618,6 +4948,13 @@
                     navHome: "ホーム", navWork: "実績", navAbout: "プロフィール", navContact: "お問い合わせ",
                     navMenu: "メニュー", navLabel: "ナビゲーション",
                     heroTagline: "ソフトウェアエンジニア<br><span>モビリティ＆ロボティクス</span>",
+                    heroBadge: "ソフトウェアエンジニア",
+                    heroTitle: 'モビリティ、ロボティクス、そして<span class="hero-accent">没入型体験</span>のためのソフトウェア設計。',
+                    heroLead: "Unreal Engine、Python、Blender、そして最新の開発ツールで、実用的なデジタルソリューションを構築します。",
+                    heroViewProjects: "プロジェクトを見る", heroContactMe: "お問い合わせ",
+                    heroStat1Num: "3+", heroStat1: "年の経験",
+                    heroStat2Num: "20+", heroStat2: "プロジェクト",
+                    heroStat3Num: "クリエイティブ", heroStat3: "問題解決力",
                     workTitle: "代表的な<em>実績</em>",
                     workSubtitle: "現実の課題を、明快さとエレガンスで解決するために設計したプロダクトとデジタル体験の厳選集です。",
                     filterAll: "すべて", filterWeb: "Web開発", filter3d: "3D・デザイン", filterAi: "AI・ビジョン",
