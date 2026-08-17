@@ -822,11 +822,17 @@
                 font-size: 0.72rem;
             }
 
+            /* let the portrait extend a bit wider, closer to the screen edges */
+            .hero-visual {
+                margin-left: calc(var(--gutter) * -0.72);
+                margin-right: calc(var(--gutter) * -0.72);
+            }
+
             /* compact landscape portrait — head & shoulders, like the reference */
             .hero-photo-card {
                 max-width: 100%;
                 width: 100%;
-                aspect-ratio: 16 / 11;
+                aspect-ratio: 16 / 10.4;
                 border-radius: 22px;
             }
 
