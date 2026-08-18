@@ -461,7 +461,10 @@
             position: relative;
             background: var(--bg);
             overflow: hidden;
-            padding: clamp(84px, 11vh, 116px) 0 clamp(18px, 2.5vh, 36px);
+            min-height: 100svh;
+            display: grid;
+            align-content: center;
+            padding: clamp(84px, 11vh, 116px) 0 clamp(36px, 5vh, 60px);
         }
 
         .hero-inner {
@@ -689,7 +692,7 @@
         .hero-photo-card {
             position: relative;
             width: 100%;
-            max-width: 600px;
+            max-width: 660px;
             aspect-ratio: 1 / 1.04;
             border-radius: 28px;
             background: linear-gradient(160deg,
