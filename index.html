@@ -2043,33 +2043,297 @@
             color: var(--ink-2);
         }
 
-        /* licenses & certifications — per-item meta */
-        .cert-issuer {
-            display: block;
-            font-size: var(--fs-200);
+        /* ── Licenses & Certifications ─────────────── */
+        .cert-section {
+            margin-bottom: var(--space-9);
+        }
+
+        .cert-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--space-5);
+            margin-bottom: var(--space-6);
+        }
+
+        .cert-kicker {
+            display: inline-block;
+            position: relative;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding-bottom: 10px;
+        }
+
+        .cert-kicker::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .cert-title {
+            font-family: var(--font-serif);
+            font-size: var(--fs-display);
+            font-weight: 600;
+            line-height: 1.05;
+            color: var(--ink);
+            margin-top: var(--space-3);
+        }
+
+        .cert-sub {
+            margin-top: var(--space-3);
+            max-width: 52ch;
+            font-size: var(--fs-400);
+            line-height: var(--lh-body);
             color: var(--ink-2);
-            margin: 2px 0 var(--space-2);
         }
 
-        .cert-skills {
-            display: block;
-            font-family: var(--font-mono);
-            font-size: var(--fs-100);
-            letter-spacing: 0.03em;
-            line-height: 1.5;
+        .cert-verify {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 300px;
+            padding-top: var(--space-2);
+            color: var(--ink-2);
+            font-size: var(--fs-200);
+            line-height: 1.45;
+        }
+
+        .cert-verify svg {
+            flex: 0 0 auto;
+            width: 30px;
+            height: 30px;
             color: var(--ink-3);
+        }
+
+        .cert-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .cred-card {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: clamp(1.1rem, 2.6vw, 2.2rem);
+            padding: clamp(var(--space-4), 2.4vw, var(--space-5));
+            background: var(--elevated);
+            border: 1px solid var(--hairline);
+            border-radius: var(--radius-lg);
+            transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+        }
+
+        .cred-card:hover {
+            border-color: var(--hairline-strong);
+            box-shadow: 0 18px 44px rgba(20, 20, 20, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .cred-aside {
+            display: flex;
+            align-items: center;
+            gap: clamp(0.9rem, 1.6vw, 1.4rem);
+        }
+
+        .cred-date {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-width: 46px;
+            line-height: 1.1;
+        }
+
+        .cred-mon {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+        }
+
+        .cred-year {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-top: 2px;
+        }
+
+        .cred-logo {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid var(--hairline);
+            overflow: hidden;
+        }
+
+        .cred-logo img {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+        }
+
+        .cred-logo-fill img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cred-main {
+            min-width: 0;
+        }
+
+        .cred-title {
+            font-family: var(--font-serif);
+            font-size: var(--fs-500);
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--ink);
+        }
+
+        .cred-issuer {
+            display: block;
+            font-size: var(--fs-300);
+            color: var(--ink-2);
+            margin-top: 3px;
+        }
+
+        .cred-desc {
+            font-size: var(--fs-300);
+            line-height: var(--lh-body);
+            color: var(--ink-2);
             margin-top: var(--space-2);
+            max-width: 70ch;
         }
 
-        .cert-cred {
-            display: block;
+        .cred-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 18px;
+            margin-top: var(--space-3);
+            padding-top: var(--space-3);
+            border-top: 1px solid var(--hairline);
             font-family: var(--font-mono);
             font-size: var(--fs-100);
-            letter-spacing: 0.01em;
+            letter-spacing: 0.02em;
             color: var(--ink-3);
-            opacity: 0.85;
-            margin-top: 4px;
-            word-break: break-word;
+        }
+
+        .cred-id-val {
+            color: var(--ink-2);
+        }
+
+        .cred-actions {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: var(--space-3);
+        }
+
+        .cred-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--hairline-strong);
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: var(--fs-200);
+            white-space: nowrap;
+            text-decoration: none;
+            transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
+                background 0.25s var(--ease), transform 0.25s var(--ease);
+        }
+
+        .cred-btn svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .cred-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .cred-verified {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: var(--fs-200);
+            color: var(--ink-3);
+        }
+
+        .cred-verified svg {
+            width: 15px;
+            height: 15px;
+            color: var(--ink-2);
+        }
+
+        .cert-foot {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: var(--space-5);
+            font-size: var(--fs-200);
+            color: var(--ink-3);
+        }
+
+        .cert-foot svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .cert-head {
+                flex-direction: column;
+                gap: var(--space-3);
+            }
+
+            .cert-verify {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cred-card {
+                grid-template-columns: 1fr;
+                gap: var(--space-3);
+                align-items: stretch;
+            }
+
+            .cred-actions {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding-top: var(--space-3);
+                border-top: 1px solid var(--hairline);
+            }
+
+            .cred-btn {
+                flex: 1 1 auto;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 768px) {
@@ -4040,48 +4304,161 @@
                 </div>
 
                 <!-- Licenses & Certifications -->
-                <div class="timeline-section">
-                    <h2 class="section-title" data-i18n="certTitle">Licenses &amp; Certifications</h2>
-                    <article class="xp-item">
-                        <ol class="xp-phases">
-                            <li>
-                                <span class="xp-when" data-i18n="cert1When">Jul 2026</span>
-                                <div class="xp-body">
-                                    <h4 data-i18n="cert1Title">AWS Knowledge: Amazon Q Developer Fundamentals — Training
-                                        Badge</h4>
-                                    <span class="cert-issuer" data-i18n="cert1Issuer">Amazon Web Services (AWS)</span>
-                                    <p data-i18n="cert1Desc">Strengthened my understanding of Amazon Q Developer,
-                                        AI-assisted software development, and AWS developer tools.</p>
-                                    <span class="cert-skills" data-i18n="cert1Skills">Amazon Q · Amazon Web Services ·
+                <div class="cert-section">
+                    <div class="cert-head">
+                        <div class="cert-head-lead">
+                            <span class="cert-kicker" data-i18n="certKicker">Credentials</span>
+                            <h2 class="cert-title" data-i18n="certTitle">Licenses &amp; Certifications</h2>
+                            <p class="cert-sub" data-i18n="certSub">Ongoing professional learning and industry-recognized
+                                certifications that strengthen my expertise and commitment to growth.</p>
+                        </div>
+                        <div class="cert-verify">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                <path d="M9 12l2 2 4-4" />
+                            </svg>
+                            <span data-i18n-html="certVerifyNote">All credentials are verified<br>and issued by
+                                recognized providers.</span>
+                        </div>
+                    </div>
+
+                    <div class="cert-list">
+                        <!-- AWS -->
+                        <article class="cred-card">
+                            <div class="cred-aside">
+                                <div class="cred-date">
+                                    <span class="cred-mon" data-i18n="cert1Mon">Jul</span>
+                                    <span class="cred-year" data-i18n="cert1Year">2026</span>
+                                </div>
+                                <span class="cred-logo"><img src="logos/aws.svg" alt="Amazon Web Services"
+                                        width="34" height="34" loading="lazy"></span>
+                            </div>
+                            <div class="cred-main">
+                                <h3 class="cred-title" data-i18n="cert1Title">AWS Knowledge: Amazon Q Developer
+                                    Fundamentals — Training Badge</h3>
+                                <span class="cred-issuer" data-i18n="cert1Issuer">Amazon Web Services (AWS)</span>
+                                <p class="cred-desc" data-i18n="cert1Desc">Strengthened my understanding of Amazon Q
+                                    Developer, AI-assisted software development, and AWS developer tools.</p>
+                                <div class="cred-meta">
+                                    <span class="cred-skills" data-i18n="cert1Skills">Amazon Q · Amazon Web Services ·
                                         AI-Assisted Development</span>
-                                    <span class="cert-cred">Credential ID · 72f2e4f7-41f2-4556-a262-5447fbdcb492</span>
+                                    <span class="cred-id"><span data-i18n="certIdLabel">Credential ID</span>:
+                                        <span class="cred-id-val">72f2e4f7-41f2-4556-a262-5447fbdcb492</span></span>
                                 </div>
-                            </li>
-                            <li>
-                                <span class="xp-when" data-i18n="cert2When">Jul 2026</span>
-                                <div class="xp-body">
-                                    <h4 data-i18n="cert2Title">Generative AI Essentials: Using LLMs to Work with Data</h4>
-                                    <span class="cert-issuer" data-i18n="cert2Issuer">IBM · SkillsBuild</span>
-                                    <p data-i18n="cert2Desc">Completed the IBM SkillsBuild program on Generative AI and
-                                        Large Language Models (LLMs), validating my knowledge of AI and applied LLM
-                                        workflows.</p>
-                                    <span class="cert-skills" data-i18n="cert2Skills">Artificial Intelligence · Large
+                            </div>
+                            <div class="cred-actions">
+                                <a class="cred-btn" href="https://www.linkedin.com/in/manojpoudel0429/details/certifications/"
+                                    target="_blank" rel="noopener">
+                                    <span data-i18n="certView">View Credential</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M7 17L17 7M9 7h8v8" />
+                                    </svg>
+                                </a>
+                                <span class="cred-verified">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                        <path d="M9 12l2 2 4-4" />
+                                    </svg>
+                                    <span data-i18n="certVerified">Verified</span>
+                                </span>
+                            </div>
+                        </article>
+
+                        <!-- IBM -->
+                        <article class="cred-card">
+                            <div class="cred-aside">
+                                <div class="cred-date">
+                                    <span class="cred-mon" data-i18n="cert2Mon">Jul</span>
+                                    <span class="cred-year" data-i18n="cert2Year">2026</span>
+                                </div>
+                                <span class="cred-logo"><img src="logos/ibm.svg" alt="IBM" width="34" height="34"
+                                        loading="lazy"></span>
+                            </div>
+                            <div class="cred-main">
+                                <h3 class="cred-title" data-i18n="cert2Title">Generative AI Essentials: Using LLMs to
+                                    Work with Data</h3>
+                                <span class="cred-issuer" data-i18n="cert2Issuer">IBM · SkillsBuild</span>
+                                <p class="cred-desc" data-i18n="cert2Desc">Completed the IBM SkillsBuild program on
+                                    Generative AI and Large Language Models (LLMs), validating my knowledge of AI and
+                                    applied LLM workflows.</p>
+                                <div class="cred-meta">
+                                    <span class="cred-skills" data-i18n="cert2Skills">Artificial Intelligence · Large
                                         Language Models · Generative AI</span>
-                                    <span class="cert-cred">Credential ID · 444fbe41-e3b8-41c8-8035-019d4c0b3dfd</span>
+                                    <span class="cred-id"><span data-i18n="certIdLabel">Credential ID</span>:
+                                        <span class="cred-id-val">444fbe41-e3b8-41c8-8035-019d4c0b3dfd</span></span>
                                 </div>
-                            </li>
-                            <li>
-                                <span class="xp-when" data-i18n="cert3When">Mar 2024</span>
-                                <div class="xp-body">
-                                    <h4 data-i18n="cert3Title">Oracle Java SE Bronze (日本語)</h4>
-                                    <span class="cert-issuer" data-i18n="cert3Issuer">Oracle</span>
-                                    <p data-i18n="cert3Desc">Entry-level Oracle certification validating fundamental Java
-                                        programming and object-oriented concepts.</p>
-                                    <span class="cert-skills" data-i18n="cert3Skills">Java · Web Design</span>
+                            </div>
+                            <div class="cred-actions">
+                                <a class="cred-btn" href="https://www.linkedin.com/in/manojpoudel0429/details/certifications/"
+                                    target="_blank" rel="noopener">
+                                    <span data-i18n="certView">View Credential</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M7 17L17 7M9 7h8v8" />
+                                    </svg>
+                                </a>
+                                <span class="cred-verified">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                        <path d="M9 12l2 2 4-4" />
+                                    </svg>
+                                    <span data-i18n="certVerified">Verified</span>
+                                </span>
+                            </div>
+                        </article>
+
+                        <!-- Oracle -->
+                        <article class="cred-card">
+                            <div class="cred-aside">
+                                <div class="cred-date">
+                                    <span class="cred-mon" data-i18n="cert3Mon">Mar</span>
+                                    <span class="cred-year" data-i18n="cert3Year">2024</span>
                                 </div>
-                            </li>
-                        </ol>
-                    </article>
+                                <span class="cred-logo cred-logo-fill"><img src="logos/oracle.svg" alt="Oracle"
+                                        width="40" height="40" loading="lazy"></span>
+                            </div>
+                            <div class="cred-main">
+                                <h3 class="cred-title" data-i18n="cert3Title">Oracle Java SE Bronze (日本語)</h3>
+                                <span class="cred-issuer" data-i18n="cert3Issuer">Oracle</span>
+                                <p class="cred-desc" data-i18n="cert3Desc">Entry-level Oracle certification validating
+                                    fundamental Java programming and object-oriented concepts.</p>
+                                <div class="cred-meta">
+                                    <span class="cred-skills" data-i18n="cert3Skills">Java · Web Design</span>
+                                </div>
+                            </div>
+                            <div class="cred-actions">
+                                <a class="cred-btn" href="https://www.linkedin.com/in/manojpoudel0429/details/certifications/"
+                                    target="_blank" rel="noopener">
+                                    <span data-i18n="certView">View Credential</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M7 17L17 7M9 7h8v8" />
+                                    </svg>
+                                </a>
+                                <span class="cred-verified">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                        <path d="M9 12l2 2 4-4" />
+                                    </svg>
+                                    <span data-i18n="certVerified">Verified</span>
+                                </span>
+                            </div>
+                        </article>
+                    </div>
+
+                    <p class="cert-foot">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="5" y="11" width="14" height="10" rx="2" />
+                            <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                        </svg>
+                        <span data-i18n="certFoot">Credential links open in a new tab and may require sign-in.</span>
+                    </p>
                 </div>
 
                 <!-- Education — premium slide-in cards -->
@@ -5068,6 +5445,12 @@
                     xp5Desc: "Continuing to improve development workflows with Blueprint, Unreal Engine, Blender, Claude Code, Blender MCP, generative AI tools, and ongoing hands-on simulation work.",
                     xpTech: "Blueprint · C++ · Python · Blender · Three.js · AI Workflows",
                     certTitle: "Licenses & Certifications",
+                    certKicker: "Credentials",
+                    certSub: "Ongoing professional learning and industry-recognized certifications that strengthen my expertise and commitment to growth.",
+                    certVerifyNote: "All credentials are verified<br>and issued by recognized providers.",
+                    certIdLabel: "Credential ID", certView: "View Credential", certVerified: "Verified",
+                    certFoot: "Credential links open in a new tab and may require sign-in.",
+                    cert1Mon: "Jul", cert1Year: "2026", cert2Mon: "Jul", cert2Year: "2026", cert3Mon: "Mar", cert3Year: "2024",
                     cert1When: "Jul 2026", cert1Title: "AWS Knowledge: Amazon Q Developer Fundamentals — Training Badge",
                     cert1Issuer: "Amazon Web Services (AWS)",
                     cert1Desc: "Strengthened my understanding of Amazon Q Developer, AI-assisted software development, and AWS developer tools.",
@@ -5159,6 +5542,12 @@
                     xp5Desc: "Blueprint、Unreal Engine、Blender、Claude Code、Blender MCP、生成AIツールを活用し、開発ワークフローの改善と実践的なシミュレーション作業を継続しています。",
                     xpTech: "Blueprint · C++ · Python · Blender · Three.js · AI Workflows",
                     certTitle: "資格・認定",
+                    certKicker: "クレデンシャル",
+                    certSub: "専門性の向上と成長への姿勢を支える、継続的な学習と業界公認の認定資格です。",
+                    certVerifyNote: "すべての資格は認証済みで<br>信頼できる発行元によるものです。",
+                    certIdLabel: "認証ID", certView: "資格を見る", certVerified: "認証済み",
+                    certFoot: "資格のリンクは新しいタブで開き、サインインが必要な場合があります。",
+                    cert1Mon: "7月", cert1Year: "2026", cert2Mon: "7月", cert2Year: "2026", cert3Mon: "3月", cert3Year: "2024",
                     cert1When: "2026年7月", cert1Title: "AWS Knowledge: Amazon Q Developer Fundamentals — Training Badge",
                     cert1Issuer: "Amazon Web Services (AWS)",
                     cert1Desc: "Amazon Q Developer、AIを活用したソフトウェア開発、AWSの開発者ツールへの理解を深めました。",
