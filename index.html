@@ -2043,6 +2043,35 @@
             color: var(--ink-2);
         }
 
+        /* licenses & certifications — per-item meta */
+        .cert-issuer {
+            display: block;
+            font-size: var(--fs-200);
+            color: var(--ink-2);
+            margin: 2px 0 var(--space-2);
+        }
+
+        .cert-skills {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: var(--fs-100);
+            letter-spacing: 0.03em;
+            line-height: 1.5;
+            color: var(--ink-3);
+            margin-top: var(--space-2);
+        }
+
+        .cert-cred {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: var(--fs-100);
+            letter-spacing: 0.01em;
+            color: var(--ink-3);
+            opacity: 0.85;
+            margin-top: 4px;
+            word-break: break-word;
+        }
+
         @media (max-width: 768px) {
             .xp-head {
                 flex-direction: column;
@@ -4010,6 +4039,51 @@
                     </div>
                 </div>
 
+                <!-- Licenses & Certifications -->
+                <div class="timeline-section">
+                    <h2 class="section-title" data-i18n="certTitle">Licenses &amp; Certifications</h2>
+                    <article class="xp-item">
+                        <ol class="xp-phases">
+                            <li>
+                                <span class="xp-when" data-i18n="cert1When">Jul 2026</span>
+                                <div class="xp-body">
+                                    <h4 data-i18n="cert1Title">AWS Knowledge: Amazon Q Developer Fundamentals — Training
+                                        Badge</h4>
+                                    <span class="cert-issuer" data-i18n="cert1Issuer">Amazon Web Services (AWS)</span>
+                                    <p data-i18n="cert1Desc">Strengthened my understanding of Amazon Q Developer,
+                                        AI-assisted software development, and AWS developer tools.</p>
+                                    <span class="cert-skills" data-i18n="cert1Skills">Amazon Q · Amazon Web Services ·
+                                        AI-Assisted Development</span>
+                                    <span class="cert-cred">Credential ID · 72f2e4f7-41f2-4556-a262-5447fbdcb492</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="xp-when" data-i18n="cert2When">Jul 2026</span>
+                                <div class="xp-body">
+                                    <h4 data-i18n="cert2Title">Generative AI Essentials: Using LLMs to Work with Data</h4>
+                                    <span class="cert-issuer" data-i18n="cert2Issuer">IBM · SkillsBuild</span>
+                                    <p data-i18n="cert2Desc">Completed the IBM SkillsBuild program on Generative AI and
+                                        Large Language Models (LLMs), validating my knowledge of AI and applied LLM
+                                        workflows.</p>
+                                    <span class="cert-skills" data-i18n="cert2Skills">Artificial Intelligence · Large
+                                        Language Models · Generative AI</span>
+                                    <span class="cert-cred">Credential ID · 444fbe41-e3b8-41c8-8035-019d4c0b3dfd</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="xp-when" data-i18n="cert3When">Mar 2024</span>
+                                <div class="xp-body">
+                                    <h4 data-i18n="cert3Title">Oracle Java SE Bronze (日本語)</h4>
+                                    <span class="cert-issuer" data-i18n="cert3Issuer">Oracle</span>
+                                    <p data-i18n="cert3Desc">Entry-level Oracle certification validating fundamental Java
+                                        programming and object-oriented concepts.</p>
+                                    <span class="cert-skills" data-i18n="cert3Skills">Java · Web Design</span>
+                                </div>
+                            </li>
+                        </ol>
+                    </article>
+                </div>
+
                 <!-- Education — premium slide-in cards -->
                 <div class="timeline-section">
                     <h2 class="section-title" data-i18n="eduTitle">Education</h2>
@@ -4993,6 +5067,19 @@
                     xp5When: "Now", xp5Title: "AI-Assisted 3D Development",
                     xp5Desc: "Continuing to improve development workflows with Blueprint, Unreal Engine, Blender, Claude Code, Blender MCP, generative AI tools, and ongoing hands-on simulation work.",
                     xpTech: "Blueprint · C++ · Python · Blender · Three.js · AI Workflows",
+                    certTitle: "Licenses & Certifications",
+                    cert1When: "Jul 2026", cert1Title: "AWS Knowledge: Amazon Q Developer Fundamentals — Training Badge",
+                    cert1Issuer: "Amazon Web Services (AWS)",
+                    cert1Desc: "Strengthened my understanding of Amazon Q Developer, AI-assisted software development, and AWS developer tools.",
+                    cert1Skills: "Amazon Q · Amazon Web Services · AI-Assisted Development",
+                    cert2When: "Jul 2026", cert2Title: "Generative AI Essentials: Using LLMs to Work with Data",
+                    cert2Issuer: "IBM · SkillsBuild",
+                    cert2Desc: "Completed the IBM SkillsBuild program on Generative AI and Large Language Models (LLMs), validating my knowledge of AI and applied LLM workflows.",
+                    cert2Skills: "Artificial Intelligence · Large Language Models · Generative AI",
+                    cert3When: "Mar 2024", cert3Title: "Oracle Java SE Bronze (日本語)",
+                    cert3Issuer: "Oracle",
+                    cert3Desc: "Entry-level Oracle certification validating fundamental Java programming and object-oriented concepts.",
+                    cert3Skills: "Java · Web Design",
                     eduTitle: "Education",
                     edu1Title: "IT Department",
                     edu1Desc: "Specialized in Network, Cloud, and Cybersecurity. Comprehensive web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.",
@@ -5071,6 +5158,19 @@
                     xp5When: "現在", xp5Title: "AIを活用した3D開発",
                     xp5Desc: "Blueprint、Unreal Engine、Blender、Claude Code、Blender MCP、生成AIツールを活用し、開発ワークフローの改善と実践的なシミュレーション作業を継続しています。",
                     xpTech: "Blueprint · C++ · Python · Blender · Three.js · AI Workflows",
+                    certTitle: "資格・認定",
+                    cert1When: "2026年7月", cert1Title: "AWS Knowledge: Amazon Q Developer Fundamentals — Training Badge",
+                    cert1Issuer: "Amazon Web Services (AWS)",
+                    cert1Desc: "Amazon Q Developer、AIを活用したソフトウェア開発、AWSの開発者ツールへの理解を深めました。",
+                    cert1Skills: "Amazon Q · Amazon Web Services · AI活用開発",
+                    cert2When: "2026年7月", cert2Title: "Generative AI Essentials: Using LLMs to Work with Data",
+                    cert2Issuer: "IBM · SkillsBuild",
+                    cert2Desc: "IBM SkillsBuild の生成AI・大規模言語モデル（LLM）プログラムを修了し、AIと実践的なLLMワークフローの知識を証明しました。",
+                    cert2Skills: "人工知能 · 大規模言語モデル · 生成AI",
+                    cert3When: "2024年3月", cert3Title: "Oracle Java SE Bronze（日本語）",
+                    cert3Issuer: "Oracle",
+                    cert3Desc: "Javaプログラミングとオブジェクト指向の基礎を証明する、エントリーレベルのOracle認定資格です。",
+                    cert3Skills: "Java · Web デザイン",
                     eduTitle: "学歴",
                     edu1Title: "IT学科",
                     edu1Desc: "ネットワーク・クラウド・サイバーセキュリティを専攻。Java、HTML/CSS、JS、PHP、Linux など幅広いWeb開発カリキュラムを修了。",
