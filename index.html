@@ -1990,10 +1990,69 @@
         .xp-phases p {
             color: var(--ink-2);
             font-size: var(--fs-300);
+            line-height: var(--lh-body);
             max-width: var(--measure);
         }
 
+        /* subtle hover on a milestone */
+        .xp-phases li h4,
+        .xp-phases li::after {
+            transition: color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+        }
+
+        .xp-phases li:hover h4 {
+            color: var(--accent);
+        }
+
+        .xp-phases li:hover::after {
+            box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 14%, transparent);
+        }
+
+        /* skills footer */
+        .xp-tech {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: var(--space-5);
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--hairline);
+        }
+
+        .xp-tech-ico {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 12%, transparent);
+        }
+
+        .xp-tech-ico svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .xp-tech-list {
+            font-family: var(--font-mono);
+            font-size: var(--fs-200);
+            letter-spacing: 0.03em;
+            line-height: 1.5;
+            color: var(--ink-2);
+        }
+
         @media (max-width: 768px) {
+            .xp-head {
+                flex-direction: column;
+                gap: var(--space-1);
+            }
+
+            .xp-years {
+                padding-top: 0;
+            }
+
             .xp-phases li {
                 flex-direction: column;
                 gap: var(--space-1);
@@ -3883,37 +3942,70 @@
                         <article class="xp-item">
                             <div class="xp-head">
                                 <div>
-                                    <span class="xp-org" data-i18n="xpOrg">Japanese engineering company · Tokyo</span>
-                                    <h3 class="xp-role" data-i18n="xpRole">Software Developer — Mobility &amp; Robotics</h3>
+                                    <span class="xp-org" data-i18n="xpOrg">Japanese Engineering Company · Tokyo</span>
+                                    <h3 class="xp-role" data-i18n="xpRole">Software Developer — Mobility, Robotics &amp; 3D
+                                        Simulation</h3>
                                 </div>
                                 <span class="xp-years" data-i18n="xpYears">Apr 2026 — Present</span>
                             </div>
                             <ol class="xp-phases">
                                 <li>
                                     <span class="xp-when" data-i18n="xp1When">Apr 2026</span>
-                                    <div>
-                                        <h4 data-i18n="xp1Title">Unreal Engine development</h4>
-                                        <p data-i18n="xp1Desc">First core mission: real-time 3D development in Unreal Engine for
-                                            mobility &amp; robotics simulation.</p>
+                                    <div class="xp-body">
+                                        <h4 data-i18n="xp1Title">Unreal Engine &amp; Simulation Foundations</h4>
+                                        <p data-i18n="xp1Desc">Built core skills in Unreal Engine through official learning
+                                            materials, documentation, video lessons, AI-assisted learning, and guidance
+                                            from a senior developer.</p>
                                     </div>
                                 </li>
                                 <li>
-                                    <span class="xp-when" data-i18n="xp2When">2026</span>
-                                    <div>
-                                        <h4 data-i18n="xp2Title">Python scripting &amp; automation</h4>
-                                        <p data-i18n="xp2Desc">Pipeline tooling and scripting in Python — automating workflows around
-                                            the simulation environment.</p>
+                                    <span class="xp-when" data-i18n="xp2When">May 2026</span>
+                                    <div class="xp-body">
+                                        <h4 data-i18n="xp2Title">Blender &amp; Low-Poly 3D Asset Creation</h4>
+                                        <p data-i18n="xp2Desc">Learned practical Blender workflows and created optimized
+                                            low-poly assets for real-time simulation environments and the
+                                            Blender-to-Unreal pipeline.</p>
                                     </div>
                                 </li>
                                 <li>
-                                    <span class="xp-when" data-i18n="xp3When">Now</span>
-                                    <div>
-                                        <h4 data-i18n="xp3Title">Blender 3D modelling</h4>
-                                        <p data-i18n="xp3Desc">Expanding into 3D asset creation and modelling workflows in Blender —
-                                            closing the loop from model to engine.</p>
+                                    <span class="xp-when" data-i18n="xp3When">Jun 2026</span>
+                                    <div class="xp-body">
+                                        <h4 data-i18n="xp3Title">Production Project Contribution</h4>
+                                        <p data-i18n="xp3Desc">Contributed to a real company project by producing the
+                                            low-poly 3D models required for the simulation environment and delivery
+                                            workflow.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="xp-when" data-i18n="xp4When">Jul 2026</span>
+                                    <div class="xp-body">
+                                        <h4 data-i18n="xp4Title">Programming, Automation &amp; Internal Tools</h4>
+                                        <p data-i18n="xp4Desc">Worked with Python, C++, JavaScript, and Three.js, explored
+                                            Blender scripting, and built a local 3D inspection tool for analysing asset
+                                            counts, polygon complexity, and model properties.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="xp-when" data-i18n="xp5When">Now</span>
+                                    <div class="xp-body">
+                                        <h4 data-i18n="xp5Title">AI-Assisted 3D Development</h4>
+                                        <p data-i18n="xp5Desc">Continuing to improve development workflows with Blueprint,
+                                            Unreal Engine, Blender, Claude Code, Blender MCP, generative AI tools, and
+                                            ongoing hands-on simulation work.</p>
                                     </div>
                                 </li>
                             </ol>
+                            <div class="xp-tech">
+                                <span class="xp-tech-ico" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                                        <path d="M3.3 7L12 12l8.7-5M12 22V12" />
+                                    </svg>
+                                </span>
+                                <span class="xp-tech-list" data-i18n="xpTech">Blueprint · C++ · Python · Blender · Three.js
+                                    · AI Workflows</span>
+                            </div>
                         </article>
                     </div>
                 </div>
@@ -4553,6 +4645,18 @@
                     scrollTrigger: { trigger: card, start: "top 85%" }
                 });
             });
+
+            // EXPERIENCE — card fades up, milestones stagger in
+            gsap.utils.toArray(".xp-item").forEach((card) => {
+                gsap.from(card, {
+                    y: 40, opacity: 0, duration: 0.9, ease: "power3.out",
+                    scrollTrigger: { trigger: card, start: "top 85%" }
+                });
+                gsap.from(card.querySelectorAll(".xp-phases li"), {
+                    y: 18, opacity: 0, duration: 0.55, stagger: 0.1, ease: "power2.out",
+                    scrollTrigger: { trigger: card.querySelector(".xp-phases"), start: "top 88%" }
+                });
+            });
         }
 
         // FOOTER ANIMATION
@@ -4875,15 +4979,20 @@
                     descImgComp: "A privacy-first image optimizer that runs entirely in the browser — batch compression, smart quality presets, no uploads.",
                     aboutTitle: "About Me", aboutSubtitle: "Experience, education, and the story so far",
                     expTitle: "Experience",
-                    xpOrg: "Japanese engineering company · Tokyo",
-                    xpRole: "Software Developer — Mobility & Robotics",
+                    xpOrg: "Japanese Engineering Company · Tokyo",
+                    xpRole: "Software Developer — Mobility, Robotics & 3D Simulation",
                     xpYears: "Apr 2026 — Present",
-                    xp1When: "Apr 2026", xp1Title: "Unreal Engine development",
-                    xp1Desc: "First core mission: real-time 3D development in Unreal Engine for mobility & robotics simulation.",
-                    xp2When: "2026", xp2Title: "Python scripting & automation",
-                    xp2Desc: "Pipeline tooling and scripting in Python — automating workflows around the simulation environment.",
-                    xp3When: "Now", xp3Title: "Blender 3D modelling",
-                    xp3Desc: "Expanding into 3D asset creation and modelling workflows in Blender — closing the loop from model to engine.",
+                    xp1When: "Apr 2026", xp1Title: "Unreal Engine & Simulation Foundations",
+                    xp1Desc: "Built core skills in Unreal Engine through official learning materials, documentation, video lessons, AI-assisted learning, and guidance from a senior developer.",
+                    xp2When: "May 2026", xp2Title: "Blender & Low-Poly 3D Asset Creation",
+                    xp2Desc: "Learned practical Blender workflows and created optimized low-poly assets for real-time simulation environments and the Blender-to-Unreal pipeline.",
+                    xp3When: "Jun 2026", xp3Title: "Production Project Contribution",
+                    xp3Desc: "Contributed to a real company project by producing the low-poly 3D models required for the simulation environment and delivery workflow.",
+                    xp4When: "Jul 2026", xp4Title: "Programming, Automation & Internal Tools",
+                    xp4Desc: "Worked with Python, C++, JavaScript, and Three.js, explored Blender scripting, and built a local 3D inspection tool for analysing asset counts, polygon complexity, and model properties.",
+                    xp5When: "Now", xp5Title: "AI-Assisted 3D Development",
+                    xp5Desc: "Continuing to improve development workflows with Blueprint, Unreal Engine, Blender, Claude Code, Blender MCP, generative AI tools, and ongoing hands-on simulation work.",
+                    xpTech: "Blueprint · C++ · Python · Blender · Three.js · AI Workflows",
                     eduTitle: "Education",
                     edu1Title: "IT Department",
                     edu1Desc: "Specialized in Network, Cloud, and Cybersecurity. Comprehensive web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.",
@@ -4949,14 +5058,19 @@
                     aboutTitle: "プロフィール", aboutSubtitle: "経歴・学歴、そしてこれまでの歩み",
                     expTitle: "職歴",
                     xpOrg: "日本のエンジニアリング企業 · 東京",
-                    xpRole: "ソフトウェア開発者 — モビリティ＆ロボティクス",
+                    xpRole: "ソフトウェア開発者 — モビリティ、ロボティクス＆3Dシミュレーション",
                     xpYears: "2026年4月 — 現在",
-                    xp1When: "2026年4月", xp1Title: "Unreal Engine 開発",
-                    xp1Desc: "最初の主要ミッションは、モビリティ・ロボティクスのシミュレーション向けに Unreal Engine でリアルタイム3D開発を行うこと。",
-                    xp2When: "2026年", xp2Title: "Python スクリプティング＆自動化",
-                    xp2Desc: "Python によるパイプラインツールの開発とスクリプティング。シミュレーション環境まわりのワークフローを自動化。",
-                    xp3When: "現在", xp3Title: "Blender 3Dモデリング",
-                    xp3Desc: "Blender での3Dアセット制作・モデリングへと領域を拡大し、モデルからエンジンまでを一気通貫でつないでいます。",
+                    xp1When: "2026年4月", xp1Title: "Unreal Engine とシミュレーションの基礎",
+                    xp1Desc: "公式教材、ドキュメント、動画講座、AIを活用した学習、そして先輩開発者の指導を通じて、Unreal Engine の中核スキルを習得しました。",
+                    xp2When: "2026年5月", xp2Title: "Blender とローポリ3Dアセット制作",
+                    xp2Desc: "実践的な Blender のワークフローを学び、リアルタイムのシミュレーション環境や Blender から Unreal へのパイプライン向けに、最適化されたローポリアセットを制作しました。",
+                    xp3When: "2026年6月", xp3Title: "実プロジェクトへの貢献",
+                    xp3Desc: "実際の社内プロジェクトに参加し、シミュレーション環境と納品ワークフローに必要なローポリ3Dモデルを制作しました。",
+                    xp4When: "2026年7月", xp4Title: "プログラミング・自動化・社内ツール",
+                    xp4Desc: "Python、C++、JavaScript、Three.js を用いて開発し、Blender スクリプティングを試すとともに、アセット数・ポリゴンの複雑さ・モデル情報を解析するローカルの3D検査ツールを作成しました。",
+                    xp5When: "現在", xp5Title: "AIを活用した3D開発",
+                    xp5Desc: "Blueprint、Unreal Engine、Blender、Claude Code、Blender MCP、生成AIツールを活用し、開発ワークフローの改善と実践的なシミュレーション作業を継続しています。",
+                    xpTech: "Blueprint · C++ · Python · Blender · Three.js · AI Workflows",
                     eduTitle: "学歴",
                     edu1Title: "IT学科",
                     edu1Desc: "ネットワーク・クラウド・サイバーセキュリティを専攻。Java、HTML/CSS、JS、PHP、Linux など幅広いWeb開発カリキュラムを修了。",
