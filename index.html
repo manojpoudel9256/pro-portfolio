@@ -7,7 +7,7 @@
     <!-- serif display face for the Selected Work section (matches reference) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Playfair+Display:wght@500;600;700&display=swap"
         rel="stylesheet">
     <!-- apply saved theme before paint to avoid a flash -->
     <script>
@@ -89,6 +89,7 @@
             --font-body: "Satoshi", "Helvetica Neue", Arial, sans-serif;
             --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
             --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+            --font-black: "Archivo Black", "Helvetica Neue", Arial, sans-serif;
 
             /* Palette — near-monochrome, one accent */
             --bg: #f2f1ee;
@@ -456,381 +457,356 @@
             display: block;
         }
 
-        /* HERO — two-column intro */
+        /* HERO — editorial: giant type behind portrait cutout */
         .hero {
             position: relative;
             background: var(--bg);
             overflow: hidden;
-            min-height: 100svh;
-            display: grid;
-            align-content: center;
-            padding: clamp(84px, 11vh, 116px) 0 clamp(36px, 5vh, 60px);
+            padding: clamp(84px, 12vh, 108px) var(--gutter) clamp(2rem, 5vh, 3rem);
         }
 
-        .hero-inner {
+        .hero-stage {
+            position: relative;
             max-width: var(--maxw);
             margin: 0 auto;
-            padding: 0 var(--gutter);
-            display: grid;
-            grid-template-columns: 1fr 1.02fr;
-            grid-template-areas:
-                "content visual"
-                "rest    visual";
-            grid-template-rows: auto auto;
-            align-items: start;
-            column-gap: clamp(2rem, 5vw, 5.5rem);
-            row-gap: clamp(1.6rem, 3vw, 2.4rem);
         }
 
-        .hero-content {
-            grid-area: content;
+        /* giant SOFTWARE ENGINEER typography (behind everything) */
+        .hero-bigtype {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            margin: 0;
+            width: 100%;
+            text-align: center;
+            font-family: var(--font-black);
+            font-weight: 400;
+            text-transform: uppercase;
+            line-height: 0.85;
+            letter-spacing: -0.02em;
+            color: var(--accent);
+            font-size: clamp(2.1rem, 15.3vw, 7rem);
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .bt-line {
+            display: block;
+        }
+
+        /* subtle burgundy halftone dots behind the portrait */
+        .hero-halftone {
+            position: absolute;
+            z-index: 2;
+            top: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(86%, 460px);
+            aspect-ratio: 1 / 1.15;
+            background-image: radial-gradient(color-mix(in srgb, var(--accent) 32%, transparent) 1.1px, transparent 1.7px);
+            background-size: 11px 11px;
+            -webkit-mask-image: radial-gradient(58% 54% at 50% 44%, #000 28%, transparent 72%);
+            mask-image: radial-gradient(58% 54% at 50% 44%, #000 28%, transparent 72%);
+            opacity: 0.65;
+            pointer-events: none;
+        }
+
+        /* portrait cutout — in front of the type */
+        .hero-portrait {
+            position: relative;
+            z-index: 3;
+            width: min(86%, 430px);
+            margin: 0 auto;
+            padding-top: clamp(2.5rem, 15vw, 6rem);
+        }
+
+        .hero-portrait img {
+            display: block;
+            width: 100%;
+            height: auto;
+            -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 97%);
+            mask-image: linear-gradient(to bottom, #000 70%, transparent 97%);
+        }
+
+        /* intro */
+        .hero-intro {
+            position: relative;
+            z-index: 4;
+            margin-top: clamp(0.75rem, 3vw, 1.25rem);
+        }
+
+        .hero-hi {
+            max-width: 330px;
+            font-size: clamp(0.98rem, 3.4vw, 1.06rem);
+            line-height: 1.55;
+            color: var(--ink-2);
+        }
+
+        .hero-hi strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .hero-actions {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: clamp(1rem, 1.8vw, 1.5rem);
+            align-items: center;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+            margin-top: var(--space-4);
         }
 
-        .hero-rest {
-            grid-area: rest;
-            display: flex;
-            flex-direction: column;
-            gap: clamp(1.3rem, 2.4vw, 1.9rem);
-        }
-
-        .hero-visual {
-            grid-area: visual;
-            align-self: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* badge */
-        .hero-badge {
+        .hero-cta {
             display: inline-flex;
             align-items: center;
             gap: 9px;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.16em;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
             color: var(--accent);
-            background: color-mix(in srgb, var(--accent) 10%, transparent);
-            border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
-            border-radius: 999px;
-            padding: 7px 15px;
-        }
-
-        .hero-badge-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
-        }
-
-        .hero-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.1rem, 4.8vw, 3.9rem);
-            font-weight: 600;
-            line-height: 1.06;
-            letter-spacing: -0.02em;
-            color: var(--ink);
-        }
-
-        .hero-title .hero-accent {
-            color: var(--accent);
-        }
-
-        .hero-lead {
-            font-size: clamp(1rem, 1.3vw, 1.18rem);
-            line-height: 1.6;
-            color: var(--ink-2);
-            max-width: 46ch;
-        }
-
-        /* tech chips */
-        .hero-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .hero-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            padding: 9px 16px;
-            border-radius: 999px;
-            background: var(--elevated);
-            border: 1px solid var(--hairline);
-            color: var(--ink);
-            font-family: var(--font-body);
-            font-weight: 500;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 14px rgba(20, 20, 20, 0.05);
-        }
-
-        .hero-chip img,
-        .hero-chip svg {
-            width: 18px;
-            height: 18px;
-            flex: 0 0 auto;
-        }
-
-        .hero-chip svg {
-            color: var(--ink-2);
-        }
-
-        /* CTA buttons */
-        .hero-cta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .hero-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 14px 26px;
-            border-radius: 14px;
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 1rem;
             text-decoration: none;
-            cursor: pointer;
-            transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
-                background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease);
         }
 
-        .hero-btn svg {
-            width: 18px;
-            height: 18px;
+        .hero-cta-slash {
+            opacity: 0.65;
         }
 
-        .hero-btn-primary {
-            color: #fff;
-            background: linear-gradient(135deg, var(--accent), #c81e4a);
-            box-shadow: 0 14px 34px rgba(159, 18, 57, 0.32);
+        .hero-cta-arrow {
+            transition: transform 0.25s var(--ease);
         }
 
-        .hero-btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 18px 44px rgba(159, 18, 57, 0.42);
+        .hero-cta:hover .hero-cta-arrow {
+            transform: translateX(6px);
         }
 
-        .hero-btn-ghost {
-            color: var(--ink);
-            background: var(--elevated);
-            border: 1px solid var(--hairline-strong);
+        .hero-contact {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--ink-2);
+            text-decoration: none;
+            border-bottom: 1px solid var(--hairline-strong);
+            padding-bottom: 2px;
+            transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
         }
 
-        .hero-btn-ghost:hover {
-            transform: translateY(-2px);
+        .hero-contact:hover {
+            color: var(--accent);
             border-color: var(--accent);
-            color: var(--accent);
         }
 
-        /* stat cards */
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-
-        .hero-stat {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px 16px;
-            border-radius: 16px;
-            background: var(--elevated);
-            border: 1px solid var(--hairline);
-            box-shadow: 0 6px 20px rgba(20, 20, 20, 0.05);
-        }
-
-        .hero-stat-ico {
-            flex: 0 0 auto;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: grid;
-            place-items: center;
-            color: var(--accent);
-            background: color-mix(in srgb, var(--accent) 12%, transparent);
-        }
-
-        .hero-stat-ico svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .hero-stat-txt {
+        /* expertise list */
+        .hero-expertise {
+            position: relative;
+            z-index: 4;
+            list-style: none;
+            margin: clamp(1.5rem, 5vw, 2rem) 0 0;
+            padding: 4px 0 4px 16px;
+            border-left: 2px solid color-mix(in srgb, var(--accent) 32%, transparent);
             display: flex;
             flex-direction: column;
-            min-width: 0;
+            gap: 7px;
         }
 
-        .hero-stat-num {
+        .hero-expertise li {
             font-family: var(--font-display);
-            font-weight: 600;
-            font-size: 1.3rem;
+            font-weight: 500;
+            font-size: clamp(1.05rem, 4vw, 1.3rem);
             line-height: 1.1;
+            letter-spacing: -0.01em;
+            color: var(--ink-3);
+            transition: color 0.25s var(--ease);
+        }
+
+        .hero-expertise li.is-active {
             color: var(--ink);
         }
 
-        .hero-stat-label {
-            font-size: 0.8rem;
-            line-height: 1.2;
+        .hero-expertise li:hover {
+            color: var(--accent);
+        }
+
+        /* tech strip */
+        .hero-techstrip {
+            max-width: var(--maxw);
+            margin: clamp(2rem, 6vw, 3rem) auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--hairline);
+        }
+
+        .ts-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 15px 8px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.82rem;
             color: var(--ink-2);
-            margin-top: 2px;
+            border-top: 1px solid var(--hairline);
+            margin-top: -1px;
         }
 
-        /* portrait card */
-        .hero-photo-card {
-            position: relative;
-            width: 100%;
-            max-width: 660px;
-            aspect-ratio: 1 / 1.04;
-            border-radius: 28px;
-            background: linear-gradient(160deg,
-                    color-mix(in srgb, var(--accent) 6%, var(--elevated)), var(--elevated));
-            border: 1px solid var(--hairline);
-            box-shadow: 0 30px 80px rgba(20, 20, 20, 0.12);
-            overflow: hidden;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-        }
-
-        .hero-photo-glow {
-            position: absolute;
-            left: 50%;
-            bottom: -6%;
-            transform: translateX(-50%);
-            width: 84%;
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            z-index: 0;
-            background: radial-gradient(circle at 50% 42%,
-                    color-mix(in srgb, var(--accent) 20%, transparent), transparent 60%);
-        }
-
-        .hero-dots {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            color: color-mix(in srgb, var(--ink) 22%, transparent);
-        }
-
-        .hero-photo-card picture {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            height: 97%;
-        }
-
-        .hero-photo-card img {
-            width: auto;
-            height: 100%;
-            max-width: 100%;
+        .ts-item img {
+            width: 20px;
+            height: 20px;
             object-fit: contain;
-            object-position: center bottom;
-            filter: drop-shadow(0 18px 36px rgba(20, 20, 20, 0.18));
+            flex: 0 0 auto;
         }
 
-        /* ---- responsive: stack to one column ---- */
-        @media (max-width: 920px) {
+        /* entrance */
+        @media (prefers-reduced-motion: no-preference) {
+            .hero-bigtype,
+            .hero-portrait {
+                animation: heroFade 1s var(--ease) both;
+            }
+
+            .hero-portrait {
+                animation-delay: 0.08s;
+            }
+
+            .hero-intro {
+                animation: heroUp 0.9s var(--ease) 0.24s both;
+            }
+
+            .hero-expertise {
+                animation: heroUp 0.9s var(--ease) 0.34s both;
+            }
+
+            .hero-techstrip {
+                animation: heroUp 0.9s var(--ease) 0.44s both;
+            }
+        }
+
+        @keyframes heroFade {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes heroUp {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* ── tablet ─────────────────────────────── */
+        @media (min-width: 768px) {
+            .hero-bigtype {
+                font-size: clamp(5rem, 16vw, 9rem);
+            }
+
+            .hero-portrait {
+                width: min(60%, 460px);
+                padding-top: clamp(3rem, 9vw, 6rem);
+            }
+
+            .hero-intro-expertise-row {
+                display: flex;
+            }
+        }
+
+        /* ── desktop / laptop: editorial absolute composition ── */
+        @media (min-width: 1024px) {
             .hero {
-                padding-top: clamp(88px, 12vh, 120px);
+                min-height: 100svh;
+                display: flex;
+                flex-direction: column;
+                padding-bottom: 0;
             }
 
-            .hero-inner {
-                grid-template-columns: 1fr;
-                grid-template-areas:
-                    "content"
-                    "visual"
-                    "rest";
-                row-gap: clamp(1.5rem, 4vw, 2.1rem);
+            .hero-stage {
+                flex: 1 1 auto;
+                min-height: 0;
+                width: 100%;
             }
 
-            .hero-content {
-                align-items: flex-start;
+            .hero-bigtype {
+                top: clamp(96px, 15vh, 150px);
+                font-size: clamp(6rem, 14.5vw, 14rem);
+                line-height: 0.86;
             }
 
-            .hero-title {
-                font-size: clamp(1.9rem, 5.4vw, 2.9rem);
+            .hero-halftone {
+                top: 50%;
+                transform: translate(-50%, -46%);
+                width: min(40vw, 540px);
+                aspect-ratio: 1 / 1;
             }
 
-            .hero-photo-card {
-                max-width: 460px;
+            .hero-portrait {
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                transform: translateX(-50%);
+                width: min(47vw, 700px);
+                margin: 0;
+                padding: 0;
+            }
+
+            .hero-portrait img {
+                -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 99%);
+                mask-image: linear-gradient(to bottom, #000 82%, transparent 99%);
+            }
+
+            .hero-intro {
+                position: absolute;
+                z-index: 4;
+                left: 0;
+                bottom: clamp(2rem, 8vh, 4.5rem);
+                max-width: 320px;
+                margin: 0;
+            }
+
+            .hero-expertise {
+                position: absolute;
+                z-index: 4;
+                right: 0;
+                bottom: clamp(2rem, 8vh, 4.5rem);
+                margin: 0;
+            }
+
+            .hero-techstrip {
+                grid-template-columns: repeat(6, 1fr);
+                margin: 0;
+                flex: 0 0 auto;
+            }
+
+            .ts-item {
+                border-top: none;
+                margin-top: 0;
+                border-left: 1px solid var(--hairline);
+                font-size: 0.85rem;
+            }
+
+            .ts-item:first-child {
+                border-left: none;
             }
         }
 
-        @media (max-width: 560px) {
-            /* compact headline so it reads like the reference (≈3 lines) */
-            .hero-badge {
-                font-size: 0.64rem;
-                letter-spacing: 0.12em;
-                padding: 6px 12px;
+        @media (min-width: 1440px) {
+            .hero-bigtype {
+                font-size: clamp(9rem, 13vw, 15rem);
             }
 
-            .hero-title {
-                font-size: clamp(1.6rem, 7vw, 2.15rem);
-                line-height: 1.08;
-            }
-
-            .hero-lead {
-                font-size: 0.95rem;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-                align-items: stretch;
-                width: 100%;
-            }
-
-            .hero-btn {
-                width: 100%;
-            }
-
-            .hero-stats {
-                gap: 8px;
-            }
-
-            .hero-stat {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-                padding: 12px;
-            }
-
-            .hero-stat-ico {
-                width: 38px;
-                height: 38px;
-                border-radius: 10px;
-            }
-
-            .hero-stat-num {
-                font-size: 1.15rem;
-            }
-
-            .hero-stat-label {
-                font-size: 0.72rem;
-            }
-
-            /* vertical portrait card — show the whole figure */
-            .hero-photo-card {
-                max-width: 430px;
-                width: 100%;
-                aspect-ratio: 1 / 1.12;
-                border-radius: 24px;
+            .hero-portrait {
+                width: min(45vw, 760px);
             }
         }
 
@@ -4005,75 +3981,55 @@
         </nav>
 
         <section class="hero" id="home">
-            <div class="hero-inner">
+            <div class="hero-stage">
+                <h1 class="hero-bigtype">
+                    <span class="bt-line">SOFTWARE</span>
+                    <span class="bt-line">ENGINEER</span>
+                </h1>
 
-                <!-- LEFT: intro -->
-                <div class="hero-content">
-                    <span class="hero-badge">
-                        <span class="hero-badge-dot" aria-hidden="true"></span>
-                        <span data-i18n="heroBadge">Software Engineer</span>
-                    </span>
-                    <h1 class="hero-title" data-i18n-html="heroTitle">Software for mobility, robotics &amp;
-                        <span class="hero-accent">immersive experiences.</span>
-                    </h1>
-                    <p class="hero-lead" data-i18n="heroLead">I build practical solutions with Unreal Engine and
-                        Blender.</p>
+                <span class="hero-halftone" aria-hidden="true"></span>
+
+                <div class="hero-portrait">
+                    <picture>
+                        <source srcset="model.webp" type="image/webp">
+                        <img src="model.webp" alt="Manoj Poudel" width="1800" height="1800" fetchpriority="high">
+                    </picture>
                 </div>
 
-                <!-- RIGHT: portrait -->
-                <div class="hero-visual">
-                    <div class="hero-photo-card">
-                        <span class="hero-photo-glow" aria-hidden="true"></span>
-                        <svg class="hero-dots" viewBox="0 0 400 420" fill="none" aria-hidden="true">
-                            <path d="M40 250 L120 150 L210 60 L300 130 L360 70" stroke="currentColor"
-                                stroke-width="1" opacity="0.5" />
-                            <path d="M70 360 L150 300 L250 340 L340 280" stroke="currentColor" stroke-width="1"
-                                opacity="0.4" />
-                            <circle cx="40" cy="250" r="3.5" fill="currentColor" />
-                            <circle cx="120" cy="150" r="3" fill="currentColor" />
-                            <circle cx="210" cy="60" r="4" fill="currentColor" />
-                            <circle cx="300" cy="130" r="3" fill="currentColor" />
-                            <circle cx="360" cy="70" r="3.5" fill="currentColor" />
-                            <circle cx="70" cy="360" r="3" fill="currentColor" />
-                            <circle cx="250" cy="340" r="3.5" fill="currentColor" />
-                            <circle cx="340" cy="280" r="3" fill="currentColor" />
-                        </svg>
-                        <picture>
-                            <source srcset="model.webp" type="image/webp">
-                            <img src="model.webp" alt="Manoj Poudel" width="1800" height="1800"
-                                fetchpriority="high">
-                        </picture>
-                    </div>
-                </div>
-
-                <!-- LEFT (below): skills, actions, stats -->
-                <div class="hero-rest">
-                    <div class="hero-stack">
-                        <span class="hero-chip"><img src="logos/unrealengine.svg" alt="" width="18" height="18"
-                                loading="eager"> Unreal Engine</span>
-                        <span class="hero-chip"><img src="logos/blender.svg" alt="" width="18" height="18"
-                                loading="eager"> Blender</span>
-                    </div>
-
-                    <div class="hero-cta">
-                        <a href="#work" class="hero-btn hero-btn-primary" data-nav>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="9" />
-                                <circle cx="12" cy="12" r="3" />
-                            </svg>
+                <div class="hero-intro">
+                    <p class="hero-hi" data-i18n-html="heroIntro"><strong>Hey there!</strong> I'm a Software Engineer
+                        building practical digital experiences for mobility, robotics, Unreal Engine, and Blender.</p>
+                    <div class="hero-actions">
+                        <a class="hero-cta" href="#work" data-nav>
+                            <span class="hero-cta-slash" aria-hidden="true">//</span>
                             <span data-i18n="heroViewProjects">View Projects</span>
+                            <span class="hero-cta-arrow" aria-hidden="true">→</span>
                         </a>
-                        <a href="#contact" class="hero-btn hero-btn-ghost" data-nav>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-                            </svg>
-                            <span data-i18n="heroContactMe">Contact Me</span>
-                        </a>
+                        <a class="hero-contact" href="#contact" data-nav data-i18n="heroContactMe">Contact Me</a>
                     </div>
                 </div>
 
+                <ul class="hero-expertise">
+                    <li class="is-active" data-i18n="heroExp1">Unreal Engine</li>
+                    <li class="is-active" data-i18n="heroExp2">Blender</li>
+                    <li data-i18n="heroExp3">3D Simulation</li>
+                    <li data-i18n="heroExp4">Web Development</li>
+                </ul>
+            </div>
+
+            <div class="hero-techstrip">
+                <span class="ts-item"><img src="logos/unrealengine.svg" alt="" width="20" height="20" loading="lazy">
+                    Unreal Engine</span>
+                <span class="ts-item"><img src="logos/blender.svg" alt="" width="20" height="20" loading="lazy">
+                    Blender</span>
+                <span class="ts-item"><img src="logos/cplusplus.svg" alt="" width="20" height="20" loading="lazy">
+                    C++</span>
+                <span class="ts-item"><img src="logos/javascript.svg" alt="" width="20" height="20" loading="lazy">
+                    JavaScript</span>
+                <span class="ts-item"><img src="logos/html5.svg" alt="" width="20" height="20" loading="lazy">
+                    HTML/CSS</span>
+                <span class="ts-item"><img src="logos/firebase.svg" alt="" width="20" height="20" loading="lazy">
+                    Firebase</span>
             </div>
         </section>
 
@@ -4997,7 +4953,7 @@
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         // TOP NAV + hero CTA smooth-scroll (real anchors + Lenis)
-        document.querySelectorAll('.top-nav a[href^="#"], .hero-btn[href^="#"]').forEach(a => {
+        document.querySelectorAll('.top-nav a[href^="#"], .hero a[href^="#"]').forEach(a => {
             a.addEventListener('click', (e) => {
                 const target = document.getElementById(a.getAttribute('href').slice(1));
                 if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: 0, duration: 1.2 }); }
@@ -5401,6 +5357,8 @@
                     heroTitle: 'Software for mobility, robotics &amp; <span class="hero-accent">immersive experiences.</span>',
                     heroLead: "I build practical solutions with Unreal Engine and Blender.",
                     heroViewProjects: "View Projects", heroContactMe: "Contact Me",
+                    heroIntro: "<strong>Hey there!</strong> I'm a Software Engineer building practical digital experiences for mobility, robotics, Unreal Engine, and Blender.",
+                    heroExp1: "Unreal Engine", heroExp2: "Blender", heroExp3: "3D Simulation", heroExp4: "Web Development",
                     heroStat1Num: "3+", heroStat1: "Years Experience",
                     heroStat2Num: "20+", heroStat2: "Projects",
                     heroStat3Num: "Creative", heroStat3: "Problem Solver",
@@ -5498,6 +5456,8 @@
                     heroTitle: 'モビリティ、ロボティクス、そして<span class="hero-accent">没入型体験</span>のためのソフトウェア。',
                     heroLead: "Unreal Engine と Blender で、実用的なソリューションを構築します。",
                     heroViewProjects: "プロジェクトを見る", heroContactMe: "お問い合わせ",
+                    heroIntro: "<strong>こんにちは！</strong> モビリティ、ロボティクス、Unreal Engine、Blender のための実用的なデジタル体験をつくるソフトウェアエンジニアです。",
+                    heroExp1: "Unreal Engine", heroExp2: "Blender", heroExp3: "3Dシミュレーション", heroExp4: "Web開発",
                     heroStat1Num: "3+", heroStat1: "年の経験",
                     heroStat2Num: "20+", heroStat2: "プロジェクト",
                     heroStat3Num: "クリエイティブ", heroStat3: "問題解決力",
