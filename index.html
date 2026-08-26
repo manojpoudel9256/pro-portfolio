@@ -1908,7 +1908,7 @@
         .about-me-section {
             background: var(--surface);
             color: var(--ink);
-            padding: var(--section-pad) 0;
+            padding: var(--section-pad) 0 0;
         }
 
         .about-me-container {
@@ -2423,6 +2423,11 @@
         .timeline-section {
             margin-bottom: var(--space-9);
             padding: 0;
+        }
+
+        /* no trailing gap after the last block (Education) */
+        .timeline-section:last-child {
+            margin-bottom: 0;
         }
 
         .timeline {
@@ -4737,10 +4742,6 @@
                 </div>
             </div>
         </section>
-
-
-
-        <section class="spacer"></section>
 
         <footer class="footer" id="contact">
             <div class="footer-container">
