@@ -1449,6 +1449,20 @@
             transform: scale(1.04);
         }
 
+        /* second row — two 16:9 tool cards */
+        .pw-row2 {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3);
+        }
+
+        .pw-tool .pw-cover {
+            flex: none;
+            aspect-ratio: 16 / 9;
+            min-height: 0;
+        }
+
         /* body */
         .pw-body {
             flex: 0 0 auto;
@@ -3634,6 +3648,10 @@
                 gap: var(--space-4);
             }
 
+            .pw-row2 {
+                display: contents;
+            }
+
             /* no hover-dim on touch */
             .pw-projects:hover .pw-card:not(:hover) {
                 opacity: 1;
@@ -4247,6 +4265,55 @@
                             <span aria-hidden="true">→</span></span>
                     </div>
                 </article>
+
+                <!-- ROW 2: 3D tools (16:9 covers) -->
+                <div class="pw-row2">
+                    <article class="pw-card pw-tool" data-cat="web" role="button" tabindex="0"
+                        onclick="openProject('glbAnalyzer')"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('glbAnalyzer')}"
+                        aria-label="Open GLB Insight details">
+                        <div class="pw-cover">
+                            <img src="glbanalyzer.webp" alt="GLB Insight — 3D model analyzer" width="1324" height="938"
+                                loading="lazy">
+                        </div>
+                        <div class="pw-body">
+                            <h3 class="pw-name" data-i18n="pjAnalyzerName">GLB Insight</h3>
+                            <p class="pw-desc" data-i18n="pjAnalyzerShort">A browser-based analyzer for .glb 3D models —
+                                inspect texture sizes, polygon counts and data size at a glance.</p>
+                            <div class="pw-tags">
+                                <span class="pw-chip">JavaScript</span>
+                                <span class="pw-chip">Node.js</span>
+                                <span class="pw-chip">glTF</span>
+                                <span class="pw-chip">Three.js</span>
+                            </div>
+                            <span class="pw-view"><span data-i18n="workViewProject">View project</span>
+                                <span aria-hidden="true">→</span></span>
+                        </div>
+                    </article>
+
+                    <article class="pw-card pw-tool" data-cat="web" role="button" tabindex="0"
+                        onclick="openProject('glbForge')"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('glbForge')}"
+                        aria-label="Open GLB Forge details">
+                        <div class="pw-cover">
+                            <img src="glboptimizer.webp" alt="GLB Forge — 3D model optimizer for UE5" width="1600"
+                                height="794" loading="lazy">
+                        </div>
+                        <div class="pw-body">
+                            <h3 class="pw-name" data-i18n="pjForgeName">GLB Forge</h3>
+                            <p class="pw-desc" data-i18n="pjForgeShort">A 100% local .glb optimizer for Unreal Engine 5 —
+                                mesh simplification, texture downscaling and a live before/after 3D viewer.</p>
+                            <div class="pw-tags">
+                                <span class="pw-chip">Node.js</span>
+                                <span class="pw-chip">Three.js</span>
+                                <span class="pw-chip">glTF-Transform</span>
+                                <span class="pw-chip">meshoptimizer</span>
+                            </div>
+                            <span class="pw-view"><span data-i18n="workViewProject">View project</span>
+                                <span aria-hidden="true">→</span></span>
+                        </div>
+                    </article>
+                </div>
 
             </div>
         </section>
@@ -5282,7 +5349,7 @@
         const PT = {
             en: {
                 website: "Website", app: "Installable Web App",
-                builtWith: "Built with", live: "View live", open: "Open the app",
+                builtWith: "Built with", live: "View live", open: "Open the app", code: "View on GitHub",
                 installTitle: "Use it as an app on your iPhone",
                 installNote: "This is a web app — no App Store needed. Add it to your home screen and it opens full-screen, just like a native app.",
                 steps: [
@@ -5295,7 +5362,7 @@
             },
             ja: {
                 website: "ウェブサイト", app: "インストール可能なウェブアプリ",
-                builtWith: "使用技術", live: "ライブを見る", open: "アプリを開く",
+                builtWith: "使用技術", live: "ライブを見る", open: "アプリを開く", code: "GitHub で見る",
                 installTitle: "iPhoneでアプリのように使う",
                 installNote: "これはウェブアプリなので App Store は不要です。ホーム画面に追加すると、ネイティブアプリのように全画面で起動します。",
                 steps: [
@@ -5388,6 +5455,54 @@
                         ["Vercel", "アプリを世界中に配信するホスティングです。"]
                     ]
                 }
+            },
+            glbAnalyzer: {
+                img: "glbanalyzer.webp", cover: true, type: "website", repo: true,
+                live: "https://github.com/manojpoudel9256/GLBAnalyzer",
+                en: {
+                    title: "GLB Insight",
+                    desc: "A browser-based analyzer for .glb 3D models. Drop or select a file and it instantly reports the texture sizes, polygon (triangle) counts and total data size, with a per-object breakdown so you can see exactly what makes a model heavy — handy before importing assets into Unreal Engine. Running it locally is simple: clone the repo, run npm install once, then start it and open the tool in your browser.",
+                    stack: [
+                        ["JavaScript (ES modules)", "Parses the .glb / glTF binary to pull out meshes, textures and buffers, then computes the stats."],
+                        ["Node.js", "Runs the analysis pipeline and the small local tool server."],
+                        ["glTF (Khronos)", "The 3D asset format it inspects — geometry, materials and embedded textures."],
+                        ["Three.js", "Renders the optional in-browser 3D preview of the loaded model."]
+                    ]
+                },
+                ja: {
+                    title: "GLB Insight",
+                    desc: ".glb 3Dモデルをブラウザで解析するツール。ファイルをドロップまたは選択すると、テクスチャサイズ・ポリゴン（三角形）数・データサイズを即座に表示し、オブジェクト別の内訳まで確認できます。Unreal Engine へ取り込む前に、モデルが重くなる原因を把握するのに便利です。ローカル実行も簡単で、リポジトリをクローンして npm install を一度行い、起動してブラウザで開くだけです。",
+                    stack: [
+                        ["JavaScript（ESモジュール）", ".glb / glTF バイナリを解析し、メッシュ・テクスチャ・バッファを抽出して統計を算出します。"],
+                        ["Node.js", "解析パイプラインとローカルのツールサーバーを実行します。"],
+                        ["glTF（Khronos）", "解析対象の3Dアセット形式。ジオメトリ・マテリアル・テクスチャを含みます。"],
+                        ["Three.js", "読み込んだモデルのブラウザ内3Dプレビューを描画します。"]
+                    ]
+                }
+            },
+            glbForge: {
+                img: "glboptimizer.webp", cover: true, type: "website", repo: true,
+                live: "https://github.com/manojpoudel9256/GLBOptimizer",
+                en: {
+                    title: "GLB Forge",
+                    desc: "A 100% local .glb optimizer built for Unreal Engine 5 — everything runs in your browser on localhost, nothing is uploaded. It simplifies meshes, downscales textures and resamples animations, strips UE5-incompatible extensions, and includes a built-in 3D viewer with Preview, Inspect, Compare (split-screen) and Mesh-Density modes plus live before/after stats. Setup is quick: with Node 18+, run npm install once, then npm start and open http://localhost:3000.",
+                    stack: [
+                        ["Node.js", "Runs the local server and the whole optimization pipeline — no framework, no uploads."],
+                        ["Three.js (r165)", "Powers the built-in 3D viewer: Preview, Inspect, Compare and Mesh-Density modes."],
+                        ["glTF-Transform + meshoptimizer", "Simplify meshes, resample animations and remove UE5-incompatible extensions."],
+                        ["sharp", "Downscales and re-encodes textures to shrink the final file."]
+                    ]
+                },
+                ja: {
+                    title: "GLB Forge",
+                    desc: "Unreal Engine 5 向けの、完全ローカルな .glb 最適化ツール。すべてブラウザ上（localhost）で動作し、ファイルはどこにもアップロードされません。メッシュの簡略化、テクスチャの縮小、アニメーションのリサンプリングを行い、UE5非対応の拡張を除去。Preview・Inspect・Compare（分割表示）・Mesh Density の各モードを備えた3Dビューアと、圧縮前後のライブ統計も搭載しています。セットアップも手軽で、Node 18以上で npm install を一度行い、npm start して http://localhost:3000 を開くだけです。",
+                    stack: [
+                        ["Node.js", "ローカルサーバーと最適化パイプライン全体を実行します（フレームワーク不使用・アップロードなし）。"],
+                        ["Three.js（r165）", "Preview・Inspect・Compare・Mesh Density モードを備えた内蔵3Dビューアを実現します。"],
+                        ["glTF-Transform + meshoptimizer", "メッシュの簡略化、アニメーションのリサンプリング、UE5非対応拡張の除去を担当します。"],
+                        ["sharp", "テクスチャを縮小・再エンコードして最終ファイルを軽量化します。"]
+                    ]
+                }
             }
         };
 
@@ -5407,7 +5522,7 @@
             document.getElementById("pmDesc").textContent = c.desc;
             const live = document.getElementById("pmLive");
             live.href = p.live;
-            live.querySelector("span").textContent = t.live;
+            live.querySelector("span").textContent = p.repo ? t.code : t.live;
             document.getElementById("pmBuilt").textContent = t.builtWith;
             const stack = document.getElementById("pmStack");
             stack.innerHTML = "";
@@ -5500,6 +5615,10 @@
                     pjBudgetShort: "A smart finance app for budgeting, tracking, and insights.",
                     pjSalaryName: "Salary Tracker App",
                     pjSalaryShort: "A payroll and remittance app for tracking earnings and transfers.",
+                    pjAnalyzerName: "GLB Insight",
+                    pjAnalyzerShort: "A browser-based analyzer for .glb 3D models — inspect texture sizes, polygon counts and data size at a glance.",
+                    pjForgeName: "GLB Forge",
+                    pjForgeShort: "A 100% local .glb optimizer for Unreal Engine 5 — mesh simplification, texture downscaling and a live before/after 3D viewer.",
                     descGlbOpt: "A 100% local, browser-based tool that compresses .glb 3D models for Unreal Engine 5 — real-time viewer, before/after comparison, per-mesh inspector.",
                     descEverest: "A cinematic travel landing page — 340 scroll-scrubbed film frames fly you from an airplane window at golden hour to the roof of the world.",
                     descFace: "A real-time face-recognition system built from scratch — live camera capture, a training pipeline, and confidence-based recognition.",
@@ -5603,6 +5722,10 @@
                     pjBudgetShort: "予算管理・記録・分析のためのスマートな家計簿アプリ。",
                     pjSalaryName: "給料トラッカーアプリ",
                     pjSalaryShort: "収入と送金を管理する給与・送金アプリ。",
+                    pjAnalyzerName: "GLB Insight",
+                    pjAnalyzerShort: ".glb 3Dモデルをブラウザで解析。テクスチャサイズ・ポリゴン数・データサイズをひと目で確認できます。",
+                    pjForgeName: "GLB Forge",
+                    pjForgeShort: "Unreal Engine 5 向けの完全ローカルな .glb 最適化ツール。メッシュ簡略化・テクスチャ縮小・圧縮前後の3Dビューアを搭載。",
                     descGlbOpt: "Unreal Engine 5 向けに .glb 3Dモデルを圧縮する、完全ローカル・ブラウザ完結型ツール。リアルタイムビューア、圧縮前後の比較、メッシュ単位のインスペクターを搭載。",
                     descEverest: "映画のような旅のランディングページ。スクロールに連動する340枚のフレームが、夕暮れの機窓から世界の頂へと誘います。",
                     descFace: "ゼロから構築したリアルタイム顔認識システム。ライブカメラ映像の取得、学習パイプライン、信頼度ベースの認識を実装。",
