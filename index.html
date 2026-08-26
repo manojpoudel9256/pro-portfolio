@@ -1646,6 +1646,18 @@
             box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
         }
 
+        /* show the whole screenshot (no crop) — used for tool projects */
+        .proj-media.is-full {
+            max-height: none;
+            background: var(--surface);
+        }
+
+        .proj-media.is-full img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
         .proj-content {
             padding: var(--space-5) clamp(1.25rem, 4vw, 2.5rem) var(--space-6);
         }
@@ -5457,7 +5469,7 @@
                 }
             },
             glbAnalyzer: {
-                img: "glbanalyzer.webp", cover: true, type: "website", repo: true,
+                img: "glbanalyzer.webp", cover: true, fullImg: true, type: "website", repo: true,
                 live: "https://github.com/manojpoudel9256/GLBAnalyzer",
                 en: {
                     title: "GLB Insight",
@@ -5470,7 +5482,7 @@
                     ]
                 },
                 ja: {
-                    title: "GLB Insight",
+                    title: "GLB モデル解析ツール",
                     desc: ".glb 3Dモデルをブラウザで解析するツール。ファイルをドロップまたは選択すると、テクスチャサイズ・ポリゴン（三角形）数・データサイズを即座に表示し、オブジェクト別の内訳まで確認できます。Unreal Engine へ取り込む前に、モデルが重くなる原因を把握するのに便利です。ローカル実行も簡単で、リポジトリをクローンして npm install を一度行い、起動してブラウザで開くだけです。",
                     stack: [
                         ["JavaScript（ESモジュール）", ".glb / glTF バイナリを解析し、メッシュ・テクスチャ・バッファを抽出して統計を算出します。"],
@@ -5481,7 +5493,7 @@
                 }
             },
             glbForge: {
-                img: "glboptimizer.webp", cover: true, type: "website", repo: true,
+                img: "glboptimizer.webp", cover: true, fullImg: true, type: "website", repo: true,
                 live: "https://github.com/manojpoudel9256/GLBOptimizer",
                 en: {
                     title: "GLB Forge",
@@ -5494,7 +5506,7 @@
                     ]
                 },
                 ja: {
-                    title: "GLB Forge",
+                    title: "GLB モデル最適化ツール",
                     desc: "Unreal Engine 5 向けの、完全ローカルな .glb 最適化ツール。すべてブラウザ上（localhost）で動作し、ファイルはどこにもアップロードされません。メッシュの簡略化、テクスチャの縮小、アニメーションのリサンプリングを行い、UE5非対応の拡張を除去。Preview・Inspect・Compare（分割表示）・Mesh Density の各モードを備えた3Dビューアと、圧縮前後のライブ統計も搭載しています。セットアップも手軽で、Node 18以上で npm install を一度行い、npm start して http://localhost:3000 を開くだけです。",
                     stack: [
                         ["Node.js", "ローカルサーバーと最適化パイプライン全体を実行します（フレームワーク不使用・アップロードなし）。"],
@@ -5517,6 +5529,7 @@
             const img = document.getElementById("pmImg");
             img.src = p.img; img.alt = c.title;
             media.classList.toggle("is-app", !p.cover);
+            media.classList.toggle("is-full", !!p.fullImg);
             document.getElementById("pmKind").textContent = (p.type === "app") ? t.app : t.website;
             document.getElementById("pmTitle").textContent = c.title;
             document.getElementById("pmDesc").textContent = c.desc;
@@ -5722,9 +5735,9 @@
                     pjBudgetShort: "予算管理・記録・分析のためのスマートな家計簿アプリ。",
                     pjSalaryName: "給料トラッカーアプリ",
                     pjSalaryShort: "収入と送金を管理する給与・送金アプリ。",
-                    pjAnalyzerName: "GLB Insight",
+                    pjAnalyzerName: "GLB モデル解析ツール",
                     pjAnalyzerShort: ".glb 3Dモデルをブラウザで解析。テクスチャサイズ・ポリゴン数・データサイズをひと目で確認できます。",
-                    pjForgeName: "GLB Forge",
+                    pjForgeName: "GLB モデル最適化ツール",
                     pjForgeShort: "Unreal Engine 5 向けの完全ローカルな .glb 最適化ツール。メッシュ簡略化・テクスチャ縮小・圧縮前後の3Dビューアを搭載。",
                     descGlbOpt: "Unreal Engine 5 向けに .glb 3Dモデルを圧縮する、完全ローカル・ブラウザ完結型ツール。リアルタイムビューア、圧縮前後の比較、メッシュ単位のインスペクターを搭載。",
                     descEverest: "映画のような旅のランディングページ。スクロールに連動する340枚のフレームが、夕暮れの機窓から世界の頂へと誘います。",
