@@ -5474,7 +5474,7 @@
                 live: "https://github.com/manojpoudel9256/GLBAnalyzer",
                 en: {
                     title: "GLB Insight",
-                    desc: "A browser-based analyzer for .glb 3D models. Drop or select a file and it instantly reports the texture sizes, polygon (triangle) counts and total data size, with a per-object breakdown so you can see exactly what makes a model heavy — handy before importing assets into Unreal Engine. Running it locally is simple: clone the repo, run npm install once, then start it and open the tool in your browser.",
+                    desc: "An internal tool I built at work after my team lead needed a fast, reliable way to see the full technical breakdown of any 3D model before it went into production. Drop in a .glb file and it instantly reports the polygon (triangle) counts, texture sizes and total data size, with a per-object breakdown — and it exports a complete PDF report you can hand to the team. I designed it around the .glb format on purpose: a single .glb carries the model's complete meshes and original-quality textures and is the cleanest format to import into Unreal Engine, so the tool analyses the exact asset that ships. It became part of our team's everyday workflow and my lead personally thanked me for it. Run it locally in minutes: clone the repo, npm install, then start it and open the tool in your browser.",
                     stack: [
                         ["JavaScript (ES modules)", "Parses the .glb / glTF binary to pull out meshes, textures and buffers, then computes the stats."],
                         ["Node.js", "Runs the analysis pipeline and the small local tool server."],
@@ -5484,7 +5484,7 @@
                 },
                 ja: {
                     title: "GLB モデル解析ツール",
-                    desc: ".glb 3Dモデルをブラウザで解析するツール。ファイルをドロップまたは選択すると、テクスチャサイズ・ポリゴン（三角形）数・データサイズを即座に表示し、オブジェクト別の内訳まで確認できます。Unreal Engine へ取り込む前に、モデルが重くなる原因を把握するのに便利です。ローカル実行も簡単で、リポジトリをクローンして npm install を一度行い、起動してブラウザで開くだけです。",
+                    desc: "社内で私が開発したツールです。チームリーダーから「本番で使う前に、3Dモデルの詳細（ポリゴン数やテクスチャサイズ）を素早く正確に把握できるツールが欲しい」と依頼を受けて制作しました。.glb ファイルをドロップすると、ポリゴン（三角形）数・テクスチャサイズ・データサイズを即座に表示し、オブジェクト別の内訳まで確認できます。さらに、すべての詳細をまとめた PDF レポートを書き出してチームに共有できます。あえて .glb 形式に対応させたのは、1つの .glb にモデルのメッシュとオリジナル品質のテクスチャがすべて含まれ、Unreal Engine への取り込みに最適な形式だからです。実際に取り込むアセットそのものを解析できます。このツールはチームの日常業務に組み込まれ、リーダーからも直接感謝されました。ローカル実行も簡単で、リポジトリをクローンして npm install し、起動してブラウザで開くだけです。",
                     stack: [
                         ["JavaScript（ESモジュール）", ".glb / glTF バイナリを解析し、メッシュ・テクスチャ・バッファを抽出して統計を算出します。"],
                         ["Node.js", "解析パイプラインとローカルのツールサーバーを実行します。"],
@@ -5498,7 +5498,7 @@
                 live: "https://github.com/manojpoudel9256/GLBOptimizer",
                 en: {
                     title: "GLB Forge",
-                    desc: "A 100% local .glb optimizer built for Unreal Engine 5 — everything runs in your browser on localhost, nothing is uploaded. It simplifies meshes, downscales textures and resamples animations, strips UE5-incompatible extensions, and includes a built-in 3D viewer with Preview, Inspect, Compare (split-screen) and Mesh-Density modes plus live before/after stats. Setup is quick: with Node 18+, run npm install once, then npm start and open http://localhost:3000.",
+                    desc: "A companion tool I created at work to solve a real production problem: when a 3D model's polygon count is too high, importing it into Unreal Engine — or any real-time 3D / simulation environment — can hang on load or crash the whole scene. I built GLB Forge to fix that by cutting the polygon count and downscaling the model's textures, so heavy assets import cleanly and run smoothly — all 100% locally in the browser, with nothing uploaded. A built-in before/after 3D viewer (Preview, Inspect, split-screen Compare and Mesh-Density modes) lets you confirm the model still looks right after optimization, and it strips UE5-incompatible extensions for clean imports. Together with GLB Insight, it's an internal tool our team relies on, built end-to-end by me. Setup is quick: with Node 18+, run npm install once, then npm start and open http://localhost:3000.",
                     stack: [
                         ["Node.js", "Runs the local server and the whole optimization pipeline — no framework, no uploads."],
                         ["Three.js (r165)", "Powers the built-in 3D viewer: Preview, Inspect, Compare and Mesh-Density modes."],
@@ -5508,7 +5508,7 @@
                 },
                 ja: {
                     title: "GLB モデル最適化ツール",
-                    desc: "Unreal Engine 5 向けの、完全ローカルな .glb 最適化ツール。すべてブラウザ上（localhost）で動作し、ファイルはどこにもアップロードされません。メッシュの簡略化、テクスチャの縮小、アニメーションのリサンプリングを行い、UE5非対応の拡張を除去。Preview・Inspect・Compare（分割表示）・Mesh Density の各モードを備えた3Dビューアと、圧縮前後のライブ統計も搭載しています。セットアップも手軽で、Node 18以上で npm install を一度行い、npm start して http://localhost:3000 を開くだけです。",
+                    desc: "社内で私が開発した、GLB Insight と対になるツールです。3Dモデルのポリゴン数が多すぎると、Unreal Engine やその他のリアルタイム3D・シミュレーション環境に取り込む際に、読み込みが止まったりシーン全体がクラッシュしたりすることがあります。GLB Forge はこの課題を解決するために制作しました。ポリゴン数を削減し、テクスチャを縮小することで、重いアセットでもクリーンに取り込め、動作も軽くなります。処理はすべてブラウザ上（localhost）で完結し、ファイルはアップロードされません。Preview・Inspect・分割表示の Compare・Mesh Density を備えた圧縮前後の3Dビューアで、最適化後もモデルが正しく見えるか確認でき、UE5非対応の拡張も除去します。GLB Insight とともにチームが実際に使う社内ツールで、すべて私が制作しました。セットアップも手軽で、Node 18以上で npm install を行い、npm start して http://localhost:3000 を開くだけです。",
                     stack: [
                         ["Node.js", "ローカルサーバーと最適化パイプライン全体を実行します（フレームワーク不使用・アップロードなし）。"],
                         ["Three.js（r165）", "Preview・Inspect・Compare・Mesh Density モードを備えた内蔵3Dビューアを実現します。"],
@@ -5630,9 +5630,9 @@
                     pjSalaryName: "Salary Tracker App",
                     pjSalaryShort: "A payroll and remittance app for tracking earnings and transfers.",
                     pjAnalyzerName: "GLB Insight",
-                    pjAnalyzerShort: "A browser-based analyzer for .glb 3D models — inspect texture sizes, polygon counts and data size at a glance.",
+                    pjAnalyzerShort: "An internal tool I built at work to inspect any .glb 3D model — polygon counts, texture sizes and an exportable PDF report.",
                     pjForgeName: "GLB Forge",
-                    pjForgeShort: "A 100% local .glb optimizer for Unreal Engine 5 — mesh simplification, texture downscaling and a live before/after 3D viewer.",
+                    pjForgeShort: "An internal tool I built to shrink heavy 3D models — cutting polygon counts and texture sizes so they import into Unreal Engine without crashing.",
                     descGlbOpt: "A 100% local, browser-based tool that compresses .glb 3D models for Unreal Engine 5 — real-time viewer, before/after comparison, per-mesh inspector.",
                     descEverest: "A cinematic travel landing page — 340 scroll-scrubbed film frames fly you from an airplane window at golden hour to the roof of the world.",
                     descFace: "A real-time face-recognition system built from scratch — live camera capture, a training pipeline, and confidence-based recognition.",
@@ -5737,9 +5737,9 @@
                     pjSalaryName: "給料トラッカーアプリ",
                     pjSalaryShort: "収入と送金を管理する給与・送金アプリ。",
                     pjAnalyzerName: "GLB モデル解析ツール",
-                    pjAnalyzerShort: ".glb 3Dモデルをブラウザで解析。テクスチャサイズ・ポリゴン数・データサイズをひと目で確認できます。",
+                    pjAnalyzerShort: "3Dモデルの詳細（ポリゴン数・テクスチャサイズ）を解析し、PDFで書き出せる、私が社内向けに開発したツール。",
                     pjForgeName: "GLB モデル最適化ツール",
-                    pjForgeShort: "Unreal Engine 5 向けの完全ローカルな .glb 最適化ツール。メッシュ簡略化・テクスチャ縮小・圧縮前後の3Dビューアを搭載。",
+                    pjForgeShort: "ポリゴン数とテクスチャを削減し、重い3DモデルもUEに安全に取り込めるようにする、私が社内向けに開発したツール。",
                     descGlbOpt: "Unreal Engine 5 向けに .glb 3Dモデルを圧縮する、完全ローカル・ブラウザ完結型ツール。リアルタイムビューア、圧縮前後の比較、メッシュ単位のインスペクターを搭載。",
                     descEverest: "映画のような旅のランディングページ。スクロールに連動する340枚のフレームが、夕暮れの機窓から世界の頂へと誘います。",
                     descFace: "ゼロから構築したリアルタイム顔認識システム。ライブカメラ映像の取得、学習パイプライン、信頼度ベースの認識を実装。",
