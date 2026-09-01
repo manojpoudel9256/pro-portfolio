@@ -2200,7 +2200,7 @@
         .lc-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            align-items: stretch;
+            align-items: start;
             gap: var(--space-4);
         }
 
@@ -2314,15 +2314,10 @@
 
         .lc-tiles {
             margin-top: var(--space-5);
-            flex: 1 1 auto;
+            flex: 0 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-        }
-
-        /* fewer-tile card: spread rows to fill the card height */
-        .lc-tiles-en {
-            align-content: space-between;
         }
 
         .lc-tile {
@@ -2380,6 +2375,98 @@
             margin-top: 2px;
         }
 
+        /* section performance bars — fills the shorter card */
+        .lc-perf {
+            position: relative;
+            z-index: 1;
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: var(--space-5);
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--hairline);
+        }
+
+        .lc-perf-title {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--lc-a);
+        }
+
+        .lc-bar-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 7px;
+        }
+
+        .lc-bar-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+
+        .lc-bar-pct {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--lc-a);
+        }
+
+        .lc-bar-track {
+            display: block;
+            width: 100%;
+            height: 8px;
+            border-radius: 6px;
+            background: color-mix(in srgb, var(--lc-a) 13%, var(--bg));
+            overflow: hidden;
+        }
+
+        .lc-bar-fill {
+            display: block;
+            height: 100%;
+            border-radius: 6px;
+            background: linear-gradient(90deg, color-mix(in srgb, var(--lc-a) 72%, #fff), var(--lc-a));
+        }
+
+        .lc-bar-sub {
+            margin-top: 6px;
+            font-size: 0.74rem;
+            color: var(--ink-3);
+        }
+
+        /* capabilities checklist (JLPT card) */
+        .lc-caps {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .lc-caps li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: var(--fs-300);
+            line-height: 1.4;
+            color: var(--ink-2);
+        }
+
+        .lc-caps svg {
+            flex: 0 0 auto;
+            width: 21px;
+            height: 21px;
+            margin-top: 1px;
+            color: var(--lc-a);
+        }
+
         @media (max-width: 980px) {
             .lc-head {
                 flex-direction: column;
@@ -2388,10 +2475,6 @@
 
             .lc-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .lc-tiles-en {
-                align-content: start;
             }
         }
 
@@ -4941,6 +5024,38 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="lc-perf">
+                                <span class="lc-perf-title" data-i18n="lcJpCapTitle">Proven Capabilities</span>
+                                <ul class="lc-caps">
+                                    <li>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="9" />
+                                            <path d="M8.5 12.5l2.5 2.5 4.5-5" />
+                                        </svg>
+                                        <span data-i18n="lcJpCap1">Business-level Japanese for professional and
+                                            technical work</span>
+                                    </li>
+                                    <li>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="9" />
+                                            <path d="M8.5 12.5l2.5 2.5 4.5-5" />
+                                        </svg>
+                                        <span data-i18n="lcJpCap2">Reads and understands complex documents and
+                                            specifications</span>
+                                    </li>
+                                    <li>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="9" />
+                                            <path d="M8.5 12.5l2.5 2.5 4.5-5" />
+                                        </svg>
+                                        <span data-i18n="lcJpCap3">Communicates confidently in meetings and with
+                                            clients</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </article>
 
                         <!-- TOEIC -->
@@ -5005,25 +5120,13 @@
                                     <span class="lc-tico">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
                                             stroke-linecap="round" stroke-linejoin="round">
-                                            <circle cx="12" cy="9" r="5" />
-                                            <path d="M8.5 13.2L7 21l5-2.6L17 21l-1.5-7.8" />
+                                            <circle cx="12" cy="12" r="9" />
+                                            <path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" />
                                         </svg>
                                     </span>
                                     <span class="lc-ttext">
-                                        <span class="lc-tlabel" data-i18n="lcLblPerc">Percentile Rank</span>
-                                        <span class="lc-tval">89</span>
-                                    </span>
-                                </div>
-                                <div class="lc-tile">
-                                    <span class="lc-tico">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M12 3.5l2.6 5.6 6.1.8-4.5 4.2 1.2 6.1L12 17.4 6.6 20.2l1.2-6.1L3.3 9.9l6.1-.8z" />
-                                        </svg>
-                                    </span>
-                                    <span class="lc-ttext">
-                                        <span class="lc-tlabel" data-i18n="lcLblResult">Result</span>
-                                        <span class="lc-tval" data-i18n="lcEnResultV">Achieved</span>
+                                        <span class="lc-tlabel" data-i18n="lcLblCefr">CEFR</span>
+                                        <span class="lc-tval">B2</span>
                                     </span>
                                 </div>
                                 <div class="lc-tile">
@@ -5038,6 +5141,52 @@
                                         <span class="lc-tlabel" data-i18n="lcLblTestDate">Test Date</span>
                                         <span class="lc-tval" data-i18n="lcEnTestV">May 18, 2025</span>
                                     </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="9" r="5" />
+                                            <path d="M8.5 13.2L7 21l5-2.6L17 21l-1.5-7.8" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblIssued">Issued</span>
+                                        <span class="lc-tval" data-i18n="lcEnIssuedV">Jun 03, 2025</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="lc-perf">
+                                <span class="lc-perf-title" data-i18n="lcEnPerfTitle">Section Performance</span>
+                                <div class="lc-bar">
+                                    <div class="lc-bar-head">
+                                        <span class="lc-bar-name" data-i18n="lcLblListen">Listening</span>
+                                        <span class="lc-bar-pct">94%</span>
+                                    </div>
+                                    <span class="lc-bar-track"><span class="lc-bar-fill"
+                                            style="width:94%"></span></span>
+                                    <div class="lc-bar-sub" data-i18n="lcEnLisSub">465 / 495 · 89th percentile ·
+                                        above average</div>
+                                </div>
+                                <div class="lc-bar">
+                                    <div class="lc-bar-head">
+                                        <span class="lc-bar-name" data-i18n="lcLblRead">Reading</span>
+                                        <span class="lc-bar-pct">77%</span>
+                                    </div>
+                                    <span class="lc-bar-track"><span class="lc-bar-fill"
+                                            style="width:77%"></span></span>
+                                    <div class="lc-bar-sub" data-i18n="lcEnReadSub">380 / 495 · 76th percentile ·
+                                        above average</div>
+                                </div>
+                                <div class="lc-bar">
+                                    <div class="lc-bar-head">
+                                        <span class="lc-bar-name" data-i18n="lcLblOverall">Overall</span>
+                                        <span class="lc-bar-pct">85%</span>
+                                    </div>
+                                    <span class="lc-bar-track"><span class="lc-bar-fill"
+                                            style="width:85%"></span></span>
+                                    <div class="lc-bar-sub" data-i18n="lcEnOverSub">845 / 990 · CEFR B2 · Independent
+                                        user</div>
                                 </div>
                             </div>
                         </article>
@@ -6274,6 +6423,15 @@
                     lcEnCat: "English Communication",
                     lcEnDesc: "Recognized English communication benchmark for reading and listening skills in professional and global settings.",
                     lcEnResultV: "Achieved", lcEnTestV: "May 18, 2025",
+                    lcLblIssued: "Issued", lcEnIssuedV: "Jun 03, 2025", lcLblOverall: "Overall",
+                    lcEnPerfTitle: "Section Performance",
+                    lcEnLisSub: "465 / 495 · 89th percentile · above average",
+                    lcEnReadSub: "380 / 495 · 76th percentile · above average",
+                    lcEnOverSub: "845 / 990 · CEFR B2 · Independent user",
+                    lcJpCapTitle: "Proven Capabilities",
+                    lcJpCap1: "Business-level Japanese for professional and technical work",
+                    lcJpCap2: "Reads and understands complex documents and specifications",
+                    lcJpCap3: "Communicates confidently in meetings and with clients",
                     certKicker: "Credentials",
                     certSub: "Ongoing professional learning and industry-recognized certifications that strengthen my expertise and commitment to growth.",
                     certVerifyNote: "All credentials are verified<br>and issued by recognized providers.",
@@ -6403,6 +6561,15 @@
                     lcEnCat: "英語コミュニケーション",
                     lcEnDesc: "プロフェッショナルおよびグローバルな場面での、リーディング・リスニング力を示す、国際的に認知された英語コミュニケーションの指標です。",
                     lcEnResultV: "取得", lcEnTestV: "2025年5月18日",
+                    lcLblIssued: "発行日", lcEnIssuedV: "2025年6月3日", lcLblOverall: "総合",
+                    lcEnPerfTitle: "セクション別スコア",
+                    lcEnLisSub: "465 / 495 ・ 上位11%（89パーセンタイル）・ 平均以上",
+                    lcEnReadSub: "380 / 495 ・ 上位24%（76パーセンタイル）・ 平均以上",
+                    lcEnOverSub: "845 / 990 ・ CEFR B2 ・ 自立した言語使用者",
+                    lcJpCapTitle: "N1 が証明する能力",
+                    lcJpCap1: "業務・技術分野で通用するビジネスレベルの日本語",
+                    lcJpCap2: "複雑な文書や仕様書を読み、正確に理解できる",
+                    lcJpCap3: "会議や顧客とのやり取りで自信を持って対応できる",
                     certKicker: "クレデンシャル",
                     certSub: "専門性の向上と成長への姿勢を支える、継続的な学習と業界公認の認定資格です。",
                     certVerifyNote: "すべての資格は認証済みで<br>信頼できる発行元によるものです。",
