@@ -2114,6 +2114,294 @@
         }
 
         /* ── Licenses & Certifications ─────────────── */
+        /* ── Language Credentials ─────────────────── */
+        .lang-cred {
+            margin-bottom: var(--space-9);
+        }
+
+        .lc-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--space-5);
+            margin-bottom: var(--space-6);
+        }
+
+        .lc-kicker {
+            display: inline-block;
+            position: relative;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding-bottom: 10px;
+        }
+
+        .lc-kicker::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .lc-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 3.4vw, 3rem);
+            font-weight: 600;
+            line-height: 1.05;
+            color: var(--ink);
+            margin-top: var(--space-2);
+        }
+
+        .lc-sub {
+            margin-top: var(--space-3);
+            max-width: 54ch;
+            font-size: var(--fs-300);
+            line-height: var(--lh-body);
+            color: var(--ink-2);
+        }
+
+        .lc-note {
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--accent) 8%, var(--elevated));
+            border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+            color: var(--ink-2);
+            font-size: var(--fs-200);
+        }
+
+        .lc-note svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+            flex: 0 0 auto;
+        }
+
+        .lc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4);
+        }
+
+        .lc-card {
+            position: relative;
+            overflow: hidden;
+            background: var(--elevated);
+            border: 1px solid var(--hairline);
+            border-radius: var(--radius-lg);
+            padding: clamp(1.4rem, 2.4vw, 2.2rem);
+            box-shadow: 0 12px 34px rgba(20, 20, 20, 0.06);
+        }
+
+        /* faint corner pattern */
+        .lc-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 46%;
+            height: 58%;
+            z-index: 0;
+            color: var(--accent);
+            opacity: 0.07;
+            pointer-events: none;
+            -webkit-mask-image: radial-gradient(120% 120% at 100% 0, #000 30%, transparent 75%);
+            mask-image: radial-gradient(120% 120% at 100% 0, #000 30%, transparent 75%);
+        }
+
+        .lc-dots {
+            background-image: radial-gradient(currentColor 1.1px, transparent 1.5px);
+            background-size: 10px 10px;
+        }
+
+        .lc-wave {
+            background-image: radial-gradient(circle at 50% 100%, transparent 7.5px, currentColor 7.5px 8.5px, transparent 8.6px);
+            background-size: 18px 9px;
+        }
+
+        .lc-card-head,
+        .lc-desc,
+        .lc-tiles {
+            position: relative;
+            z-index: 1;
+        }
+
+        .lc-card-head {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .lc-badge {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 9%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
+        }
+
+        .lc-badge svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .lc-card-titles {
+            min-width: 0;
+        }
+
+        .lc-cat {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .lc-name {
+            font-family: var(--font-serif);
+            font-size: clamp(1.5rem, 2.4vw, 2rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--ink);
+        }
+
+        .lc-rule {
+            display: block;
+            width: 46px;
+            height: 3px;
+            border-radius: 2px;
+            background: var(--accent);
+            margin-top: 10px;
+        }
+
+        .lc-desc {
+            margin-top: var(--space-4);
+            font-size: var(--fs-300);
+            line-height: var(--lh-body);
+            color: var(--ink-2);
+            max-width: 52ch;
+        }
+
+        .lc-tiles {
+            margin-top: var(--space-4);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-2);
+        }
+
+        .lc-tile {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            padding: 13px 14px;
+            border-radius: 14px;
+            background: var(--bg);
+            border: 1px solid var(--hairline);
+            transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+        }
+
+        .lc-tile:hover {
+            border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+            transform: translateY(-2px);
+        }
+
+        .lc-tico {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            width: 26px;
+            height: 26px;
+            color: var(--accent);
+        }
+
+        .lc-tico svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .lc-ttext {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            line-height: 1.25;
+        }
+
+        .lc-tlabel {
+            font-size: 0.7rem;
+            color: var(--ink-3);
+            margin-bottom: 3px;
+        }
+
+        .lc-tval {
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--ink);
+        }
+
+        .lc-tmax {
+            font-weight: 500;
+            color: var(--ink-3);
+        }
+
+        .lc-tsub {
+            font-size: 0.72rem;
+            color: var(--ink-3);
+            margin-top: 2px;
+        }
+
+        @media (max-width: 980px) {
+            .lc-head {
+                flex-direction: column;
+                gap: var(--space-3);
+            }
+
+            .lc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .lc-tiles {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .lc-card-head {
+                gap: var(--space-3);
+            }
+
+            .lc-badge {
+                width: 60px;
+                height: 60px;
+            }
+
+            .lc-badge svg {
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .lc-tiles {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .cert-section {
             margin-bottom: var(--space-9);
         }
@@ -4456,6 +4744,280 @@
                     </div>
                 </div>
 
+                <!-- Language Credentials -->
+                <div class="lang-cred">
+                    <div class="lc-head">
+                        <div class="lc-head-lead">
+                            <span class="lc-kicker" data-i18n="lcKicker">Language Credentials</span>
+                            <h2 class="lc-title" data-i18n="lcTitle">Language Credentials</h2>
+                            <p class="lc-sub" data-i18n="lcSub">Professional language qualifications that strengthen my
+                                ability to work, collaborate, and communicate in Japan and global environments.</p>
+                        </div>
+                        <div class="lc-note">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M12 3l1.5 6L20 10.5 13.5 12 12 18l-1.5-6L4 10.5 10.5 9z" />
+                            </svg>
+                            <span data-i18n="lcNote">A strong complement to my technical expertise</span>
+                        </div>
+                    </div>
+
+                    <div class="lc-grid">
+                        <!-- JLPT N1 -->
+                        <article class="lc-card">
+                            <span class="lc-pattern lc-wave" aria-hidden="true"></span>
+                            <div class="lc-card-head">
+                                <span class="lc-badge lc-badge-jp" aria-hidden="true">
+                                    <svg viewBox="0 0 64 64" fill="currentColor">
+                                        <rect x="26" y="20" width="12" height="10" rx="1.6" />
+                                        <rect x="26" y="33" width="12" height="10" rx="1.6" />
+                                        <path d="M22 18c-7 3-9 12-4.5 20" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" />
+                                        <ellipse cx="17.5" cy="24" rx="2.7" ry="1.5"
+                                            transform="rotate(-35 17.5 24)" />
+                                        <ellipse cx="16" cy="30" rx="2.7" ry="1.5" transform="rotate(-18 16 30)" />
+                                        <ellipse cx="16" cy="36" rx="2.7" ry="1.5" />
+                                        <ellipse cx="17.5" cy="42" rx="2.7" ry="1.5" transform="rotate(28 17.5 42)" />
+                                        <path d="M42 18c7 3 9 12 4.5 20" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" />
+                                        <ellipse cx="46.5" cy="24" rx="2.7" ry="1.5" transform="rotate(35 46.5 24)" />
+                                        <ellipse cx="48" cy="30" rx="2.7" ry="1.5" transform="rotate(18 48 30)" />
+                                        <ellipse cx="48" cy="36" rx="2.7" ry="1.5" />
+                                        <ellipse cx="46.5" cy="42" rx="2.7" ry="1.5" transform="rotate(-28 46.5 42)" />
+                                    </svg>
+                                </span>
+                                <div class="lc-card-titles">
+                                    <span class="lc-cat" data-i18n="lcJpCat">Japanese Proficiency</span>
+                                    <h3 class="lc-name">JLPT N1</h3>
+                                    <span class="lc-rule" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <p class="lc-desc" data-i18n="lcJpDesc">Highest level of the Japanese-Language Proficiency
+                                Test. Demonstrates advanced Japanese comprehension for professional, technical, and
+                                workplace communication in Japan.</p>
+                            <div class="lc-tiles">
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblLevel">Level</span>
+                                        <span class="lc-tval">N1</span>
+                                        <span class="lc-tsub" data-i18n="lcJpLevelSub">(Highest Level)</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="9" />
+                                            <path d="M8.5 12.5l2.5 2.5 4.5-5" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblResult">Result</span>
+                                        <span class="lc-tval" data-i18n="lcJpResultV">Passed</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+                                            <path d="M14 3v5h5M9 13h6M9 17h4" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblCert">Certification</span>
+                                        <span class="lc-tval" data-i18n="lcJpCertV">Japanese-Language Proficiency
+                                            Test</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 6.5C10.5 5.5 8 5 4 5v13c4 0 6.5.5 8 1.5 1.5-1 4-1.5 8-1.5V5c-4 0-6.5.5-8 1.5z" />
+                                            <path d="M12 6.5V20" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblFocus">Focus</span>
+                                        <span class="lc-tval" data-i18n="lcJpFocus1V">Reading</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+                                            <rect x="3" y="14" width="4" height="6" rx="1.5" />
+                                            <rect x="17" y="14" width="4" height="6" rx="1.5" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblFocus">Focus</span>
+                                        <span class="lc-tval" data-i18n="lcJpFocus2V">Listening</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M4 20h4L19 9l-4-4L4 16z" />
+                                            <path d="M14 6l4 4" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblFocus">Focus</span>
+                                        <span class="lc-tval" data-i18n="lcJpFocus3V">Vocabulary / Grammar</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="7" width="18" height="13" rx="2" />
+                                            <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12.5h18" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblComm">Communication</span>
+                                        <span class="lc-tval" data-i18n="lcJpCommV">Professional / Workplace</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4.5" width="18" height="16" rx="2" />
+                                            <path d="M3 9.5h18M8 3v4M16 3v4" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblTestDate">Test Date</span>
+                                        <span class="lc-tval" data-i18n="lcJpTestV">July 05, 2026</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="9" />
+                                            <path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblCefr">CEFR</span>
+                                        <span class="lc-tval">B2</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- TOEIC -->
+                        <article class="lc-card">
+                            <span class="lc-pattern lc-dots" aria-hidden="true"></span>
+                            <div class="lc-card-head">
+                                <span class="lc-badge" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="9" />
+                                        <path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" />
+                                    </svg>
+                                </span>
+                                <div class="lc-card-titles">
+                                    <span class="lc-cat" data-i18n="lcEnCat">English Communication</span>
+                                    <h3 class="lc-name">TOEIC Listening &amp; Reading</h3>
+                                    <span class="lc-rule" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <p class="lc-desc" data-i18n="lcEnDesc">Recognized English communication benchmark for
+                                reading and listening skills in professional and global settings.</p>
+                            <div class="lc-tiles lc-tiles-en">
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M3 17l6-6 4 4 8-8" />
+                                            <path d="M15 7h6v6" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblTotal">Total Score</span>
+                                        <span class="lc-tval">845</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblListen">Listening</span>
+                                        <span class="lc-tval">465<span class="lc-tmax"> / 495</span></span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+                                            <path d="M14 3v5h5M9 13h6M9 17h4" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblRead">Reading</span>
+                                        <span class="lc-tval">380<span class="lc-tmax"> / 495</span></span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="9" r="5" />
+                                            <path d="M8.5 13.2L7 21l5-2.6L17 21l-1.5-7.8" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblPerc">Percentile Rank</span>
+                                        <span class="lc-tval">89</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 3.5l2.6 5.6 6.1.8-4.5 4.2 1.2 6.1L12 17.4 6.6 20.2l1.2-6.1L3.3 9.9l6.1-.8z" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblResult">Result</span>
+                                        <span class="lc-tval" data-i18n="lcEnResultV">Achieved</span>
+                                    </span>
+                                </div>
+                                <div class="lc-tile">
+                                    <span class="lc-tico">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="4.5" width="18" height="16" rx="2" />
+                                            <path d="M3 9.5h18M8 3v4M16 3v4" />
+                                        </svg>
+                                    </span>
+                                    <span class="lc-ttext">
+                                        <span class="lc-tlabel" data-i18n="lcLblTestDate">Test Date</span>
+                                        <span class="lc-tval" data-i18n="lcEnTestV">May 18, 2025</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
                 <!-- Licenses & Certifications -->
                 <div class="cert-section">
                     <div class="cert-head">
@@ -4516,50 +5078,6 @@
                                         <path d="M9 12l2 2 4-4" />
                                     </svg>
                                     <span data-i18n="certVerified">Verified</span>
-                                </span>
-                            </div>
-                        </article>
-
-                        <!-- JLPT N1 -->
-                        <article class="cred-card">
-                            <div class="cred-aside">
-                                <div class="cred-date">
-                                    <span class="cred-mon" data-i18n="cert5Mon">Jul</span>
-                                    <span class="cred-year" data-i18n="cert5Year">2026</span>
-                                </div>
-                                <span class="cred-logo"><img src="logos/jlpt.svg" alt="JLPT" width="64" height="24"
-                                        loading="lazy"></span>
-                            </div>
-                            <div class="cred-main">
-                                <h3 class="cred-title" data-i18n="cert5Title">JLPT N1 — Japanese Proficiency</h3>
-                                <span class="cred-issuer" data-i18n="cert5Issuer">The Japan Foundation · JEES</span>
-                                <p class="cred-desc" data-i18n="cert5Desc">Passed N1 — the highest of the JLPT's five
-                                    levels and the Japanese-proficiency benchmark employers look for in Japan's IT
-                                    industry. Certifies comprehension of Japanese across business, technical and academic
-                                    contexts (total score 128/180, CEFR B2).</p>
-                                <div class="cred-meta">
-                                    <span class="cred-skills" data-i18n="cert5Skills">Reading · Listening · Vocabulary ·
-                                        Grammar</span>
-                                    <span class="cred-id"><span data-i18n="certIdLabel">Credential ID</span>:
-                                        <span class="cred-id-val">N1A358051J</span></span>
-                                </div>
-                            </div>
-                            <div class="cred-actions">
-                                <a class="cred-btn" href="https://www.linkedin.com/in/manojpoudel0429/details/certifications/"
-                                    target="_blank" rel="noopener">
-                                    <span data-i18n="certView">View Credential</span>
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <path d="M7 17L17 7M9 7h8v8" />
-                                    </svg>
-                                </a>
-                                <span class="cred-verified">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                        <path d="M9 12l2 2 4-4" />
-                                    </svg>
-                                    <span data-i18n="certCertified">Certified</span>
                                 </span>
                             </div>
                         </article>
@@ -4647,47 +5165,6 @@
                                         <path d="M9 12l2 2 4-4" />
                                     </svg>
                                     <span data-i18n="certVerified">Verified</span>
-                                </span>
-                            </div>
-                        </article>
-
-                        <!-- TOEIC -->
-                        <article class="cred-card">
-                            <div class="cred-aside">
-                                <div class="cred-date">
-                                    <span class="cred-mon" data-i18n="cert6Mon">May</span>
-                                    <span class="cred-year" data-i18n="cert6Year">2025</span>
-                                </div>
-                                <span class="cred-logo"><img src="logos/toeic.svg" alt="TOEIC" width="64" height="24"
-                                        loading="lazy"></span>
-                            </div>
-                            <div class="cred-main">
-                                <h3 class="cred-title" data-i18n="cert6Title">TOEIC L&amp;R — 845</h3>
-                                <span class="cred-issuer" data-i18n="cert6Issuer">ETS · IIBC</span>
-                                <p class="cred-desc" data-i18n="cert6Desc">Official TOEIC Listening &amp; Reading score of
-                                    845 / 990 (Listening 465, Reading 380) — demonstrating strong professional English
-                                    for international, business and technical communication.</p>
-                                <div class="cred-meta">
-                                    <span class="cred-skills" data-i18n="cert6Skills">Listening · Reading · Business
-                                        English</span>
-                                </div>
-                            </div>
-                            <div class="cred-actions">
-                                <a class="cred-btn" href="https://www.linkedin.com/in/manojpoudel0429/details/certifications/"
-                                    target="_blank" rel="noopener">
-                                    <span data-i18n="certView">View Credential</span>
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <path d="M7 17L17 7M9 7h8v8" />
-                                    </svg>
-                                </a>
-                                <span class="cred-verified">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                        <path d="M9 12l2 2 4-4" />
-                                    </svg>
-                                    <span data-i18n="certCertified">Certified</span>
                                 </span>
                             </div>
                         </article>
@@ -5757,6 +6234,20 @@
                     cert6Issuer: "ETS · IIBC",
                     cert6Desc: "Official TOEIC Listening & Reading score of 845 / 990 (Listening 465, Reading 380) — demonstrating strong professional English for international, business and technical communication.",
                     cert6Skills: "Listening · Reading · Business English",
+                    lcKicker: "Language Credentials", lcTitle: "Language Credentials",
+                    lcSub: "Professional language qualifications that strengthen my ability to work, collaborate, and communicate in Japan and global environments.",
+                    lcNote: "A strong complement to my technical expertise",
+                    lcJpCat: "Japanese Proficiency",
+                    lcJpDesc: "Highest level of the Japanese-Language Proficiency Test. Demonstrates advanced Japanese comprehension for professional, technical, and workplace communication in Japan.",
+                    lcLblLevel: "Level", lcLblResult: "Result", lcLblCert: "Certification", lcLblFocus: "Focus",
+                    lcLblComm: "Communication", lcLblTestDate: "Test Date", lcLblCefr: "CEFR",
+                    lcLblTotal: "Total Score", lcLblListen: "Listening", lcLblRead: "Reading", lcLblPerc: "Percentile Rank",
+                    lcJpLevelSub: "(Highest Level)", lcJpResultV: "Passed", lcJpCertV: "Japanese-Language Proficiency Test",
+                    lcJpFocus1V: "Reading", lcJpFocus2V: "Listening", lcJpFocus3V: "Vocabulary / Grammar",
+                    lcJpCommV: "Professional / Workplace", lcJpTestV: "July 05, 2026",
+                    lcEnCat: "English Communication",
+                    lcEnDesc: "Recognized English communication benchmark for reading and listening skills in professional and global settings.",
+                    lcEnResultV: "Achieved", lcEnTestV: "May 18, 2025",
                     certKicker: "Credentials",
                     certSub: "Ongoing professional learning and industry-recognized certifications that strengthen my expertise and commitment to growth.",
                     certVerifyNote: "All credentials are verified<br>and issued by recognized providers.",
@@ -5872,6 +6363,20 @@
                     cert6Issuer: "ETS・IIBC",
                     cert6Desc: "TOEIC Listening & Reading 公式スコア 845 / 990（リスニング 465、リーディング 380）。国際・ビジネス・技術の場面での高い実務英語力を示します。",
                     cert6Skills: "リスニング · リーディング · ビジネス英語",
+                    lcKicker: "語学の資格", lcTitle: "語学の資格",
+                    lcSub: "日本および世界の環境で働き、協働し、コミュニケーションする力を高める、実務レベルの語学資格です。",
+                    lcNote: "技術力を支える大きな強みです",
+                    lcJpCat: "日本語能力",
+                    lcJpDesc: "日本語能力試験の最上位レベル。ビジネス・技術・職場でのコミュニケーションに求められる高度な日本語の理解力を証明します。",
+                    lcLblLevel: "レベル", lcLblResult: "結果", lcLblCert: "認定", lcLblFocus: "分野",
+                    lcLblComm: "コミュニケーション", lcLblTestDate: "受験日", lcLblCefr: "CEFR",
+                    lcLblTotal: "合計スコア", lcLblListen: "リスニング", lcLblRead: "リーディング", lcLblPerc: "パーセンタイル",
+                    lcJpLevelSub: "（最上位レベル）", lcJpResultV: "合格", lcJpCertV: "日本語能力試験",
+                    lcJpFocus1V: "読解", lcJpFocus2V: "聴解", lcJpFocus3V: "語彙・文法",
+                    lcJpCommV: "ビジネス・職場", lcJpTestV: "2026年7月5日",
+                    lcEnCat: "英語コミュニケーション",
+                    lcEnDesc: "プロフェッショナルおよびグローバルな場面での、リーディング・リスニング力を示す、国際的に認知された英語コミュニケーションの指標です。",
+                    lcEnResultV: "取得", lcEnTestV: "2025年5月18日",
                     certKicker: "クレデンシャル",
                     certSub: "専門性の向上と成長への姿勢を支える、継続的な学習と業界公認の認定資格です。",
                     certVerifyNote: "すべての資格は認証済みで<br>信頼できる発行元によるものです。",
