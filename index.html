@@ -2116,19 +2116,17 @@
         /* ── Licenses & Certifications ─────────────── */
         /* ── Language Credentials ─────────────────── */
         .lang-cred {
-            /* scoped orange / gold palette */
-            --lc-a: #b45309;
-            --lc-a2: #d97706;
-            --lc-a-soft: color-mix(in srgb, #d97706 12%, var(--elevated));
-            --lc-glow: rgba(217, 119, 6, 0.28);
+            /* scoped amber-orange palette */
+            --lc-a: #df851d;
+            --lc-tint: color-mix(in srgb, var(--lc-a) 8%, var(--elevated));
+            --lc-line: color-mix(in srgb, var(--lc-a) 20%, transparent);
             margin-bottom: var(--space-9);
         }
 
         html[data-theme="dark"] .lang-cred {
-            --lc-a: #fbbf24;
-            --lc-a2: #f59e0b;
-            --lc-a-soft: color-mix(in srgb, #f59e0b 14%, var(--elevated));
-            --lc-glow: rgba(245, 158, 11, 0.34);
+            --lc-a: #eaa63f;
+            --lc-tint: color-mix(in srgb, var(--lc-a) 12%, var(--elevated));
+            --lc-line: color-mix(in srgb, var(--lc-a) 26%, transparent);
         }
 
         .lc-head {
@@ -2159,7 +2157,7 @@
             width: 44px;
             height: 2px;
             border-radius: 2px;
-            background: linear-gradient(90deg, var(--lc-a2), color-mix(in srgb, var(--lc-a2) 20%, transparent));
+            background: var(--lc-a);
         }
 
         .lc-title {
@@ -2186,8 +2184,8 @@
             gap: 9px;
             padding: 9px 16px;
             border-radius: 999px;
-            background: color-mix(in srgb, var(--lc-a2) 9%, var(--elevated));
-            border: 1px solid color-mix(in srgb, var(--lc-a2) 22%, transparent);
+            background: var(--lc-tint);
+            border: 1px solid var(--lc-line);
             color: var(--ink-2);
             font-size: var(--fs-200);
         }
@@ -2195,49 +2193,27 @@
         .lc-note svg {
             width: 16px;
             height: 16px;
-            color: var(--lc-a2);
+            color: var(--lc-a);
             flex: 0 0 auto;
         }
 
         .lc-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            align-items: start;
+            align-items: stretch;
             gap: var(--space-4);
         }
 
         .lc-card {
             position: relative;
             overflow: hidden;
-            background:
-                radial-gradient(130% 90% at 100% 0, color-mix(in srgb, var(--lc-a2) 7%, transparent), transparent 60%),
-                var(--elevated);
+            display: flex;
+            flex-direction: column;
+            background: var(--elevated);
             border: 1px solid var(--hairline);
             border-radius: var(--radius-lg);
-            padding: clamp(1.5rem, 2.4vw, 2.3rem);
-            box-shadow: 0 12px 34px rgba(20, 20, 20, 0.06);
-            transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
-        }
-
-        /* gold accent hairline along the top edge */
-        .lc-card::before {
-            content: "";
-            position: absolute;
-            inset: 0 0 auto 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--lc-a2) 22%, #fbbf24 50%, var(--lc-a2) 78%, transparent);
-            opacity: 0.55;
-            transition: opacity 0.4s var(--ease);
-        }
-
-        .lc-card:hover {
-            transform: translateY(-5px);
-            border-color: color-mix(in srgb, var(--lc-a2) 30%, transparent);
-            box-shadow: 0 22px 48px -12px var(--lc-glow), 0 10px 22px rgba(20, 20, 20, 0.07);
-        }
-
-        .lc-card:hover::before {
-            opacity: 1;
+            padding: clamp(1.6rem, 2.6vw, 2.5rem);
+            box-shadow: 0 14px 40px -18px rgba(20, 20, 20, 0.14);
         }
 
         /* faint corner pattern */
@@ -2248,8 +2224,8 @@
             width: 46%;
             height: 58%;
             z-index: 0;
-            color: var(--lc-a2);
-            opacity: 0.08;
+            color: var(--lc-a);
+            opacity: 0.09;
             pointer-events: none;
             -webkit-mask-image: radial-gradient(120% 120% at 100% 0, #000 30%, transparent 75%);
             mask-image: radial-gradient(120% 120% at 100% 0, #000 30%, transparent 75%);
@@ -2257,7 +2233,7 @@
 
         .lc-dots {
             background-image: radial-gradient(currentColor 1.1px, transparent 1.5px);
-            background-size: 10px 10px;
+            background-size: 11px 11px;
         }
 
         .lc-wave {
@@ -2278,104 +2254,22 @@
             gap: var(--space-4);
         }
 
-        /* ── 3D gold medallion badge ── */
+        /* flat line-art badge in a soft tinted circle */
         .lc-badge {
-            position: relative;
             flex: 0 0 auto;
             display: grid;
             place-items: center;
-            width: 104px;
-            height: 104px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            color: #6b3908;
-            background:
-                radial-gradient(125% 125% at 32% 24%,
-                    #fff7e2 0%, #ffe89a 16%, #f7b23a 44%, #dc8409 66%, #a1560a 86%, #6b3908 100%);
-            box-shadow:
-                0 20px 34px -14px rgba(161, 86, 10, 0.6),
-                0 6px 14px -4px rgba(107, 57, 8, 0.42),
-                inset 0 3px 4px rgba(255, 255, 255, 0.72),
-                inset 0 -11px 18px rgba(107, 57, 8, 0.5),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.22);
-            animation: lc-float 4.6s var(--ease) infinite;
-            transition: box-shadow 0.4s var(--ease);
-        }
-
-        /* glossy top highlight */
-        .lc-badge::before {
-            content: "";
-            position: absolute;
-            top: 8%;
-            left: 14%;
-            width: 58%;
-            height: 42%;
-            border-radius: 50%;
-            background: radial-gradient(100% 100% at 40% 30%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 70%);
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        /* rotating specular sheen */
-        .lc-badge::after {
-            content: "";
-            position: absolute;
-            inset: -1px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg,
-                    transparent 0 54%, rgba(255, 255, 255, 0.5) 66%, rgba(255, 255, 255, 0.05) 74%, transparent 82% 100%);
-            mix-blend-mode: screen;
-            z-index: 4;
-            pointer-events: none;
-            animation: lc-sheen 7s linear infinite;
+            color: var(--lc-a);
+            background: var(--lc-tint);
+            border: 1px solid var(--lc-line);
         }
 
         .lc-badge svg {
-            position: relative;
-            z-index: 2;
-            width: 58px;
-            height: 58px;
-            filter: drop-shadow(0 1px 0 rgba(255, 245, 220, 0.55)) drop-shadow(0 -1px 1px rgba(80, 42, 6, 0.35));
-            animation: lc-breathe 4.6s var(--ease) infinite;
-        }
-
-        .lc-card:hover .lc-badge {
-            box-shadow:
-                0 26px 40px -14px rgba(161, 86, 10, 0.7),
-                0 8px 18px -4px rgba(107, 57, 8, 0.5),
-                inset 0 3px 4px rgba(255, 255, 255, 0.8),
-                inset 0 -11px 18px rgba(107, 57, 8, 0.5),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.3),
-                0 0 0 6px color-mix(in srgb, var(--lc-a2) 14%, transparent);
-        }
-
-        @keyframes lc-float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-6px);
-            }
-        }
-
-        @keyframes lc-breathe {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes lc-sheen {
-            to {
-                transform: rotate(360deg);
-            }
+            width: 54px;
+            height: 54px;
         }
 
         .lc-card-titles {
@@ -2406,7 +2300,7 @@
             width: 46px;
             height: 3px;
             border-radius: 2px;
-            background: linear-gradient(90deg, var(--lc-a2), #fbbf24);
+            background: var(--lc-a);
             margin-top: 10px;
         }
 
@@ -2420,75 +2314,58 @@
 
         .lc-tiles {
             margin-top: var(--space-5);
+            flex: 1 1 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-2);
+            gap: 12px;
+        }
+
+        /* fewer-tile card: spread rows to fill the card height */
+        .lc-tiles-en {
+            align-content: space-between;
         }
 
         .lc-tile {
             display: flex;
             align-items: flex-start;
-            gap: 11px;
-            padding: 14px;
-            border-radius: 14px;
-            background: var(--bg);
+            gap: 13px;
+            padding: 16px 18px;
+            border-radius: 12px;
+            background: transparent;
             border: 1px solid var(--hairline);
-            transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
         }
 
-        .lc-tile:hover {
-            border-color: color-mix(in srgb, var(--lc-a2) 38%, transparent);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 18px -10px var(--lc-glow);
-        }
-
-        /* gold icon chip */
         .lc-tico {
             flex: 0 0 auto;
             display: grid;
             place-items: center;
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            color: #7c3d06;
-            background: linear-gradient(150deg, #ffe9b8, #f6b73f 60%, #e08a12);
-            box-shadow:
-                inset 0 1px 1px rgba(255, 255, 255, 0.7),
-                inset 0 -3px 5px rgba(124, 61, 6, 0.32),
-                0 3px 7px -3px rgba(180, 83, 9, 0.5);
-            transition: transform 0.25s var(--ease);
-        }
-
-        html[data-theme="dark"] .lc-tico {
-            color: #5a2c04;
-        }
-
-        .lc-tile:hover .lc-tico {
-            transform: scale(1.09) rotate(-3deg);
+            width: 24px;
+            height: 24px;
+            color: var(--lc-a);
         }
 
         .lc-tico svg {
-            width: 19px;
-            height: 19px;
+            width: 24px;
+            height: 24px;
         }
 
         .lc-ttext {
             display: flex;
             flex-direction: column;
             min-width: 0;
-            line-height: 1.25;
+            line-height: 1.3;
         }
 
         .lc-tlabel {
-            font-size: 0.7rem;
+            font-size: 0.74rem;
             color: var(--ink-3);
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
         .lc-tval {
             font-family: var(--font-body);
             font-weight: 700;
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             color: var(--ink);
         }
 
@@ -2498,18 +2375,9 @@
         }
 
         .lc-tsub {
-            font-size: 0.72rem;
+            font-size: 0.74rem;
             color: var(--ink-3);
             margin-top: 2px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-
-            .lc-badge,
-            .lc-badge svg,
-            .lc-badge::after {
-                animation: none;
-            }
         }
 
         @media (max-width: 980px) {
@@ -2520,6 +2388,10 @@
 
             .lc-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .lc-tiles-en {
+                align-content: start;
             }
         }
 
@@ -2533,13 +2405,13 @@
             }
 
             .lc-badge {
-                width: 84px;
-                height: 84px;
+                width: 82px;
+                height: 82px;
             }
 
             .lc-badge svg {
-                width: 46px;
-                height: 46px;
+                width: 44px;
+                height: 44px;
             }
         }
 
@@ -4915,21 +4787,28 @@
                             <div class="lc-card-head">
                                 <span class="lc-badge lc-badge-jp" aria-hidden="true">
                                     <svg viewBox="0 0 64 64" fill="currentColor">
-                                        <rect x="26" y="20" width="12" height="10" rx="1.6" />
-                                        <rect x="26" y="33" width="12" height="10" rx="1.6" />
-                                        <path d="M22 18c-7 3-9 12-4.5 20" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" />
-                                        <ellipse cx="17.5" cy="24" rx="2.7" ry="1.5"
-                                            transform="rotate(-35 17.5 24)" />
-                                        <ellipse cx="16" cy="30" rx="2.7" ry="1.5" transform="rotate(-18 16 30)" />
-                                        <ellipse cx="16" cy="36" rx="2.7" ry="1.5" />
-                                        <ellipse cx="17.5" cy="42" rx="2.7" ry="1.5" transform="rotate(28 17.5 42)" />
-                                        <path d="M42 18c7 3 9 12 4.5 20" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" />
-                                        <ellipse cx="46.5" cy="24" rx="2.7" ry="1.5" transform="rotate(35 46.5 24)" />
-                                        <ellipse cx="48" cy="30" rx="2.7" ry="1.5" transform="rotate(18 48 30)" />
-                                        <ellipse cx="48" cy="36" rx="2.7" ry="1.5" />
-                                        <ellipse cx="46.5" cy="42" rx="2.7" ry="1.5" transform="rotate(-28 46.5 42)" />
+                                        <!-- 日 -->
+                                        <rect x="27" y="19" width="10" height="9" rx="1.5" />
+                                        <rect x="27" y="31" width="10" height="9" rx="1.5" />
+                                        <!-- left laurel branch -->
+                                        <path d="M23 45c-6-4-7.6-13-3-20" fill="none" stroke="currentColor"
+                                            stroke-width="2.2" stroke-linecap="round" />
+                                        <ellipse cx="18.4" cy="24" rx="3.3" ry="1.8"
+                                            transform="rotate(-44 18.4 24)" />
+                                        <ellipse cx="17.3" cy="30" rx="3.3" ry="1.8"
+                                            transform="rotate(-22 17.3 30)" />
+                                        <ellipse cx="17.6" cy="36" rx="3.3" ry="1.8" transform="rotate(4 17.6 36)" />
+                                        <ellipse cx="19.6" cy="41.4" rx="3.3" ry="1.8"
+                                            transform="rotate(32 19.6 41.4)" />
+                                        <!-- right laurel branch -->
+                                        <path d="M41 45c6-4 7.6-13 3-20" fill="none" stroke="currentColor"
+                                            stroke-width="2.2" stroke-linecap="round" />
+                                        <ellipse cx="45.6" cy="24" rx="3.3" ry="1.8"
+                                            transform="rotate(44 45.6 24)" />
+                                        <ellipse cx="46.7" cy="30" rx="3.3" ry="1.8" transform="rotate(22 46.7 30)" />
+                                        <ellipse cx="46.4" cy="36" rx="3.3" ry="1.8" transform="rotate(-4 46.4 36)" />
+                                        <ellipse cx="44.4" cy="41.4" rx="3.3" ry="1.8"
+                                            transform="rotate(-32 44.4 41.4)" />
                                     </svg>
                                 </span>
                                 <div class="lc-card-titles">
