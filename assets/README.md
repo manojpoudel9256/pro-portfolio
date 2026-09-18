@@ -19,6 +19,13 @@ The website uses the lightweight project covers, not the large exports or archiv
 
 The education card and enlarged view use the original photograph, `images/education/hokkaido-japanese-language-academy.webp`.
 
+## Photo favicon
+
+The favicon uses the supplied original portrait, cropped around the face and resized without AI changes.
+Browser PNGs are 16, 32, and 48 pixels (about 1.1, 1.7, and 2.6 KB), with a 5.5 KB multiresolution ICO fallback.
+The 180-pixel Apple icon and 192/512-pixel install icons use the same portrait. The browser favicon links use only the tiny versions.
+Icon URLs include a version query so the previous icon is not reused from cache.
+
 ## Active project covers
 
 - `images/projects/everest-travel.webp`
