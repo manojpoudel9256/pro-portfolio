@@ -17,7 +17,7 @@ Use lowercase, descriptive, hyphen-separated filenames. Paths in `index.html` an
 
 The website uses the lightweight project covers, not the large exports or archived variants. All images were moved without changing their contents.
 
-The education card and enlarged view use the original photograph, `images/education/hokkaido-japanese-language-academy.webp`.
+The Japanese-language education card and enlarged view use `images/education/hokkaido-japanese-language-academy-sapporo-graduation.jpg`. This is an unchanged copy of the supplied graduation photo: 768 × 1024 pixels, 210,070 bytes, with no resizing or recompression. The previous photo is retained in `images/archive/hokkaido-japanese-language-academy-previous.webp`.
 
 ## Photo favicon
 
@@ -43,6 +43,7 @@ encoding settings, playback behavior, and validation.
 
 | Previous name | New name in `images/archive/` |
 | --- | --- |
+| `education/hokkaido-japanese-language-academy.webp` | `hokkaido-japanese-language-academy-previous.webp` |
 | `budget.webp` | `budget-legacy.webp` |
 | `travel.webp` | `travel-legacy.webp` |
 | `glbanalyzer.webp` | `glb-analyzer-legacy.webp` |
