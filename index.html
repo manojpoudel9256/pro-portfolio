@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- serif display face for the Selected Work section (matches reference) -->
+    <!-- Original heavyweight display face for the hero backdrop. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Playfair+Display:wght@500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- apply saved theme before paint to avoid a flash -->
     <script>
         (function () {
@@ -32,14 +32,14 @@
     <meta property="og:title" content="Manoj — Software Engineer, Mobility &amp; Robotics">
     <meta property="og:description"
         content="Software Engineer specialising in Mobility &amp; Robotics, based in Tokyo. Selected work and background.">
-    <meta property="og:image" content="icon-512.png">
+    <meta property="og:image" content="assets/icons/icon-512.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Manoj — Software Engineer, Mobility &amp; Robotics">
     <meta name="twitter:description" content="Software Engineer specialising in Mobility &amp; Robotics, based in Tokyo.">
 
-    <link rel="icon" href="icon-192.png" type="image/png">
+    <link rel="icon" href="assets/icons/icon-192.png" type="image/png">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 
     <!-- Self-hosted variable fonts (preload the two above-the-fold faces) -->
     <link rel="preload" href="fonts/ClashDisplay-Variable.woff2" as="font" type="font/woff2" crossorigin>
@@ -88,7 +88,6 @@
             --font-display: "Clash Display", "Helvetica Neue", Arial, sans-serif;
             --font-body: "Satoshi", "Helvetica Neue", Arial, sans-serif;
             --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-            --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
             --font-black: "Archivo Black", "Helvetica Neue", Arial, sans-serif;
 
             /* Palette — near-monochrome, one accent */
@@ -154,8 +153,8 @@
 
             /* Layout */
             --maxw: 1440px;
-            --pw-maxw: 1700px;
-            /* Selected Work uses a wider frame so the cards fill more of the screen */
+            --pw-maxw: var(--maxw);
+            /* Shared content frame for all sections */
             --gutter: clamp(1.25rem, 5vw, 6rem);
             --section-pad: clamp(6rem, 12vw, 10rem);
             --radius: 16px;
@@ -1291,7 +1290,7 @@
         }
 
         .pw-title {
-            font-family: var(--font-serif);
+            font-family: var(--font-display);
             font-size: var(--fs-display);
             font-weight: 600;
             line-height: 1.04;
@@ -1473,7 +1472,7 @@
         }
 
         .pw-name {
-            font-family: var(--font-serif);
+            font-family: var(--font-display);
             font-size: var(--fs-500);
             font-weight: 600;
             letter-spacing: 0;
@@ -1922,7 +1921,7 @@
             margin-bottom: var(--space-8);
         }
 
-        .about-me-header h1 {
+        .about-me-header h2 {
             font-size: var(--fs-display);
             font-weight: 600;
             margin-bottom: var(--space-3);
@@ -2161,7 +2160,7 @@
         }
 
         .lc-title {
-            font-family: var(--font-serif);
+            font-family: var(--font-display);
             font-size: clamp(2rem, 3.4vw, 3rem);
             font-weight: 600;
             line-height: 1.05;
@@ -2288,7 +2287,7 @@
         }
 
         .lc-name {
-            font-family: var(--font-serif);
+            font-family: var(--font-display);
             font-size: clamp(1.5rem, 2.4vw, 2rem);
             font-weight: 600;
             line-height: 1.1;
@@ -2540,7 +2539,7 @@
         }
 
         .cert-title {
-            font-family: var(--font-serif);
+            font-family: var(--font-display);
             font-size: clamp(2rem, 3.4vw, 3rem);
             font-weight: 600;
             line-height: 1.06;
@@ -2655,7 +2654,7 @@
         }
 
         .cred-title {
-            font-family: var(--font-serif);
+            font-family: var(--font-display);
             font-size: var(--fs-400);
             font-weight: 600;
             line-height: 1.25;
@@ -4331,6 +4330,7 @@
         }
 
     </style>
+    <link rel="stylesheet" href="refinements.css">
 </head>
 
 <body>
@@ -4518,8 +4518,8 @@
 
                 <div class="hero-portrait">
                     <picture>
-                        <source srcset="model.webp" type="image/webp">
-                        <img src="model.webp" alt="Manoj Poudel" width="1800" height="1800" fetchpriority="high">
+                        <source srcset="assets/images/portraits/manoj-poudel.webp" type="image/webp">
+                        <img src="assets/images/portraits/manoj-poudel.webp" alt="Manoj Poudel" width="1800" height="1800" fetchpriority="high">
                     </picture>
                 </div>
 
@@ -4546,30 +4546,30 @@
 
             <div class="hero-techstrip" aria-label="Tech stack">
                 <div class="ts-track">
-                    <span class="ts-item"><img src="logos/unrealengine.svg" alt="" width="20" height="20"
+                    <span class="ts-item"><img src="assets/logos/unrealengine.svg" alt="" width="20" height="20"
                             loading="lazy"> Unreal Engine</span>
-                    <span class="ts-item"><img src="logos/blender.svg" alt="" width="20" height="20" loading="lazy">
+                    <span class="ts-item"><img src="assets/logos/blender.svg" alt="" width="20" height="20" loading="lazy">
                         Blender</span>
-                    <span class="ts-item"><img src="logos/cplusplus.svg" alt="" width="20" height="20" loading="lazy">
+                    <span class="ts-item"><img src="assets/logos/cplusplus.svg" alt="" width="20" height="20" loading="lazy">
                         C++</span>
-                    <span class="ts-item"><img src="logos/javascript.svg" alt="" width="20" height="20"
+                    <span class="ts-item"><img src="assets/logos/javascript.svg" alt="" width="20" height="20"
                             loading="lazy"> JavaScript</span>
-                    <span class="ts-item"><img src="logos/html5.svg" alt="" width="20" height="20" loading="lazy">
+                    <span class="ts-item"><img src="assets/logos/html5.svg" alt="" width="20" height="20" loading="lazy">
                         HTML/CSS</span>
-                    <span class="ts-item"><img src="logos/firebase.svg" alt="" width="20" height="20" loading="lazy">
+                    <span class="ts-item"><img src="assets/logos/firebase.svg" alt="" width="20" height="20" loading="lazy">
                         Firebase</span>
                     <!-- duplicate set for a seamless loop -->
-                    <span class="ts-item" aria-hidden="true"><img src="logos/unrealengine.svg" alt="" width="20"
+                    <span class="ts-item" aria-hidden="true"><img src="assets/logos/unrealengine.svg" alt="" width="20"
                             height="20" loading="lazy"> Unreal Engine</span>
-                    <span class="ts-item" aria-hidden="true"><img src="logos/blender.svg" alt="" width="20" height="20"
+                    <span class="ts-item" aria-hidden="true"><img src="assets/logos/blender.svg" alt="" width="20" height="20"
                             loading="lazy"> Blender</span>
-                    <span class="ts-item" aria-hidden="true"><img src="logos/cplusplus.svg" alt="" width="20"
+                    <span class="ts-item" aria-hidden="true"><img src="assets/logos/cplusplus.svg" alt="" width="20"
                             height="20" loading="lazy"> C++</span>
-                    <span class="ts-item" aria-hidden="true"><img src="logos/javascript.svg" alt="" width="20"
+                    <span class="ts-item" aria-hidden="true"><img src="assets/logos/javascript.svg" alt="" width="20"
                             height="20" loading="lazy"> JavaScript</span>
-                    <span class="ts-item" aria-hidden="true"><img src="logos/html5.svg" alt="" width="20" height="20"
+                    <span class="ts-item" aria-hidden="true"><img src="assets/logos/html5.svg" alt="" width="20" height="20"
                             loading="lazy"> HTML/CSS</span>
-                    <span class="ts-item" aria-hidden="true"><img src="logos/firebase.svg" alt="" width="20"
+                    <span class="ts-item" aria-hidden="true"><img src="assets/logos/firebase.svg" alt="" width="20"
                             height="20" loading="lazy"> Firebase</span>
                 </div>
             </div>
@@ -4608,7 +4608,7 @@
                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('everest')}"
                     aria-label="Open Everest Travel Experience details">
                     <div class="pw-cover">
-                        <img src="travelsite.webp" alt="Everest travel website" width="1600" height="805"
+                        <img src="assets/images/projects/everest-travel.webp" alt="Everest travel website" width="1600" height="805"
                             loading="lazy">
                     </div>
                     <div class="pw-body">
@@ -4632,7 +4632,7 @@
                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('budget')}"
                     aria-label="Open Personal Finance App details">
                     <div class="pw-cover">
-                        <img src="budgettracker.webp" alt="Personal Finance App" width="900" height="1599"
+                        <img src="assets/images/projects/personal-finance-app.webp" alt="Personal Finance App" width="900" height="1599"
                             loading="lazy">
                     </div>
                     <div class="pw-body">
@@ -4656,7 +4656,7 @@
                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('salary')}"
                     aria-label="Open Salary Tracker App details">
                     <div class="pw-cover">
-                        <img src="salarytracker.webp" alt="Salary Tracker App" width="900" height="1599"
+                        <img src="assets/images/projects/salary-tracker.webp" alt="Salary Tracker App" width="900" height="1599"
                             loading="lazy">
                     </div>
                     <div class="pw-body">
@@ -4681,7 +4681,7 @@
                         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('glbAnalyzer')}"
                         aria-label="Open GLB Insight details">
                         <div class="pw-cover">
-                            <img src="glbanalyzer.webp" alt="GLB Insight — 3D model analyzer" width="1448" height="1086"
+                            <img src="assets/images/projects/glb-analyzer.webp" alt="GLB Analyzer: understand every mesh. Geometry, textures and PDF reports." width="1672" height="941"
                                 loading="lazy">
                         </div>
                         <div class="pw-body">
@@ -4704,8 +4704,8 @@
                         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('glbForge')}"
                         aria-label="Open GLB Forge details">
                         <div class="pw-cover">
-                            <img src="glboptimizer.webp" alt="GLB Forge — 3D model optimizer for UE5" width="1600"
-                                height="936" loading="lazy">
+                            <img src="assets/images/projects/glb-optimizer.webp" alt="GLB Optimizer: lighter models, smoother scenes. Mesh reduction, texture resizing and UE5-ready assets." width="1672"
+                                height="941" loading="lazy">
                         </div>
                         <div class="pw-body">
                             <h3 class="pw-name" data-i18n="pjForgeName">GLB Forge</h3>
@@ -4768,7 +4768,7 @@
         <section class="about-me-section" id="about-me">
             <div class="about-me-container">
                 <div class="about-me-header">
-                    <h1 data-i18n="aboutTitle">About Me</h1>
+                    <h2 data-i18n="aboutTitle">About Me</h2>
                     <p data-i18n="aboutSubtitle">Experience, education, and the story so far</p>
                 </div>
 
@@ -4787,48 +4787,22 @@
                             </div>
                             <ol class="xp-phases">
                                 <li>
-                                    <span class="xp-when" data-i18n="xp1When">Apr 2026</span>
+                                    <span class="xp-when" data-i18n="xp1When">Apr–Jun 2026</span>
                                     <div class="xp-body">
-                                        <h4 data-i18n="xp1Title">Unreal Engine &amp; Simulation Foundations</h4>
-                                        <p data-i18n="xp1Desc">Built core skills in Unreal Engine through official learning
-                                            materials, documentation, video lessons, AI-assisted learning, and guidance
-                                            from a senior developer.</p>
+                                        <h4 data-i18n="xp1Title">Unreal Engine &amp; Blender Foundations</h4>
+                                        <p data-i18n="xp1Desc">Built foundational skills in Unreal Engine and Blender,
+                                            learning low-poly 3D modeling and the Blender-to-Unreal workflow for
+                                            real-time simulation.</p>
                                     </div>
                                 </li>
                                 <li>
-                                    <span class="xp-when" data-i18n="xp2When">May 2026</span>
+                                    <span class="xp-when" data-i18n="xp2When">Jul–Sep 2026</span>
                                     <div class="xp-body">
-                                        <h4 data-i18n="xp2Title">Blender &amp; Low-Poly 3D Asset Creation</h4>
-                                        <p data-i18n="xp2Desc">Learned practical Blender workflows and created optimized
-                                            low-poly assets for real-time simulation environments and the
-                                            Blender-to-Unreal pipeline.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="xp-when" data-i18n="xp3When">Jun 2026</span>
-                                    <div class="xp-body">
-                                        <h4 data-i18n="xp3Title">Production Project Contribution</h4>
-                                        <p data-i18n="xp3Desc">Contributed to a real company project by producing the
-                                            low-poly 3D models required for the simulation environment and delivery
-                                            workflow.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="xp-when" data-i18n="xp4When">Jul 2026</span>
-                                    <div class="xp-body">
-                                        <h4 data-i18n="xp4Title">Programming, Automation &amp; Internal Tools</h4>
-                                        <p data-i18n="xp4Desc">Worked with Python, C++, JavaScript, and Three.js, explored
-                                            Blender scripting, and built a local 3D inspection tool for analysing asset
-                                            counts, polygon complexity, and model properties.</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span class="xp-when" data-i18n="xp5When">Now</span>
-                                    <div class="xp-body">
-                                        <h4 data-i18n="xp5Title">AI-Assisted 3D Development</h4>
-                                        <p data-i18n="xp5Desc">Continuing to improve development workflows with Blueprint,
-                                            Unreal Engine, Blender, Claude Code, Blender MCP, generative AI tools, and
-                                            ongoing hands-on simulation work.</p>
+                                        <h4 data-i18n="xp2Title">Project Contributions &amp; Internal Tools</h4>
+                                        <p data-i18n="xp2Desc">Contributed to a real company project by creating 3D models
+                                            in Blender. Developed local GLB inspection and optimization tools using
+                                            JavaScript, Three.js, and Node.js, and continue refining automation and
+                                            simulation workflows with Python, C++, Blueprint, and AI-assisted development.</p>
                                     </div>
                                 </li>
                             </ol>
@@ -4872,8 +4846,8 @@
                                 <span class="lc-badge lc-badge-jp" aria-hidden="true">
                                     <svg viewBox="0 0 64 64" fill="currentColor">
                                         <!-- 日 -->
-                                        <rect x="26" y="19" width="12" height="10" rx="2" />
-                                        <rect x="26" y="31" width="12" height="10" rx="2" />
+                                        <path d="M25 19h14v23H25zM25 30.5h14" fill="none"
+                                            stroke="currentColor" stroke-width="2.7" stroke-linejoin="round" />
                                         <!-- left laurel branch -->
                                         <path d="M23.5 45C14 41 11 26 16.5 15.5" fill="none" stroke="currentColor"
                                             stroke-width="1.4" stroke-linecap="round" />
@@ -5068,7 +5042,14 @@
 
                         <!-- TOEIC -->
                         <article class="lc-card">
-                            <span class="lc-pattern lc-dots" aria-hidden="true"></span>
+                            <svg class="lc-pattern lc-map" viewBox="0 0 240 160" aria-hidden="true">
+                                <defs>
+                                    <pattern id="lc-map-dots" width="4" height="4" patternUnits="userSpaceOnUse">
+                                        <circle cx="1" cy="1" r="0.85" fill="currentColor" />
+                                    </pattern>
+                                </defs>
+                                <path fill="url(#lc-map-dots)" d="M14 37l21-15 25-3 19 11-3 16-17 7-6 18-13-4-10-17-13-2zM63 76l17 5 12 22-10 20-10 23-9-13 1-20-12-22zM92 16l16-8 14 7-6 18-13 6zM114 43l12-14 26-3 13 9 23-3 33 15 9 16-18 9-19-5-10 20-12-7-10-20-18 1-11-8zM121 61l21 5 12 24-13 32-13-5-8-23-9-16zM185 112l21-8 17 10 4 16-25 7-18-10zM174 91l11 4 4 15-9-3z" />
+                            </svg>
                             <div class="lc-card-head">
                                 <span class="lc-badge" aria-hidden="true">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -5233,7 +5214,7 @@
                                     <span class="cred-mon" data-i18n="cert4Mon">Aug</span>
                                     <span class="cred-year" data-i18n="cert4Year">2026</span>
                                 </div>
-                                <span class="cred-logo"><img src="logos/cisco.svg" alt="Cisco" width="64" height="24"
+                                <span class="cred-logo"><img src="assets/logos/cisco.svg" alt="Cisco" width="64" height="24"
                                         loading="lazy"></span>
                             </div>
                             <div class="cred-main">
@@ -5276,7 +5257,7 @@
                                     <span class="cred-mon" data-i18n="cert1Mon">Jul</span>
                                     <span class="cred-year" data-i18n="cert1Year">2026</span>
                                 </div>
-                                <span class="cred-logo"><img src="logos/aws.svg" alt="Amazon Web Services"
+                                <span class="cred-logo"><img src="assets/logos/aws.svg" alt="Amazon Web Services"
                                         width="34" height="34" loading="lazy"></span>
                             </div>
                             <div class="cred-main">
@@ -5319,7 +5300,7 @@
                                     <span class="cred-mon" data-i18n="cert2Mon">Jul</span>
                                     <span class="cred-year" data-i18n="cert2Year">2026</span>
                                 </div>
-                                <span class="cred-logo"><img src="logos/ibm.svg" alt="IBM" width="34" height="34"
+                                <span class="cred-logo"><img src="assets/logos/ibm.svg" alt="IBM" width="34" height="34"
                                         loading="lazy"></span>
                             </div>
                             <div class="cred-main">
@@ -5363,7 +5344,7 @@
                                     <span class="cred-mon" data-i18n="cert3Mon">Mar</span>
                                     <span class="cred-year" data-i18n="cert3Year">2024</span>
                                 </div>
-                                <span class="cred-logo"><img src="logos/oracle.svg" alt="Oracle"
+                                <span class="cred-logo"><img src="assets/logos/oracle.svg" alt="Oracle"
                                         width="64" height="24" loading="lazy"></span>
                             </div>
                             <div class="cred-main">
@@ -5415,11 +5396,11 @@
                     <div class="edu-grid">
 
                         <article class="edu-card"
-                            onclick="openImageModal('hcc.webp', 'IT Department', 'Hokkaido Cyber Creators College')">
+                            onclick="openImageModal('assets/images/education/hokkaido-cyber-creators-college.webp', 'IT Department', 'Hokkaido Cyber Creators College')">
                             <div class="edu-photo">
                                 <picture>
-                                    <source srcset="hcc.webp" type="image/webp">
-                                    <img src="hcc.webp" alt="Classroom at Hokkaido Cyber Creators College" width="1200"
+                                    <source srcset="assets/images/education/hokkaido-cyber-creators-college.webp" type="image/webp">
+                                    <img src="assets/images/education/hokkaido-cyber-creators-college.webp" alt="Classroom at Hokkaido Cyber Creators College" width="1200"
                                         height="800" loading="lazy">
                                 </picture>
                                 <span class="edu-year">2024 — 2026</span>
@@ -5439,13 +5420,13 @@
                         </article>
 
                         <article class="edu-card"
-                            onclick="openImageModal('hjla.webp', 'Japanese Language', 'Hokkaido Japanese Language Academy')">
+                            onclick="openImageModal('assets/images/education/hokkaido-japanese-language-academy.webp', 'Japanese Language', 'Hokkaido Japanese Language Academy')">
                             <div class="edu-photo">
                                 <picture>
-                                    <source srcset="hjla.webp" type="image/webp">
-                                    <img src="hjla.webp" alt="Graduation at Hokkaido Japanese Language Academy"
+                                    <source srcset="assets/images/education/hokkaido-japanese-language-academy.webp" type="image/webp">
+                                    <img src="assets/images/education/hokkaido-japanese-language-academy.webp" alt="Graduation at Hokkaido Japanese Language Academy"
                                         width="1200" height="1200" loading="lazy"
-                                        style="object-position: center 28%;">
+                                        style="object-position: center;">
                                 </picture>
                                 <span class="edu-year">2022 — 2024</span>
                             </div>
@@ -5501,8 +5482,8 @@
                         <div class="cl-eyebrow">
                             <span class="cl-avatar">
                                 <picture>
-                                    <source srcset="model.webp" type="image/webp">
-                                    <img src="model.webp" alt="Manoj Poudel" width="56" height="56" loading="lazy">
+                                    <source srcset="assets/images/portraits/manoj-poudel.webp" type="image/webp">
+                                    <img src="assets/images/portraits/manoj-poudel.webp" alt="Manoj Poudel" width="56" height="56" loading="lazy">
                                 </picture>
                             </span>
                             <span class="cl-eyebrow-text" data-i18n="conEyebrow">Let's connect</span>
@@ -5961,7 +5942,7 @@
             ];
             // build the hero tech marquee (CSS handles the infinite scroll)
             const tsItem = ([f, n], hidden) =>
-                `<span class="ts-item"${hidden ? ' aria-hidden="true"' : ''}><img src="logos/${f}.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> ${n}</span>`;
+                `<span class="ts-item"${hidden ? ' aria-hidden="true"' : ''}><img src="assets/logos/${f}.svg" alt="" width="20" height="20" loading="lazy" decoding="async"> ${n}</span>`;
             const tsTrack = document.querySelector(".hero-techstrip .ts-track");
             if (tsTrack) {
                 tsTrack.innerHTML = LOGOS.map(t => tsItem(t, false)).join("") + LOGOS.map(t => tsItem(t, true)).join("");
@@ -6139,7 +6120,7 @@
 
         const PROJECTS = {
             everest: {
-                img: "travelsite.webp", cover: true, type: "website",
+                img: "assets/images/projects/everest-travel.webp", cover: true, type: "website",
                 live: "https://travel-site-delta-five.vercel.app/",
                 en: {
                     title: "Everest Travel Experience",
@@ -6163,7 +6144,7 @@
                 }
             },
             budget: {
-                img: "budgettracker.webp", cover: false, type: "app",
+                img: "assets/images/projects/personal-finance-app.webp", cover: false, type: "app",
                 live: "https://budget-tracker-v2-gamma.vercel.app/",
                 en: {
                     title: "Personal Finance App",
@@ -6191,7 +6172,7 @@
                 }
             },
             salary: {
-                img: "salarytracker.webp", cover: false, type: "app",
+                img: "assets/images/projects/salary-tracker.webp", cover: false, type: "app",
                 live: "https://salary-tracker-v3-six.vercel.app/",
                 en: {
                     title: "Salary Tracker App",
@@ -6219,7 +6200,7 @@
                 }
             },
             glbAnalyzer: {
-                img: "glbanalyzer.webp", cover: true, fullImg: true, type: "website", repo: true,
+                img: "assets/images/projects/glb-analyzer.webp", cover: true, fullImg: true, type: "website", repo: true,
                 live: "https://github.com/manojpoudel9256/GLBAnalyzer",
                 en: {
                     title: "GLB Insight",
@@ -6243,7 +6224,7 @@
                 }
             },
             glbForge: {
-                img: "glboptimizer.webp", cover: true, fullImg: true, type: "website", repo: true,
+                img: "assets/images/projects/glb-optimizer.webp", cover: true, fullImg: true, type: "website", repo: true,
                 live: "https://github.com/manojpoudel9256/GLBOptimizer",
                 en: {
                     title: "GLB Forge",
@@ -6397,16 +6378,10 @@
                     xpOrg: "Japanese Engineering Company · Tokyo",
                     xpRole: "Software Developer — Mobility, Robotics & 3D Simulation",
                     xpYears: "Apr 2026 — Present",
-                    xp1When: "Apr 2026", xp1Title: "Unreal Engine & Simulation Foundations",
-                    xp1Desc: "Built core skills in Unreal Engine through official learning materials, documentation, video lessons, AI-assisted learning, and guidance from a senior developer.",
-                    xp2When: "May 2026", xp2Title: "Blender & Low-Poly 3D Asset Creation",
-                    xp2Desc: "Learned practical Blender workflows and created optimized low-poly assets for real-time simulation environments and the Blender-to-Unreal pipeline.",
-                    xp3When: "Jun 2026", xp3Title: "Production Project Contribution",
-                    xp3Desc: "Contributed to a real company project by producing the low-poly 3D models required for the simulation environment and delivery workflow.",
-                    xp4When: "Jul 2026", xp4Title: "Programming, Automation & Internal Tools",
-                    xp4Desc: "Worked with Python, C++, JavaScript, and Three.js, explored Blender scripting, and built a local 3D inspection tool for analysing asset counts, polygon complexity, and model properties.",
-                    xp5When: "Now", xp5Title: "AI-Assisted 3D Development",
-                    xp5Desc: "Continuing to improve development workflows with Blueprint, Unreal Engine, Blender, Claude Code, Blender MCP, generative AI tools, and ongoing hands-on simulation work.",
+                    xp1When: "Apr–Jun 2026", xp1Title: "Unreal Engine & Blender Foundations",
+                    xp1Desc: "Built foundational skills in Unreal Engine and Blender, learning low-poly 3D modeling and the Blender-to-Unreal workflow for real-time simulation.",
+                    xp2When: "Jul–Sep 2026", xp2Title: "Project Contributions & Internal Tools",
+                    xp2Desc: "Contributed to a real company project by creating 3D models in Blender. Developed local GLB inspection and optimization tools using JavaScript, Three.js, and Node.js, and continue refining automation and simulation workflows with Python, C++, Blueprint, and AI-assisted development.",
                     xpTech: "Blueprint · C++ · Python · Blender · Three.js · AI Workflows",
                     certTitle: "Licenses & Certifications",
                     cert4Mon: "Aug", cert4Year: "2026", cert4Title: "Networking Basics",
@@ -6535,16 +6510,10 @@
                     xpOrg: "日本のエンジニアリング企業 · 東京",
                     xpRole: "ソフトウェア開発者 — モビリティ、ロボティクス＆3Dシミュレーション",
                     xpYears: "2026年4月 — 現在",
-                    xp1When: "2026年4月", xp1Title: "Unreal Engine とシミュレーションの基礎",
-                    xp1Desc: "公式教材、ドキュメント、動画講座、AIを活用した学習、そして先輩開発者の指導を通じて、Unreal Engine の中核スキルを習得しました。",
-                    xp2When: "2026年5月", xp2Title: "Blender とローポリ3Dアセット制作",
-                    xp2Desc: "実践的な Blender のワークフローを学び、リアルタイムのシミュレーション環境や Blender から Unreal へのパイプライン向けに、最適化されたローポリアセットを制作しました。",
-                    xp3When: "2026年6月", xp3Title: "実プロジェクトへの貢献",
-                    xp3Desc: "実際の社内プロジェクトに参加し、シミュレーション環境と納品ワークフローに必要なローポリ3Dモデルを制作しました。",
-                    xp4When: "2026年7月", xp4Title: "プログラミング・自動化・社内ツール",
-                    xp4Desc: "Python、C++、JavaScript、Three.js を用いて開発し、Blender スクリプティングを試すとともに、アセット数・ポリゴンの複雑さ・モデル情報を解析するローカルの3D検査ツールを作成しました。",
-                    xp5When: "現在", xp5Title: "AIを活用した3D開発",
-                    xp5Desc: "Blueprint、Unreal Engine、Blender、Claude Code、Blender MCP、生成AIツールを活用し、開発ワークフローの改善と実践的なシミュレーション作業を継続しています。",
+                    xp1When: "2026年4月〜6月", xp1Title: "Unreal Engine と Blender の基礎習得",
+                    xp1Desc: "Unreal Engine と Blender の基礎スキルを習得し、ローポリ3Dモデリングと、リアルタイムシミュレーション向けの Blender から Unreal への制作フローを学びました。",
+                    xp2When: "2026年7月〜9月", xp2Title: "プロジェクトへの貢献と社内ツール開発",
+                    xp2Desc: "Blender で3Dモデルを制作し、実際の社内プロジェクトに貢献しました。JavaScript、Three.js、Node.js を用いて、ローカルで動作する GLB 解析・最適化ツールを開発しました。Python、C++、Blueprint、AIを活用した開発により、自動化とシミュレーションのワークフロー改善を継続しています。",
                     xpTech: "Blueprint · C++ · Python · Blender · Three.js · AI Workflows",
                     certTitle: "資格・認定",
                     cert4Mon: "8月", cert4Year: "2026", cert4Title: "Networking Basics",
