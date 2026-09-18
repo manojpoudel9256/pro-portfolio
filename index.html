@@ -5396,17 +5396,17 @@
                     <div class="edu-grid">
 
                         <article class="edu-card"
-                            onclick="openImageModal('assets/images/education/hokkaido-cyber-creators-college.webp', 'IT Department', 'Hokkaido Cyber Creators College')">
+                            onclick="openImageModal(this)">
                             <div class="edu-photo">
                                 <picture>
                                     <source srcset="assets/images/education/hokkaido-cyber-creators-college.webp" type="image/webp">
-                                    <img src="assets/images/education/hokkaido-cyber-creators-college.webp" alt="Classroom at Hokkaido Cyber Creators College" width="1200"
+                                    <img src="assets/images/education/hokkaido-cyber-creators-college.webp" data-i18n-alt="edu1PhotoAlt" alt="Classroom at Hokkaido Cyber Creator Professional Training College" width="1200"
                                         height="800" loading="lazy">
                                 </picture>
                                 <span class="edu-year">2024 — 2026</span>
                             </div>
                             <div class="edu-body">
-                                <span class="edu-school">Hokkaido Cyber Creators</span>
+                                <span class="edu-school" data-i18n="edu1School">Hokkaido Cyber Creator Professional Training College</span>
                                 <h3 class="edu-title" data-i18n="edu1Title">IT Department</h3>
                                 <p class="edu-desc" data-i18n="edu1Desc">Specialized in Network, Cloud, and Cybersecurity. Comprehensive
                                     web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.</p>
@@ -5420,18 +5420,18 @@
                         </article>
 
                         <article class="edu-card"
-                            onclick="openImageModal('assets/images/education/hokkaido-japanese-language-academy.webp', 'Japanese Language', 'Hokkaido Japanese Language Academy')">
+                            onclick="openImageModal(this)">
                             <div class="edu-photo">
                                 <picture>
                                     <source srcset="assets/images/education/hokkaido-japanese-language-academy.webp" type="image/webp">
-                                    <img src="assets/images/education/hokkaido-japanese-language-academy.webp" alt="Graduation at Hokkaido Japanese Language Academy"
+                                    <img src="assets/images/education/hokkaido-japanese-language-academy.webp" data-i18n-alt="edu2PhotoAlt" alt="Graduation at Hokkaido Japanese Language Academy Sapporo Main Campus"
                                         width="1200" height="1200" loading="lazy"
                                         style="object-position: center;">
                                 </picture>
                                 <span class="edu-year">2022 — 2024</span>
                             </div>
                             <div class="edu-body">
-                                <span class="edu-school">Hokkaido JL Academy</span>
+                                <span class="edu-school" data-i18n="edu2School">Hokkaido Japanese Language Academy Sapporo Main Campus</span>
                                 <h3 class="edu-title" data-i18n="edu2Title">Japanese Language</h3>
                                 <p class="edu-desc" data-i18n="edu2Desc">Achieved JLPT N3 certification. Deep focus on Japanese
                                     corporate culture, business manners, and volunteer leadership.</p>
@@ -6051,15 +6051,22 @@
         }
 
         // IMAGE MODAL FUNCTIONS
-        function openImageModal(imageSrc, title, subtitle) {
+        function openImageModal(card) {
+            const photo = card.querySelector('.edu-photo img');
+            const title = card.querySelector('.edu-title');
+            const school = card.querySelector('.edu-school');
             const modal = document.getElementById('imageModal');
             const modalImage = document.getElementById('modalImage');
             const modalTitle = document.getElementById('modalTitle');
             const modalSubtitle = document.getElementById('modalSubtitle');
 
-            modalImage.src = imageSrc;
-            modalTitle.textContent = title;
-            modalSubtitle.textContent = subtitle;
+            modalImage.src = photo.currentSrc || photo.src;
+            modalImage.alt = photo.alt;
+            modalImage.dataset.i18nAlt = photo.dataset.i18nAlt;
+            modalTitle.textContent = title.textContent;
+            modalTitle.dataset.i18n = title.dataset.i18n;
+            modalSubtitle.textContent = school.textContent;
+            modalSubtitle.dataset.i18n = school.dataset.i18n;
 
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -6438,8 +6445,12 @@
                     cert3Desc: "Entry-level Oracle certification validating fundamental Java programming and object-oriented concepts.",
                     cert3Skills: "Java · Web Design", certCertified: "Certified",
                     eduTitle: "Education",
+                    edu1School: "Hokkaido Cyber Creator Professional Training College",
+                    edu1PhotoAlt: "Classroom at Hokkaido Cyber Creator Professional Training College",
                     edu1Title: "IT Department",
                     edu1Desc: "Specialized in Network, Cloud, and Cybersecurity. Comprehensive web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.",
+                    edu2School: "Hokkaido Japanese Language Academy Sapporo Main Campus",
+                    edu2PhotoAlt: "Graduation at Hokkaido Japanese Language Academy Sapporo Main Campus",
                     edu2Title: "Japanese Language",
                     edu2Desc: "Achieved JLPT N3 certification. Deep focus on Japanese corporate culture, business manners, and volunteer leadership.",
                     viewPhoto: "View photo", toolsTitle: "Tools & Technologies",
@@ -6570,8 +6581,12 @@
                     cert3Desc: "Javaプログラミングとオブジェクト指向の基礎を証明する、エントリーレベルのOracle認定資格です。",
                     cert3Skills: "Java · Web デザイン", certCertified: "認定済み",
                     eduTitle: "学歴",
+                    edu1School: "専門学校北海道サイバークリエイターズ大学校",
+                    edu1PhotoAlt: "専門学校北海道サイバークリエイターズ大学校の教室",
                     edu1Title: "IT学科",
                     edu1Desc: "ネットワーク・クラウド・サイバーセキュリティを専攻。Java、HTML/CSS、JS、PHP、Linux など幅広いWeb開発カリキュラムを修了。",
+                    edu2School: "北海道日本語学院札幌本校",
+                    edu2PhotoAlt: "北海道日本語学院札幌本校の卒業式",
                     edu2Title: "日本語学科",
                     edu2Desc: "JLPT N3 を取得。日本の企業文化・ビジネスマナー、そしてボランティアでのリーダーシップに注力。",
                     viewPhoto: "写真を見る", toolsTitle: "ツール＆テクノロジー",
@@ -6609,6 +6624,9 @@
                 });
                 document.querySelectorAll("[data-i18n-ph]").forEach(el => {
                     const v = t[el.dataset.i18nPh]; if (v != null) el.placeholder = v;
+                });
+                document.querySelectorAll("[data-i18n-alt]").forEach(el => {
+                    const v = t[el.dataset.i18nAlt]; if (v != null) el.alt = v;
                 });
                 // toggle button shows the language you'll switch TO
                 const other = (l === "ja")
