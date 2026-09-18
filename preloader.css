@@ -1,0 +1,98 @@
+/* Live typography inspired by the supplied Hello GIF; no video or image assets. */
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: #f4f1ef;
+    color: #171614;
+    transition: transform 650ms cubic-bezier(.76, 0, .24, 1),
+        border-radius 650ms cubic-bezier(.76, 0, .24, 1);
+}
+
+.preloader[hidden] { display: none; }
+
+.pl-word {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.4em;
+    margin: 0;
+    font-size: clamp(64px, 10vw, 112px);
+    line-height: 1;
+    user-select: none;
+}
+
+.pl-letter {
+    display: grid;
+    place-items: center;
+    width: .63em;
+    height: 1.15em;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.pl-letter[data-letter="l"] { width: .32em; }
+.pl-glyph { display: block; line-height: 1; }
+
+.pl-letter[data-style="1"] { font-family: Georgia, serif; font-style: italic; }
+.pl-letter[data-style="2"] { font-family: Georgia, serif; font-weight: 700; }
+.pl-letter[data-style="3"] { font-family: "Clash Display", Arial, sans-serif; font-weight: 700; }
+.pl-letter[data-style="4"] {
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 300;
+    color: transparent;
+    -webkit-text-stroke: .7px #171614;
+}
+.pl-letter[data-style="5"] {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    transform: skewX(-9deg);
+}
+.pl-letter[data-style="6"] .pl-glyph {
+    background: #171614;
+    color: #f4f1ef;
+    padding: .035em .015em .065em;
+    font-family: "Satoshi", Arial, sans-serif;
+    font-weight: 500;
+}
+.pl-pixels { display: none; width: .57em; height: .8em; fill: currentColor; }
+.pl-letter[data-style="7"] .pl-glyph { display: none; }
+.pl-letter[data-style="7"] .pl-pixels { display: block; }
+.pl-letter[data-letter="l"] .pl-pixels { width: .24em; }
+.pl-letter[data-style="8"] {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -.07em;
+}
+
+.pl-skip {
+    position: absolute;
+    right: max(24px, env(safe-area-inset-right));
+    bottom: max(24px, env(safe-area-inset-bottom));
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid #d8d1ca;
+    border-radius: 999px;
+    background: transparent;
+    color: #625a53;
+    font: 400 12px "Satoshi", Arial, sans-serif;
+    cursor: pointer;
+}
+.pl-skip:hover { color: #171614; border-color: #171614; }
+.pl-skip:focus-visible { outline: 2px solid #171614; outline-offset: 4px; }
+.preloader.pl-done {
+    transform: translateY(-100%);
+    border-radius: 0 0 50% 50% / 0 0 10vh 10vh;
+    pointer-events: none;
+}
+.preloader.pl-done .pl-word,
+.preloader.pl-done .pl-skip { opacity: 0; transition: opacity 180ms ease; }
+
+@media (prefers-reduced-motion: reduce) {
+    .preloader { display: none; transition: none; }
+}

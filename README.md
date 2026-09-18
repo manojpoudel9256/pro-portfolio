@@ -16,6 +16,13 @@ a full-bleed portrait hero, consistent quiet card surfaces, and GSAP + Lenis mot
 
 ## Run / Deploy
 
+The opening `hello` animation uses live HTML lettering, CSS type styles, and
+JavaScript-generated SVG pixels in `preloader.css` and `preloader.js`, inspired by
+[the supplied typography reference](https://jp.pinterest.com/pin/528539706272479068/).
+It finishes in about 3.4 seconds, including the upward reveal. Visitors can skip
+with the button or Escape; reduced-motion preferences and `?nopreload=1` bypass it.
+The overlay stays hidden when JavaScript is unavailable.
+
 Open `index.html`, or deploy the folder as-is to **Vercel / Netlify / GitHub Pages**
 (framework preset: **Other**, no build command, no output directory).
 
