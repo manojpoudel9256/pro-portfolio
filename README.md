@@ -16,6 +16,12 @@ a full-bleed portrait hero, consistent quiet card surfaces, and GSAP + Lenis mot
 
 ## Run / Deploy
 
+The Unreal Engine section includes on-demand 1080p previews, separate generated
+covers, bilingual project descriptions, and links to the full LinkedIn videos.
+Its standalone styles and playback controller are `unreal-projects.css` and
+`unreal-projects.js`. See [media notes](assets/videos/unreal-engine/README.md)
+and [artwork prompts](assets/images/projects/unreal-engine/ARTWORK.md).
+
 The opening `hello` animation uses live HTML lettering, CSS type styles, and
 JavaScript-generated SVG pixels in `preloader.css` and `preloader.js`, inspired by
 [the supplied typography reference](https://jp.pinterest.com/pin/528539706272479068/).

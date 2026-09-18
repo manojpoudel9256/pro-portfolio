@@ -8,6 +8,7 @@
 }
 
 .work,
+.unreal-work,
 .about-me-section,
 .footer,
 .proj-modal {
@@ -27,7 +28,7 @@
     --card-shadow: 0 12px 34px rgba(87, 59, 27, 0.045);
 }
 
-html[data-theme="dark"] :is(.work, .about-me-section, .footer, .proj-modal) {
+html[data-theme="dark"] :is(.work, .unreal-work, .about-me-section, .footer, .proj-modal) {
     --bg: #191714;
     --surface: #201c18;
     --elevated: #27221c;
