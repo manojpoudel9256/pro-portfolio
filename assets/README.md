@@ -6,6 +6,7 @@ Use lowercase, descriptive, hyphen-separated filenames. Paths in `index.html` an
 | --- | --- |
 | `icons/` | Favicon, Apple touch icon, and PWA icons |
 | `logos/` | Technology and certification SVG logos |
+| `logos/branding/` | Lightweight generated MP monogram for mobile navigation |
 | `images/portraits/` | Manoj's portrait and retained About image |
 | `images/projects/` | Optimized WebP project covers used by cards and dialogs |
 | `images/projects/unreal-engine/` | Darts and warehouse covers, responsive variants, and generation prompts |
@@ -13,6 +14,7 @@ Use lowercase, descriptive, hyphen-separated filenames. Paths in `index.html` an
 | `images/education/` | College and Japanese-language academy photographs |
 | `images/exports/` | Full-size 4K upscaled GLB artwork PNG exports |
 | `images/exports/unreal-engine/` | Native-resolution generated PNG cover masters |
+| `images/exports/branding/` | Native generated monogram and a 3840 × 2160 upscaled export |
 | `images/archive/` | Previous covers and source variants retained for reference |
 
 The website uses the lightweight project covers, not the large exports or archived variants. All images were moved without changing their contents.

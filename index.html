@@ -193,8 +193,7 @@
         html.theme-anim .pw-card,
         html.theme-anim .edu-card,
         html.theme-anim .stack,
-        html.theme-anim .logo-chip,
-        html.theme-anim .menu-overlay {
+        html.theme-anim .logo-chip {
             transition: background-color 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
         }
 
@@ -442,70 +441,6 @@
         /* menu (hamburger text) button — desktop hidden, mobile shown */
         .top-nav .menu-text {
             display: none;
-        }
-
-        /* language button inside the mobile menu overlay */
-        .menu-lang {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: var(--space-5);
-            padding: 13px 22px;
-            border-radius: 999px;
-            cursor: pointer;
-            align-self: flex-start;
-            background: var(--elevated);
-            border: 1px solid var(--hairline);
-            color: var(--ink);
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 0.95rem;
-            opacity: 0;
-            transform: translateX(24px);
-            transition: border-color 0.25s var(--ease), transform 0.5s var(--ease), opacity 0.5s var(--ease);
-        }
-
-        .menu-overlay.is-open .menu-lang {
-            opacity: 1;
-            transform: none;
-            transition-delay: 0.36s;
-        }
-
-        .menu-lang:hover {
-            border-color: var(--accent);
-            transform: translateY(-1px);
-        }
-
-        .menu-lang .lang-flag {
-            font-size: 1.2rem;
-        }
-
-        .menu-controls {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: var(--space-5);
-        }
-
-        .menu-controls .menu-lang {
-            margin-top: 0;
-        }
-
-        .menu-theme .ico-sun {
-            display: none;
-        }
-
-        .menu-theme svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        html[data-theme="dark"] .menu-theme .ico-moon {
-            display: none;
-        }
-
-        html[data-theme="dark"] .menu-theme .ico-sun {
-            display: block;
         }
 
         /* HERO — editorial: giant type behind portrait cutout */
@@ -3073,247 +3008,6 @@
             height: var(--space-7);
         }
 
-        /* MENU BUTTON — floating menu trigger, no longer needed now that the
-           pill nav is sticky (desktop) and the nav has a Menu button (mobile) */
-        .menu-button-wrapper {
-            display: none !important;
-            position: fixed;
-            top: var(--space-3);
-            right: var(--space-3);
-            z-index: 2400;
-            transform: scale(0);
-            transition: transform 0.3s var(--ease);
-        }
-
-        .menu-button-wrapper.active {
-            transform: scale(1);
-        }
-
-        .menu-button {
-            background-color: var(--ink);
-            border-radius: 50px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            gap: var(--space-2);
-            box-shadow: 0 6px 20px rgba(20, 20, 20, 0.25);
-            padding: var(--space-2) var(--space-4);
-        }
-
-        .menu-button-text {
-            color: var(--on-dark);
-            font-family: var(--font-mono);
-            font-size: var(--fs-200);
-            letter-spacing: 0.04em;
-        }
-
-        .burger {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .burger .line {
-            width: 24px;
-            height: 2px;
-            background-color: var(--on-dark);
-            transition: all 0.3s var(--ease);
-        }
-
-        .menu-button.open .line:first-child {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .menu-button.open .line:last-child {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* MENU OVERLAY */
-        /* ===== Premium slide-in menu (theme-adaptive) ===== */
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: min(440px, 100vw);
-            height: 100vh;
-            height: 100dvh;
-            background: var(--bg);
-            border-left: 1px solid var(--hairline);
-            box-shadow: -30px 0 80px rgba(20, 20, 20, 0.20);
-            z-index: 2500;
-            transform: translateX(100%);
-            padding: clamp(24px, 7vw, 52px) clamp(24px, 6vw, 46px);
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-
-        /* soft accent glow in the corner for a premium feel */
-        .menu-overlay::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background:
-                radial-gradient(50% 34% at 88% 8%, rgba(159, 18, 57, 0.10), transparent 70%),
-                radial-gradient(60% 40% at 6% 96%, rgba(124, 92, 255, 0.08), transparent 72%);
-        }
-
-        .menu-overlay>* {
-            position: relative;
-            z-index: 1;
-        }
-
-        .menu-close {
-            position: absolute;
-            top: clamp(18px, 5vw, 30px);
-            right: clamp(18px, 5vw, 30px);
-            width: 44px;
-            height: 44px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            border: 1px solid var(--hairline);
-            background: var(--elevated);
-            z-index: 2501;
-            transition: transform 0.3s var(--ease), border-color 0.25s var(--ease);
-        }
-
-        .menu-close:hover {
-            transform: rotate(90deg);
-            border-color: var(--accent);
-        }
-
-        .menu-close::before,
-        .menu-close::after {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 2px;
-            border-radius: 2px;
-            background: var(--ink);
-        }
-
-        .menu-close::before {
-            transform: rotate(45deg);
-        }
-
-        .menu-close::after {
-            transform: rotate(-45deg);
-        }
-
-        .menu-nav {
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-
-        .menu-nav p {
-            font-family: var(--font-mono);
-            font-size: var(--fs-100);
-            color: var(--ink-3, var(--ink-2));
-            text-transform: uppercase;
-            letter-spacing: var(--tracking-label);
-            margin-bottom: var(--space-2);
-        }
-
-        .hr {
-            width: 100%;
-            height: 1px;
-            background: var(--hairline);
-            margin-bottom: var(--space-4);
-        }
-
-        .menu-nav a {
-            display: flex;
-            align-items: center;
-            gap: var(--space-2);
-            color: var(--ink);
-            text-decoration: none;
-            font-family: var(--font-display);
-            font-size: clamp(1.35rem, 6vw, 1.85rem);
-            font-weight: 500;
-            letter-spacing: -0.01em;
-            padding: clamp(12px, 2vh, 17px) 0;
-            border-bottom: 1px solid var(--hairline);
-            /* staggered entrance */
-            opacity: 0;
-            transform: translateX(24px);
-            transition: color 0.3s var(--ease), padding-left 0.35s var(--ease),
-                opacity 0.5s var(--ease), transform 0.5s var(--ease);
-        }
-
-        .menu-overlay.is-open .menu-nav a {
-            opacity: 1;
-            transform: none;
-        }
-
-        .menu-overlay.is-open .menu-nav a:nth-of-type(1) {
-            transition-delay: 0.12s;
-        }
-
-        .menu-overlay.is-open .menu-nav a:nth-of-type(2) {
-            transition-delay: 0.18s;
-        }
-
-        .menu-overlay.is-open .menu-nav a:nth-of-type(3) {
-            transition-delay: 0.24s;
-        }
-
-        .menu-overlay.is-open .menu-nav a:nth-of-type(4) {
-            transition-delay: 0.30s;
-        }
-
-        .menu-ico {
-            width: 40px;
-            height: 40px;
-            flex: 0 0 auto;
-            display: grid;
-            place-items: center;
-            border-radius: 11px;
-            border: 1px solid var(--hairline);
-            background: var(--elevated);
-            color: var(--ink);
-            transition: transform 0.4s var(--ease), background 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
-        }
-
-        .menu-ico svg {
-            width: 19px;
-            height: 19px;
-        }
-
-        .menu-label {
-            flex: 1;
-        }
-
-        .menu-arrow {
-            opacity: 0;
-            transform: translateX(-10px);
-            color: var(--accent);
-            transition: all 0.35s var(--ease);
-        }
-
-        .menu-nav a:hover {
-            padding-left: var(--space-2);
-            color: var(--accent);
-        }
-
-        .menu-nav a:hover .menu-ico {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: var(--accent-ink);
-            transform: rotate(-6deg) scale(1.08);
-        }
-
-        .menu-nav a:hover .menu-arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
         /* FOOTER — theme-adaptive.
            Remap the "on-dark" surface tokens locally so every descendant
            (buttons, form, socials, bottom bar) follows light/dark automatically. */
@@ -3827,10 +3521,6 @@
                 display: none;
             }
 
-            .menu-button-wrapper {
-                display: none;
-            }
-
             /* hero mobile layout is handled in the hero block above */
 
             .work {
@@ -4084,15 +3774,6 @@
                 max-width: 100%;
             }
 
-            .menu-overlay {
-                width: 100%;
-                padding: var(--space-8) var(--gutter);
-            }
-
-            .menu-nav a {
-                font-size: clamp(1.35rem, 6vw, 1.85rem);
-            }
-
             .footer {
                 padding: var(--space-7) var(--gutter) var(--space-4);
                 min-height: auto;
@@ -4160,6 +3841,7 @@
     <link rel="stylesheet" href="refinements.css">
     <link rel="stylesheet" href="preloader.css">
     <link rel="stylesheet" href="unreal-projects.css">
+    <link rel="stylesheet" href="mobile-menu.css">
 </head>
 
 <body>
@@ -4177,85 +3859,47 @@
     </div>
     <script src="preloader.js"></script>
 
-    <div class="menu-button-wrapper">
-        <div class="menu-button magnetic-wrap" onclick="window.toggleMenu()">
-            <span class="menu-button-text">Menu</span>
-            <div class="burger">
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
+    <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+    <aside class="menu-overlay" id="mobileMenu" role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle" aria-hidden="true" inert data-lenis-prevent>
+        <div class="menu-heading">
+            <a class="menu-brand" href="#home" data-menu-link>
+                <img src="assets/logos/branding/manoj-poudel-monogram-144.webp" width="44" height="44" alt="" decoding="async">
+                <span class="menu-brand-copy"><span class="menu-brand-name">Manoj Poudel</span><span class="menu-brand-role" data-i18n="menuRole">Software Engineer</span></span>
+            </a>
+            <button class="menu-close" type="button" aria-label="Close menu" data-i18n-aria="menuClose">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+            </button>
         </div>
-    </div>
+        <nav class="menu-nav" aria-labelledby="mobileMenuTitle">
+            <p class="menu-kicker" id="mobileMenuTitle" data-i18n="menuExplore">Explore the portfolio</p>
+            <ol class="menu-links">
+                <li><a href="#home" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">01</span><span class="menu-label" data-i18n="navHome">Home</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
+                <li><a href="#work" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">02</span><span class="menu-label" data-i18n="menuWork">Selected work</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
+                <li><a href="#unreal-projects" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">03</span><span class="menu-label" data-i18n="menuUnreal">Unreal Engine</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
+                <li><a href="#about-me" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">04</span><span class="menu-label" data-i18n="navAbout">About</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
+                <li><a href="#contact" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">05</span><span class="menu-label" data-i18n="navContact">Contact</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
+            </ol>
+        </nav>
+        <div class="menu-footer">
+            <div class="menu-preferences">
+                <div class="menu-language" role="group" aria-label="Language" data-i18n-aria="menuLanguage">
+                    <button class="menu-language-option active" type="button" data-lang="en" onclick="window.setLang('en')" aria-label="English" aria-pressed="true" lang="en">EN</button>
+                    <button class="menu-language-option" type="button" data-lang="ja" onclick="window.setLang('ja')" aria-label="日本語" aria-pressed="false" lang="ja">日本語</button>
+                </div>
+                <button class="menu-theme" type="button" onclick="window.toggleTheme()">
+                    <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                    <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2m-15-7 1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+                    <span id="themeLabelM">Dark mode</span>
+                </button>
+            </div>
+            <p class="menu-location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="menuLocation">Tokyo, Japan</span></p>
+        </div>
+    </aside>
 
-    <div class="menu-overlay">
-        <div class="menu-close" onclick="window.toggleMenu()"></div>
-        <div class="menu-nav">
-            <p data-i18n="navLabel">Navigation</p>
-            <div class="hr"></div>
-            <a href="#home" class="menu-link" onclick="window.toggleMenu()">
-                <span class="menu-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                        <path d="M4 11.5 12 5l8 6.5M6 10v9h12v-9" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </span>
-                <span class="menu-label" data-i18n="navHome">Home</span>
-                <span class="menu-arrow" aria-hidden="true">→</span>
-            </a>
-            <a href="#work" class="menu-link" onclick="window.toggleMenu()">
-                <span class="menu-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                        <rect x="4" y="7" width="16" height="12" rx="2" />
-                        <path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7" stroke-linecap="round" />
-                    </svg>
-                </span>
-                <span class="menu-label" data-i18n="navWork">Work</span>
-                <span class="menu-arrow" aria-hidden="true">→</span>
-            </a>
-            <a href="#about-me" class="menu-link" onclick="window.toggleMenu()">
-                <span class="menu-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                        <circle cx="12" cy="8" r="4" />
-                        <path d="M5 20a7 7 0 0 1 14 0" stroke-linecap="round" />
-                    </svg>
-                </span>
-                <span class="menu-label" data-i18n="navAbout">About</span>
-                <span class="menu-arrow" aria-hidden="true">→</span>
-            </a>
-            <a href="#contact" class="menu-link" onclick="window.toggleMenu()">
-                <span class="menu-ico" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                        <rect x="3" y="5" width="18" height="14" rx="2" />
-                        <path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </span>
-                <span class="menu-label" data-i18n="navContact">Contact</span>
-                <span class="menu-arrow" aria-hidden="true">→</span>
-            </a>
-            <div class="menu-controls">
-                <button class="menu-lang" type="button" onclick="window.toggleLang()">
-                    <span class="lang-flag" id="langFlagM">🇯🇵</span>
-                    <span id="langLabelM">日本語</span>
-                </button>
-                <button class="menu-lang menu-theme" type="button" onclick="window.toggleTheme()"
-                    aria-label="Toggle dark mode">
-                    <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
-                    </svg>
-                    <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="4.2" />
-                        <path d="M12 2v2.2M12 19.8V22M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2 12h2.2M19.8 12H22M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6" />
-                    </svg>
-                    <span id="themeLabelM">Dark</span>
-                </button>
-            </div>
-        </div>
-    </div>
 
     <main id="main">
         <nav class="top-nav">
-            <a class="logo" href="#home">Manoj Poudel</a>
+            <a class="logo" href="#home"><img class="mobile-brandmark" src="assets/logos/branding/manoj-poudel-monogram-96.webp" width="30" height="30" alt="" decoding="async"><span>Manoj Poudel</span></a>
             <div class="nav-pill">
                 <a href="#home" class="np-link" data-nav data-i18n="navHome">Home</a>
                 <a href="#work" class="np-link" data-nav data-i18n="navWork">Work</a>
@@ -4313,8 +3957,9 @@
                         </svg>
                     </button>
                 </div>
-                <button class="menu-text" type="button" aria-label="Open menu"
-                    onclick="window.toggleMenu()"><span data-i18n="navMenu">Menu</span></button>
+                <button class="menu-text" id="mobileMenuTrigger" type="button" aria-label="Open menu" data-i18n-aria="menuOpen" aria-controls="mobileMenu" aria-expanded="false">
+                    <span data-i18n="navMenu">Menu</span><svg class="menu-trigger-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M3 7h14M7 13h10"/></svg>
+                </button>
             </div>
         </nav>
 
@@ -5551,44 +5196,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
 
-    <!-- CRITICAL: Menu Logic Isolated to prevent crashes -->
-    <script>
-        window.menuOpen = false;
-        window.toggleMenu = function () {
-            const menuOverlay = document.querySelector('.menu-overlay');
-            const menuButtonInner = document.querySelector('.menu-button');
-
-            if (!menuOverlay || !menuButtonInner) {
-                console.warn('Menu elements not found in DOM');
-                return;
-            }
-
-            if (!window.menuOpen) {
-                // Use GSAP if available, otherwise fallback to simple CSS
-                if (typeof gsap !== 'undefined') {
-                    gsap.to(menuOverlay, { translateX: 0, duration: 0.5, ease: "power4.out" });
-                } else {
-                    menuOverlay.style.transform = 'translateX(0)';
-                    menuOverlay.style.transition = 'transform 0.5s ease-out';
-                }
-                menuButtonInner.classList.add('open');
-                menuOverlay.classList.add('is-open');
-                document.documentElement.style.overflow = 'hidden';
-                window.menuOpen = true;
-            } else {
-                if (typeof gsap !== 'undefined') {
-                    gsap.to(menuOverlay, { translateX: "100%", duration: 0.4, ease: "power3.inOut" });
-                } else {
-                    menuOverlay.style.transform = 'translateX(100%)';
-                    menuOverlay.style.transition = 'transform 0.4s ease-in-out';
-                }
-                menuButtonInner.classList.remove('open');
-                menuOverlay.classList.remove('is-open');
-                document.documentElement.style.overflow = '';
-                window.menuOpen = false;
-            }
-        };
-    </script>
+    <script src="mobile-menu.js"></script>
 
     <!-- THEME toggle (light / dark) -->
     <script>
@@ -5596,7 +5204,8 @@
             function syncThemeUI() {
                 var dark = document.documentElement.getAttribute("data-theme") === "dark";
                 var lm = document.getElementById("themeLabelM");
-                if (lm) lm.textContent = dark ? "Light" : "Dark";
+                var japanese = document.documentElement.lang === 'ja';
+                if (lm) lm.textContent = dark ? (japanese ? 'ライトモード' : 'Light mode') : (japanese ? 'ダークモード' : 'Dark mode');
                 var meta = document.querySelector('meta[name="theme-color"]');
                 if (meta) meta.setAttribute("content", dark ? "#0f0f11" : "#f2f1ee");
             }
@@ -5608,6 +5217,7 @@
                 try { localStorage.setItem("pp_theme", next); } catch (e) { }
                 syncThemeUI();
             };
+            window.addEventListener('portfolio:languagechange', syncThemeUI);
             syncThemeUI();
         })();
     </script>
@@ -5633,21 +5243,7 @@
         })();
     </script>
 
-    <!-- CRITICAL: Floating Button Logic Isolated -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const floatBtn = document.querySelector('.menu-button-wrapper');
-            if (floatBtn) {
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 200) {
-                        floatBtn.classList.add('active');
-                    } else {
-                        floatBtn.classList.remove('active');
-                    }
-                });
-            }
-        });
-    </script>
+
 
     <!-- CRITICAL: Clock Logic Isolated -->
     <script>
@@ -5730,11 +5326,6 @@
                 if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: 0, duration: 1.2 }); }
             });
         });
-
-        // MENU open/close/link handling is done entirely by the inline
-        // onclick="window.toggleMenu()" attributes + the single toggleMenu()
-        // defined in the isolated script above. (Duplicate JS bindings here were
-        // firing handlers twice and breaking the close — removed.)
 
         // TOOLS MARQUEE — real self-hosted logos, duplicated for a seamless loop.
         // Movement is driven by requestAnimationFrame (not CSS keyframes), which
@@ -6184,6 +5775,9 @@
                     ueFull: "Full video on LinkedIn", ueError: "Preview unavailable.", ueOpen: "Open video directly",
                     navHome: "Home", navWork: "Work", navAbout: "About", navContact: "Contact",
                     navMenu: "Menu", navLabel: "Navigation",
+                    menuOpen: "Open menu", menuClose: "Close menu", menuRole: "Software Engineer",
+                    menuExplore: "Explore the portfolio", menuWork: "Selected work", menuUnreal: "Unreal Engine",
+                    menuLanguage: "Language", menuLocation: "Tokyo, Japan",
                     heroTagline: "Software Engineer<br><span>Mobility &amp; Robotics</span>",
                     heroBadge: "Software Engineer",
                     heroTitle: 'Software for mobility, robotics &amp; <span class="hero-accent">immersive experiences.</span>',
@@ -6330,6 +5924,9 @@
                     ueFull: "LinkedInでフル動画を見る", ueError: "プレビューを再生できません。", ueOpen: "動画を直接開く",
                     navHome: "ホーム", navWork: "実績", navAbout: "プロフィール", navContact: "お問い合わせ",
                     navMenu: "メニュー", navLabel: "ナビゲーション",
+                    menuOpen: "メニューを開く", menuClose: "メニューを閉じる", menuRole: "ソフトウェアエンジニア",
+                    menuExplore: "ポートフォリオ", menuWork: "制作実績", menuUnreal: "Unreal Engine",
+                    menuLanguage: "言語", menuLocation: "日本・東京",
                     heroTagline: "ソフトウェアエンジニア<br><span>モビリティ＆ロボティクス</span>",
                     heroBadge: "ソフトウェアエンジニア",
                     heroTitle: 'モビリティ、ロボティクス、そして<span class="hero-accent">没入型体験</span>のためのソフトウェア。',
@@ -6480,6 +6077,9 @@
                 document.querySelectorAll("[data-i18n-alt]").forEach(el => {
                     const v = t[el.dataset.i18nAlt]; if (v != null) el.alt = v;
                 });
+                document.querySelectorAll("[data-i18n-aria]").forEach(el => {
+                    const v = t[el.dataset.i18nAria]; if (v != null) el.setAttribute('aria-label', v);
+                });
                 // toggle button shows the language you'll switch TO
                 const other = (l === "ja")
                     ? { flag: "🇬🇧", label: "English" }
@@ -6487,7 +6087,7 @@
                 ["langFlag", "langFlagM"].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = other.flag; });
                 ["langLabel", "langLabelM"].forEach(id => { const e = document.getElementById(id); if (e) e.textContent = other.label; });
                 // highlight the active flag in the two-flag switch
-                document.querySelectorAll(".lang-flag-btn").forEach(b => {
+                document.querySelectorAll(".lang-flag-btn, .menu-language-option").forEach(b => {
                     const on = b.dataset.lang === l;
                     b.classList.toggle("active", on);
                     b.setAttribute("aria-pressed", on ? "true" : "false");

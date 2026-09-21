@@ -1,5 +1,5 @@
 /* Shared visual rhythm across work, background, credentials and contact.
-   The warm editorial theme is scoped below; hero/nav keep their own palette. */
+   The warm editorial theme is scoped below; hero/desktop nav keep their own palette. */
 :root {
     --section-heading: clamp(2.5rem, 5.5vw, 5rem);
     --subsection-heading: clamp(1.75rem, 3.2vw, 2.75rem);
@@ -9,6 +9,7 @@
 
 .work,
 .unreal-work,
+.menu-overlay,
 .about-me-section,
 .footer,
 .proj-modal {
@@ -28,7 +29,7 @@
     --card-shadow: 0 12px 34px rgba(87, 59, 27, 0.045);
 }
 
-html[data-theme="dark"] :is(.work, .unreal-work, .about-me-section, .footer, .proj-modal) {
+html[data-theme="dark"] :is(.work, .unreal-work, .menu-overlay, .about-me-section, .footer, .proj-modal) {
     --bg: #191714;
     --surface: #201c18;
     --elevated: #27221c;

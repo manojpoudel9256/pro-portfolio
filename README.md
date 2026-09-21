@@ -16,6 +16,11 @@ a full-bleed portrait hero, consistent quiet card surfaces, and GSAP + Lenis mot
 
 ## Run / Deploy
 
+Mobile navigation uses `mobile-menu.css` and `mobile-menu.js`, with a generated
+MP monogram, numbered links, language/theme controls, keyboard focus handling,
+and background scroll locking. [Logo sources and prompt](assets/logos/branding/README.md)
+include a 4K upscaled export; only the 4.6–7.2 KB WebP variants load on the site.
+
 The Unreal Engine section includes on-demand 1080p previews, separate generated
 covers, bilingual project descriptions, and links to the full LinkedIn videos.
 Its standalone styles and playback controller are `unreal-projects.css` and
