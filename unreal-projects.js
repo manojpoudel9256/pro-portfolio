@@ -5,6 +5,7 @@
     if (!section) return;
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const phone = window.matchMedia('(max-width: 768px) and (pointer: coarse)');
     const connection = navigator.connection;
     const players = [];
     const japanese = () => document.documentElement.lang === 'ja';
@@ -72,7 +73,10 @@
             card.classList.toggle('is-loading', video.paused || video.readyState < 3);
             labels();
             if (!video.getAttribute('src')) {
-                fallback = !video.canPlayType('video/webm; codecs="vp9"');
+                // Prefer the fast-start H.264 preview on touch phones. Some
+                // WebKit runtimes advertise VP9 but never deliver a frame.
+                // Desktop keeps its existing WebM-first selection.
+                fallback = phone.matches || !video.canPlayType('video/webm; codecs="vp9"');
                 video.src = fallback ? video.dataset.mp4 : video.dataset.webm;
                 video.preload = 'auto';
                 video.load();

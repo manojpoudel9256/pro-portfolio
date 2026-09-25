@@ -7,7 +7,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const code = fs.readFileSync(path.join(__dirname, '../unreal-projects.js'), 'utf8');
 
-function setup({ reduced = false, fine = true, saveData = false, webm = true } = {}) {
+function setup({ reduced = false, fine = true, saveData = false, webm = true, phone = false } = {}) {
     const timers = new Map();
     let now = 0, timerId = 0, intersection;
     function node() {
@@ -50,7 +50,7 @@ function setup({ reduced = false, fine = true, saveData = false, webm = true } =
     });
     const section = Object.assign(node(), { querySelectorAll: () => cards });
     document.getElementById = () => section;
-    const window = Object.assign(node(), { matchMedia: query => query.includes('reduced') ? motion : hover });
+    const window = Object.assign(node(), { matchMedia: query => query.includes('reduced') ? motion : query.includes('max-width') ? { matches: phone } : hover });
     function IntersectionObserver(fn) { intersection = fn; this.observe = () => {}; }
     window.IntersectionObserver = IntersectionObserver;
     vm.runInNewContext(code, {
@@ -99,6 +99,17 @@ test('touch click uses MP4 fallback and native controls; leaving card does not s
     assert.equal(card.parts['.ue-toggle'].getAttribute('aria-expanded'), 'true');
     click(card); assert.equal(card.video.paused, true);
 });
+test('touch phones prefer MP4 even when VP9 is advertised; desktop keeps WebM', () => {
+    for (const phone of [true, false]) {
+        const h = setup({ phone, fine: !phone, webm: true }), card = h.cards[0];
+        assert.equal(card.video.src, null);
+        click(card);
+        assert.equal(card.video.src, phone ? '0.mp4' : '0.webm');
+        playing(card);
+        assert.equal(card.classList.contains('is-ready'), true);
+    }
+});
+
 test('only one clip plays and cards stop when offscreen or the tab is hidden', () => {
     const h = setup(), [a, b] = h.cards;
     click(a); click(b); assert.equal(a.video.paused, true);

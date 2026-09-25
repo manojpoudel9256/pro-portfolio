@@ -21,6 +21,10 @@ MP monogram, numbered links, language/theme controls, keyboard focus handling,
 and background scroll locking. [Logo sources and prompt](assets/logos/branding/README.md)
 include a 4K upscaled export; only the 4.6–7.2 KB WebP variants load on the site.
 
+Phone layouts are refined separately in `mobile-refinements.css`, restricted to
+768px and below in both the stylesheet and its HTML link. This keeps desktop
+presentation unchanged. See [mobile design and verification notes](MOBILE-REFINEMENT.md).
+
 The Unreal Engine section includes on-demand 1080p previews, separate generated
 covers, bilingual project descriptions, and links to the full LinkedIn videos.
 Its standalone styles and playback controller are `unreal-projects.css` and
