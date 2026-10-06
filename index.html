@@ -2554,6 +2554,20 @@
             }
         }
 
+        @media (min-width: 769px) {
+            .xp-phases {
+                display: grid;
+                grid-template-columns: max-content minmax(0, 1fr);
+                column-gap: clamp(var(--space-3), 4vw, var(--space-6));
+            }
+
+            .xp-phases li {
+                display: grid;
+                grid-column: 1 / -1;
+                grid-template-columns: subgrid;
+            }
+        }
+
         @media (max-width: 768px) {
             .xp-head {
                 flex-direction: column;
