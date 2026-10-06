@@ -2267,6 +2267,7 @@
 
         .cert-section {
             margin-bottom: var(--space-9);
+            scroll-margin-top: 96px;
         }
 
         .cert-head {
@@ -3893,7 +3894,9 @@
                 <li><a href="#work" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">02</span><span class="menu-label" data-i18n="menuWork">Selected work</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
                 <li><a href="#unreal-projects" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">03</span><span class="menu-label" data-i18n="menuUnreal">Unreal Engine</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
                 <li><a href="#about-me" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">04</span><span class="menu-label" data-i18n="navAbout">About</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
-                <li><a href="#contact" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">05</span><span class="menu-label" data-i18n="navContact">Contact</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
+                <li><a href="#certifications" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">05</span><span class="menu-label" data-i18n="navCertifications">Certifications</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
+                <li><a href="#future-goals" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">06</span><span class="menu-label" data-i18n="navGoals">Goals</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
+                <li><a href="#contact" class="menu-link" data-menu-link><span class="menu-index" aria-hidden="true">07</span><span class="menu-label" data-i18n="navContact">Contact</span><span class="menu-arrow" aria-hidden="true">↗</span></a></li>
             </ol>
         </nav>
         <div class="menu-footer">
@@ -3920,6 +3923,8 @@
                 <a href="#home" class="np-link" data-nav data-i18n="navHome">Home</a>
                 <a href="#work" class="np-link" data-nav data-i18n="navWork">Work</a>
                 <a href="#about-me" class="np-link" data-nav data-i18n="navAbout">About</a>
+                <a href="#certifications" class="np-link" data-nav data-i18n="navCertifications">Certifications</a>
+                <a href="#future-goals" class="np-link" data-nav data-i18n="navGoals">Goals</a>
                 <a href="#contact" class="np-link" data-nav data-i18n="navContact">Contact</a>
             </div>
             <div class="nav-right">
@@ -4748,7 +4753,7 @@
                 </div>
 
                 <!-- Licenses & Certifications -->
-                <div class="cert-section">
+                <div class="cert-section" id="certifications">
                     <div class="cert-head">
                         <div class="cert-head-lead">
                             <span class="cert-kicker" data-i18n="certKicker">Credentials</span>
@@ -5414,7 +5419,12 @@
         document.querySelectorAll('.top-nav a[href^="#"], .hero a[href^="#"]').forEach(a => {
             a.addEventListener('click', (e) => {
                 const target = document.getElementById(a.getAttribute('href').slice(1));
-                if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: 0, duration: 1.2 }); }
+                if (target) {
+                    e.preventDefault();
+                    const offset = target.id === 'certifications' || target.id === 'future-goals'
+                        ? -document.querySelector('.top-nav').getBoundingClientRect().height - 16 : 0;
+                    lenis.scrollTo(target, { offset, duration: 1.2, immediate: prefersReducedMotion });
+                }
             });
         });
 
@@ -5865,6 +5875,7 @@
                     ueWarehouseAlt: "Warehouse simulation cover: an architectural cutaway with carton racks, conveyors and robotic equipment",
                     ueFull: "Full video on LinkedIn", ueError: "Preview unavailable.", ueOpen: "Open video directly",
                     navHome: "Home", navWork: "Work", navAbout: "About", navContact: "Contact",
+                    navCertifications: "Certifications", navGoals: "Goals",
                     navMenu: "Menu", navLabel: "Navigation",
                     menuOpen: "Open menu", menuClose: "Close menu", menuRole: "Software Engineer",
                     menuExplore: "Explore the portfolio", menuWork: "Selected work", menuUnreal: "Unreal Engine",
@@ -6039,6 +6050,7 @@
                     ueWarehouseAlt: "倉庫シミュレーションのカバー：棚、コンベヤー、ロボット設備のある倉庫の立体図",
                     ueFull: "LinkedInでフル動画を見る", ueError: "プレビューを再生できません。", ueOpen: "動画を直接開く",
                     navHome: "ホーム", navWork: "実績", navAbout: "プロフィール", navContact: "お問い合わせ",
+                    navCertifications: "資格・認定", navGoals: "今後の目標",
                     navMenu: "メニュー", navLabel: "ナビゲーション",
                     menuOpen: "メニューを開く", menuClose: "メニューを閉じる", menuRole: "ソフトウェアエンジニア",
                     menuExplore: "ポートフォリオ", menuWork: "制作実績", menuUnreal: "Unreal Engine",
@@ -6257,15 +6269,26 @@
             // scroll-spy: highlight the active pill link
             const links = Array.from(document.querySelectorAll(".np-link[data-nav]"));
             function setActive(id) {
-                links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
+                links.forEach(a => {
+                    const active = a.getAttribute("href") === "#" + id;
+                    a.classList.toggle("active", active);
+                    if (active) a.setAttribute("aria-current", "location");
+                    else a.removeAttribute("aria-current");
+                });
             }
             setActive("home");
             const secs = links
                 .map(a => document.getElementById(a.getAttribute("href").slice(1)))
                 .filter(Boolean);
             if ("IntersectionObserver" in window && secs.length) {
-                const io = new IntersectionObserver(entries => {
-                    entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+                const io = new IntersectionObserver(() => {
+                    // Certifications sits inside About; prefer the nested destination
+                    // and restore About when scrolling back into its other content.
+                    const active = secs.filter(section => {
+                        const rect = section.getBoundingClientRect();
+                        return rect.top <= innerHeight * .5 && rect.bottom >= innerHeight * .45;
+                    }).pop();
+                    if (active) setActive(active.id);
                 }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
                 secs.forEach(s => io.observe(s));
             }

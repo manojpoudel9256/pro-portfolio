@@ -83,4 +83,9 @@ html[lang="ja"] .menu-label { font-family: var(--font-body); font-size: clamp(22
     html[data-theme="dark"] .menu-trigger-icon { color: #efb05e; }
 }
 @media (max-height: 620px) { .menu-overlay { gap: 18px; } .menu-link { min-height: 50px; padding-block: 9px; } .menu-label { font-size: 25px; } .menu-location { margin-top: 14px; } }
+/* Keep six desktop destinations clear of the brand and controls on tablets. */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .top-nav { padding-inline: 20px; gap: 10px; }
+    .top-nav .np-link { padding-inline: 7px; font-size: 12px; }
+}
 @media (prefers-reduced-motion: reduce) { .menu-overlay, .menu-backdrop, .menu-link { transition: none; } }

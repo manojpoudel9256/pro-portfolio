@@ -28,7 +28,7 @@ function setup({ desktop = false, reduced = false, stopped = false, noLenis = fa
             blur() { document.activeElement = document.body; }
         }, extra);
     }
-    const targets = Object.fromEntries(['home', 'work', 'unreal-projects', 'about-me', 'contact'].map((id, i) => [id, element({ getBoundingClientRect: () => ({ top: i * 700 - 800 }) })]));
+    const targets = Object.fromEntries(['home', 'work', 'unreal-projects', 'about-me', 'certifications', 'future-goals', 'contact'].map((id, i) => [id, element({ getBoundingClientRect: () => ({ top: i * 700 - 800 }) })]));
     const links = Object.keys(targets).map(id => element({ hash: '#' + id }));
     const brand = element({ hash: '#home' }), close = element(), langEn = element(), langJa = element(), theme = element();
     const focusable = [brand, close, ...links, langEn, langJa, theme];
@@ -88,7 +88,7 @@ test('Tab and Shift+Tab wrap within the dialog', () => {
     s.document.fire('keydown', { key: 'Tab', shiftKey: true }); assert.equal(s.document.activeElement, s.theme);
 });
 test('all menu destinations close the menu, navigate, and focus their section', () => {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 7; i++) {
         const s = setup(); s.trigger.fire('click'); s.links[i].fire('click');
         const target = s.targets[s.links[i].hash.slice(1)];
         assert.equal(s.window.menuOpen, false); assert.equal(s.window.location.hash, s.links[i].hash);
