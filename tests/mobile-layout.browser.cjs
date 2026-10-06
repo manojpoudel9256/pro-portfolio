@@ -20,6 +20,9 @@ const sections = [
   ['18-certificate-two','.cred-card:nth-child(2)'], ['19-certificate-three','.cred-card:nth-child(3)'],
   ['19b-certificate-four','.cred-card:nth-child(4)'],
   ['20-college','.edu-card'], ['21-language-school','.edu-card:last-child'],
+  ['21b-future-goals','#future-goals'], ['21c-goal-robotics','.fg-card:nth-child(1)'],
+  ['21d-goal-simulation','.fg-card:nth-child(2)'], ['21e-goal-ai','.fg-card:nth-child(3)'],
+  ['21f-goal-connected','.fg-card:nth-child(4)'],
   ['22-contact','#contact'], ['23-contact-form','#contactForm'], ['24-footer','.footer-bottom']
 ];
 const report = { engine, configurations: [], desktop: [], interactions: [] };

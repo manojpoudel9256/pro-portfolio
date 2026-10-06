@@ -1,0 +1,69 @@
+/* Future Goals: scoped styles keep the existing portfolio sections intact. */
+.future-goals {
+    --fg-bg: #fcfaf7;
+    --fg-card: #fffdfa;
+    --fg-ink: #211a1b;
+    --fg-muted: #61585a;
+    --fg-accent: #9f1239;
+    --fg-line: rgba(128, 40, 62, .16);
+    --fg-tint: #f8eff0;
+    background: var(--fg-bg);
+    color: var(--fg-ink);
+    padding-block: var(--section-gap);
+    border-top: 1px solid var(--fg-line);
+    scroll-margin-top: 96px;
+}
+html[data-theme="dark"] .future-goals {
+    --fg-bg: #191714;
+    --fg-card: #25201f;
+    --fg-ink: #faf3e9;
+    --fg-muted: #cec1bd;
+    --fg-accent: #f0a4b7;
+    --fg-line: rgba(240, 164, 183, .2);
+    --fg-tint: #302326;
+}
+.fg-container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.fg-opening { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: clamp(32px, 5vw, 72px); margin-bottom: clamp(32px, 5vw, 64px); }
+.fg-kicker { color: var(--fg-accent); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 22px; }
+.fg-kicker::after { content: ""; display: block; width: 44px; height: 1px; background: currentColor; margin-top: 14px; }
+.fg-title { font-family: "Playfair Display", Georgia, serif; font-size: var(--section-heading); font-weight: 600; line-height: 1.08; letter-spacing: -.035em; text-wrap: balance; margin-bottom: 24px; }
+.fg-intro { font-size: 17px; line-height: 1.75; color: var(--fg-muted); max-width: 58ch; }
+.fg-art { margin: 0; min-width: 0; }
+.fg-art img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; border-radius: 24px; border: 1px solid var(--fg-line); }
+.fg-art figcaption { margin-top: 12px; color: var(--fg-muted); font-size: 12px; line-height: 1.6; text-align: right; }
+.fg-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.fg-card { display: flex; flex-direction: column; min-width: 0; background: var(--fg-card); border: 1px solid var(--fg-line); border-radius: 24px; padding: clamp(24px, 3vw, 40px); transition: border-color .2s ease, box-shadow .2s ease; }
+.fg-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.fg-icon { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--fg-line); border-radius: 14px; background: var(--fg-tint); color: var(--fg-accent); }
+.fg-icon svg { width: 26px; height: 26px; }
+.fg-number { font-family: var(--font-mono); font-size: 13px; color: var(--fg-accent); }
+.fg-card h3 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(24px, 2.3vw, 32px); font-weight: 600; line-height: 1.25; letter-spacing: -.02em; margin-bottom: 14px; text-wrap: balance; }
+.fg-topics { color: var(--fg-accent); font-size: 13px; font-weight: 600; line-height: 1.7; margin-bottom: 18px; }
+.fg-description { color: var(--fg-muted); font-size: 16px; line-height: 1.75; margin-bottom: 28px; }
+.fg-next { margin-top: auto; padding-top: 22px; border-top: 1px solid var(--fg-line); }
+.fg-next-label { display: block; color: var(--fg-accent); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+.fg-next p { font-size: 15px; line-height: 1.7; }
+@media (min-width: 769px) {
+    .fg-card { display: grid; grid-template-rows: subgrid; grid-row: span 5; row-gap: 0; }
+    .fg-next { margin-top: 0; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .fg-card:hover { border-color: var(--fg-accent); box-shadow: 0 12px 30px rgba(85, 30, 44, .06); }
+}
+@media (max-width: 768px) {
+    .future-goals { scroll-margin-top: 88px; }
+    .fg-opening, .fg-grid { grid-template-columns: minmax(0, 1fr); }
+    .fg-opening { gap: 28px; margin-bottom: 28px; }
+    .fg-kicker { margin-bottom: 18px; font-size: 12px; }
+    .fg-title { margin-bottom: 20px; }
+    .fg-intro, .fg-next p { font-size: 16px; line-height: 1.7; }
+    .fg-art img { border-radius: 20px; }
+    .fg-art figcaption { text-align: left; }
+    .fg-grid { gap: 20px; }
+    .fg-card { padding: 24px 20px; border-radius: 22px; }
+    .fg-card-top { margin-bottom: 20px; }
+    .fg-card h3 { font-size: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .fg-card { transition: none; }
+}

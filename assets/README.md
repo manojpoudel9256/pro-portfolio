@@ -13,6 +13,7 @@ Use lowercase, descriptive, hyphen-separated filenames. Paths in `index.html` an
 | `videos/unreal-engine/` | On-demand 1080p WebM previews and MP4 fallbacks |
 | `images/education/` | College and Japanese-language academy photographs |
 | `images/documentation/` | Website screenshots used in repository documentation |
+| `images/future-goals/` | Conceptual robotics and AI illustration, with its generation prompt |
 | `images/exports/` | Full-size 4K upscaled GLB artwork PNG exports |
 | `images/exports/unreal-engine/` | Native-resolution generated PNG cover masters |
 | `images/exports/branding/` | Native generated monogram and a 3840 × 2160 upscaled export |
