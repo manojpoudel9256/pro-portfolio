@@ -30,13 +30,9 @@
 .fg-number { font-family: var(--font-mono); font-size: 13px; color: var(--fg-accent); }
 .fg-card h3 { font-family: "Playfair Display", Georgia, serif; font-size: clamp(24px, 2.3vw, 32px); font-weight: 600; line-height: 1.25; letter-spacing: -.02em; margin-bottom: 14px; text-wrap: balance; }
 .fg-topics { color: var(--fg-accent); font-size: 13px; font-weight: 600; line-height: 1.7; margin-bottom: 18px; }
-.fg-description { color: var(--fg-muted); font-size: 16px; line-height: 1.75; margin-bottom: 28px; }
-.fg-next { margin-top: auto; padding-top: 22px; border-top: 1px solid var(--fg-line); }
-.fg-next-label { display: block; color: var(--fg-accent); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
-.fg-next p { font-size: 15px; line-height: 1.7; }
+.fg-description { color: var(--fg-muted); font-size: 16px; line-height: 1.75; margin: 0; }
 @media (min-width: 769px) {
-    .fg-card { display: grid; grid-template-rows: subgrid; grid-row: span 5; row-gap: 0; }
-    .fg-next { margin-top: 0; }
+    .fg-card { display: grid; grid-template-rows: subgrid; grid-row: span 4; row-gap: 0; }
 }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
     .fg-card:hover { border-color: var(--fg-accent); box-shadow: var(--card-shadow); }
@@ -47,7 +43,7 @@
     .fg-opening { gap: 28px; margin-bottom: 28px; }
     .fg-kicker { margin-bottom: 18px; font-size: 12px; }
     .fg-title { margin-bottom: 20px; }
-    .fg-intro, .fg-next p { font-size: 16px; line-height: 1.7; }
+    .fg-intro { font-size: 16px; line-height: 1.7; }
     .fg-art img { border-radius: 20px; }
     .fg-art figcaption { text-align: left; }
     .fg-grid { gap: 20px; }
