@@ -1,0 +1,74 @@
+/* A personal qualification card, with a certificate-inspired frame and seal.
+   Scoped to JLPT so the TOEIC card and other portfolio sections keep their design. */
+.lc-card.lc-jlpt {
+    align-self: start;
+    padding: clamp(28px, 3vw, 44px);
+    border: 1px solid var(--hairline-strong);
+    border-radius: 16px;
+    background: radial-gradient(ellipse at 50% 0, var(--accent-tint), transparent 58%), var(--elevated);
+    box-shadow: var(--card-shadow);
+}
+.lc-jlpt::before {
+    content: "";
+    position: absolute;
+    inset: 9px;
+    border: 1px solid var(--hairline-strong);
+    border-radius: 9px;
+    pointer-events: none;
+}
+.lc-jlpt::after {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    background:
+        linear-gradient(var(--accent-icon), var(--accent-icon)) left top / 22px 1px,
+        linear-gradient(var(--accent-icon), var(--accent-icon)) left top / 1px 22px,
+        linear-gradient(var(--accent-icon), var(--accent-icon)) right top / 22px 1px,
+        linear-gradient(var(--accent-icon), var(--accent-icon)) right top / 1px 22px,
+        linear-gradient(var(--accent-icon), var(--accent-icon)) left bottom / 22px 1px,
+        linear-gradient(var(--accent-icon), var(--accent-icon)) left bottom / 1px 22px,
+        linear-gradient(var(--accent-icon), var(--accent-icon)) right bottom / 22px 1px,
+        linear-gradient(var(--accent-icon), var(--accent-icon)) right bottom / 1px 22px;
+    background-repeat: no-repeat;
+    opacity: .65;
+    pointer-events: none;
+}
+.lc-jlpt .lc-pattern { width: 100%; height: 420px; opacity: .055; }
+.jlpt-overline { position: relative; text-align: center; font-size: 10px; font-weight: 600; color: var(--ink-3); letter-spacing: .2em; text-transform: uppercase; margin-bottom: 20px; }
+.lc-jlpt .lc-card-head { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+.lc-jlpt .lc-badge-jp {
+    width: 92px;
+    height: 92px;
+    color: var(--accent);
+    border: 1px solid var(--hairline-strong);
+    outline: 1px solid var(--hairline-strong);
+    outline-offset: 5px;
+    background: radial-gradient(circle at 35% 25%, var(--elevated), var(--accent-tint) 75%);
+    box-shadow: 0 4px 16px rgb(120 80 20 / 6%);
+}
+.lc-jlpt .lc-cat { font-size: 11px; letter-spacing: .16em; margin-bottom: 8px; }
+.lc-jlpt .lc-name { font-family: "Playfair Display", Georgia, serif; font-size: clamp(40px, 4vw, 56px); font-weight: 500; font-variant-numeric: lining-nums; letter-spacing: -.025em; line-height: 1.15; }
+.lc-jlpt .lc-name span { color: var(--accent); }
+.lc-jlpt .lc-rule { position: relative; width: 100px; margin: 18px auto 0; background: var(--hairline-strong); }
+.lc-jlpt .lc-rule::after { content: ""; position: absolute; left: calc(50% - 3px); top: -3px; width: 7px; height: 7px; background: var(--accent-icon); transform: rotate(45deg); }
+.jlpt-holder { position: relative; text-align: center; margin-top: 20px; }
+.jlpt-holder-name { font-family: "Playfair Display", Georgia, serif; font-size: clamp(24px, 2.5vw, 30px); line-height: 1.3; letter-spacing: -.015em; color: var(--ink); }
+.jlpt-exam { margin-top: 8px; font-size: 12px; line-height: 1.6; color: var(--ink-3); }
+.lc-jlpt .lc-desc { text-align: center; margin: 20px auto 0; font-size: 15px; line-height: 1.75; }
+.lc-jlpt .lc-tiles { margin-top: 28px; gap: 10px; }
+.lc-jlpt .lc-tile { background: color-mix(in srgb, var(--elevated) 70%, transparent); border-radius: 8px; padding: 12px 10px; gap: 8px; }
+.lc-jlpt .lc-tico, .lc-jlpt .lc-tico svg { width: 23px; height: 23px; flex-shrink: 0; }
+.lc-jlpt .lc-tval { font-size: 15px; line-height: 1.4; }
+.lc-jlpt .lc-perf { position: relative; margin-top: 24px; padding-top: 22px; }
+@media (max-width: 768px) {
+    .lc-card.lc-jlpt { padding: 30px 22px; }
+    .lc-jlpt .lc-badge-jp { width: 78px; height: 78px; }
+    .lc-jlpt .lc-desc { font-size: 16px; line-height: 1.65; }
+    .lc-jlpt .lc-tiles { gap: 10px; }
+    .lc-jlpt .lc-tile { padding: 12px; gap: 10px; }
+    .lc-jlpt .lc-tval { font-size: 16px; overflow-wrap: anywhere; }
+}
+@media (min-width: 981px) and (max-width: 1200px) {
+    .lc-jlpt .lc-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .lc-jlpt .lc-tile:nth-child(3) { grid-column: 1 / -1; }
+}

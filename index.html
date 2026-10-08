@@ -3859,6 +3859,7 @@
     <link rel="stylesheet" href="unreal-projects.css">
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="stylesheet" href="mobile-refinements.css" media="(max-width: 768px)">
+    <link rel="stylesheet" href="jlpt-certificate.css">
 </head>
 
 <body>
@@ -4406,8 +4407,9 @@
 
                     <div class="lc-grid">
                         <!-- JLPT N1 -->
-                        <article class="lc-card">
+                        <article class="lc-card lc-jlpt" aria-labelledby="jlpt-title">
                             <span class="lc-pattern lc-wave" aria-hidden="true"></span>
+                            <p class="jlpt-overline" data-i18n="jlptProfile">Language qualification</p>
                             <div class="lc-card-head">
                                 <span class="lc-badge lc-badge-jp" aria-hidden="true">
                                     <svg viewBox="0 0 64 64" fill="currentColor">
@@ -4444,9 +4446,13 @@
                                 </span>
                                 <div class="lc-card-titles">
                                     <span class="lc-cat" data-i18n="lcJpCat">Japanese Proficiency</span>
-                                    <h3 class="lc-name">JLPT N1</h3>
+                                    <h3 class="lc-name" id="jlpt-title">JLPT <span>N1</span></h3>
                                     <span class="lc-rule" aria-hidden="true"></span>
                                 </div>
+                            </div>
+                            <div class="jlpt-holder">
+                                <p class="jlpt-holder-name">Manoj Poudel</p>
+                                <p class="jlpt-exam" data-i18n="lcJpCertV">Japanese-Language Proficiency Test</p>
                             </div>
                             <p class="lc-desc" data-i18n="lcJpDesc">Highest level of the Japanese-Language Proficiency
                                 Test. Demonstrates advanced Japanese comprehension for professional, technical, and
@@ -5961,6 +5967,7 @@
                     lcSub: "Professional language qualifications that strengthen my ability to work, collaborate, and communicate in Japan and global environments.",
                     lcNote: "A strong complement to my technical expertise",
                     lcJpCat: "Japanese Proficiency",
+                    jlptProfile: "Language qualification",
                     lcJpDesc: "Highest level of the Japanese-Language Proficiency Test. Demonstrates advanced Japanese comprehension for professional, technical, and workplace communication in Japan.",
                     lcLblLevel: "Level", lcLblResult: "Result", lcLblCert: "Certification", lcLblFocus: "Focus",
                     lcLblComm: "Communication", lcLblTestDate: "Test Date", lcLblCefr: "CEFR",
@@ -6131,6 +6138,7 @@
                     lcSub: "日本および世界の環境で働き、協働し、コミュニケーションする力を高める、実務レベルの語学資格です。",
                     lcNote: "技術力を支える大きな強みです",
                     lcJpCat: "日本語能力",
+                    jlptProfile: "語学資格",
                     lcJpDesc: "日本語能力試験の最上位レベル。ビジネス・技術・職場でのコミュニケーションに求められる高度な日本語の理解力を証明します。",
                     lcLblLevel: "レベル", lcLblResult: "結果", lcLblCert: "認定", lcLblFocus: "分野",
                     lcLblComm: "コミュニケーション", lcLblTestDate: "受験日", lcLblCefr: "CEFR",
