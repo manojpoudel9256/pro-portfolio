@@ -14,7 +14,7 @@ const sections = [
   ['07-unreal','#unreal-projects'], ['08-warehouse','.ue-card:last-child'],
   ['09-about','#about-me'], ['10-experience','.xp-item'],
   ['11-language-intro','.lang-cred'], ['12-jlpt','.lc-card'],
-  ['13-jlpt-details','.jlpt-record'], ['14-jlpt-capabilities','.jlpt-capabilities'],
+  ['13-jlpt-details','.lc-card .lc-tiles'], ['14-jlpt-capabilities','.lc-card .lc-perf'],
   ['15-toeic','.lc-card:last-child'], ['16-toeic-details','.lc-card:last-child .lc-tiles'],
   ['17-certifications','.cert-section'],
   ['18-certificate-two','.cred-card:nth-child(2)'], ['19-certificate-three','.cred-card:nth-child(3)'],
