@@ -1,0 +1,576 @@
+{
+  "delivery-truck": {
+    "id": "delivery-truck",
+    "title": {
+      "en": "Delivery Truck",
+      "ja": "配送トラック"
+    },
+    "description": {
+      "en": "A box-body delivery truck with closed rear doors, detailed wheels, and textured bodywork for logistics scenes.",
+      "ja": "閉じた荷室のリアドア、細部まで作り込んだ車輪、質感のある車体を備えた、物流シーン向けの配送トラック。"
+    },
+    "src": "assets/models/blender/delivery-truck.glb",
+    "fileSizeBytes": 7715084,
+    "format": "glTF 2.0 binary",
+    "sha256": "f5a3cf6235d451179a02dca54cd7c06d9a9cd118c06fa8037f5c7c3eb0f73b44",
+    "stats": {
+      "triangles": 7876,
+      "vertices": 10860,
+      "meshes": 48,
+      "meshInstances": 48,
+      "primitives": 110,
+      "materials": 32,
+      "textures": 45,
+      "images": 45,
+      "nodes": 48,
+      "animations": 0
+    },
+    "dimensions": {
+      "x": 6.442,
+      "y": 2.96,
+      "z": 2.552684,
+      "unit": "m"
+    },
+    "bounds": {
+      "min": [
+        -3.243,
+        0.0,
+        -1.283849
+      ],
+      "max": [
+        3.199,
+        2.96,
+        1.268835
+      ]
+    },
+    "geometryStats": {
+      "uniqueMeshTriangles": 7876,
+      "uniqueMeshVertices": 10860,
+      "uniquePositionAccessorVertices": 10860
+    },
+    "defaultScene": 0,
+    "embeddedResourcesOnly": true,
+    "extensionsUsed": [
+      "KHR_materials_clearcoat"
+    ],
+    "extensionsRequired": [],
+    "imageDetails": [
+      {
+        "mimeType": "image/png",
+        "bytes": 519390,
+        "width": 1024,
+        "height": 858
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 609452,
+        "width": 1024,
+        "height": 858
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 73029,
+        "width": 1024,
+        "height": 858
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 5262,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 6639,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 1682,
+        "width": 512,
+        "height": 128
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 1551,
+        "width": 512,
+        "height": 128
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 5762,
+        "width": 512,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 5526,
+        "width": 512,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 281740,
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 175404,
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 133981,
+        "width": 1024,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 167012,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 38732,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 58945,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 5007,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 4366,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 4310,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 71086,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 105335,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 39552,
+        "width": 256,
+        "height": 256
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 6571,
+        "width": 1024,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 14651,
+        "width": 1024,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 9983,
+        "width": 1024,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 5117,
+        "width": 512,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 63139,
+        "width": 512,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 35453,
+        "width": 512,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 338162,
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 670404,
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 356238,
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 125539,
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 370869,
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 283316,
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 102328,
+        "width": 1024,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 323643,
+        "width": 1024,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 33995,
+        "width": 1024,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 90202,
+        "width": 1024,
+        "height": 2048
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 507694,
+        "width": 1024,
+        "height": 2048
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 475707,
+        "width": 1024,
+        "height": 2048
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 53038,
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 953032,
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 50035,
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 8085,
+        "width": 512,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 3172,
+        "width": 512,
+        "height": 512
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 3172,
+        "width": 512,
+        "height": 512
+      }
+    ]
+  },
+  "industrial-robot-arm": {
+    "id": "industrial-robot-arm",
+    "title": {
+      "en": "Industrial Robot Arm",
+      "ja": "産業用ロボットアーム"
+    },
+    "description": {
+      "en": "A posed industrial robot arm with distinct joints and material finishes for factory and automation scenes.",
+      "ja": "関節や素材の質感を作り分けた産業用ロボットアーム。工場や自動化設備のシーンを想定したモデル。"
+    },
+    "src": "assets/models/blender/industrial-robot-arm.glb",
+    "fileSizeBytes": 151696,
+    "format": "glTF 2.0 binary",
+    "sha256": "99b2e5802eeaab7500009a8991c3aa00a57eb46084fbd4b6a44bb0065cd1b125",
+    "stats": {
+      "triangles": 3306,
+      "vertices": 3820,
+      "meshes": 1,
+      "meshInstances": 1,
+      "primitives": 8,
+      "materials": 8,
+      "textures": 0,
+      "images": 0,
+      "nodes": 1,
+      "animations": 0
+    },
+    "dimensions": {
+      "x": 0.603955,
+      "y": 0.817012,
+      "z": 0.3,
+      "unit": "m"
+    },
+    "bounds": {
+      "min": [
+        -0.185805,
+        0.0,
+        -0.15
+      ],
+      "max": [
+        0.41815,
+        0.817012,
+        0.15
+      ]
+    },
+    "geometryStats": {
+      "uniqueMeshTriangles": 3306,
+      "uniqueMeshVertices": 3820,
+      "uniquePositionAccessorVertices": 3820
+    },
+    "defaultScene": 0,
+    "embeddedResourcesOnly": true,
+    "extensionsUsed": [],
+    "extensionsRequired": [],
+    "imageDetails": []
+  },
+  "cardboard-box": {
+    "id": "cardboard-box",
+    "title": {
+      "en": "Cardboard Box",
+      "ja": "段ボール箱"
+    },
+    "description": {
+      "en": "A textured cardboard box for packaging, warehouse, and material-handling scenes.",
+      "ja": "梱包、倉庫、搬送シーンに使える、テクスチャ付きの段ボール箱。"
+    },
+    "src": "assets/models/blender/cardboard-box.glb",
+    "fileSizeBytes": 1647220,
+    "format": "glTF 2.0 binary",
+    "sha256": "652ae752608abf71edcd3e51fd23c44570cf6bb0dac62244bdc18bfe39ceb2ce",
+    "stats": {
+      "triangles": 12,
+      "vertices": 24,
+      "meshes": 1,
+      "meshInstances": 1,
+      "primitives": 1,
+      "materials": 1,
+      "textures": 1,
+      "images": 1,
+      "nodes": 1,
+      "animations": 0
+    },
+    "dimensions": {
+      "x": 1.0,
+      "y": 0.6,
+      "z": 0.6,
+      "unit": "m"
+    },
+    "bounds": {
+      "min": [
+        -0.5,
+        -0.3,
+        -0.3
+      ],
+      "max": [
+        0.5,
+        0.3,
+        0.3
+      ]
+    },
+    "geometryStats": {
+      "uniqueMeshTriangles": 12,
+      "uniqueMeshVertices": 24,
+      "uniquePositionAccessorVertices": 24
+    },
+    "defaultScene": 0,
+    "embeddedResourcesOnly": true,
+    "extensionsUsed": [],
+    "extensionsRequired": [],
+    "imageDetails": [
+      {
+        "mimeType": "image/png",
+        "bytes": 1644963,
+        "width": 1391,
+        "height": 1131
+      }
+    ]
+  },
+  "roller-conveyor": {
+    "id": "roller-conveyor",
+    "title": {
+      "en": "Roller Conveyor",
+      "ja": "ローラーコンベヤー"
+    },
+    "description": {
+      "en": "A roller conveyor with a supporting frame for warehouse layouts and material-flow visualizations.",
+      "ja": "支持フレームを備えたローラーコンベヤー。倉庫レイアウトや搬送フローの可視化を想定したモデル。"
+    },
+    "src": "assets/models/blender/roller-conveyor.glb",
+    "fileSizeBytes": 148952,
+    "format": "glTF 2.0 binary",
+    "sha256": "8086112ffdff1c69d60c51c938875e4f30eb40d70cfec5c78cf55aefa71d9a83",
+    "stats": {
+      "triangles": 2414,
+      "vertices": 3998,
+      "meshes": 1,
+      "meshInstances": 1,
+      "primitives": 5,
+      "materials": 5,
+      "textures": 0,
+      "images": 0,
+      "nodes": 1,
+      "animations": 0
+    },
+    "dimensions": {
+      "x": 4.008,
+      "y": 0.801,
+      "z": 0.828,
+      "unit": "m"
+    },
+    "bounds": {
+      "min": [
+        -2.004,
+        0.0,
+        -0.345
+      ],
+      "max": [
+        2.004,
+        0.801,
+        0.483
+      ]
+    },
+    "geometryStats": {
+      "uniqueMeshTriangles": 2414,
+      "uniqueMeshVertices": 3998,
+      "uniquePositionAccessorVertices": 3998
+    },
+    "defaultScene": 0,
+    "embeddedResourcesOnly": true,
+    "extensionsUsed": [],
+    "extensionsRequired": [],
+    "imageDetails": []
+  },
+  "roll-cage": {
+    "id": "roll-cage",
+    "title": {
+      "en": "Roll Cage",
+      "ja": "ロールボックスパレット"
+    },
+    "description": {
+      "en": "A wheeled metal roll cage with a mesh frame for stock handling and warehouse scenes.",
+      "ja": "網状の金属フレームと車輪を備えたロールボックスパレット。在庫管理や倉庫シーン向けのモデル。"
+    },
+    "src": "assets/models/blender/roll-cage.glb",
+    "fileSizeBytes": 1794748,
+    "format": "glTF 2.0 binary",
+    "sha256": "71ff13dcee9041071dcd3d0e3a53cf53c7d4fad8719809eb3f70d6350a3f7328",
+    "stats": {
+      "triangles": 3140,
+      "vertices": 3833,
+      "meshes": 11,
+      "meshInstances": 11,
+      "primitives": 11,
+      "materials": 1,
+      "textures": 3,
+      "images": 3,
+      "nodes": 11,
+      "animations": 0
+    },
+    "dimensions": {
+      "x": 0.8,
+      "y": 1.410461,
+      "z": 0.62,
+      "unit": "m"
+    },
+    "bounds": {
+      "min": [
+        -0.4,
+        0.0,
+        -0.31
+      ],
+      "max": [
+        0.4,
+        1.410461,
+        0.31
+      ]
+    },
+    "geometryStats": {
+      "uniqueMeshTriangles": 3140,
+      "uniqueMeshVertices": 3833,
+      "uniquePositionAccessorVertices": 3833
+    },
+    "defaultScene": 0,
+    "embeddedResourcesOnly": true,
+    "extensionsUsed": [],
+    "extensionsRequired": [],
+    "imageDetails": [
+      {
+        "mimeType": "image/png",
+        "bytes": 780443,
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 793509,
+        "width": 2048,
+        "height": 2048
+      },
+      {
+        "mimeType": "image/png",
+        "bytes": 73197,
+        "width": 2048,
+        "height": 2048
+      }
+    ]
+  }
+}

@@ -49,6 +49,7 @@ required to serve it. The applications and tools it showcases are separate proje
 - **Light and dark themes:** coordinated surfaces, typography, and accents, with a saved theme preference.
 - **Dedicated phone layouts:** readable stacked cards, larger touch targets, a compact navigation drawer, and inputs sized for mobile browsing.
 - **On-demand video:** short 1080p Unreal Engine previews load after interaction. Touch phones use optimized MP4; desktop retains WebM-first playback with an MP4 fallback.
+- **Blender Work:** five original GLB assets with realistic AI-styled WebP previews and an on-demand Three.js inspector. Orbit, zoom, pan, switch lighting, view wireframes, and inspect measured geometry and file statistics.
 - **Project and photo viewers:** inspect project details or the original education photographs without scrolling the page behind the overlay.
 - **Considered motion:** a code-rendered `hello` introduction, scroll reveals, and reduced-motion handling. The introduction can be skipped.
 - **Direct contact:** email, social profiles, and a contact form delivered through Formspree.
@@ -67,6 +68,7 @@ from the desktop composition.
 | Interaction | Vanilla JavaScript for navigation, themes, translation, filters, dialogs, and playback |
 | Animation | GSAP, ScrollTrigger, and Lenis; standalone CSS/JavaScript for the preloader |
 | Media | WebP project covers, self-hosted WOFF2 fonts, and on-demand WebM/MP4 previews |
+| 3D inspection | Self-hosted Three.js r180, GLTFLoader, OrbitControls, and studio environment lighting; loaded only on request |
 | Contact delivery | Formspree |
 | Hosting | Vercel static deployment |
 | Verification | Node's built-in test runner and optional Playwright browser checks |
@@ -105,6 +107,8 @@ http://localhost:4173/?nopreload=1&theme=light
 ├── mobile-menu.css / .js       # Mobile navigation and focus/scroll handling
 ├── preloader.css / .js         # Opening typography animation
 ├── unreal-projects.css / .js   # Unreal Engine cards and media lifecycle
+├── blender-work.css / .js      # Blender gallery, translations, and inspector dialog
+├── blender-viewer.js           # Lazy-loaded Three.js renderer and resource cleanup
 ├── manifest.json              # App metadata and home-screen icons
 ├── fonts/                     # Self-hosted typefaces and mobile font instances
 ├── assets/
@@ -127,6 +131,9 @@ Further documentation:
 - [Mobile refinements and browser verification](MOBILE-REFINEMENT.md)
 - [Video encoding and delivery](assets/videos/unreal-engine/README.md)
 - [Unreal Engine cover artwork](assets/images/projects/unreal-engine/ARTWORK.md)
+- [Blender showcase and browser verification](BLENDER-WORK.md)
+- [Original GLBs and measured statistics](assets/models/blender/README.md)
+- [Blender preview artwork](assets/images/projects/blender/ARTWORK.md)
 - [Mobile font instances](fonts/MOBILE-FONTS.md)
 
 ## Verification

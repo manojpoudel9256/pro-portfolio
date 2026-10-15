@@ -10,6 +10,9 @@ Use lowercase, descriptive, hyphen-separated filenames. Paths in `index.html` an
 | `images/portraits/` | Manoj's portrait and retained About image |
 | `images/projects/` | Optimized WebP project covers used by cards and dialogs |
 | `images/projects/unreal-engine/` | Darts and warehouse covers, responsive variants, and generation prompts |
+| `images/projects/blender/` | Five AI-styled model previews in 768px, 1536px, and upscaled 4K WebP variants; generation notes |
+| `models/blender/` | Original GLB models, audited scene statistics, and metadata generation script |
+| `vendor/three/` | Self-hosted Three.js r180 modules, required addons, and MIT license |
 | `videos/unreal-engine/` | On-demand 1080p WebM previews and MP4 fallbacks |
 | `images/education/` | College and Japanese-language academy photographs |
 | `images/documentation/` | Website screenshots used in repository documentation |
@@ -42,6 +45,10 @@ Icon URLs include a version query so the previous icon is not reused from cache.
 
 See [Unreal Engine media notes](videos/unreal-engine/README.md) for sizes,
 encoding settings, playback behavior, and validation.
+
+The [Blender gallery](../BLENDER-WORK.md) uses responsive previews from
+`images/projects/blender/`. Each model is downloaded only after a visitor selects
+**Inspect model**. The GLBs retain their original geometry, textures, and materials.
 
 ## Archived names
 

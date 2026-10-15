@@ -1,0 +1,117 @@
+{
+  "delivery-truck": {
+    "native": [
+      1672,
+      941
+    ],
+    "exports": {
+      "768": {
+        "width": 768,
+        "height": 432,
+        "bytes": 35350
+      },
+      "1536": {
+        "width": 1536,
+        "height": 864,
+        "bytes": 128626
+      },
+      "4k": {
+        "width": 3840,
+        "height": 2160,
+        "bytes": 475794
+      }
+    }
+  },
+  "industrial-robot-arm": {
+    "native": [
+      1672,
+      941
+    ],
+    "exports": {
+      "768": {
+        "width": 768,
+        "height": 432,
+        "bytes": 9208
+      },
+      "1536": {
+        "width": 1536,
+        "height": 864,
+        "bytes": 30360
+      },
+      "4k": {
+        "width": 3840,
+        "height": 2160,
+        "bytes": 178390
+      }
+    }
+  },
+  "cardboard-box": {
+    "native": [
+      1672,
+      941
+    ],
+    "exports": {
+      "768": {
+        "width": 768,
+        "height": 432,
+        "bytes": 21740
+      },
+      "1536": {
+        "width": 1536,
+        "height": 864,
+        "bytes": 118614
+      },
+      "4k": {
+        "width": 3840,
+        "height": 2160,
+        "bytes": 548520
+      }
+    }
+  },
+  "roller-conveyor": {
+    "native": [
+      1672,
+      941
+    ],
+    "exports": {
+      "768": {
+        "width": 768,
+        "height": 432,
+        "bytes": 20644
+      },
+      "1536": {
+        "width": 1536,
+        "height": 864,
+        "bytes": 65060
+      },
+      "4k": {
+        "width": 3840,
+        "height": 2160,
+        "bytes": 274888
+      }
+    }
+  },
+  "roll-cage": {
+    "native": [
+      1672,
+      941
+    ],
+    "exports": {
+      "768": {
+        "width": 768,
+        "height": 432,
+        "bytes": 19168
+      },
+      "1536": {
+        "width": 1536,
+        "height": 864,
+        "bytes": 63748
+      },
+      "4k": {
+        "width": 3840,
+        "height": 2160,
+        "bytes": 276228
+      }
+    }
+  }
+}
