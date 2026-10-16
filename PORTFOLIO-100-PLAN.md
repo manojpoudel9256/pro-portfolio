@@ -89,14 +89,14 @@ JLPT/TOEIC credential cards as an intentional "certificate gold".
 "Industrial automation & DX company · Tokyo".
 **Fix:** Update the Experience card (EN + 日本語).
 
-### Step 6 — Contact privacy 🟨 (decision: a — keep email, form, LINE, LinkedIn, GitHub)
+### Step 6 — Contact privacy ✅ (decision: a — keep email, form, LINE, LinkedIn, GitHub)
 **Problem:** Phone number, WhatsApp, LINE, and Telegram are all public, which invites
 spam and scraping.
 **Decision:** Keep which channels? Recommended: email + contact form + LinkedIn + GitHub.
 Move LINE/WhatsApp behind "available on request".
 **Fix:** Remove or obfuscate the chosen channels. Keep the layout balanced.
 
-### Step 7 — JLPT N1 presentation ❓
+### Step 7 — JLPT N1 presentation 🟨 (decision: a — B2 is on the report; score 128/180)
 **Problem:** "N1 → CEFR B2" can look like it undersells N1 at a glance.
 **Decision:** Is B2 printed on the official score report? If yes, keep it but
 lead with the N1 score. If no, remove the CEFR line.
@@ -189,4 +189,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | 4 | ✅ | 3845c41 | Contact copy, topics, placeholder rewritten for employers (EN + 日本語); aria-pressed on topic pills |
 | 4b | ✅ | e88a987 | v1 muted antique gold rejected ("not golden enough"); v2: saturated gold text #8f6b0a, metallic gradient fills, black-and-gold dark mode |
 | 5 | ✅ | 9d35b3c | "Industrial Software & DX Company · Tokyo" / 産業向けソフトウェア・DX企業 · 東京 |
-| 6 | 🟨 in review | (this commit) | Phone, WhatsApp, Telegram removed; LinkedIn card + GitHub icon added; LINE kept |
+| 6 | ✅ | 196f88b | Phone, WhatsApp, Telegram removed; LinkedIn card + GitHub icon added; LINE kept |
+| 7 | 🟨 in review | (this commit) | Result tile → Total Score 128 / 180 (Passed); CEFR B2 labelled "JLPT official guide" |
