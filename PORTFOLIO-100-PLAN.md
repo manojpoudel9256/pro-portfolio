@@ -106,7 +106,7 @@ lead with the N1 score. If no, remove the CEFR line.
 
 ## Phase C — Proof of work
 
-### Step 8 — Blender Work: trim to the two strongest models 🟨
+### Step 8 — Blender Work: trim to the two strongest models ✅
 **Decision (Manoj):** keep the AI previews (they match the models). Keep only Delivery Truck +
 Industrial Robot Arm; remove Cardboard Box, Roller Conveyor, Roll Cage to shorten the page.
 
@@ -120,7 +120,7 @@ Optionally add a wireframe overlay toggle on hover to show topology.
 Remove the "AI-styled previews" disclaimer.
 **Verify:** Every card image visibly matches what the 3D inspector shows.
 
-### Step 9 — Optimise the GLB files with GLB Forge ⬜
+### Step 9 — Optimise the GLB files with GLB Forge ⏭️ skipped (Manoj)
 **Problem:** (box/cage removed in Step 8) Truck = 7.7 MB with 45 textures for 7,876 triangles.
 Heavy downloads, and it undercuts the GLB optimisation tool shown on the same page.
 **Fix:** Run the models through GLB Forge / glTF-Transform. Resize textures (≤1024 or
@@ -129,7 +129,7 @@ Update the triangle/size numbers in `models.json`. Add a small "Optimised with G
 7.7 MB → x MB" note, which turns this into proof that the tool works.
 **Verify:** Models look the same in the inspector. Sizes drop by at least 60%.
 
-### Step 10 — Case-study depth for each project ⬜
+### Step 10 — Case-study depth for each project 🟨
 **Problem:** The modals list features and stack, but not problem → role → result.
 **Fix:** Add three short lines per project modal (EN + 日本語):
 **Problem**, **What I did**, **Result** (with numbers where possible, e.g.
@@ -195,4 +195,6 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | 5 | ✅ | 9d35b3c | "Industrial Software & DX Company · Tokyo" / 産業向けソフトウェア・DX企業 · 東京 |
 | 6 | ✅ | 196f88b | Phone, WhatsApp, Telegram removed; LinkedIn card + GitHub icon added; LINE kept |
 | 7 | ✅ | 7f7f72a | Result tile → Total Score 128 / 180 (Passed); CEFR B2 labelled "JLPT official guide" |
-| 8 | 🟨 in review | (this commit) | 3 cards + their GLBs/previews/metadata removed (−3.6 MB GLB); tests updated to 2 cards |
+| 8 | ✅ | 348d3c7 | 3 cards + their GLBs/previews/metadata removed (−3.6 MB GLB); tests updated to 2 cards |
+| 9 | ⏭️ skipped | — | Truck GLB left at 7.7 MB by choice |
+| 10 | 🟨 in review | (this commit) | Problem / What I did / Result in all 5 modals (EN + 日本語), facts supplied by Manoj |
