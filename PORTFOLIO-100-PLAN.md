@@ -1,0 +1,177 @@
+# Portfolio 78 → 100 plan — October 16, 2026
+
+Starting score: **78 / 100**. Every step below targets a specific deduction from
+that review. Steps are done **one at a time**. After each one, the change is pushed
+to `pro`, so it shows up on https://pro-portfolio-mocha.vercel.app. The next step
+starts only after Manoj confirms the live result.
+
+Legend: ⬜ todo · 🟨 in review · ✅ confirmed · ❓ needs a decision from Manoj first
+
+---
+
+## What "100" means
+
+Taste is subjective, so "100" is defined as a checklist that can be verified:
+
+- [ ] Every claim on the site matches the linked project, repo, or credential
+- [ ] No placeholder, stale, or wrong default values (time zone, tags, copy)
+- [ ] Every 3D/visual asset shows the real work, not AI imagery
+- [ ] Lighthouse (mobile): Performance ≥ 90, Accessibility 100, Best Practices 100, SEO 100
+- [ ] Every interactive element works with the keyboard and has a visible focus state
+- [ ] Shared links (LinkedIn / X / LINE) show a proper preview card
+- [ ] A recruiter sees name, role, and best work within 5 seconds, with no forced intro
+- [ ] One clear audience and call to action across hero, projects, and contact
+- [ ] Each project explains its problem, Manoj's role, and the result
+- [ ] CSS is in a structure Manoj can maintain (no stack of patch files)
+
+---
+
+## Phase A — Accuracy and trust (no decisions needed)
+
+### Step 1 — Make project card tags match the real tech stacks 🟨
+**Problem:** The cards claim tools that the detail modals (and the real code) don't use:
+- Everest card: *Figma · Webflow* → real stack: HTML5, Tailwind CSS, JavaScript, Vercel
+- Personal Finance card: *iOS · Android · Figma* → real stack: React, Vite, Tailwind CSS, Gemini AI
+- Salary Tracker card: *iOS · Android · Figma* → real stack: React, Vite, Tailwind CSS, Recharts
+
+**Fix:** Replace the chips in `index.html` (Selected Work cards) with the technologies
+listed in each project's `stack` data. Keep the `data-cat` filter categories unchanged
+so the All / Web / Apps / UI/UX filters still behave the same.
+**Verify:** On each card, compare the chips with the "Tech stack" list in its modal.
+They must match.
+
+### Step 2 — Default the footer clock to Tokyo time ⬜
+**Problem:** The HTML placeholder says `00:00 AM GMT+1`. It flashes before JS runs,
+and it's what crawlers and no-JS visitors see.
+**Fix:** Check that the clock script formats with `timeZone: 'Asia/Tokyo'` (so the
+time is right wherever the visitor is). Change the placeholder to `JST`.
+**Verify:** Footer shows the current Tokyo time with the label "JST" / "GMT+9",
+including with the browser's time zone set to something else.
+
+### Step 3 — Social sharing and SEO metadata ⬜
+**Problem:** `og:image` is a relative path, which LinkedIn and X often fail to load.
+There is no `og:url`, canonical link, or structured data, and the preview image
+is a 512px square icon.
+**Fix:**
+- Create a 1200×630 `assets/images/og-cover.jpg` (portrait + name + role, site palette)
+- Absolute URLs for `og:image` / `twitter:image`, plus `og:url`, `og:site_name`,
+  `og:locale` (+ `og:locale:alternate` ja_JP), `<link rel="canonical">`
+- JSON-LD `Person` schema (name, jobTitle, address Tokyo, sameAs → LinkedIn/GitHub)
+**Verify:** Run the LinkedIn Post Inspector and an OG preview checker. The preview card
+should show the new image, title, and description.
+
+---
+
+## Phase B — Positioning and content (❓ decisions needed)
+
+### Step 4 — One audience, one call to action ❓
+**Problem:** The hero says "robotics and simulation engineer". The contact form
+offers "New website / Front-end help", which reads like a freelancer's site.
+**Decision:** Who is the site for?
+- (a) Employers and recruiters in robotics, simulation, and 3D (recommended, matches Future Goals)
+- (b) Freelance clients
+- (c) Both, with employers first
+**Fix:** Rewrite the contact headline, topics (e.g. "Job opportunity · 3D / simulation
+project · Collaboration · Just saying hi"), and hero CTA wording to fit. Update EN + 日本語.
+
+### Step 5 — Employer line ❓
+**Problem:** "Japanese Engineering Company · Tokyo" reads like the employer is hidden on purpose.
+**Decision:** Can the company be named? If not, use a descriptive line, e.g.
+"Industrial automation & DX company · Tokyo".
+**Fix:** Update the Experience card (EN + 日本語).
+
+### Step 6 — Contact privacy ❓
+**Problem:** Phone number, WhatsApp, LINE, and Telegram are all public, which invites
+spam and scraping.
+**Decision:** Keep which channels? Recommended: email + contact form + LinkedIn + GitHub.
+Move LINE/WhatsApp behind "available on request".
+**Fix:** Remove or obfuscate the chosen channels. Keep the layout balanced.
+
+### Step 7 — JLPT N1 presentation ❓
+**Problem:** "N1 → CEFR B2" can look like it undersells N1 at a glance.
+**Decision:** Is B2 printed on the official score report? If yes, keep it but
+lead with the N1 score. If no, remove the CEFR line.
+**Fix:** Adjust the JLPT card. Optionally add the total score (e.g. "N1 · 1xx/180").
+
+---
+
+## Phase C — Proof of work
+
+### Step 8 — Replace AI previews in Blender Work with real renders ⬜
+**Problem:** The section says "AI-styled previews". On a 3D portfolio this makes
+visitors doubt the real work.
+**Fix:** Render each of the 5 GLBs (truck, robot arm, box, conveyor, roll cage) in
+Blender with a consistent studio setup: neutral backdrop matching the site palette,
+3-point light, same camera focal length. Export a WebP at 1672×941 plus a 960w version.
+Optionally add a wireframe overlay toggle on hover to show topology.
+Remove the "AI-styled previews" disclaimer.
+**Verify:** Every card image visibly matches what the 3D inspector shows.
+
+### Step 9 — Optimise the GLB files with GLB Forge ⬜
+**Problem:** Cardboard box = 12 triangles but 1.65 MB (oversized textures). Truck = 7.7 MB.
+Heavy downloads, and it undercuts the GLB optimisation tool shown on the same page.
+**Fix:** Run the models through GLB Forge / glTF-Transform. Resize textures (≤1024 or
+2048 for the truck), apply WebP/KTX2 texture compression, and meshopt where it's safe.
+Update the triangle/size numbers in `models.json`. Add a small "Optimised with GLB Forge:
+7.7 MB → x MB" note, which turns this into proof that the tool works.
+**Verify:** Models look the same in the inspector. Sizes drop by at least 60%.
+
+### Step 10 — Case-study depth for each project ⬜
+**Problem:** The modals list features and stack, but not problem → role → result.
+**Fix:** Add three short lines per project modal (EN + 日本語):
+**Problem**, **What I did**, **Result** (with numbers where possible, e.g.
+"cut a 120 MB model to 9 MB so it loads in UE5 without hanging").
+**Decision during this step:** Manoj supplies or confirms any real numbers. Nothing gets made up.
+
+---
+
+## Phase D — Performance, UX, and accessibility
+
+### Step 11 — Preloader: fast and respectful ⬜
+**Fix:** Show the "hello" intro only on the first visit per session (sessionStorage),
+cap it at about 1.2 s, skip it entirely for `prefers-reduced-motion`, and keep "Skip intro".
+**Verify:** Reloading the page shows content immediately.
+
+### Step 12 — Performance pass ⬜
+**Fix:**
+- Merge the two Google Fonts requests (Archivo Black + Playfair Display) into one, or self-host them
+- `defer` GSAP / ScrollTrigger / Lenis; check that nothing blocks the first render
+- Hero portrait: serve a 900w/1200w `srcset` instead of always 1800px
+- Check that the Unreal videos and GLBs load only on interaction (already mostly true)
+**Verify:** Lighthouse mobile Performance ≥ 90, LCP < 2.5 s, CLS < 0.05.
+
+### Step 13 — Accessibility pass ⬜
+**Known issue:** Education cards use `onclick` on an `<article>` without
+`role="button"`, `tabindex`, or key handlers, so keyboard users can't open them.
+**Fix:** Make every clickable element keyboard-operable with a visible `:focus-visible`
+style. Check colour contrast in light and dark modes, check that the modals trap and return
+focus, and keep `lang` in sync when switching to 日本語.
+**Verify:** Lighthouse Accessibility 100. Every action works with Tab / Enter / Esc.
+
+---
+
+## Phase E — Maintainability and finish
+
+### Step 14 — Consolidate CSS ⬜
+**Problem:** Large inline `<style>` + `refinements.css`, `mobile-refinements.css`,
+`mobile-menu.css`, `preloader.css`, `unreal-projects.css`, `blender-work.css`,
+`future-goals.css`, all layered as patches.
+**Fix:** Move the inline CSS into `styles/` files organised by section. Fold each
+"refinements" override into the rule it overrides. Screenshot before and after at
+375 / 768 / 1440 px in light and dark modes. Visuals must stay the same.
+
+### Step 15 — Repo tidy-up ⬜
+**Fix:** Handle the untracked files (`GRADUATION-EDIT.md`, exports PNG). Move working
+notes into `docs/`. Update the README (stack, deploy rule: push to `pro`).
+
+### Step 16 — Final audit and re-score ⬜
+Go through the "What 100 means" checklist item by item, run Lighthouse on mobile and
+desktop, test real phones (iOS Safari + Android Chrome), and re-score.
+
+---
+
+## Progress log
+
+| Step | Status | Commit | Notes |
+|---|---|---|---|
+| 1 | 🟨 in review | (this commit) | Chips now mirror each modal's stack |
