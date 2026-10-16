@@ -40,7 +40,7 @@ so the All / Web / Apps / UI/UX filters still behave the same.
 **Verify:** On each card, compare the chips with the "Tech stack" list in its modal.
 They must match.
 
-### Step 2 — Default the footer clock to Tokyo time 🟨
+### Step 2 — Default the footer clock to Tokyo time ✅
 **Problem:** The HTML placeholder says `00:00 AM GMT+1`. It flashes before JS runs,
 and it's what crawlers and no-JS visitors see.
 **Fix:** Check that the clock script formats with `timeZone: 'Asia/Tokyo'` (so the
@@ -48,7 +48,7 @@ time is right wherever the visitor is). Change the placeholder to `JST`.
 **Verify:** Footer shows the current Tokyo time with the label "JST" / "GMT+9",
 including with the browser's time zone set to something else.
 
-### Step 3 — Social sharing and SEO metadata ⬜
+### Step 3 — Social sharing and SEO metadata 🟨
 **Problem:** `og:image` is a relative path, which LinkedIn and X often fail to load.
 There is no `og:url`, canonical link, or structured data, and the preview image
 is a 512px square icon.
@@ -175,4 +175,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | Step | Status | Commit | Notes |
 |---|---|---|---|
 | 1 | ✅ | 304090a | Chips now mirror each modal's stack |
-| 2 | 🟨 in review | (this commit) | Clock pinned to Asia/Tokyo; label "Tokyo Time / 東京時間" |
+| 2 | ✅ | 2c7d394 | Clock pinned to Asia/Tokyo; label "Tokyo Time / 東京時間" |
+| 3 | 🟨 in review | (this commit) | og-cover.jpg 1200×630, absolute OG/Twitter tags, canonical, JSON-LD Person, robots.txt + sitemap.xml |
