@@ -258,8 +258,7 @@
         html.theme-anim .about-me-section,
         html.theme-anim .pw-card,
         html.theme-anim .edu-card,
-        html.theme-anim .stack,
-        html.theme-anim .logo-chip {
+        html.theme-anim .stack {
             transition: background-color 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
         }
 
@@ -395,7 +394,6 @@
         }
 
         /* nav control pills — language, theme, menu (fixed dark capsule look) */
-        .lang-toggle,
         .menu-text,
         .theme-toggle {
             display: inline-flex;
@@ -442,17 +440,11 @@
             display: block;
         }
 
-        .lang-toggle:hover,
         .menu-text:hover,
         .theme-toggle:hover {
             transform: translateY(-1px);
             color: var(--ink);
             border-color: var(--hairline-strong);
-        }
-
-        .lang-flag {
-            font-size: 1.05rem;
-            line-height: 1;
         }
 
         /* two-flag language switch (desktop) */
@@ -790,9 +782,6 @@
                 padding-top: clamp(3rem, 9vw, 6rem);
             }
 
-            .hero-intro-expertise-row {
-                display: flex;
-            }
         }
 
         /* ── desktop / laptop: editorial absolute composition ── */
@@ -883,65 +872,8 @@
 
 
         /* Footer Social Buttons (Magnetic) */
-        .footer-social-row {
-            display: flex;
-            gap: var(--space-2);
-            align-items: center;
-        }
-
-        .social-btn {
-            width: 70px;
-            height: 70px;
-            border: 1px solid var(--on-dark-hairline);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--on-dark);
-            transition: all 0.3s var(--ease);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-btn svg {
-            width: 30px;
-            height: 30px;
-            z-index: 2;
-            transition: all 0.3s;
-        }
-
-        .social-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            transform: scale(0);
-            transition: transform 0.4s var(--ease);
-            z-index: 1;
-        }
-
-        .social-btn:hover {
-            border-color: transparent;
-            transform: scale(1.08);
-        }
-
-        .social-btn:hover::before {
-            transform: scale(1);
-        }
-
-        .social-btn.line::before {
-            background: #00B900;
-        }
-
-        .social-btn:hover svg {
-            fill: white;
-            color: white;
-        }
 
         /* TOOLS MARQUEE — four rows, alternating directions (in About) */
-        .stack-inner {
-            margin-top: clamp(var(--space-6), 9vw, var(--space-8));
-        }
 
         /* full-bleed marquee band — one row across the whole screen.
            Theme-adaptive & translucent: colours derive from --ink/--bg tokens,
@@ -979,106 +911,11 @@
             }
         }
 
-        .stack .logo-marquee {
-            position: relative;
-            z-index: 1;
-        }
-
-        .logo-marquee {
-            position: relative;
-            display: flex;
-            overflow: hidden;
-        }
-
         /* edge fade — blends into whatever the section background is */
-        .logo-marquee::before,
-        .logo-marquee::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 9%;
-            z-index: 3;
-            pointer-events: none;
-        }
-
-        .logo-marquee::before {
-            left: 0;
-            background: linear-gradient(90deg, var(--bg), transparent);
-        }
-
-        .logo-marquee::after {
-            right: 0;
-            background: linear-gradient(270deg, var(--bg), transparent);
-        }
 
         /* moved by a requestAnimationFrame driver in JS */
-        .logo-track {
-            display: flex;
-            width: max-content;
-            gap: 0;
-        }
 
         /* flat "partner strip" item — icon + label, thin divider between, no box */
-        .logo-chip {
-            flex: 0 0 auto;
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0 clamp(24px, 3.2vw, 48px);
-            opacity: 0.68;
-            transition: opacity 0.4s var(--ease);
-        }
-
-        .logo-chip::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1px;
-            height: 30px;
-            background: color-mix(in srgb, var(--ink) 14%, transparent);
-        }
-
-        .logo-marquee:hover .logo-chip {
-            opacity: 1;
-        }
-
-        .logo-ico {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            flex: 0 0 auto;
-            /* subtle white coin keeps every logo crisp on light OR dark bands */
-            background: #fff;
-            display: grid;
-            place-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
-        }
-
-        .logo-ico img {
-            width: 21px;
-            height: 21px;
-            display: block;
-        }
-
-        .logo-chip b {
-            font-weight: 600;
-            font-size: 0.98rem;
-            color: var(--ink);
-            white-space: nowrap;
-            letter-spacing: 0.01em;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .logo-track {
-                flex-wrap: wrap;
-                width: 100%;
-                justify-content: center;
-            }
-        }
 
         /* WORK SECTION — light showcase grid */
         .work {
@@ -1747,68 +1584,6 @@
         }
 
         /* Premium About (Sticky) */
-        .about-container-premium {
-            display: flex;
-            align-items: flex-start;
-            gap: 6%;
-            position: relative;
-            max-width: var(--maxw);
-            margin: 0 auto;
-            padding: 0 var(--gutter);
-        }
-
-        .about-image-wrap {
-            width: 45%;
-            height: auto;
-            position: sticky;
-            top: var(--space-7);
-        }
-
-        .about-sticky-img {
-            width: 100%;
-            height: 80vh;
-            object-fit: cover;
-            display: block;
-        }
-
-        .about-text-content {
-            width: 50%;
-            padding-top: var(--space-5);
-            padding-bottom: var(--space-7);
-        }
-
-        .about-premium-title {
-            font-size: var(--fs-800);
-            line-height: var(--lh-tight);
-            margin-bottom: var(--space-6);
-            font-weight: 600;
-            letter-spacing: var(--tracking-display);
-        }
-
-        .premium-text {
-            font-size: var(--fs-500);
-            line-height: var(--lh-body);
-            margin-bottom: var(--space-4);
-            color: var(--ink-2);
-            font-weight: 400;
-            max-width: var(--measure);
-        }
-
-        .premium-text strong {
-            color: var(--ink);
-            font-weight: 600;
-        }
-
-        .premium-text.highlight {
-            font-size: var(--fs-600);
-            color: var(--ink);
-            margin-top: var(--space-6);
-            border-left: 2px solid var(--accent);
-            padding-left: var(--space-4);
-            font-family: var(--font-display);
-            font-weight: 500;
-            letter-spacing: -0.01em;
-        }
 
         /* ABOUT ME SECTION */
         .about-me-section {
@@ -2135,11 +1910,6 @@
             pointer-events: none;
             -webkit-mask-image: radial-gradient(120% 120% at 100% 0, #000 30%, transparent 75%);
             mask-image: radial-gradient(120% 120% at 100% 0, #000 30%, transparent 75%);
-        }
-
-        .lc-dots {
-            background-image: radial-gradient(currentColor 1.1px, transparent 1.5px);
-            background-size: 11px 11px;
         }
 
         .lc-wave {
@@ -2742,152 +2512,6 @@
             margin-bottom: 0;
         }
 
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            width: 100%;
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            padding: var(--space-4) 0;
-            cursor: pointer;
-            transition: all 0.5s var(--ease);
-            background: transparent;
-            border-bottom: 1px solid var(--hairline);
-        }
-
-        .timeline-item:hover {
-            transform: translateX(6px);
-        }
-
-        .timeline-image-container {
-            width: 22%;
-            height: 180px;
-            flex-shrink: 0;
-            overflow: hidden;
-            border-radius: var(--radius);
-            margin-right: var(--space-5);
-            background: var(--elevated);
-        }
-
-        .timeline-thumb {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: transform 0.7s var(--ease);
-        }
-
-        .timeline-item:hover .timeline-thumb {
-            transform: scale(1.04);
-        }
-
-        .timeline-content-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .timeline-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: var(--space-1);
-            border-bottom: 1px solid var(--hairline);
-            padding-bottom: var(--space-1);
-            width: 100%;
-        }
-
-        .timeline-year {
-            font-family: var(--font-mono);
-            font-size: var(--fs-200);
-            color: var(--ink-3);
-            font-weight: 500;
-            margin-right: var(--space-3);
-            white-space: nowrap;
-        }
-
-        .timeline-school {
-            font-family: var(--font-mono);
-            font-size: var(--fs-100);
-            color: var(--ink-3);
-            text-transform: uppercase;
-            letter-spacing: var(--tracking-label);
-            margin-bottom: var(--space-1);
-            display: block;
-        }
-
-        .timeline-title {
-            font-size: var(--fs-600);
-            font-weight: 500;
-            color: var(--ink);
-            letter-spacing: -0.02em;
-            margin-bottom: 0;
-            line-height: var(--lh-snug);
-        }
-
-        .timeline-desc {
-            font-size: var(--fs-300);
-            color: var(--ink-2);
-            line-height: var(--lh-body);
-            max-width: var(--measure);
-            margin-top: 0;
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 0.5s var(--ease);
-        }
-
-        .timeline-desc a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            font-family: var(--font-mono);
-            font-size: var(--fs-200);
-        }
-
-        .timeline-desc a:hover {
-            text-decoration: underline;
-        }
-
-        .timeline-item.active .timeline-desc {
-            margin-top: var(--space-2);
-            max-height: 500px;
-            opacity: 1;
-        }
-
-        .timeline-item.active .timeline-arrow svg {
-            transform: rotate(90deg);
-        }
-
-        .timeline-arrow {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 1px solid var(--hairline-strong);
-            background: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s var(--ease);
-            flex-shrink: 0;
-            margin-left: var(--space-4);
-            color: var(--ink);
-        }
-
-        .timeline-arrow svg {
-            transition: transform 0.3s var(--ease);
-        }
-
-        .timeline-item:hover .timeline-arrow {
-            background: var(--ink);
-            color: var(--on-dark);
-            border-color: var(--ink);
-        }
-
         /* EDUCATION — premium slide-in cards */
         .edu-grid {
             display: grid;
@@ -3004,65 +2628,6 @@
         }
 
         /* FULLSCREEN TEXT MODAL (MOBILE) */
-        .text-modal {
-            position: fixed;
-            inset: 0;
-            background: var(--bg);
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            padding: var(--space-6) var(--gutter);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s var(--ease);
-            overflow-y: auto;
-        }
-
-        .text-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .text-modal-close {
-            align-self: flex-end;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--ink);
-            margin-bottom: var(--space-6);
-        }
-
-        .text-modal-year {
-            font-family: var(--font-mono);
-            font-size: var(--fs-400);
-            color: var(--ink-2);
-            font-weight: 500;
-            margin-bottom: var(--space-1);
-            display: block;
-        }
-
-        .text-modal-school {
-            font-family: var(--font-mono);
-            font-size: var(--fs-200);
-            color: var(--ink-3);
-            text-transform: uppercase;
-            letter-spacing: var(--tracking-label);
-            margin-bottom: var(--space-4);
-            display: block;
-        }
-
-        .text-modal-title {
-            font-size: var(--fs-700);
-            line-height: var(--lh-snug);
-            color: var(--ink);
-            margin-bottom: var(--space-4);
-            font-weight: 600;
-        }
-
-        .text-modal-desc {
-            font-size: var(--fs-400);
-            line-height: 1.7;
-            color: var(--ink-2);
-        }
 
         /* FULLSCREEN IMAGE MODAL */
         .image-modal {
@@ -3167,10 +2732,6 @@
             font-family: var(--font-mono);
             font-size: var(--fs-200);
             color: var(--on-dark-2);
-        }
-
-        .spacer {
-            height: var(--space-7);
         }
 
         /* FOOTER — theme-adaptive.
@@ -3649,17 +3210,7 @@
             box-shadow: 0 10px 26px color-mix(in srgb, var(--sc) 45%, transparent);
         }
 
-        .magnetic-wrap {
-            display: inline-block;
-        }
-
         /* ===================== RESPONSIVE ===================== */
-        @media (max-width: 1024px) {
-            .timeline-image-container {
-                width: 26%;
-                height: 150px;
-            }
-        }
 
         @media (max-width: 768px) {
             .top-nav {
@@ -3873,28 +3424,6 @@
                 padding: var(--space-3);
             }
 
-            .about-container-premium {
-                flex-direction: column;
-            }
-
-            .about-image-wrap {
-                width: 100%;
-                position: relative;
-                top: 0;
-                height: auto;
-                margin-bottom: var(--space-5);
-            }
-
-            .about-sticky-img {
-                height: 60vh;
-            }
-
-            .about-text-content {
-                width: 100%;
-                padding-top: 0;
-                padding-bottom: var(--space-5);
-            }
-
             .about-me-section {
                 padding: var(--space-7) 0;
             }
@@ -3904,40 +3433,6 @@
             }
 
             /* Timeline mobile */
-            .timeline-item {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: var(--space-3) 0;
-            }
-
-            .timeline-item:hover {
-                transform: none;
-            }
-
-            .timeline-image-container {
-                width: 100%;
-                height: 200px;
-                margin-right: 0;
-                margin-bottom: var(--space-3);
-            }
-
-            .timeline-content-wrapper {
-                width: 100%;
-            }
-
-            .timeline-header-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: var(--space-1);
-            }
-
-            .timeline-arrow {
-                display: none;
-            }
-
-            .timeline-desc {
-                max-width: 100%;
-            }
 
             .footer {
                 padding: var(--space-7) var(--gutter) var(--space-4);
@@ -3978,9 +3473,6 @@
                 justify-content: flex-start;
             }
 
-            .spacer {
-                height: var(--space-5);
-            }
         }
 
         @media (max-width: 400px) {
@@ -4272,8 +3764,6 @@
             box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 18%, transparent);
         }
         .stack::before { display: none; }
-        .logo-marquee::before { background: linear-gradient(90deg, var(--surface), transparent); }
-        .logo-marquee::after { background: linear-gradient(270deg, var(--surface), transparent); }
 
         .footer {
             background: var(--bg);
@@ -4601,7 +4091,6 @@
             .top-nav { padding-inline: var(--gutter); }
             .hero { padding-top: 104px; padding-bottom: 32px; }
             .hero-bigtype { font-size: clamp(2.1rem, 14.4vw, 6.5rem); }
-            .hero-intro-expertise-row { display: block; }
             .hero-hi { max-width: 38ch; font-size: 16px; line-height: 1.6; }
             .hero-actions { gap: 16px 24px; margin-top: 20px; }
             .hero-cta, .hero-contact { display: inline-flex; align-items: center; min-height: 44px; }
@@ -4755,9 +4244,7 @@
             .edu-title { font-size: 26px; line-height: 1.25; margin-top: 10px; }
             .edu-desc { font-size: 16px; line-height: 1.65; }
             .edu-more { display: flex; justify-content: space-between; min-height: 44px; margin-top: 16px; border-top: 1px solid var(--hairline); padding-top: 12px; }
-            .stack-inner { margin-top: 40px; }
             .stack { padding-block: 24px; }
-            .logo-chip { padding-inline: 20px; }
 
             .contact-layout { gap: 32px; padding-bottom: 0; }
             .cl-eyebrow { gap: 12px; margin-bottom: 24px; }
@@ -4805,8 +4292,6 @@
             .image-modal-info { position: static; margin-top: 16px; }
             .image-modal-info h3 { font-size: 21px; line-height: 1.3; }
             .image-modal-info p { font-size: 12px; line-height: 1.5; }
-            .text-modal { padding: 20px var(--gutter); }
-            .text-modal-close { min-width: 44px; min-height: 44px; margin-bottom: 24px; text-align: center; }
 
             @media (max-width: 380px) {
                 /* Keep Japanese calendar dates together instead of leaving 日 alone. */
@@ -4824,7 +4309,6 @@
                 .ue-footer { align-items: stretch; flex-direction: column; }
                 .cred-actions { align-items: stretch; flex-direction: column; }
             }
-        }
         }
     </style>
 </head>
@@ -6138,16 +5622,6 @@
 
             </div>
 
-            <!-- Mobile Text Modal -->
-            <div class="text-modal" id="textModal">
-                <div class="text-modal-close" onclick="closeTextModal()">&times;</div>
-                <div class="text-modal-content">
-                    <span class="text-modal-year" id="textModalYear"></span>
-                    <span class="text-modal-school" id="textModalSchool"></span>
-                    <h2 class="text-modal-title" id="textModalTitle"></h2>
-                    <p class="text-modal-desc" id="textModalDesc"></p>
-                </div>
-            </div>
 
             <!-- Image Modal -->
             <div class="image-modal" id="imageModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true" data-lenis-prevent>
@@ -6506,7 +5980,7 @@
     </script>
 
     <script>
-        // Smooth scroll, ScrollTrigger and magnetic buttons start once the motion libraries arrive.
+        // Smooth scroll and ScrollTrigger start once the motion libraries arrive.
         window.__motion.then(function () {
             // Initialize Lenis Smooth Scroll
             const lenis = new Lenis({
@@ -6528,33 +6002,6 @@
 
             // Integrate Lenis with ScrollTrigger
             lenis.on('scroll', ScrollTrigger.update);
-
-            // MAGNETIC BUTTONS
-            const magneticButtons = document.querySelectorAll('.magnetic-wrap');
-
-            magneticButtons.forEach(btn => {
-                btn.addEventListener('mousemove', function (e) {
-                    const position = btn.getBoundingClientRect();
-                    const x = e.clientX - position.left - position.width / 2;
-                    const y = e.clientY - position.top - position.height / 2;
-
-                    gsap.to(btn, {
-                        x: x * 0.3,
-                        y: y * 0.3,
-                        ease: "power2.out",
-                        duration: 0.6
-                    });
-                });
-
-                btn.addEventListener('mouseleave', function (e) {
-                    gsap.to(btn, {
-                        x: 0,
-                        y: 0,
-                        ease: "elastic.out(1, 0.3)",
-                        duration: 0.8
-                    });
-                });
-            });
         });
 
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -6666,42 +6113,6 @@
         });
 
 
-
-        // TIMELINE ACCORDION
-        // TIMELINE INTERACTION (Accordion vs Mobile Modal)
-        function toggleTimeline(element) {
-            // Check if Mobile (< 768px)
-            if (window.innerWidth < 768) {
-                // Open Full Screen Modal
-                const item = element.closest('.timeline-item');
-                const title = item.querySelector('.timeline-title').textContent;
-                const year = item.querySelector('.timeline-year').textContent;
-                const school = item.querySelector('.timeline-school').textContent;
-                const desc = item.querySelector('.timeline-desc').innerHTML; // Use innerHTML to preserve formatting
-
-                openTextModal(year, school, title, desc);
-            } else {
-                // Desktop: Toggle Accordion
-                const item = element.closest('.timeline-item');
-                item.classList.toggle('active');
-            }
-        }
-
-        // TEXT MODAL FUNCTIONS
-        function openTextModal(year, school, title, desc) {
-            document.getElementById('textModalYear').textContent = year;
-            document.getElementById('textModalSchool').textContent = school;
-            document.getElementById('textModalTitle').textContent = title;
-            document.getElementById('textModalDesc').innerHTML = desc; // Inject as HTML
-
-            document.getElementById('textModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling bg
-        }
-
-        function closeTextModal() {
-            document.getElementById('textModal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
 
         // IMAGE MODAL FUNCTIONS
         let imageModalScrollState = null;
@@ -7089,28 +6500,18 @@
                     ueFull: "Full video on LinkedIn", ueError: "Preview unavailable.", ueOpen: "Open video directly",
                     navHome: "Home", navWork: "Work", navAbout: "About", navContact: "Contact",
                     navCertifications: "Certifications", navGoals: "Goals", navBlender: "Blender", menuBlender: "Blender Work",
-                    navMenu: "Menu", navLabel: "Navigation", skipLink: "Skip to content",
+                    navMenu: "Menu", skipLink: "Skip to content",
                     menuOpen: "Open menu", menuClose: "Close menu", menuRole: "Software Engineer",
                     menuExplore: "Explore the portfolio", menuWork: "Selected work", menuUnreal: "Unreal Engine",
                     menuLanguage: "Language", menuLocation: "Tokyo, Japan",
-                    heroTagline: "Software Engineer<br><span>Mobility &amp; Robotics</span>",
-                    heroBadge: "Software Engineer",
-                    heroTitle: 'Software for mobility, robotics &amp; <span class="hero-accent">immersive experiences.</span>',
-                    heroLead: "I build practical solutions with Unreal Engine and Blender.",
                     heroViewProjects: "View Projects", heroContactMe: "Contact Me",
                     heroIntro: "<strong>Hey there!</strong> I'm a Software Engineer building practical digital experiences for mobility, robotics, Unreal Engine, and Blender.",
                     heroExp1: "Unreal Engine", heroExp2: "Blender", heroExp3: "3D Simulation", heroExp4: "Web Development",
-                    heroStat1Num: "3+", heroStat1: "Years Experience",
-                    heroStat2Num: "20+", heroStat2: "Projects",
-                    heroStat3Num: "Creative", heroStat3: "Problem Solver",
-                    workTitle: "Selected <em>Work</em>",
                     workSubtitle: "A curated selection of products and digital experiences designed to solve real problems with clarity and elegance.",
-                    filterAll: "All", filterWeb: "Web Development", filter3d: "3D & Design", filterAi: "AI & Vision",
-                    hintLiveDemo: "Live demo ↗", hintScreenshot: "Screenshot", workMore: "View More Projects",
+                    filterAll: "All",
                     workKicker: "Portfolio", workTitle2: "Selected Work", workViewAll: "View all projects",
                     workViewProject: "View project",
                     filterWebShort: "Web", filterApps: "Apps", filterUiux: "UI/UX",
-                    kindWebsite: "Website", kindApp: "App", viewDetails: "View details",
                     pjEverestName: "Everest Travel Experience",
                     pjEverestShort: "A premium travel website for curated Himalayan adventures and expeditions.",
                     pjBudgetName: "Personal Finance App",
@@ -7121,16 +6522,6 @@
                     pjAnalyzerShort: "An internal tool I built at work to inspect any .glb 3D model — polygon counts, texture sizes and an exportable PDF report.",
                     pjForgeName: "GLB Forge",
                     pjForgeShort: "An internal tool I built to shrink heavy 3D models — cutting polygon counts and texture sizes so they import into Unreal Engine without crashing.",
-                    descGlbOpt: "A 100% local, browser-based tool that compresses .glb 3D models for Unreal Engine 5 — real-time viewer, before/after comparison, per-mesh inspector.",
-                    descEverest: "A cinematic travel landing page — 340 scroll-scrubbed film frames fly you from an airplane window at golden hour to the roof of the world.",
-                    descFace: "A real-time face-recognition system built from scratch — live camera capture, a training pipeline, and confidence-based recognition.",
-                    descBudget: "A personal finance tool that reads receipts with Gemini vision AI, sets budgets, and generates spending insights from raw photos.",
-                    descWeather: "A full-stack app that recommends destinations by optimal weather — real-time search, 5-day forecasts, bilingual EN/日本語.",
-                    descGlbAna: "A Node toolkit that inspects .glb models — mesh, texture, and size reports — plus a UE5-safe compression pipeline.",
-                    descStudy: "A gamified study tracker — focus timer, streaks and XP, interactive analytics charts, and a weather-adaptive UI in EN/日本語.",
-                    descSalary: "A bilingual salary tracker for part-time work in Japan — shifts, hourly wages, and monthly income at a glance.",
-                    descGorkhali: "The bilingual site for my YouTube channel — live subscriber stats, featured videos, and EN/日本語 switching.",
-                    descImgComp: "A privacy-first image optimizer that runs entirely in the browser — batch compression, smart quality presets, no uploads.",
                     fgKicker: "Future Goals", fgTitle: "What I’m Building Toward",
                     fgIntro: "My work with web development and 3D simulation has sparked a deeper curiosity about how software understands and interacts with the world. I want to build on that foundation through robotics, digital twins, and AI-powered applications—turning each new concept into something I can build, test, and improve.",
                     fgArtAlt: "Concept illustration connecting a robotic workspace, a digital twin, document search, and a data dashboard.",
@@ -7166,28 +6557,20 @@
                     cert4Issuer: "Cisco · Networking Academy",
                     cert4Desc: "Successfully completed the Networking Basics course from Cisco Networking Academy, covering network communication, IPv4/IPv6 addressing, network media, and application layer services.",
                     cert4Skills: "Application Layer Services · IPv4 Addresses · Network Media · Network Types",
-                    cert5Mon: "Jul", cert5Year: "2026", cert5Title: "JLPT N1 — Japanese Proficiency",
-                    cert5Issuer: "The Japan Foundation · JEES",
-                    cert5Desc: "Passed N1 — the highest of the JLPT's five levels and the Japanese-proficiency benchmark employers look for in Japan's IT industry. Certifies comprehension of Japanese across business, technical and academic contexts (total score 128/180, CEFR B2).",
-                    cert5Skills: "Reading · Listening · Vocabulary · Grammar",
-                    cert6Mon: "May", cert6Year: "2025", cert6Title: "TOEIC L&R — 845",
-                    cert6Issuer: "ETS · IIBC",
-                    cert6Desc: "Official TOEIC Listening & Reading score of 845 / 990 (Listening 465, Reading 380) — demonstrating strong professional English for international, business and technical communication.",
-                    cert6Skills: "Listening · Reading · Business English",
                     lcKicker: "Language Credentials", lcTitle: "Language Credentials",
                     lcSub: "Professional language qualifications that strengthen my ability to work, collaborate, and communicate in Japan and global environments.",
                     lcNote: "A strong complement to my technical expertise",
                     lcJpCat: "Japanese Proficiency",
                     lcJpDesc: "Highest level of the Japanese-Language Proficiency Test. Demonstrates advanced Japanese comprehension for professional, technical, and workplace communication in Japan.",
-                    lcLblLevel: "Level", lcLblResult: "Result", lcLblCert: "Certification", lcLblFocus: "Focus",
+                    lcLblLevel: "Level", lcLblCert: "Certification", lcLblFocus: "Focus",
                     lcLblComm: "Communication", lcLblTestDate: "Test Date", lcLblCefr: "CEFR",
-                    lcLblTotal: "Total Score", lcLblListen: "Listening", lcLblRead: "Reading", lcLblPerc: "Percentile Rank",
-                    lcJpLevelSub: "(Highest Level)", lcJpResultV: "Passed", lcJpScoreSub: "(Passed)", lcJpCefrSub: "(JLPT official guide)", lcJpCertV: "Japanese-Language Proficiency Test",
+                    lcLblTotal: "Total Score", lcLblListen: "Listening", lcLblRead: "Reading",
+                    lcJpLevelSub: "(Highest Level)", lcJpScoreSub: "(Passed)", lcJpCefrSub: "(JLPT official guide)", lcJpCertV: "Japanese-Language Proficiency Test",
                     lcJpFocus1V: "Reading", lcJpFocus2V: "Listening", lcJpFocus3V: "Vocabulary / Grammar",
                     lcJpCommV: "Professional / Workplace", lcJpTestV: "July 05, 2026",
                     lcEnCat: "English Communication",
                     lcEnDesc: "Recognized English communication benchmark for reading and listening skills in professional and global settings.",
-                    lcEnResultV: "Achieved", lcEnTestV: "May 18, 2025",
+                    lcEnTestV: "May 18, 2025",
                     lcLblIssued: "Issued", lcEnIssuedV: "Jun 03, 2025", lcLblOverall: "Overall",
                     lcEnPerfTitle: "Section Performance",
                     lcEnLisSub: "465 / 495 · 89th percentile · above average",
@@ -7203,15 +6586,15 @@
                     certIdLabel: "Credential ID", certView: "View Credential", certVerified: "Verified",
                     certFoot: "Credential links open in a new tab and may require sign-in.",
                     cert1Mon: "Jul", cert1Year: "2026", cert2Mon: "Jul", cert2Year: "2026", cert3Mon: "Mar", cert3Year: "2024",
-                    cert1When: "Jul 2026", cert1Title: "AWS Knowledge: Amazon Q Developer Fundamentals — Training Badge",
+                    cert1Title: "AWS Knowledge: Amazon Q Developer Fundamentals — Training Badge",
                     cert1Issuer: "Amazon Web Services (AWS)",
                     cert1Desc: "Strengthened my understanding of Amazon Q Developer, AI-assisted software development, and AWS developer tools.",
                     cert1Skills: "Amazon Q · Amazon Web Services · AI-Assisted Development",
-                    cert2When: "Jul 2026", cert2Title: "Generative AI Essentials: Using LLMs to Work with Data",
+                    cert2Title: "Generative AI Essentials: Using LLMs to Work with Data",
                     cert2Issuer: "IBM · SkillsBuild",
                     cert2Desc: "Completed the IBM SkillsBuild program on Generative AI and Large Language Models (LLMs), validating my knowledge of AI and applied LLM workflows.",
                     cert2Skills: "Artificial Intelligence · Large Language Models · Generative AI",
-                    cert3When: "Mar 2024", cert3Title: "Oracle Certified Java Programmer, Bronze SE",
+                    cert3Title: "Oracle Certified Java Programmer, Bronze SE",
                     cert3Issuer: "Oracle · Java SE",
                     cert3Desc: "Entry-level Oracle certification validating fundamental Java programming and object-oriented concepts.",
                     cert3Skills: "Java · Web Design", certCertified: "Certified",
@@ -7224,13 +6607,8 @@
                     edu2PhotoAlt: "Graduation at Hokkaido Japanese Language Academy Sapporo Main Campus",
                     edu2Title: "Japanese Language",
                     edu2Desc: "Achieved JLPT N3 certification. Deep focus on Japanese corporate culture, business manners, and volunteer leadership.",
-                    viewPhoto: "View photo", toolsTitle: "Tools & Technologies",
-                    bioHeadline: "Driven by<br>Impact.",
-                    bioP1: "I am a dedicated <strong>Mobility & Robotics Specialist</strong> with a core mission: to contribute to society through the power of IT.",
-                    bioP2: "Today that means building real-time 3D in <strong>Unreal Engine</strong>, automating pipelines with <strong>Python</strong>, and modelling assets in <strong>Blender</strong> — engineering the tools that move mobility and robotics forward.",
-                    bioP3: "Ready to grow together and set new standards in the industry.",
-                    footWork: "Let's work", footTogether: "together",
-                    footVersion: "Version", footLocalTime: "Tokyo Time", footSocials: "Socials",
+                    viewPhoto: "View photo",
+                    footVersion: "Version", footLocalTime: "Tokyo Time",
                     footFollow: "Follow me",
                     conEyebrow: "Open to conversations",
                     conHeadline: "Let's work<br>together",
@@ -7259,28 +6637,18 @@
                     ueFull: "LinkedInでフル動画を見る", ueError: "プレビューを再生できません。", ueOpen: "動画を直接開く",
                     navHome: "ホーム", navWork: "実績", navAbout: "プロフィール", navContact: "お問い合わせ",
                     navCertifications: "資格・認定", navGoals: "今後の目標", navBlender: "Blender", menuBlender: "Blender 制作",
-                    navMenu: "メニュー", navLabel: "ナビゲーション", skipLink: "本文へスキップ",
+                    navMenu: "メニュー", skipLink: "本文へスキップ",
                     menuOpen: "メニューを開く", menuClose: "メニューを閉じる", menuRole: "ソフトウェアエンジニア",
                     menuExplore: "ポートフォリオ", menuWork: "制作実績", menuUnreal: "Unreal Engine",
                     menuLanguage: "言語", menuLocation: "日本・東京",
-                    heroTagline: "ソフトウェアエンジニア<br><span>モビリティ＆ロボティクス</span>",
-                    heroBadge: "ソフトウェアエンジニア",
-                    heroTitle: 'モビリティ、ロボティクス、そして<span class="hero-accent">没入型体験</span>のためのソフトウェア。',
-                    heroLead: "Unreal Engine と Blender で、実用的なソリューションを構築します。",
                     heroViewProjects: "プロジェクトを見る", heroContactMe: "お問い合わせ",
                     heroIntro: "<strong>こんにちは！</strong> モビリティ、ロボティクス、Unreal Engine、Blender のための実用的なデジタル体験をつくるソフトウェアエンジニアです。",
                     heroExp1: "Unreal Engine", heroExp2: "Blender", heroExp3: "3Dシミュレーション", heroExp4: "Web開発",
-                    heroStat1Num: "3+", heroStat1: "年の経験",
-                    heroStat2Num: "20+", heroStat2: "プロジェクト",
-                    heroStat3Num: "クリエイティブ", heroStat3: "問題解決力",
-                    workTitle: "代表的な<em>実績</em>",
                     workSubtitle: "現実の課題を、明快さとエレガンスで解決するために設計したプロダクトとデジタル体験の厳選集です。",
-                    filterAll: "すべて", filterWeb: "Web開発", filter3d: "3D・デザイン", filterAi: "AI・ビジョン",
-                    hintLiveDemo: "ライブデモ ↗", hintScreenshot: "スクリーンショット", workMore: "その他のプロジェクトを見る",
+                    filterAll: "すべて",
                     workKicker: "ポートフォリオ", workTitle2: "代表的な実績", workViewAll: "すべてのプロジェクトを見る",
                     workViewProject: "プロジェクトを見る",
                     filterWebShort: "Web", filterApps: "アプリ", filterUiux: "UI/UX",
-                    kindWebsite: "ウェブサイト", kindApp: "アプリ", viewDetails: "詳しく見る",
                     pjEverestName: "エベレスト・トラベル体験",
                     pjEverestShort: "厳選されたヒマラヤの冒険と遠征のためのプレミアムな旅行ウェブサイト。",
                     pjBudgetName: "家計管理アプリ",
@@ -7291,16 +6659,6 @@
                     pjAnalyzerShort: "3Dモデルの詳細（ポリゴン数・テクスチャサイズ）を解析し、PDFで書き出せる、私が社内向けに開発したツール。",
                     pjForgeName: "GLB モデル最適化ツール",
                     pjForgeShort: "ポリゴン数とテクスチャを削減し、重い3DモデルもUEに安全に取り込めるようにする、私が社内向けに開発したツール。",
-                    descGlbOpt: "Unreal Engine 5 向けに .glb 3Dモデルを圧縮する、完全ローカル・ブラウザ完結型ツール。リアルタイムビューア、圧縮前後の比較、メッシュ単位のインスペクターを搭載。",
-                    descEverest: "映画のような旅のランディングページ。スクロールに連動する340枚のフレームが、夕暮れの機窓から世界の頂へと誘います。",
-                    descFace: "ゼロから構築したリアルタイム顔認識システム。ライブカメラ映像の取得、学習パイプライン、信頼度ベースの認識を実装。",
-                    descBudget: "Gemini のビジョンAIでレシートを読み取る家計管理ツール。予算設定から、写真をもとにした支出分析までを自動化。",
-                    descWeather: "最適な天気から旅先を提案するフルスタックアプリ。リアルタイム検索、5日間予報、英語・日本語のバイリンガル対応。",
-                    descGlbAna: ".glb モデルを解析する Node 製ツールキット。メッシュ・テクスチャ・サイズのレポートに加え、UE5対応の圧縮パイプラインを提供。",
-                    descStudy: "ゲーム感覚の学習トラッカー。集中タイマー、連続記録とXP、インタラクティブな分析グラフを、天気に応じて変化するUIと英語・日本語で提供。",
-                    descSalary: "日本でのアルバイト向けバイリンガル給料管理アプリ。シフト、時給、月収をひと目で把握できます。",
-                    descGorkhali: "自身のYouTubeチャンネル向けバイリンガルサイト。登録者数のライブ表示、注目動画、英語・日本語の切り替えに対応。",
-                    descImgComp: "プライバシー重視の画像最適化ツール。すべてブラウザ内で完結し、一括圧縮とスマートな品質プリセットを搭載、アップロード不要。",
                     fgKicker: "今後の目標", fgTitle: "これから目指すこと",
                     fgIntro: "Web開発と3Dシミュレーションの経験を通じて、ソフトウェアが世界をどのように理解し、関わるのかに興味を持つようになりました。この土台を生かしてロボティクス、デジタルツイン、AIを活用したアプリケーションを学び、新しい知識を実装・検証・改善へとつなげていきたいと考えています。",
                     fgArtAlt: "ロボットの作業空間、デジタルツイン、文書検索、データダッシュボードをつなぐコンセプトイラスト。",
@@ -7336,28 +6694,20 @@
                     cert4Issuer: "Cisco · Networking Academy",
                     cert4Desc: "Cisco Networking Academy の Networking Basics コースを修了。ネットワーク通信、IPv4/IPv6 アドレッシング、ネットワークメディア、アプリケーション層サービスなどを学びました。",
                     cert4Skills: "Application Layer Services · IPv4 Addresses · Network Media · Network Types",
-                    cert5Mon: "7月", cert5Year: "2026", cert5Title: "日本語能力試験 N1",
-                    cert5Issuer: "国際交流基金・JEES",
-                    cert5Desc: "JLPT の最上位である N1 に合格。日本のIT業界で採用の目安とされる日本語力の指標です。ビジネス・技術・学術の幅広い場面で日本語を理解できることを証明します（総合スコア 128/180、CEFR B2）。",
-                    cert5Skills: "読解 · 聴解 · 語彙 · 文法",
-                    cert6Mon: "5月", cert6Year: "2025", cert6Title: "TOEIC L&R — 845",
-                    cert6Issuer: "ETS・IIBC",
-                    cert6Desc: "TOEIC Listening & Reading 公式スコア 845 / 990（リスニング 465、リーディング 380）。国際・ビジネス・技術の場面での高い実務英語力を示します。",
-                    cert6Skills: "リスニング · リーディング · ビジネス英語",
                     lcKicker: "語学の資格", lcTitle: "語学の資格",
                     lcSub: "日本および世界の環境で働き、協働し、コミュニケーションする力を高める、実務レベルの語学資格です。",
                     lcNote: "技術力を支える大きな強みです",
                     lcJpCat: "日本語能力",
                     lcJpDesc: "日本語能力試験の最上位レベル。ビジネス・技術・職場でのコミュニケーションに求められる高度な日本語の理解力を証明します。",
-                    lcLblLevel: "レベル", lcLblResult: "結果", lcLblCert: "認定", lcLblFocus: "分野",
+                    lcLblLevel: "レベル", lcLblCert: "認定", lcLblFocus: "分野",
                     lcLblComm: "コミュニケーション", lcLblTestDate: "受験日", lcLblCefr: "CEFR",
-                    lcLblTotal: "合計スコア", lcLblListen: "リスニング", lcLblRead: "リーディング", lcLblPerc: "パーセンタイル",
-                    lcJpLevelSub: "（最上位レベル）", lcJpResultV: "合格", lcJpScoreSub: "（合格）", lcJpCefrSub: "（JLPT公式の目安）", lcJpCertV: "日本語能力試験",
+                    lcLblTotal: "合計スコア", lcLblListen: "リスニング", lcLblRead: "リーディング",
+                    lcJpLevelSub: "（最上位レベル）", lcJpScoreSub: "（合格）", lcJpCefrSub: "（JLPT公式の目安）", lcJpCertV: "日本語能力試験",
                     lcJpFocus1V: "読解", lcJpFocus2V: "聴解", lcJpFocus3V: "語彙・文法",
                     lcJpCommV: "ビジネス・職場", lcJpTestV: "2026年7月5日",
                     lcEnCat: "英語コミュニケーション",
                     lcEnDesc: "プロフェッショナルおよびグローバルな場面での、リーディング・リスニング力を示す、国際的に認知された英語コミュニケーションの指標です。",
-                    lcEnResultV: "取得", lcEnTestV: "2025年5月18日",
+                    lcEnTestV: "2025年5月18日",
                     lcLblIssued: "発行日", lcEnIssuedV: "2025年6月3日", lcLblOverall: "総合",
                     lcEnPerfTitle: "セクション別スコア",
                     lcEnLisSub: "465 / 495 ・ 上位11%（89パーセンタイル）・ 平均以上",
@@ -7373,15 +6723,15 @@
                     certIdLabel: "認証ID", certView: "資格を見る", certVerified: "認証済み",
                     certFoot: "資格のリンクは新しいタブで開き、サインインが必要な場合があります。",
                     cert1Mon: "7月", cert1Year: "2026", cert2Mon: "7月", cert2Year: "2026", cert3Mon: "3月", cert3Year: "2024",
-                    cert1When: "2026年7月", cert1Title: "AWS Knowledge: Amazon Q Developer Fundamentals — Training Badge",
+                    cert1Title: "AWS Knowledge: Amazon Q Developer Fundamentals — Training Badge",
                     cert1Issuer: "Amazon Web Services (AWS)",
                     cert1Desc: "Amazon Q Developer、AIを活用したソフトウェア開発、AWSの開発者ツールへの理解を深めました。",
                     cert1Skills: "Amazon Q · Amazon Web Services · AI活用開発",
-                    cert2When: "2026年7月", cert2Title: "Generative AI Essentials: Using LLMs to Work with Data",
+                    cert2Title: "Generative AI Essentials: Using LLMs to Work with Data",
                     cert2Issuer: "IBM · SkillsBuild",
                     cert2Desc: "IBM SkillsBuild の生成AI・大規模言語モデル（LLM）プログラムを修了し、AIと実践的なLLMワークフローの知識を証明しました。",
                     cert2Skills: "人工知能 · 大規模言語モデル · 生成AI",
-                    cert3When: "2024年3月", cert3Title: "Oracle Certified Java Programmer, Bronze SE",
+                    cert3Title: "Oracle Certified Java Programmer, Bronze SE",
                     cert3Issuer: "Oracle · Java SE",
                     cert3Desc: "Javaプログラミングとオブジェクト指向の基礎を証明する、エントリーレベルのOracle認定資格です。",
                     cert3Skills: "Java · Web デザイン", certCertified: "認定済み",
@@ -7394,13 +6744,8 @@
                     edu2PhotoAlt: "北海道日本語学院札幌本校の卒業式",
                     edu2Title: "日本語学科",
                     edu2Desc: "JLPT N3 を取得。日本の企業文化・ビジネスマナー、そしてボランティアでのリーダーシップに注力。",
-                    viewPhoto: "写真を見る", toolsTitle: "ツール＆テクノロジー",
-                    bioHeadline: "社会に<br>インパクトを。",
-                    bioP1: "私は<strong>モビリティ＆ロボティクスのスペシャリスト</strong>として、ITの力で社会に貢献することを使命としています。",
-                    bioP2: "具体的には、<strong>Unreal Engine</strong> でのリアルタイム3D開発、<strong>Python</strong> によるパイプラインの自動化、<strong>Blender</strong> でのアセット制作を通じて、モビリティとロボティクスを前進させるツールをつくっています。",
-                    bioP3: "共に成長し、業界に新たな基準を打ち立てていきます。",
-                    footWork: "一緒に", footTogether: "つくろう。",
-                    footVersion: "バージョン", footLocalTime: "東京時間", footSocials: "SNS",
+                    viewPhoto: "写真を見る",
+                    footVersion: "バージョン", footLocalTime: "東京時間",
                     footFollow: "フォロー",
                     conEyebrow: "お気軽にご連絡ください",
                     conHeadline: "一緒に<br>働きましょう",

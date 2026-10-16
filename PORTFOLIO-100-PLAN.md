@@ -153,7 +153,7 @@ cap it at about 1.2 s, skip it entirely for `prefers-reduced-motion`, and keep "
 - Check that the Unreal videos and GLBs load only on interaction (already mostly true)
 **Verify:** Lighthouse mobile Performance ≥ 90, LCP < 2.5 s, CLS < 0.05.
 
-### Step 13 — Accessibility pass 🟨
+### Step 13 — Accessibility pass ✅
 **Known issue:** Education cards use `onclick` on an `<article>` without
 `role="button"`, `tabindex`, or key handlers, so keyboard users can't open them.
 **Fix:** Make every clickable element keyboard-operable with a visible `:focus-visible`
@@ -165,7 +165,7 @@ focus, and keep `lang` in sync when switching to 日本語.
 
 ## Phase E — Maintainability and finish
 
-### Step 14 — Consolidate CSS ⬜
+### Step 14 — Consolidate CSS 🟨 (re-scoped: render-critical CSS was inlined in Step 12; this step removes dead code)
 **Problem:** Large inline `<style>` + `refinements.css`, `mobile-refinements.css`,
 `mobile-menu.css`, `preloader.css`, `unreal-projects.css`, `blender-work.css`,
 `future-goals.css`, all layered as patches.
@@ -202,4 +202,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | 12 | ✅ | d7f8f89, 20a2ab0, 6030486, 179e3d1 | Mobile Lighthouse 68 → 86 median (81–93), desktop 99. Self-hosted fonts, srcset images, vercel.json caching, inlined critical CSS + intro, async below-fold CSS, motion libs after idle, no LCP fade. Weight 1.35 MB → ~0.9 MB |
 
 > Measuring note: ESET antivirus on Manoj's work PC intercepts browser HTTPS ("ESET SSL Filter CA") and strips compression, so Lighthouse in Edge is skewed. Use chrome-headless-shell (not intercepted) against the live URL.
-| 13 | 🟨 in review | (this commit) | Lighthouse a11y 100 (mobile+desktop, light+dark). Real buttons on project/education cards, dialog focus in/trap/return, image viewer role=dialog + button close, skip link, focus ring, contrast fixes |
+| 13 | ✅ | 7890e00 | Lighthouse a11y 100 (mobile+desktop, light+dark). Real buttons on project/education cards, dialog focus in/trap/return, image viewer role=dialog + button close, skip link, focus ring, contrast fixes |
+| 14 | 🟨 in review | (this commit) | Removed 81 dead CSS rules (30 unused classes), dead text-modal/timeline/magnetic JS, 116 unused i18n entries, a stray `}`; −27 KB HTML. 20-state screenshot diff: identical |
