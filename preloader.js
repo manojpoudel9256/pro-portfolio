@@ -5,10 +5,15 @@
     if (!pre) return;
     var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     var params = new URLSearchParams(window.location.search);
-    if (params.has('nopreload') || motion.matches) {
+    // Play once per browser session: reloads, back-navigation and deep links
+    // (e.g. a shared #contact URL) go straight to the content.
+    var seen = false;
+    try { seen = sessionStorage.getItem('pp_intro_seen') === '1'; } catch (e) { /* Storage is optional. */ }
+    if (params.has('nopreload') || motion.matches || seen || window.location.hash.length > 1) {
         pre.remove();
         return;
     }
+    try { sessionStorage.setItem('pp_intro_seen', '1'); } catch (e) { /* Storage is optional. */ }
 
     var letters = Array.from(pre.querySelectorAll('.pl-letter'));
     var skip = pre.querySelector('.pl-skip');
@@ -71,7 +76,7 @@
             finish();
         } else {
             pre.classList.add('pl-done');
-            setTimeout(finish, 680);
+            setTimeout(finish, 520);
         }
     }
 
@@ -99,9 +104,9 @@
             var nextStyle = style;
             timers.push(setTimeout(function () {
                 letter.dataset.style = String(nextStyle);
-            }, 260 * nextStyle + index * 55));
+            }, 120 * nextStyle + index * 35));
         });
     }
-    timers.push(setTimeout(function () { dismiss(false); }, 2750));
-    timers.push(setTimeout(function () { dismiss(true); }, 5000));
+    timers.push(setTimeout(function () { dismiss(false); }, 1200));
+    timers.push(setTimeout(function () { dismiss(true); }, 2500));
 })();

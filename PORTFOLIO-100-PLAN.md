@@ -129,7 +129,7 @@ Update the triangle/size numbers in `models.json`. Add a small "Optimised with G
 7.7 MB → x MB" note, which turns this into proof that the tool works.
 **Verify:** Models look the same in the inspector. Sizes drop by at least 60%.
 
-### Step 10 — Case-study depth for each project 🟨
+### Step 10 — Case-study depth for each project ✅
 **Problem:** The modals list features and stack, but not problem → role → result.
 **Fix:** Add three short lines per project modal (EN + 日本語):
 **Problem**, **What I did**, **Result** (with numbers where possible, e.g.
@@ -140,7 +140,7 @@ Update the triangle/size numbers in `models.json`. Add a small "Optimised with G
 
 ## Phase D — Performance, UX, and accessibility
 
-### Step 11 — Preloader: fast and respectful ⬜
+### Step 11 — Preloader: fast and respectful 🟨
 **Fix:** Show the "hello" intro only on the first visit per session (sessionStorage),
 cap it at about 1.2 s, skip it entirely for `prefers-reduced-motion`, and keep "Skip intro".
 **Verify:** Reloading the page shows content immediately.
@@ -197,4 +197,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | 7 | ✅ | 7f7f72a | Result tile → Total Score 128 / 180 (Passed); CEFR B2 labelled "JLPT official guide" |
 | 8 | ✅ | 348d3c7 | 3 cards + their GLBs/previews/metadata removed (−3.6 MB GLB); tests updated to 2 cards |
 | 9 | ⏭️ skipped | — | Truck GLB left at 7.7 MB by choice |
-| 10 | 🟨 in review | (this commit) | Problem / What I did / Result in all 5 modals (EN + 日本語), facts supplied by Manoj |
+| 10 | ✅ | fea6f1a | Problem / What I did / Result in all 5 modals (EN + 日本語), facts supplied by Manoj |
+| 11 | 🟨 in review | (this commit) | Intro once per session, skipped on deep links; ~3.4 s → ~1.7 s; reload 0.24 s |
