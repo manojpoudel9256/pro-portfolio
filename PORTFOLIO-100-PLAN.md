@@ -165,7 +165,7 @@ focus, and keep `lang` in sync when switching to 日本語.
 
 ## Phase E — Maintainability and finish
 
-### Step 14 — Consolidate CSS 🟨 (re-scoped: render-critical CSS was inlined in Step 12; this step removes dead code)
+### Step 14 — Consolidate CSS ✅ (re-scoped: render-critical CSS was inlined in Step 12; this step removes dead code)
 **Problem:** Large inline `<style>` + `refinements.css`, `mobile-refinements.css`,
 `mobile-menu.css`, `preloader.css`, `unreal-projects.css`, `blender-work.css`,
 `future-goals.css`, all layered as patches.
@@ -182,6 +182,12 @@ Go through the "What 100 means" checklist item by item, run Lighthouse on mobile
 desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 
 ---
+
+## Phase F — Navigation, order and mobile density (added Oct 16 at Manoj's request)
+
+- **F1 Nav jumps:** one `scrollToSection()` aligns every section top to the fixed header's bottom (desktop nav, hero buttons, mobile menu, direct #links). Before: 14–16px of the previous section showed on most jumps. Desktop nav: + Unreal Engine, − Home (logo goes home).
+- **F2 Order:** section order kept (Work → Unreal → Blender → About → Goals → Contact). Inside Selected Work, the team-used GLB tools now lead, ahead of personal web projects.
+- **F3 Mobile density:** the Sept mobile pass had enlarged everything (card titles 23–28px, all copy 16px/1.65, tall tiles/frames). Retuned in place to a mobile scale (section 30 / card title 20 / body 15px), slimmer card padding, half-height JLPT/TOEIC tiles, shorter app/photo frames, credential IDs hidden on phones. Inputs stay 16px; tap targets stay ≥44px; desktop pixel-identical. Page: 22.7 → 19.4 screens.
 
 ## Progress log
 
@@ -203,4 +209,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 
 > Measuring note: ESET antivirus on Manoj's work PC intercepts browser HTTPS ("ESET SSL Filter CA") and strips compression, so Lighthouse in Edge is skewed. Use chrome-headless-shell (not intercepted) against the live URL.
 | 13 | ✅ | 7890e00 | Lighthouse a11y 100 (mobile+desktop, light+dark). Real buttons on project/education cards, dialog focus in/trap/return, image viewer role=dialog + button close, skip link, focus ring, contrast fixes |
-| 14 | 🟨 in review | (this commit) | Removed 81 dead CSS rules (30 unused classes), dead text-modal/timeline/magnetic JS, 116 unused i18n entries, a stray `}`; −27 KB HTML. 20-state screenshot diff: identical |
+| 14 | ✅ | c2aced7 | Removed 81 dead CSS rules (30 unused classes), dead text-modal/timeline/magnetic JS, 116 unused i18n entries, a stray `}`; −27 KB HTML. 20-state screenshot diff: identical |
+| F1–F3 | 🟨 in review | 7956a60, 65851c2, (this commit) | Nav lands exactly; GLB tools first; mobile density pass |

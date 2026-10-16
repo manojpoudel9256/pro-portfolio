@@ -38,18 +38,17 @@
     .fg-card:hover { border-color: var(--fg-accent); box-shadow: var(--card-shadow); }
 }
 @media (max-width: 768px) {
-    .future-goals { scroll-margin-top: 88px; }
     .fg-opening, .fg-grid { grid-template-columns: minmax(0, 1fr); }
-    .fg-opening { gap: 28px; margin-bottom: 28px; }
+    .fg-opening { gap: 20px; margin-bottom: 20px; }
     .fg-kicker { margin-bottom: 18px; font-size: 12px; }
     .fg-title { margin-bottom: 20px; }
-    .fg-intro { font-size: 16px; line-height: 1.7; }
-    .fg-art img { border-radius: 20px; }
+    .fg-intro { font-size: 15px; line-height: 1.6; }
+    .fg-art img { border-radius: 18px; aspect-ratio: 16 / 9; object-fit: cover; }
     .fg-art figcaption { text-align: left; }
-    .fg-grid { gap: 20px; }
-    .fg-card { padding: 24px 20px; border-radius: 22px; }
-    .fg-card-top { margin-bottom: 20px; }
-    .fg-card h3 { font-size: 26px; }
+    .fg-grid { gap: 14px; }
+    .fg-card { padding: 18px 16px; border-radius: 20px; }
+    .fg-card-top { margin-bottom: 14px; }
+    .fg-card h3 { font-size: clamp(19px, 5.1vw, 21px); }
 }
 @media (prefers-reduced-motion: reduce) {
     .fg-card { transition: none; }
