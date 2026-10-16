@@ -28,7 +28,7 @@ Taste is subjective, so "100" is defined as a checklist that can be verified:
 
 ## Phase A — Accuracy and trust (no decisions needed)
 
-### Step 1 — Make project card tags match the real tech stacks 🟨
+### Step 1 — Make project card tags match the real tech stacks ✅
 **Problem:** The cards claim tools that the detail modals (and the real code) don't use:
 - Everest card: *Figma · Webflow* → real stack: HTML5, Tailwind CSS, JavaScript, Vercel
 - Personal Finance card: *iOS · Android · Figma* → real stack: React, Vite, Tailwind CSS, Gemini AI
@@ -40,7 +40,7 @@ so the All / Web / Apps / UI/UX filters still behave the same.
 **Verify:** On each card, compare the chips with the "Tech stack" list in its modal.
 They must match.
 
-### Step 2 — Default the footer clock to Tokyo time ⬜
+### Step 2 — Default the footer clock to Tokyo time 🟨
 **Problem:** The HTML placeholder says `00:00 AM GMT+1`. It flashes before JS runs,
 and it's what crawlers and no-JS visitors see.
 **Fix:** Check that the clock script formats with `timeZone: 'Asia/Tokyo'` (so the
@@ -174,4 +174,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 
 | Step | Status | Commit | Notes |
 |---|---|---|---|
-| 1 | 🟨 in review | (this commit) | Chips now mirror each modal's stack |
+| 1 | ✅ | 304090a | Chips now mirror each modal's stack |
+| 2 | 🟨 in review | (this commit) | Clock pinned to Asia/Tokyo; label "Tokyo Time / 東京時間" |

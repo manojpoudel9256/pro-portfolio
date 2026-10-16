@@ -5330,8 +5330,8 @@
                         <div><span data-i18n="footVersion">Version</span>
                             <p>2026 © Edition</p>
                         </div>
-                        <div><span data-i18n="footLocalTime">Local Time</span>
-                            <p id="time">00:00 AM GMT+1</p>
+                        <div><span data-i18n="footLocalTime">Tokyo Time</span>
+                            <p id="time">-- : -- JST</p>
                         </div>
                     </div>
                     <div class="footer-socials">
@@ -5429,12 +5429,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             function updateClock() {
-                const now = new Date();
-                const timeString = now.toLocaleTimeString('en-US', {
+                // Always Tokyo time, whatever the visitor's own time zone is.
+                const ja = window.__lang === 'ja';
+                const timeString = new Date().toLocaleTimeString(ja ? 'ja-JP' : 'en-US', {
                     hour: '2-digit',
                     minute: '2-digit',
-                    timeZoneName: 'short'
-                });
+                    timeZone: 'Asia/Tokyo'
+                }) + ' JST';
                 const timeElement = document.getElementById('time');
                 if (timeElement) {
                     timeElement.textContent = timeString;
@@ -5443,6 +5444,7 @@
                 }
             }
             setInterval(updateClock, 1000);
+            window.addEventListener('portfolio:languagechange', updateClock);
             updateClock();
         });
     </script>
@@ -6100,7 +6102,7 @@
                     bioP2: "Today that means building real-time 3D in <strong>Unreal Engine</strong>, automating pipelines with <strong>Python</strong>, and modelling assets in <strong>Blender</strong> — engineering the tools that move mobility and robotics forward.",
                     bioP3: "Ready to grow together and set new standards in the industry.",
                     footWork: "Let's work", footTogether: "together",
-                    footVersion: "Version", footLocalTime: "Local Time", footSocials: "Socials",
+                    footVersion: "Version", footLocalTime: "Tokyo Time", footSocials: "Socials",
                     footFollow: "Follow me",
                     conEyebrow: "Let's connect",
                     conHeadline: "Let's create<br>something great",
@@ -6270,7 +6272,7 @@
                     bioP2: "具体的には、<strong>Unreal Engine</strong> でのリアルタイム3D開発、<strong>Python</strong> によるパイプラインの自動化、<strong>Blender</strong> でのアセット制作を通じて、モビリティとロボティクスを前進させるツールをつくっています。",
                     bioP3: "共に成長し、業界に新たな基準を打ち立てていきます。",
                     footWork: "一緒に", footTogether: "つくろう。",
-                    footVersion: "バージョン", footLocalTime: "現地時間", footSocials: "SNS",
+                    footVersion: "バージョン", footLocalTime: "東京時間", footSocials: "SNS",
                     footFollow: "フォロー",
                     conEyebrow: "つながりましょう",
                     conHeadline: "一緒に<br>素晴らしいものを",
