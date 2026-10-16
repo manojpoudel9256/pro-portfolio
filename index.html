@@ -5146,7 +5146,7 @@
                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('budget')}"
                     aria-label="Open Personal Finance App details">
                     <div class="pw-cover">
-                        <img src="assets/images/projects/personal-finance-app.webp" srcset="assets/images/projects/personal-finance-app-450.webp 450w, assets/images/projects/personal-finance-app.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Personal Finance App" width="900" height="1599"
+                        <img src="assets/images/projects/personal-finance-app.webp" srcset="assets/images/projects/personal-finance-app-300.webp 300w, assets/images/projects/personal-finance-app-450.webp 450w, assets/images/projects/personal-finance-app.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Personal Finance App" width="900" height="1599"
                             loading="lazy">
                     </div>
                     <div class="pw-body">
@@ -5170,7 +5170,7 @@
                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('salary')}"
                     aria-label="Open Salary Tracker App details">
                     <div class="pw-cover">
-                        <img src="assets/images/projects/salary-tracker.webp" srcset="assets/images/projects/salary-tracker-450.webp 450w, assets/images/projects/salary-tracker.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Salary Tracker App" width="900" height="1599"
+                        <img src="assets/images/projects/salary-tracker.webp" srcset="assets/images/projects/salary-tracker-300.webp 300w, assets/images/projects/salary-tracker-450.webp 450w, assets/images/projects/salary-tracker.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Salary Tracker App" width="900" height="1599"
                             loading="lazy">
                     </div>
                     <div class="pw-body">
@@ -6358,9 +6358,36 @@
         </footer>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    <!-- Motion libraries (GSAP, ScrollTrigger, Lenis) only drive scroll effects, so they load
+         after the page has loaded and gone idle instead of competing with first paint.
+         window.__motion resolves once they are ready (and never if a CDN fails). -->
+    <script>
+        window.__motion = new Promise(function (resolve) {
+            function load(src) {
+                return new Promise(function (ok, fail) {
+                    var el = document.createElement('script');
+                    el.src = src; el.onload = ok; el.onerror = fail;
+                    document.head.appendChild(el);
+                });
+            }
+            function start() {
+                load('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js')
+                    .then(function () {
+                        return Promise.all([
+                            load('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js'),
+                            load('https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js')
+                        ]);
+                    })
+                    .then(resolve, function () { /* motion is optional */ });
+            }
+            function idle() {
+                if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 });
+                else setTimeout(start, 200);
+            }
+            if (document.readyState === 'complete') idle();
+            else window.addEventListener('load', idle, { once: true });
+        });
+    </script>
 
     <script src="mobile-menu.js"></script>
 
@@ -6396,7 +6423,8 @@
             if (!portrait || !hero) return;
             const fine = window.matchMedia('(pointer: fine)').matches;
             const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (!fine || reduce || typeof gsap === 'undefined') return;
+            if (!fine || reduce) return;
+            window.__motion.then(() => {
             hero.addEventListener('mousemove', (e) => {
                 const r = hero.getBoundingClientRect();
                 const x = (e.clientX - r.left - r.width / 2) / r.width;
@@ -6405,6 +6433,7 @@
             });
             hero.addEventListener('mouseleave', () => {
                 gsap.to(portrait, { x: 0, y: 0, duration: 1, ease: 'power3.out' });
+            });
             });
         })();
     </script>
@@ -6436,50 +6465,53 @@
     </script>
 
     <script>
-        // Initialize Lenis Smooth Scroll
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true
-        });
-        window.lenis = lenis;
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-
-        requestAnimationFrame(raf);
-
-        // Register ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Integrate Lenis with ScrollTrigger
-        lenis.on('scroll', ScrollTrigger.update);
-
-        // MAGNETIC BUTTONS
-        const magneticButtons = document.querySelectorAll('.magnetic-wrap');
-
-        magneticButtons.forEach(btn => {
-            btn.addEventListener('mousemove', function (e) {
-                const position = btn.getBoundingClientRect();
-                const x = e.clientX - position.left - position.width / 2;
-                const y = e.clientY - position.top - position.height / 2;
-
-                gsap.to(btn, {
-                    x: x * 0.3,
-                    y: y * 0.3,
-                    ease: "power2.out",
-                    duration: 0.6
-                });
+        // Smooth scroll, ScrollTrigger and magnetic buttons start once the motion libraries arrive.
+        window.__motion.then(function () {
+            // Initialize Lenis Smooth Scroll
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smoothWheel: true
             });
+            window.lenis = lenis;
 
-            btn.addEventListener('mouseleave', function (e) {
-                gsap.to(btn, {
-                    x: 0,
-                    y: 0,
-                    ease: "elastic.out(1, 0.3)",
-                    duration: 0.8
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+
+            // Register ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Integrate Lenis with ScrollTrigger
+            lenis.on('scroll', ScrollTrigger.update);
+
+            // MAGNETIC BUTTONS
+            const magneticButtons = document.querySelectorAll('.magnetic-wrap');
+
+            magneticButtons.forEach(btn => {
+                btn.addEventListener('mousemove', function (e) {
+                    const position = btn.getBoundingClientRect();
+                    const x = e.clientX - position.left - position.width / 2;
+                    const y = e.clientY - position.top - position.height / 2;
+
+                    gsap.to(btn, {
+                        x: x * 0.3,
+                        y: y * 0.3,
+                        ease: "power2.out",
+                        duration: 0.6
+                    });
+                });
+
+                btn.addEventListener('mouseleave', function (e) {
+                    gsap.to(btn, {
+                        x: 0,
+                        y: 0,
+                        ease: "elastic.out(1, 0.3)",
+                        duration: 0.8
+                    });
                 });
             });
         });
@@ -6494,7 +6526,11 @@
                     e.preventDefault();
                     const offset = ['certifications', 'future-goals', 'blender-work'].includes(target.id)
                         ? -document.querySelector('.top-nav').getBoundingClientRect().height - 16 : 0;
-                    lenis.scrollTo(target, { offset, duration: 1.2, immediate: prefersReducedMotion });
+                    if (window.lenis) {
+                        window.lenis.scrollTo(target, { offset, duration: 1.2, immediate: prefersReducedMotion });
+                    } else {
+                        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY + offset, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+                    }
                 }
             });
         });
@@ -6538,52 +6574,54 @@
             }));
         })();
 
-        // SELECTED WORK — scroll reveal (skip under reduced motion)
-        if (!prefersReducedMotion) {
-            gsap.utils.toArray(".pw-card").forEach((card) => {
-                gsap.from(card, {
-                    y: 60,
-                    opacity: 0,
-                    duration: 0.9,
-                    ease: "power3.out",
-                    scrollTrigger: { trigger: card, start: "top 85%" }
+        window.__motion.then(function () {
+            // SELECTED WORK — scroll reveal (skip under reduced motion)
+            if (!prefersReducedMotion) {
+                gsap.utils.toArray(".pw-card").forEach((card) => {
+                    gsap.from(card, {
+                        y: 60,
+                        opacity: 0,
+                        duration: 0.9,
+                        ease: "power3.out",
+                        scrollTrigger: { trigger: card, start: "top 85%" }
+                    });
                 });
-            });
 
-            // EDUCATION — cards slide in from opposite sides
-            gsap.utils.toArray(".edu-card").forEach((card, i) => {
-                gsap.from(card, {
-                    x: i % 2 === 0 ? -90 : 90,
-                    opacity: 0,
-                    duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: { trigger: card, start: "top 85%" }
+                // EDUCATION — cards slide in from opposite sides
+                gsap.utils.toArray(".edu-card").forEach((card, i) => {
+                    gsap.from(card, {
+                        x: i % 2 === 0 ? -90 : 90,
+                        opacity: 0,
+                        duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: { trigger: card, start: "top 85%" }
+                    });
                 });
-            });
 
-            // EXPERIENCE — card fades up, milestones stagger in
-            gsap.utils.toArray(".xp-item").forEach((card) => {
-                gsap.from(card, {
-                    y: 40, opacity: 0, duration: 0.9, ease: "power3.out",
-                    scrollTrigger: { trigger: card, start: "top 85%" }
+                // EXPERIENCE — card fades up, milestones stagger in
+                gsap.utils.toArray(".xp-item").forEach((card) => {
+                    gsap.from(card, {
+                        y: 40, opacity: 0, duration: 0.9, ease: "power3.out",
+                        scrollTrigger: { trigger: card, start: "top 85%" }
+                    });
+                    gsap.from(card.querySelectorAll(".xp-phases li"), {
+                        y: 18, opacity: 0, duration: 0.55, stagger: 0.1, ease: "power2.out",
+                        scrollTrigger: { trigger: card.querySelector(".xp-phases"), start: "top 88%" }
+                    });
                 });
-                gsap.from(card.querySelectorAll(".xp-phases li"), {
-                    y: 18, opacity: 0, duration: 0.55, stagger: 0.1, ease: "power2.out",
-                    scrollTrigger: { trigger: card.querySelector(".xp-phases"), start: "top 88%" }
-                });
-            });
-        }
-
-        // FOOTER ANIMATION
-        gsap.from(".footer-container", {
-            y: 100,
-            opacity: 0,
-            scrollTrigger: {
-                trigger: ".footer",
-                start: "top 80%",
-                end: "top 50%",
-                scrub: true
             }
+
+            // FOOTER ANIMATION
+            gsap.from(".footer-container", {
+                y: 100,
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: ".footer",
+                    start: "top 80%",
+                    end: "top 50%",
+                    scrub: true
+                }
+            });
         });
 
 
