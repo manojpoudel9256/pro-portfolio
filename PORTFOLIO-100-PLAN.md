@@ -83,13 +83,13 @@ That breaks the single-accent system that replaced orange in August.
 JLPT/TOEIC credential cards as an intentional "certificate gold".
 **Fix:** Point the scoped colours at `var(--accent)` (light + dark), screenshot each section.
 
-### Step 5 — Employer line 🟨 (default used: description; swap in real name if allowed)
+### Step 5 — Employer line ✅ (default used: description; swap in real name if allowed)
 **Problem:** "Japanese Engineering Company · Tokyo" reads like the employer is hidden on purpose.
 **Decision:** Can the company be named? If not, use a descriptive line, e.g.
 "Industrial automation & DX company · Tokyo".
 **Fix:** Update the Experience card (EN + 日本語).
 
-### Step 6 — Contact privacy ❓
+### Step 6 — Contact privacy 🟨 (decision: a — keep email, form, LINE, LinkedIn, GitHub)
 **Problem:** Phone number, WhatsApp, LINE, and Telegram are all public, which invites
 spam and scraping.
 **Decision:** Keep which channels? Recommended: email + contact form + LinkedIn + GitHub.
@@ -188,4 +188,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | 3 | ✅ | d567b64 | og-cover.jpg 1200×630, absolute OG/Twitter tags, canonical, JSON-LD Person, robots.txt + sitemap.xml |
 | 4 | ✅ | 3845c41 | Contact copy, topics, placeholder rewritten for employers (EN + 日本語); aria-pressed on topic pills |
 | 4b | ✅ | e88a987 | v1 muted antique gold rejected ("not golden enough"); v2: saturated gold text #8f6b0a, metallic gradient fills, black-and-gold dark mode |
-| 5 | 🟨 in review | (this commit) | "Industrial Software & DX Company · Tokyo" / 産業向けソフトウェア・DX企業 · 東京 |
+| 5 | ✅ | 9d35b3c | "Industrial Software & DX Company · Tokyo" / 産業向けソフトウェア・DX企業 · 東京 |
+| 6 | 🟨 in review | (this commit) | Phone, WhatsApp, Telegram removed; LinkedIn card + GitHub icon added; LINE kept |
