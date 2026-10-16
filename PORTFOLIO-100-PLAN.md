@@ -140,12 +140,12 @@ Update the triangle/size numbers in `models.json`. Add a small "Optimised with G
 
 ## Phase D — Performance, UX, and accessibility
 
-### Step 11 — Preloader: fast and respectful 🟨
+### Step 11 — Preloader: fast and respectful ✅
 **Fix:** Show the "hello" intro only on the first visit per session (sessionStorage),
 cap it at about 1.2 s, skip it entirely for `prefers-reduced-motion`, and keep "Skip intro".
 **Verify:** Reloading the page shows content immediately.
 
-### Step 12 — Performance pass ⬜
+### Step 12 — Performance pass 🟨
 **Fix:**
 - Merge the two Google Fonts requests (Archivo Black + Playfair Display) into one, or self-host them
 - `defer` GSAP / ScrollTrigger / Lenis; check that nothing blocks the first render
@@ -198,4 +198,7 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | 8 | ✅ | 348d3c7 | 3 cards + their GLBs/previews/metadata removed (−3.6 MB GLB); tests updated to 2 cards |
 | 9 | ⏭️ skipped | — | Truck GLB left at 7.7 MB by choice |
 | 10 | ✅ | fea6f1a | Problem / What I did / Result in all 5 modals (EN + 日本語), facts supplied by Manoj |
-| 11 | 🟨 in review | (this commit) | Intro once per session, skipped on deep links; ~3.4 s → ~1.7 s; reload 0.24 s |
+| 11 | ✅ | ddf7964 | Intro once per session, skipped on deep links; ~3.4 s → ~1.7 s; reload 0.24 s |
+| 12 | 🟨 in review | d7f8f89, 20a2ab0, 6030486, 179e3d1 | Mobile Lighthouse 68 → 86 median (81–93), desktop 99. Self-hosted fonts, srcset images, vercel.json caching, inlined critical CSS + intro, async below-fold CSS, motion libs after idle, no LCP fade. Weight 1.35 MB → ~0.9 MB |
+
+> Measuring note: ESET antivirus on Manoj's work PC intercepts browser HTTPS ("ESET SSL Filter CA") and strips compression, so Lighthouse in Edge is skewed. Use chrome-headless-shell (not intercepted) against the live URL.
