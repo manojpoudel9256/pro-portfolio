@@ -73,6 +73,9 @@ export async function createModelViewer(container, model, options = {}) {
   let sceneReady = false;
   let width = 0;
   let height = 0;
+  let mixer = null;
+  let action = null;
+  let playing = false;
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'default' });
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
@@ -120,9 +123,11 @@ export async function createModelViewer(container, model, options = {}) {
     const delta = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 1 / 60;
     lastTime = time;
     controls.update(delta);
+    if (mixer && playing) mixer.update(delta);
     if (floor) floor.visible = camera.position.y >= floor.position.y;
     renderer.render(scene, camera);
-    if (controls.autoRotate) invalidate();
+    // Render continuously only while something moves; otherwise stay idle.
+    if (controls.autoRotate || playing) invalidate();
   }
   function fitDistance() {
     const halfVertical = THREE.MathUtils.degToRad(camera.fov / 2);
@@ -188,6 +193,29 @@ export async function createModelViewer(container, model, options = {}) {
     invalidate();
     return controls.autoRotate;
   }
+  /** Play a glTF clip by name (loops). Switching clips cross-fades; same clip resumes. */
+  function playAnimation(name) {
+    if (disposed || !mixer) return false;
+    const clip = gltf.animations.find(c => c.name === name) || gltf.animations[0];
+    if (!clip) return false;
+    if (action && action.getClip() === clip) {
+      action.paused = false;
+    } else {
+      const previous = action;
+      action = mixer.clipAction(clip);
+      action.reset().setLoop(THREE.LoopRepeat, Infinity).play();
+      if (previous) action.crossFadeFrom(previous, 0.35, false);
+    }
+    playing = true;
+    lastTime = 0;
+    invalidate();
+    return true;
+  }
+  function pauseAnimation() {
+    if (action) action.paused = true;
+    playing = false;
+    invalidate();
+  }
   function motionChange() {
     controls.enableDamping = !reducedMotion.matches;
     setAutoRotate(autoRotateRequested);
@@ -240,6 +268,8 @@ export async function createModelViewer(container, model, options = {}) {
     canvas.removeEventListener('webglcontextlost', onContextLost);
     controls.removeEventListener('change', invalidate);
     controls.dispose();
+    mixer?.stopAllAction();
+    if (mixer && gltf) mixer.uncacheRoot(gltf.scene);
     disposeObjects(gltf ? gltf.scenes : []);
     if (floor) disposeObjects([floor]);
     environmentTarget?.dispose();
@@ -289,6 +319,7 @@ export async function createModelViewer(container, model, options = {}) {
       if (object.isMesh) { object.castShadow = true; object.receiveShadow = true; }
     });
     scene.add(gltf.scene);
+    if (gltf.animations.length) mixer = new THREE.AnimationMixer(gltf.scene);
 
     const room = new RoomEnvironment();
     const pmrem = new THREE.PMREMGenerator(renderer);
@@ -318,6 +349,9 @@ export async function createModelViewer(container, model, options = {}) {
     onProgress?.(1);
     return {
       reset, setWireframe, setAutoRotate, setEnvironment, resize, dispose,
+      playAnimation, pauseAnimation,
+      getAnimations: () => (gltf ? gltf.animations.map(c => ({ name: c.name, duration: c.duration })) : []),
+      isPlaying: () => playing,
       getStats: () => ({ ...model.stats, renderer: { ...renderer.info.render }, radius }),
       // Useful for pixel-based QA without enabling continuous rendering.
       render: () => { if (!disposed) renderer.render(scene, camera); },

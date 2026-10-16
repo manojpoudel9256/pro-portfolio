@@ -15,6 +15,7 @@
             help: 'Drag to orbit · Scroll or pinch to zoom · Right-drag or two-finger drag to pan. Keyboard: arrows to orbit, + / − to zoom, Home to reset.',
             triangles: 'Triangles', vertices: 'Exported vertices', meshes: 'Meshes', materials: 'Materials', textures: 'Textures', size: 'GLB file size', dimensions: 'Dimensions (X × Y × Z)',
             statNote: 'GLB geometry is triangulated; original Blender quad counts are not retained. Counts include mesh instances. Dimensions use the exported scene’s meter units.',
+            play: 'Play animation', pause: 'Pause animation', clips: 'Animation clips', animated: 'Animated', animations: 'animations',
             loading: 'Preparing your model…', downloading: 'Loading model', failed: 'The 3D viewer could not load. Please try again, or use a browser with WebGL support.', retry: 'Try again', canvas: 'Interactive 3D model. Drag to rotate, or use arrow keys. Plus and minus zoom; Home resets the view.'
         },
         ja: {
@@ -25,6 +26,7 @@
             help: 'ドラッグで回転・スクロール／ピンチで拡大縮小・右ドラッグ／2本指で移動。キーボード：矢印キーで回転、＋／−で拡大縮小、Homeでリセット。',
             triangles: '三角形ポリゴン', vertices: '出力された頂点', meshes: 'メッシュ', materials: 'マテリアル', textures: 'テクスチャ', size: 'GLBファイルサイズ', dimensions: '寸法（X × Y × Z）',
             statNote: 'GLBの形状は三角形に変換されるため、Blenderでの四角形ポリゴン数とは異なります。数値はメッシュの配置数を含み、寸法は出力シーンのメートル単位です。',
+            play: 'アニメーション再生', pause: '一時停止', clips: 'アニメーション', animated: 'アニメーション付き', animations: '種類のアニメーション',
             loading: 'モデルを準備しています…', downloading: 'モデルを読み込み中', failed: '3Dビューアを読み込めませんでした。再試行するか、WebGL対応のブラウザをご利用ください。', retry: '再試行', canvas: '操作できる3Dモデル。ドラッグまたは矢印キーで回転、＋と−で拡大縮小、Homeで視点をリセットします。'
         }
     };
@@ -58,7 +60,17 @@
             card.querySelector('.bw-cover img').alt = data.title[lang()] + (lang() === 'ja' ? 'のAIスタジオプレビュー' : ' — AI studio preview');
             card.querySelectorAll('[data-inspect-model]').forEach(button => button.setAttribute('aria-label', text('inspect') + ': ' + data.title[lang()]));
             card.querySelector('[data-bw-triangles]').textContent = number(data.stats.triangles) + (lang() === 'ja' ? ' 三角形' : ' triangles');
+            const sizeEl = card.querySelector('[data-bw-size]');
+            if (sizeEl) sizeEl.textContent = size(data.fileSizeBytes);
+            const animEl = card.querySelector('[data-bw-anim]');
+            const clipCount = (data.animations || []).length;
+            if (animEl) {
+                animEl.hidden = !clipCount;
+                animEl.textContent = clipCount > 1 ? (lang() === 'ja' ? clipCount + text('animations') : clipCount + ' ' + text('animations')) : text('animated');
+            }
         });
+        dialog.querySelectorAll('[data-bw-aria]').forEach(el => el.setAttribute('aria-label', text(el.dataset.bwAria)));
+        renderAnimationUI();
         if (model) {
             $('biTitle').textContent = model.title[lang()];
             $('biDescription').textContent = model.description[lang()];
@@ -93,6 +105,38 @@
             viewer?.setAutoRotate(false);
         }
     }
+    // ── Animation playback (models with glTF clips only) ──
+    let clipName = null;
+    function renderAnimationUI() {
+        const clips = (model && viewer && model.animations || []).filter(a => viewer.getAnimations().some(c => c.name === a.clip));
+        $('biAnim').hidden = !clips.length;
+        if (!clips.length) return;
+        clipName ||= clips[0].clip;
+        const wrap = $('biClips');
+        wrap.hidden = clips.length < 2;
+        wrap.replaceChildren(...clips.map(a => {
+            const b = document.createElement('button');
+            b.type = 'button'; b.className = 'bi-control bi-clip'; b.dataset.clip = a.clip;
+            b.textContent = a.label[lang()] || a.clip;
+            b.setAttribute('aria-pressed', String(a.clip === clipName));
+            return b;
+        }));
+        const on = viewer.isPlaying();
+        $('biPlay').setAttribute('aria-pressed', String(on));
+        $('biPlayLabel').textContent = text(on ? 'pause' : 'play');
+    }
+    $('biPlay').addEventListener('click', () => {
+        if (!viewer) return;
+        if (viewer.isPlaying()) viewer.pauseAnimation(); else viewer.playAnimation(clipName);
+        renderAnimationUI();
+    });
+    $('biClips').addEventListener('click', event => {
+        const b = event.target.closest('[data-clip]');
+        if (!b || !viewer) return;
+        clipName = b.dataset.clip;
+        viewer.playAnimation(clipName);
+        renderAnimationUI();
+    });
     async function load(id) {
         const token = ++request;
         controller?.abort(); viewer?.dispose(); viewer = null;
@@ -103,6 +147,8 @@
         $('biWireframe').setAttribute('aria-pressed', 'false');
         $('biRotate').setAttribute('aria-pressed', 'false');
         $('biEnvironment').value = 'studio';
+        clipName = null;
+        $('biAnim').hidden = true;
         state('loading');
         try {
             const data = await loadMetadata();

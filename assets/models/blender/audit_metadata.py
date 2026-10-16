@@ -10,20 +10,34 @@ from pathlib import Path
 import struct
 
 ROOT = Path(__file__).resolve().parent
+# "file" is the GLB beside this script; "animations" lists the clips the inspector
+# offers (clip = glTF animation name), in display order. The first is the default.
 MODELS = {
     "delivery-truck": {
+        "file": "delivery-truck-animated.glb",
         "title": {"en": "Delivery Truck", "ja": "配送トラック"},
         "description": {
-            "en": "A box-body delivery truck with closed rear doors, detailed wheels, and textured bodywork for logistics scenes.",
-            "ja": "閉じた荷室のリアドア、細部まで作り込んだ車輪、質感のある車体を備えた、物流シーン向けの配送トラック。",
+            "en": "A rigged box-body delivery truck for logistics scenes, with rolling wheels, a driving motion, and opening rear and cab doors.",
+            "ja": "物流シーン向けにリグを組んだ箱型の配送トラック。タイヤの回転、走行モーション、荷台と運転席のドアの開閉アニメーション付き。",
         },
+        "animations": [
+            {"clip": "All_Animations", "label": {"en": "Full sequence", "ja": "全シーケンス"}},
+            {"clip": "Drive_Forward_Back", "label": {"en": "Drive", "ja": "走行"}},
+            {"clip": "Tires_Rotate", "label": {"en": "Wheels", "ja": "タイヤ回転"}},
+            {"clip": "Rear_Doors_Open_Close", "label": {"en": "Rear doors", "ja": "荷台ドア"}},
+            {"clip": "Cab_Doors_Open_Close", "label": {"en": "Cab doors", "ja": "運転席ドア"}},
+        ],
     },
     "industrial-robot-arm": {
+        "file": "industrial-robot-arm-animated.glb",
         "title": {"en": "Industrial Robot Arm", "ja": "産業用ロボットアーム"},
         "description": {
-            "en": "A posed industrial robot arm with distinct joints and material finishes for factory and automation scenes.",
-            "ja": "関節や素材の質感を作り分けた産業用ロボットアーム。工場や自動化設備のシーンを想定したモデル。",
+            "en": "A rigged six-axis industrial robot arm with a pick-and-place cycle: the joints and gripper move a part across its work table.",
+            "ja": "リグを組んだ6軸の産業用ロボットアーム。関節とグリッパーが作業台の部品をつかんで移動させる、ピック＆プレースの動作付き。",
         },
+        "animations": [
+            {"clip": "Pick_And_Place", "label": {"en": "Pick & place", "ja": "ピック＆プレース"}},
+        ],
     },
 }
 COMPONENTS = {5120: ("b", 1), 5121: ("B", 1), 5122: ("h", 2),
@@ -102,11 +116,14 @@ def primitive_counts(document, primitive):
 
 
 def analyze(slug, text):
-    path = ROOT / (slug + ".glb")
+    text = dict(text)
+    file_name = text.pop("file", slug + ".glb")
+    path = ROOT / file_name
     data, document, binary = read_glb(path)
     assert all("uri" not in b for b in document.get("buffers", [])), "External buffer"
     assert all("bufferView" in i for i in document.get("images", [])), "External image"
-    assert not document.get("skins"), "Skinned bounds need animation evaluation"
+    # Skinned meshes are measured in their bind pose. These exports are rigid
+    # (one bone per part) and saved at rest, so bind pose == rest pose.
     assert not any(p.get("targets") for m in document["meshes"] for p in m["primitives"])
     scenes = document.get("scenes", [])
     scene_index = document.get("scene", 0)
@@ -150,7 +167,7 @@ def analyze(slug, text):
             info["width"], info["height"] = struct.unpack_from(">II", image_bytes, 16)
         image_info.append(info)
     return {
-        "id": slug, **text, "src": f"assets/models/blender/{slug}.glb",
+        "id": slug, **text, "src": f"assets/models/blender/{file_name}",
         "fileSizeBytes": len(data), "format": "glTF 2.0 binary",
         "sha256": hashlib.sha256(data).hexdigest(),
         "stats": {
@@ -162,6 +179,7 @@ def analyze(slug, text):
             "textures": len(document.get("textures", [])),
             "images": len(document.get("images", [])), "nodes": len(scene_nodes),
             "animations": len(document.get("animations", [])),
+            "skins": len(document.get("skins", [])),
         },
         "dimensions": {**{axis: round(bounds_max[i] - bounds_min[i], 6)
                            for i, axis in enumerate(("x", "y", "z"))}, "unit": "m"},

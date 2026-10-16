@@ -5082,7 +5082,7 @@
                             <p class="bw-kind">BLENDER / GLB</p>
                             <h3 class="bw-name">Delivery Truck</h3>
                             <p class="bw-desc">A box-body delivery truck with closed rear doors, detailed wheels, and textured bodywork for logistics scenes.</p>
-                            <div class="bw-facts"><span data-bw-triangles>7,876 triangles</span><span>7.72 MB</span></div>
+                            <div class="bw-facts"><span data-bw-triangles>7,871 triangles</span><span data-bw-size>8.02 MB</span><span class="bw-anim-note" data-bw-anim>5 animations</span></div>
                             <button class="bw-inspect" type="button" data-inspect-model="delivery-truck" aria-haspopup="dialog"><span data-bw-text="inspect">Inspect model</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
                         </div>
                     </article>
@@ -5095,7 +5095,7 @@
                             <p class="bw-kind">BLENDER / GLB</p>
                             <h3 class="bw-name">Industrial Robot Arm</h3>
                             <p class="bw-desc">A posed industrial robot arm with distinct joints and material finishes for factory and automation scenes.</p>
-                            <div class="bw-facts"><span data-bw-triangles>3,306 triangles</span><span>151.7 KB</span></div>
+                            <div class="bw-facts"><span data-bw-triangles>3,502 triangles</span><span data-bw-size>373.6 KB</span><span class="bw-anim-note" data-bw-anim>Animated</span></div>
                             <button class="bw-inspect" type="button" data-inspect-model="industrial-robot-arm" aria-haspopup="dialog"><span data-bw-text="inspect">Inspect model</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
                         </div>
                     </article>
@@ -7111,6 +7111,14 @@
                 <div class="bi-stage">
                     <div class="bi-viewport" id="biViewport" aria-busy="true"></div>
                     <div class="bi-status" id="biStatus" role="status" aria-live="polite"><p id="biStatusText">Preparing your model…</p><progress class="bi-progress" id="biProgress" max="1" aria-label="Model loading"></progress><button class="bi-control" id="biRetry" type="button" data-bw-text="retry" hidden>Try again</button></div>
+                </div>
+                <div class="bi-anim" id="biAnim" hidden>
+                    <button class="bi-control bi-play" id="biPlay" type="button" aria-pressed="false">
+                        <svg class="bi-ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+                        <svg class="bi-ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3v13h-3zM13.5 5.5h3v13h-3z"/></svg>
+                        <span id="biPlayLabel" data-bw-text="play">Play animation</span>
+                    </button>
+                    <div class="bi-clips" id="biClips" role="group" aria-label="Animation" data-bw-aria="clips"></div>
                 </div>
                 <div class="bi-controls">
                     <button class="bi-control" id="biReset" type="button" data-bw-text="reset" disabled>Reset view</button>

@@ -6,24 +6,62 @@
       "ja": "配送トラック"
     },
     "description": {
-      "en": "A box-body delivery truck with closed rear doors, detailed wheels, and textured bodywork for logistics scenes.",
-      "ja": "閉じた荷室のリアドア、細部まで作り込んだ車輪、質感のある車体を備えた、物流シーン向けの配送トラック。"
+      "en": "A rigged box-body delivery truck for logistics scenes, with rolling wheels, a driving motion, and opening rear and cab doors.",
+      "ja": "物流シーン向けにリグを組んだ箱型の配送トラック。タイヤの回転、走行モーション、荷台と運転席のドアの開閉アニメーション付き。"
     },
-    "src": "assets/models/blender/delivery-truck.glb",
-    "fileSizeBytes": 7715084,
+    "animations": [
+      {
+        "clip": "All_Animations",
+        "label": {
+          "en": "Full sequence",
+          "ja": "全シーケンス"
+        }
+      },
+      {
+        "clip": "Drive_Forward_Back",
+        "label": {
+          "en": "Drive",
+          "ja": "走行"
+        }
+      },
+      {
+        "clip": "Tires_Rotate",
+        "label": {
+          "en": "Wheels",
+          "ja": "タイヤ回転"
+        }
+      },
+      {
+        "clip": "Rear_Doors_Open_Close",
+        "label": {
+          "en": "Rear doors",
+          "ja": "荷台ドア"
+        }
+      },
+      {
+        "clip": "Cab_Doors_Open_Close",
+        "label": {
+          "en": "Cab doors",
+          "ja": "運転席ドア"
+        }
+      }
+    ],
+    "src": "assets/models/blender/delivery-truck-animated.glb",
+    "fileSizeBytes": 8023892,
     "format": "glTF 2.0 binary",
-    "sha256": "f5a3cf6235d451179a02dca54cd7c06d9a9cd118c06fa8037f5c7c3eb0f73b44",
+    "sha256": "a09f89796923eaa515fb6780741c613689409c893eaceeabe955f6d2640747df",
     "stats": {
-      "triangles": 7876,
-      "vertices": 10860,
-      "meshes": 48,
-      "meshInstances": 48,
-      "primitives": 110,
-      "materials": 32,
+      "triangles": 7871,
+      "vertices": 10676,
+      "meshes": 51,
+      "meshInstances": 51,
+      "primitives": 124,
+      "materials": 34,
       "textures": 45,
       "images": 45,
-      "nodes": 48,
-      "animations": 0
+      "nodes": 67,
+      "animations": 5,
+      "skins": 1
     },
     "dimensions": {
       "x": 6.442,
@@ -44,9 +82,9 @@
       ]
     },
     "geometryStats": {
-      "uniqueMeshTriangles": 7876,
-      "uniqueMeshVertices": 10860,
-      "uniquePositionAccessorVertices": 10860
+      "uniqueMeshTriangles": 7871,
+      "uniqueMeshVertices": 10676,
+      "uniquePositionAccessorVertices": 10676
     },
     "defaultScene": 0,
     "embeddedResourcesOnly": true,
@@ -334,47 +372,57 @@
       "ja": "産業用ロボットアーム"
     },
     "description": {
-      "en": "A posed industrial robot arm with distinct joints and material finishes for factory and automation scenes.",
-      "ja": "関節や素材の質感を作り分けた産業用ロボットアーム。工場や自動化設備のシーンを想定したモデル。"
+      "en": "A rigged six-axis industrial robot arm with a pick-and-place cycle: the joints and gripper move a part across its work table.",
+      "ja": "リグを組んだ6軸の産業用ロボットアーム。関節とグリッパーが作業台の部品をつかんで移動させる、ピック＆プレースの動作付き。"
     },
-    "src": "assets/models/blender/industrial-robot-arm.glb",
-    "fileSizeBytes": 151696,
+    "animations": [
+      {
+        "clip": "Pick_And_Place",
+        "label": {
+          "en": "Pick & place",
+          "ja": "ピック＆プレース"
+        }
+      }
+    ],
+    "src": "assets/models/blender/industrial-robot-arm-animated.glb",
+    "fileSizeBytes": 373628,
     "format": "glTF 2.0 binary",
-    "sha256": "99b2e5802eeaab7500009a8991c3aa00a57eb46084fbd4b6a44bb0065cd1b125",
+    "sha256": "f0d621751c04eae4f878d5497b5d109a45a241f2175238a533e24b182d050903",
     "stats": {
-      "triangles": 3306,
-      "vertices": 3820,
-      "meshes": 1,
-      "meshInstances": 1,
-      "primitives": 8,
-      "materials": 8,
+      "triangles": 3502,
+      "vertices": 4226,
+      "meshes": 18,
+      "meshInstances": 18,
+      "primitives": 32,
+      "materials": 12,
       "textures": 0,
       "images": 0,
-      "nodes": 1,
-      "animations": 0
+      "nodes": 29,
+      "animations": 2,
+      "skins": 1
     },
     "dimensions": {
-      "x": 0.603955,
-      "y": 0.817012,
-      "z": 0.3,
+      "x": 1.2,
+      "y": 1.569874,
+      "z": 0.8,
       "unit": "m"
     },
     "bounds": {
       "min": [
-        -0.185805,
+        -0.6,
         0.0,
-        -0.15
+        -0.4
       ],
       "max": [
-        0.41815,
-        0.817012,
-        0.15
+        0.6,
+        1.569874,
+        0.4
       ]
     },
     "geometryStats": {
-      "uniqueMeshTriangles": 3306,
-      "uniqueMeshVertices": 3820,
-      "uniquePositionAccessorVertices": 3820
+      "uniqueMeshTriangles": 3502,
+      "uniqueMeshVertices": 4226,
+      "uniquePositionAccessorVertices": 4226
     },
     "defaultScene": 0,
     "embeddedResourcesOnly": true,
