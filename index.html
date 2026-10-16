@@ -4379,19 +4379,22 @@
             .lc-bar-sub { font-size: 12px; line-height: 1.5; }
 
             .cert-verify { font-size: 14px; line-height: 1.6; }
-            .cert-list { gap: 14px; }
-            .cred-card { padding: 16px; gap: 14px; border-radius: 20px; }
-            .cred-aside { justify-content: space-between; flex-direction: row-reverse; }
-            .cred-logo { width: 48px; height: 48px; }
-            .cred-date { align-items: flex-end; }
-            .cred-title { font-size: var(--m-card-title); line-height: 1.3; }
-            .cred-issuer { font-size: 14px; line-height: 1.5; margin-top: 6px; }
-            .cred-desc { font-size: var(--m-body); line-height: 1.55; margin-top: 10px; }
-            .cred-meta { font-size: 11px; line-height: 1.6; padding-top: 12px; margin-top: 12px; }
-            .cred-id { display: none; }
-            .cred-actions { gap: 12px; flex-wrap: wrap; padding-top: 12px; }
-            .cred-btn { min-height: 44px; white-space: normal; text-align: center; }
-            .cred-verified { font-size: 12px; }
+            /* Certifications: compact 2 x 2 grid, so all four fit on one phone screen.
+               Description/skills stay on desktop; "View Credential" links the full proof. */
+            .cert-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+            .cred-card { display: flex; flex-direction: column; align-items: stretch; gap: 10px; padding: 12px; border-radius: 16px; }
+            .cred-aside { justify-content: space-between; flex-direction: row-reverse; align-items: center; gap: 8px; }
+            .cred-logo { width: 36px; height: 36px; }
+            .cred-date { align-items: flex-end; min-width: 0; }
+            .cred-mon { font-size: 10px; }
+            .cred-year { font-size: 14px; }
+            .cred-main { flex: 1; min-width: 0; }
+            .cred-title { font-size: 14px; line-height: 1.3; overflow-wrap: anywhere; }
+            .cred-issuer { font-size: 11.5px; line-height: 1.4; margin-top: 4px; }
+            .cred-desc, .cred-meta { display: none; }
+            .cred-actions { flex-direction: column; align-items: stretch; gap: 6px; margin-top: auto; padding-top: 10px; }
+            .cred-btn { min-height: 44px; padding: 8px 6px; gap: 4px; font-size: 12px; white-space: normal; text-align: center; justify-content: center; }
+            .cred-verified { justify-content: center; font-size: 11px; }
             .cert-foot { align-items: flex-start; font-size: 12px; line-height: 1.6; }
             .cert-foot svg { flex: none; margin-top: 3px; }
 
