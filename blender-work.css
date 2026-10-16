@@ -3,7 +3,6 @@
 .bw-inner { max-width: var(--maxw); padding-inline: var(--gutter); margin-inline: auto; }
 .bw-heading { max-width: 800px; margin-bottom: 36px; }
 .bw-eyebrow { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
-.bw-eyebrow img { width: 25px; height: 25px; }
 .bw-title { font-family: var(--font-display); font-size: var(--section-heading); line-height: 1.08; letter-spacing: var(--tracking-display); font-weight: 600; }
 .bw-intro { color: var(--ink-2); max-width: 60ch; font-size: 17px; line-height: 1.7; margin-top: 20px; }
 .bw-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
