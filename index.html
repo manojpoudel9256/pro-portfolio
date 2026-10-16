@@ -1362,6 +1362,15 @@
             color: #f0405f;
         }
 
+        /* In-page jumps (incl. direct #links) stop exactly under the fixed header. */
+        html {
+            scroll-padding-top: var(--nav-h, 72px);
+        }
+
+        :is(section[id], footer[id], #certifications) {
+            scroll-margin-top: 0;
+        }
+
         /* Keyboard focus: one consistent, visible ring (low specificity so
            component-specific focus styles still win). */
         :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
@@ -4086,8 +4095,6 @@
                 --subsection-heading: clamp(1.75rem, 7vw, 2rem);
             }
 
-            html { scroll-padding-top: 88px; }
-            :is(#home, #work, #unreal-projects, #about-me, #contact) { scroll-margin-top: 88px; }
             .top-nav { padding-inline: var(--gutter); }
             .hero { padding-top: 104px; padding-bottom: 32px; }
             .hero-bigtype { font-size: clamp(2.1rem, 14.4vw, 6.5rem); }
@@ -4487,8 +4494,8 @@
         <nav class="top-nav">
             <a class="logo" href="#home"><img class="mobile-brandmark" src="assets/logos/branding/manoj-poudel-monogram-96.webp" width="30" height="30" alt="" decoding="async"><span>Manoj Poudel</span></a>
             <div class="nav-pill">
-                <a href="#home" class="np-link" data-nav data-i18n="navHome">Home</a>
                 <a href="#work" class="np-link" data-nav data-i18n="navWork">Work</a>
+                <a href="#unreal-projects" class="np-link" data-nav data-i18n="navUnreal">Unreal</a>
                 <a href="#blender-work" class="np-link" data-nav data-i18n="navBlender">Blender</a>
                 <a href="#about-me" class="np-link" data-nav data-i18n="navAbout">About</a>
                 <a href="#certifications" class="np-link" data-nav data-i18n="navCertifications">Certifications</a>
@@ -5904,6 +5911,26 @@
         });
     </script>
 
+    <!-- One rule for every in-page jump (desktop nav, hero buttons, mobile menu, #links):
+         the section's top lands exactly at the fixed header's bottom edge. -->
+    <script>
+        (function () {
+            const nav = document.querySelector('.top-nav');
+            const headerBottom = () => nav ? Math.max(0, Math.round(nav.getBoundingClientRect().bottom)) : 0;
+            const syncVar = () => document.documentElement.style.setProperty('--nav-h', headerBottom() + 'px');
+            syncVar();
+            window.addEventListener('resize', syncVar, { passive: true });
+            if (nav && 'ResizeObserver' in window) new ResizeObserver(syncVar).observe(nav);
+            window.scrollToSection = function (target, opts) {
+                if (!target) return;
+                const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                const top = target.id === 'home' ? 0
+                    : Math.max(0, Math.round(target.getBoundingClientRect().top + window.scrollY - headerBottom()));
+                if (window.lenis && !reduced) window.lenis.scrollTo(top, { duration: (opts && opts.duration) || 1.1 });
+                else window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
+            };
+        })();
+    </script>
     <script src="mobile-menu.js"></script>
 
     <!-- THEME toggle (light / dark) -->
@@ -6012,13 +6039,8 @@
                 const target = document.getElementById(a.getAttribute('href').slice(1));
                 if (target) {
                     e.preventDefault();
-                    const offset = ['certifications', 'future-goals', 'blender-work'].includes(target.id)
-                        ? -document.querySelector('.top-nav').getBoundingClientRect().height - 16 : 0;
-                    if (window.lenis) {
-                        window.lenis.scrollTo(target, { offset, duration: 1.2, immediate: prefersReducedMotion });
-                    } else {
-                        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY + offset, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-                    }
+                    window.scrollToSection(target);
+                    if (location.hash !== '#' + target.id) history.pushState(null, '', '#' + target.id);
                 }
             });
         });
@@ -6499,7 +6521,7 @@
                     ueWarehouseAlt: "Warehouse simulation cover: an architectural cutaway with carton racks, conveyors and robotic equipment",
                     ueFull: "Full video on LinkedIn", ueError: "Preview unavailable.", ueOpen: "Open video directly",
                     navHome: "Home", navWork: "Work", navAbout: "About", navContact: "Contact",
-                    navCertifications: "Certifications", navGoals: "Goals", navBlender: "Blender", menuBlender: "Blender Work",
+                    navCertifications: "Certifications", navGoals: "Goals", navUnreal: "Unreal", navBlender: "Blender", menuBlender: "Blender Work",
                     navMenu: "Menu", skipLink: "Skip to content",
                     menuOpen: "Open menu", menuClose: "Close menu", menuRole: "Software Engineer",
                     menuExplore: "Explore the portfolio", menuWork: "Selected work", menuUnreal: "Unreal Engine",
@@ -6636,7 +6658,7 @@
                     ueWarehouseAlt: "倉庫シミュレーションのカバー：棚、コンベヤー、ロボット設備のある倉庫の立体図",
                     ueFull: "LinkedInでフル動画を見る", ueError: "プレビューを再生できません。", ueOpen: "動画を直接開く",
                     navHome: "ホーム", navWork: "実績", navAbout: "プロフィール", navContact: "お問い合わせ",
-                    navCertifications: "資格・認定", navGoals: "今後の目標", navBlender: "Blender", menuBlender: "Blender 制作",
+                    navCertifications: "資格・認定", navGoals: "今後の目標", navUnreal: "Unreal", navBlender: "Blender", menuBlender: "Blender 制作",
                     navMenu: "メニュー", skipLink: "本文へスキップ",
                     menuOpen: "メニューを開く", menuClose: "メニューを閉じる", menuRole: "ソフトウェアエンジニア",
                     menuExplore: "ポートフォリオ", menuWork: "制作実績", menuUnreal: "Unreal Engine",

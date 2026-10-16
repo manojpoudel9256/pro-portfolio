@@ -7,7 +7,6 @@
     const closeButton = panel && panel.querySelector('.menu-close');
     const main = document.getElementById('main');
     if (!panel || !backdrop || !trigger || !closeButton || !main) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const desktop = window.matchMedia('(min-width: 769px)');
     const links = Array.from(panel.querySelectorAll('.menu-link'));
     let saved = null;
@@ -91,9 +90,7 @@
             if (!target) return;
             event.preventDefault();
             closeMenu(false);
-            const offset = target.getBoundingClientRect().top + window.scrollY - 82;
-            if (window.lenis && !reduced.matches) window.lenis.scrollTo(target, { offset: -82, duration: .85 });
-            else window.scrollTo({ top: Math.max(0, offset), behavior: 'instant' });
+            window.scrollToSection(target, { duration: .85 });
             if (window.location.hash !== link.hash) window.history.pushState(null, '', link.hash);
             const previousTabindex = target.getAttribute('tabindex');
             target.setAttribute('tabindex', '-1');
