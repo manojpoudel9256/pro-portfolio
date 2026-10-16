@@ -64,7 +64,7 @@ should show the new image, title, and description.
 
 ## Phase B — Positioning and content (❓ decisions needed)
 
-### Step 4 — One audience, one call to action 🟨 (decision: a — employers/recruiters)
+### Step 4 — One audience, one call to action ✅ (decision: a — employers/recruiters)
 **Problem:** The hero says "robotics and simulation engineer". The contact form
 offers "New website / Front-end help", which reads like a freelancer's site.
 **Decision:** Who is the site for?
@@ -74,7 +74,7 @@ offers "New website / Front-end help", which reads like a freelancer's site.
 **Fix:** Rewrite the contact headline, topics (e.g. "Job opportunity · 3D / simulation
 project · Collaboration · Just saying hi"), and hero CTA wording to fit. Update EN + 日本語.
 
-### Step 4b — Accent colour consistency ❓ (found during Step 4)
+### Step 4b — Accent colour consistency 🟨 (decision: calm gold/cream theme; hero burgundy lettering stays)
 **Problem:** The site accent is burgundy (`#9f1239`), but some sections still use a
 scoped amber/orange palette: contact icons + "Send message" button (`rgb(184,90,8)`,
 `#e8881d`), the mobile "MP" logo, and the Language Credentials block (`--lc-a:#df851d`).
@@ -186,4 +186,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | 1 | ✅ | 304090a | Chips now mirror each modal's stack |
 | 2 | ✅ | 2c7d394 | Clock pinned to Asia/Tokyo; label "Tokyo Time / 東京時間" |
 | 3 | ✅ | d567b64 | og-cover.jpg 1200×630, absolute OG/Twitter tags, canonical, JSON-LD Person, robots.txt + sitemap.xml |
-| 4 | 🟨 in review | (this commit) | Contact copy, topics, placeholder rewritten for employers (EN + 日本語); aria-pressed on topic pills |
+| 4 | ✅ | 3845c41 | Contact copy, topics, placeholder rewritten for employers (EN + 日本語); aria-pressed on topic pills |
+| 4b | 🟨 in review | (this commit) | Orange → antique gold #86651c / dark #d9b968 on cream; monogram recoloured; hero untouched |

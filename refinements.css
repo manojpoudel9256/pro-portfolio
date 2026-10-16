@@ -17,34 +17,36 @@
 .footer,
 .proj-modal {
     --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-    --bg: #fcfaf7;
-    --surface: #faf7f2;
-    --elevated: #fffdfa;
-    --ink: #1b1916;
-    --ink-2: #58575b;
-    --ink-3: #70665c;
-    --accent: #b85a08;
+    /* Calm gold-on-cream theme (Oct 2026). Accent passes WCAG AA on every
+       cream surface and with white text; --accent-icon is decorative only. */
+    --bg: #fbf8f1;
+    --surface: #f7f2e7;
+    --elevated: #fffdf8;
+    --ink: #1d1a14;
+    --ink-2: #5a554b;
+    --ink-3: #6f6656;
+    --accent: #86651c;
     --accent-ink: #ffffff;
-    --accent-icon: #e8881d;
-    --accent-tint: #fdf5e9;
-    --hairline: rgba(193, 118, 43, 0.17);
-    --hairline-strong: rgba(193, 118, 43, 0.34);
-    --card-shadow: 0 12px 34px rgba(87, 59, 27, 0.045);
+    --accent-icon: #b8913a;
+    --accent-tint: #f7efdc;
+    --hairline: rgba(160, 125, 50, 0.18);
+    --hairline-strong: rgba(160, 125, 50, 0.34);
+    --card-shadow: 0 12px 34px rgba(80, 62, 22, 0.05);
 }
 
 html[data-theme="dark"] :is(.work, .unreal-work, .blender-work, .bi-dialog, .menu-overlay, .about-me-section, .future-goals, .footer, .proj-modal) {
-    --bg: #191714;
-    --surface: #201c18;
-    --elevated: #27221c;
-    --ink: #faf3e9;
-    --ink-2: #c8beb0;
-    --ink-3: #b7a895;
-    --accent: #efb05e;
-    --accent-ink: #24180b;
-    --accent-icon: #efb05e;
-    --accent-tint: #32271b;
-    --hairline: rgba(239, 176, 94, 0.16);
-    --hairline-strong: rgba(239, 176, 94, 0.32);
+    --bg: #17150f;
+    --surface: #1e1b14;
+    --elevated: #25211a;
+    --ink: #f6efe0;
+    --ink-2: #c9bfa9;
+    --ink-3: #b3a78f;
+    --accent: #d9b968;
+    --accent-ink: #1d1709;
+    --accent-icon: #d9b968;
+    --accent-tint: #2e2716;
+    --hairline: rgba(217, 185, 104, 0.16);
+    --hairline-strong: rgba(217, 185, 104, 0.32);
 }
 
 .work,
