@@ -17,36 +17,41 @@
 .footer,
 .proj-modal {
     --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-    /* Calm gold-on-cream theme (Oct 2026). Accent passes WCAG AA on every
-       cream surface and with white text; --accent-icon is decorative only. */
-    --bg: #fbf8f1;
-    --surface: #f7f2e7;
-    --elevated: #fffdf8;
-    --ink: #1d1a14;
-    --ink-2: #5a554b;
-    --ink-3: #6f6656;
-    --accent: #86651c;
-    --accent-ink: #ffffff;
-    --accent-icon: #b8913a;
-    --accent-tint: #f7efdc;
-    --hairline: rgba(160, 125, 50, 0.18);
-    --hairline-strong: rgba(160, 125, 50, 0.34);
-    --card-shadow: 0 12px 34px rgba(80, 62, 22, 0.05);
+    /* Golden theme (Oct 2026). --accent is a saturated gold that stays
+       readable as small text (AA on cream); bright metallic gold is used for
+       fills (--accent-fill, dark text on top) and decoration (--accent-icon). */
+    --bg: #fcf8ee;
+    --surface: #f8f1e0;
+    --elevated: #fffcf4;
+    --ink: #1f1a0e;
+    --ink-2: #5b5442;
+    --ink-3: #6e6550;
+    --accent: #8f6b0a;
+    --accent-ink: #2a1f05;
+    --accent-icon: #c9a227;
+    --accent-tint: #fbf0d2;
+    --accent-fill: linear-gradient(135deg, #f3d77e 0%, #d9b240 48%, #b8901f 100%);
+    --accent-glow: rgba(201, 162, 39, 0.35);
+    --hairline: rgba(201, 162, 39, 0.24);
+    --hairline-strong: rgba(201, 162, 39, 0.46);
+    --card-shadow: 0 12px 34px rgba(120, 90, 10, 0.06);
 }
 
 html[data-theme="dark"] :is(.work, .unreal-work, .blender-work, .bi-dialog, .menu-overlay, .about-me-section, .future-goals, .footer, .proj-modal) {
-    --bg: #17150f;
-    --surface: #1e1b14;
-    --elevated: #25211a;
-    --ink: #f6efe0;
-    --ink-2: #c9bfa9;
-    --ink-3: #b3a78f;
-    --accent: #d9b968;
-    --accent-ink: #1d1709;
-    --accent-icon: #d9b968;
-    --accent-tint: #2e2716;
-    --hairline: rgba(217, 185, 104, 0.16);
-    --hairline-strong: rgba(217, 185, 104, 0.32);
+    --bg: #12100b;
+    --surface: #1a1710;
+    --elevated: #221e15;
+    --ink: #f7efd9;
+    --ink-2: #cfc3a3;
+    --ink-3: #b3a682;
+    --accent: #e6c15a;
+    --accent-ink: #1f1703;
+    --accent-icon: #e6c15a;
+    --accent-tint: #2d2612;
+    --accent-fill: linear-gradient(135deg, #f7dc8a 0%, #e6c15a 48%, #c99f34 100%);
+    --accent-glow: rgba(230, 193, 90, 0.28);
+    --hairline: rgba(230, 193, 90, 0.18);
+    --hairline-strong: rgba(230, 193, 90, 0.36);
 }
 
 .work,
@@ -315,4 +320,18 @@ html[data-theme="dark"] .lang-cred {
     .pw-card:hover,
     .cred-card:hover,
     .pw-card:hover .pw-cover img { transform: none; }
+}
+
+/* Metallic gold fills for solid accent surfaces in the themed sections.
+   (Pseudo-elements can't go inside :is(), so they get their own selectors.) */
+:is(.work, .unreal-work, .blender-work, .bi-dialog, .menu-overlay, .about-me-section, .future-goals, .footer, .proj-modal)
+    :is(.pw-fbtn.active, .pw-viewall:hover, .proj-live, .cf-submit, .cf-topic.active, .ue-toggle:hover, .cl-dot, .lc-rule, .lc-bar-fill),
+:is(.work, .unreal-work, .blender-work, .about-me-section, .future-goals, .footer) .section-title::after,
+.about-me-section .xp-phases li::after,
+.about-me-section .cert-kicker::after {
+    background: var(--accent-fill);
+    color: var(--accent-ink);
+}
+:is(.work, .footer, .proj-modal) :is(.proj-live:hover, .cf-submit:hover) {
+    box-shadow: 0 12px 30px var(--accent-glow);
 }
