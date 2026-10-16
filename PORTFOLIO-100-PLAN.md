@@ -48,7 +48,7 @@ time is right wherever the visitor is). Change the placeholder to `JST`.
 **Verify:** Footer shows the current Tokyo time with the label "JST" / "GMT+9",
 including with the browser's time zone set to something else.
 
-### Step 3 — Social sharing and SEO metadata 🟨
+### Step 3 — Social sharing and SEO metadata ✅
 **Problem:** `og:image` is a relative path, which LinkedIn and X often fail to load.
 There is no `og:url`, canonical link, or structured data, and the preview image
 is a 512px square icon.
@@ -64,7 +64,7 @@ should show the new image, title, and description.
 
 ## Phase B — Positioning and content (❓ decisions needed)
 
-### Step 4 — One audience, one call to action ❓
+### Step 4 — One audience, one call to action 🟨 (decision: a — employers/recruiters)
 **Problem:** The hero says "robotics and simulation engineer". The contact form
 offers "New website / Front-end help", which reads like a freelancer's site.
 **Decision:** Who is the site for?
@@ -73,6 +73,15 @@ offers "New website / Front-end help", which reads like a freelancer's site.
 - (c) Both, with employers first
 **Fix:** Rewrite the contact headline, topics (e.g. "Job opportunity · 3D / simulation
 project · Collaboration · Just saying hi"), and hero CTA wording to fit. Update EN + 日本語.
+
+### Step 4b — Accent colour consistency ❓ (found during Step 4)
+**Problem:** The site accent is burgundy (`#9f1239`), but some sections still use a
+scoped amber/orange palette: contact icons + "Send message" button (`rgb(184,90,8)`,
+`#e8881d`), the mobile "MP" logo, and the Language Credentials block (`--lc-a:#df851d`).
+That breaks the single-accent system that replaced orange in August.
+**Decision:** Make everything burgundy (recommended), or keep orange only on the
+JLPT/TOEIC credential cards as an intentional "certificate gold".
+**Fix:** Point the scoped colours at `var(--accent)` (light + dark), screenshot each section.
 
 ### Step 5 — Employer line ❓
 **Problem:** "Japanese Engineering Company · Tokyo" reads like the employer is hidden on purpose.
@@ -176,4 +185,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 |---|---|---|---|
 | 1 | ✅ | 304090a | Chips now mirror each modal's stack |
 | 2 | ✅ | 2c7d394 | Clock pinned to Asia/Tokyo; label "Tokyo Time / 東京時間" |
-| 3 | 🟨 in review | (this commit) | og-cover.jpg 1200×630, absolute OG/Twitter tags, canonical, JSON-LD Person, robots.txt + sitemap.xml |
+| 3 | ✅ | d567b64 | og-cover.jpg 1200×630, absolute OG/Twitter tags, canonical, JSON-LD Person, robots.txt + sitemap.xml |
+| 4 | 🟨 in review | (this commit) | Contact copy, topics, placeholder rewritten for employers (EN + 日本語); aria-pressed on topic pills |
