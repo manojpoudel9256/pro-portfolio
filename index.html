@@ -670,7 +670,7 @@
             font-size: clamp(1.05rem, 4vw, 1.3rem);
             line-height: 1.1;
             letter-spacing: -0.01em;
-            color: var(--ink-3);
+            color: var(--ink-2);
             transition: color 0.25s var(--ease);
         }
 
@@ -1325,6 +1325,14 @@
             white-space: nowrap;
         }
 
+        .pw-view,
+        .edu-more {
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: pointer;
+        }
+
         .pw-view {
             display: inline-flex;
             align-items: center;
@@ -1508,6 +1516,42 @@
             line-height: var(--lh-body);
             color: var(--ink-2);
             margin-bottom: var(--space-4);
+        }
+
+        /* Dark mode: small hero accent text gets a slightly brighter red so it
+           passes 4.5:1 on black; the large SOFTWARE ENGINEER lettering keeps
+           the original #e11d48. */
+        html[data-theme="dark"] :is(.hero-hi strong, .hero-cta) {
+            color: #f0405f;
+        }
+
+        /* Keyboard focus: one consistent, visible ring (low specificity so
+           component-specific focus styles still win). */
+        :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        #main:focus {
+            outline: none;
+        }
+
+        .skip-link {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 10000;
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: var(--ink);
+            color: var(--bg);
+            font: 600 14px var(--font-body);
+            transform: translateY(-160%);
+            transition: transform 0.2s var(--ease);
+        }
+
+        .skip-link:focus {
+            transform: none;
         }
 
         /* Problem → What I did → Result */
@@ -1979,7 +2023,7 @@
         /* ── Language Credentials ─────────────────── */
         .lang-cred {
             /* scoped amber-orange palette */
-            --lc-a: #8f6b0a;
+            --lc-a: #836208;
             --lc-tint: color-mix(in srgb, var(--lc-a) 8%, var(--elevated));
             --lc-line: color-mix(in srgb, var(--lc-a) 20%, transparent);
             margin-bottom: var(--space-9);
@@ -3067,6 +3111,10 @@
         }
 
         .image-modal-close {
+            padding: 0;
+            border: 0;
+            background: none;
+            color: inherit;
             position: absolute;
             top: -50px;
             right: 0;
@@ -3985,7 +4033,7 @@
             --ink: #1f1a0e;
             --ink-2: #5b5442;
             --ink-3: #6e6550;
-            --accent: #8f6b0a;
+            --accent: #836208;
             --accent-ink: #2a1f05;
             --accent-icon: #c9a227;
             --accent-tint: #fbf0d2;
@@ -4950,7 +4998,8 @@
     </aside>
 
 
-    <main id="main">
+    <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
+    <main id="main" tabindex="-1">
         <nav class="top-nav">
             <a class="logo" href="#home"><img class="mobile-brandmark" src="assets/logos/branding/manoj-poudel-monogram-96.webp" width="30" height="30" alt="" decoding="async"><span>Manoj Poudel</span></a>
             <div class="nav-pill">
@@ -5117,16 +5166,13 @@
             <div class="pw-projects">
 
                 <!-- EVEREST — large feature card -->
-                <article class="pw-card pw-hero" data-cat="web uiux" role="button" tabindex="0"
-                    onclick="openProject('everest')"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('everest')}"
-                    aria-label="Open Everest Travel Experience details">
+                <article class="pw-card pw-hero" data-cat="web uiux" onclick="openProject('everest')">
                     <div class="pw-cover">
                         <img src="assets/images/projects/everest-travel.webp" srcset="assets/images/projects/everest-travel-800.webp 800w, assets/images/projects/everest-travel.webp 1600w" sizes="(max-width: 768px) 92vw, 600px" alt="Everest travel website" width="1600" height="805"
                             loading="lazy">
                     </div>
                     <div class="pw-body">
-                        <h3 class="pw-name" data-i18n="pjEverestName">Everest Travel Experience</h3>
+                        <h3 class="pw-name" id="pw-name-everest" data-i18n="pjEverestName">Everest Travel Experience</h3>
                         <p class="pw-desc" data-i18n="pjEverestShort">A premium travel website for curated Himalayan
                             adventures and expeditions.</p>
                         <div class="pw-tags">
@@ -5135,22 +5181,20 @@
                             <span class="pw-chip">Tailwind CSS</span>
                             <span class="pw-chip">JavaScript</span>
                         </div>
-                        <span class="pw-view"><span data-i18n="workViewProject">View project</span>
-                            <span aria-hidden="true">→</span></span>
+                        <button type="button" class="pw-view" aria-labelledby="pw-view-everest pw-name-everest"
+                            onclick="event.stopPropagation(); openProject('everest')"><span id="pw-view-everest" data-i18n="workViewProject">View project</span>
+                            <span aria-hidden="true">→</span></button>
                     </div>
                 </article>
 
                 <!-- PERSONAL FINANCE APP -->
-                <article class="pw-card pw-app" data-cat="apps uiux" role="button" tabindex="0"
-                    onclick="openProject('budget')"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('budget')}"
-                    aria-label="Open Personal Finance App details">
+                <article class="pw-card pw-app" data-cat="apps uiux" onclick="openProject('budget')">
                     <div class="pw-cover">
                         <img src="assets/images/projects/personal-finance-app.webp" srcset="assets/images/projects/personal-finance-app-300.webp 300w, assets/images/projects/personal-finance-app-450.webp 450w, assets/images/projects/personal-finance-app.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Personal Finance App" width="900" height="1599"
                             loading="lazy">
                     </div>
                     <div class="pw-body">
-                        <h3 class="pw-name" data-i18n="pjBudgetName">Personal Finance App</h3>
+                        <h3 class="pw-name" id="pw-name-budget" data-i18n="pjBudgetName">Personal Finance App</h3>
                         <p class="pw-desc" data-i18n="pjBudgetShort">A smart finance app for budgeting, tracking,
                             and insights.</p>
                         <div class="pw-tags">
@@ -5159,22 +5203,20 @@
                             <span class="pw-chip">Tailwind CSS</span>
                             <span class="pw-chip">Gemini AI</span>
                         </div>
-                        <span class="pw-view"><span data-i18n="workViewProject">View project</span>
-                            <span aria-hidden="true">→</span></span>
+                        <button type="button" class="pw-view" aria-labelledby="pw-view-budget pw-name-budget"
+                            onclick="event.stopPropagation(); openProject('budget')"><span id="pw-view-budget" data-i18n="workViewProject">View project</span>
+                            <span aria-hidden="true">→</span></button>
                     </div>
                 </article>
 
                 <!-- SALARY TRACKER APP -->
-                <article class="pw-card pw-app" data-cat="apps uiux" role="button" tabindex="0"
-                    onclick="openProject('salary')"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('salary')}"
-                    aria-label="Open Salary Tracker App details">
+                <article class="pw-card pw-app" data-cat="apps uiux" onclick="openProject('salary')">
                     <div class="pw-cover">
                         <img src="assets/images/projects/salary-tracker.webp" srcset="assets/images/projects/salary-tracker-300.webp 300w, assets/images/projects/salary-tracker-450.webp 450w, assets/images/projects/salary-tracker.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Salary Tracker App" width="900" height="1599"
                             loading="lazy">
                     </div>
                     <div class="pw-body">
-                        <h3 class="pw-name" data-i18n="pjSalaryName">Salary Tracker App</h3>
+                        <h3 class="pw-name" id="pw-name-salary" data-i18n="pjSalaryName">Salary Tracker App</h3>
                         <p class="pw-desc" data-i18n="pjSalaryShort">A payroll and remittance app for tracking
                             earnings and transfers.</p>
                         <div class="pw-tags">
@@ -5183,23 +5225,21 @@
                             <span class="pw-chip">Tailwind CSS</span>
                             <span class="pw-chip">Recharts</span>
                         </div>
-                        <span class="pw-view"><span data-i18n="workViewProject">View project</span>
-                            <span aria-hidden="true">→</span></span>
+                        <button type="button" class="pw-view" aria-labelledby="pw-view-salary pw-name-salary"
+                            onclick="event.stopPropagation(); openProject('salary')"><span id="pw-view-salary" data-i18n="workViewProject">View project</span>
+                            <span aria-hidden="true">→</span></button>
                     </div>
                 </article>
 
                 <!-- ROW 2: 3D tools (16:9 covers) -->
                 <div class="pw-row2">
-                    <article class="pw-card pw-tool" data-cat="web" role="button" tabindex="0"
-                        onclick="openProject('glbAnalyzer')"
-                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('glbAnalyzer')}"
-                        aria-label="Open GLB Insight details">
+                    <article class="pw-card pw-tool" data-cat="web" onclick="openProject('glbAnalyzer')">
                         <div class="pw-cover">
                             <img src="assets/images/projects/glb-analyzer.webp" srcset="assets/images/projects/glb-analyzer-800.webp 800w, assets/images/projects/glb-analyzer.webp 1672w" sizes="(max-width: 768px) 92vw, 640px" alt="GLB Analyzer: understand every mesh. Geometry, textures and PDF reports." width="1672" height="941"
                                 loading="lazy">
                         </div>
                         <div class="pw-body">
-                            <h3 class="pw-name" data-i18n="pjAnalyzerName">GLB Insight</h3>
+                            <h3 class="pw-name" id="pw-name-glbAnalyzer" data-i18n="pjAnalyzerName">GLB Insight</h3>
                             <p class="pw-desc" data-i18n="pjAnalyzerShort">A browser-based analyzer for .glb 3D models —
                                 inspect texture sizes, polygon counts and data size at a glance.</p>
                             <div class="pw-tags">
@@ -5208,21 +5248,19 @@
                                 <span class="pw-chip">glTF</span>
                                 <span class="pw-chip">Three.js</span>
                             </div>
-                            <span class="pw-view"><span data-i18n="workViewProject">View project</span>
-                                <span aria-hidden="true">→</span></span>
+                            <button type="button" class="pw-view" aria-labelledby="pw-view-glbAnalyzer pw-name-glbAnalyzer"
+                            onclick="event.stopPropagation(); openProject('glbAnalyzer')"><span id="pw-view-glbAnalyzer" data-i18n="workViewProject">View project</span>
+                            <span aria-hidden="true">→</span></button>
                         </div>
                     </article>
 
-                    <article class="pw-card pw-tool" data-cat="web" role="button" tabindex="0"
-                        onclick="openProject('glbForge')"
-                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProject('glbForge')}"
-                        aria-label="Open GLB Forge details">
+                    <article class="pw-card pw-tool" data-cat="web" onclick="openProject('glbForge')">
                         <div class="pw-cover">
                             <img src="assets/images/projects/glb-optimizer.webp" srcset="assets/images/projects/glb-optimizer-800.webp 800w, assets/images/projects/glb-optimizer.webp 1672w" sizes="(max-width: 768px) 92vw, 640px" alt="GLB Optimizer: lighter models, smoother scenes. Mesh reduction, texture resizing and UE5-ready assets." width="1672"
                                 height="941" loading="lazy">
                         </div>
                         <div class="pw-body">
-                            <h3 class="pw-name" data-i18n="pjForgeName">GLB Forge</h3>
+                            <h3 class="pw-name" id="pw-name-glbForge" data-i18n="pjForgeName">GLB Forge</h3>
                             <p class="pw-desc" data-i18n="pjForgeShort">A 100% local .glb optimizer for Unreal Engine 5 —
                                 mesh simplification, texture downscaling and a live before/after 3D viewer.</p>
                             <div class="pw-tags">
@@ -5231,8 +5269,9 @@
                                 <span class="pw-chip">glTF-Transform</span>
                                 <span class="pw-chip">meshoptimizer</span>
                             </div>
-                            <span class="pw-view"><span data-i18n="workViewProject">View project</span>
-                                <span aria-hidden="true">→</span></span>
+                            <button type="button" class="pw-view" aria-labelledby="pw-view-glbForge pw-name-glbForge"
+                            onclick="event.stopPropagation(); openProject('glbForge')"><span id="pw-view-glbForge" data-i18n="workViewProject">View project</span>
+                            <span aria-hidden="true">→</span></button>
                         </div>
                     </article>
                 </div>
@@ -6058,15 +6097,16 @@
                             </div>
                             <div class="edu-body">
                                 <span class="edu-school" data-i18n="edu1School">Hokkaido Cyber Creator Professional Training College</span>
-                                <h3 class="edu-title" data-i18n="edu1Title">IT Department</h3>
+                                <h3 class="edu-title" id="edu-title-1" data-i18n="edu1Title">IT Department</h3>
                                 <p class="edu-desc" data-i18n="edu1Desc">Specialized in Network, Cloud, and Cybersecurity. Comprehensive
                                     web development curriculum including Java, HTML/CSS, JS, PHP, and Linux.</p>
-                                <span class="edu-more"><span data-i18n="viewPhoto">View photo</span>
+                                <button type="button" class="edu-more" aria-labelledby="edu-view-1 edu-title-1"
+                                    onclick="event.stopPropagation(); openImageModal(this.closest('.edu-card'))"><span id="edu-view-1" data-i18n="viewPhoto">View photo</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                         <path d="M5 12h14M13 6l6 6-6 6" />
                                     </svg>
-                                </span>
+                                </button>
                             </div>
                         </article>
 
@@ -6080,15 +6120,16 @@
                             </div>
                             <div class="edu-body">
                                 <span class="edu-school" data-i18n="edu2School">Hokkaido Japanese Language Academy Sapporo Main Campus</span>
-                                <h3 class="edu-title" data-i18n="edu2Title">Japanese Language</h3>
+                                <h3 class="edu-title" id="edu-title-2" data-i18n="edu2Title">Japanese Language</h3>
                                 <p class="edu-desc" data-i18n="edu2Desc">Achieved JLPT N3 certification. Deep focus on Japanese
                                     corporate culture, business manners, and volunteer leadership.</p>
-                                <span class="edu-more"><span data-i18n="viewPhoto">View photo</span>
+                                <button type="button" class="edu-more" aria-labelledby="edu-view-2 edu-title-2"
+                                    onclick="event.stopPropagation(); openImageModal(this.closest('.edu-card'))"><span id="edu-view-2" data-i18n="viewPhoto">View photo</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                         <path d="M5 12h14M13 6l6 6-6 6" />
                                     </svg>
-                                </span>
+                                </button>
                             </div>
                         </article>
 
@@ -6109,9 +6150,9 @@
             </div>
 
             <!-- Image Modal -->
-            <div class="image-modal" id="imageModal" data-lenis-prevent>
+            <div class="image-modal" id="imageModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true" data-lenis-prevent>
                 <div class="image-modal-content">
-                    <div class="image-modal-close" onclick="closeImageModal()"></div>
+                    <button type="button" class="image-modal-close" onclick="closeImageModal()" aria-label="Close"></button>
                     <img id="modalImage" src="" alt="School Image">
                     <div class="image-modal-info">
                         <h3 id="modalTitle"></h3>
@@ -6696,12 +6737,16 @@
             document.documentElement.style.overflow = 'hidden';
             document.body.style.overflow = 'hidden';
             modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            window.dialogFocus.open(modal, modal.querySelector('.image-modal-close'));
         }
 
         function closeImageModal() {
             const modal = document.getElementById('imageModal');
             if (!modal.classList.contains('active')) return;
             modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            window.dialogFocus.close(modal);
             if (imageModalScrollState) {
                 const state = imageModalScrollState;
                 document.documentElement.style.overflow = state.rootOverflow;
@@ -6954,6 +6999,41 @@
             }
         }
 
+        // Dialog focus: move focus in on open, keep Tab inside, give it back on close.
+        window.dialogFocus = window.dialogFocus || (function () {
+            const FOCUSABLE = 'a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])';
+            const openers = new Map();
+            document.addEventListener("keydown", function (e) {
+                if (e.key !== "Tab") return;
+                const dlg = [...openers.keys()].pop();
+                if (!dlg) return;
+                const items = [...dlg.querySelectorAll(FOCUSABLE)].filter(el => el.offsetParent !== null);
+                if (!items.length) return;
+                const first = items[0], last = items[items.length - 1];
+                if (e.shiftKey && (document.activeElement === first || !dlg.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+                else if (!e.shiftKey && (document.activeElement === last || !dlg.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+            });
+            return {
+                open(dlg, initial) {
+                    if (!openers.has(dlg)) openers.set(dlg, document.activeElement);
+                    // The dialog fades in from visibility:hidden, which can't take focus
+                    // on the first frame; retry briefly until it lands.
+                    const target = initial || dlg.querySelector(FOCUSABLE);
+                    let tries = 0;
+                    (function tryFocus() {
+                        if (!target || !openers.has(dlg)) return;
+                        target.focus({ preventScroll: true });
+                        if (document.activeElement !== target && ++tries < 20) requestAnimationFrame(tryFocus);
+                    })();
+                },
+                close(dlg) {
+                    const back = openers.get(dlg);
+                    openers.delete(dlg);
+                    if (back && back.focus && document.contains(back)) back.focus({ preventScroll: true });
+                }
+            };
+        })();
+
         function openProject(id) {
             if (!PROJECTS[id]) return;
             _openProj = id;
@@ -6963,6 +7043,7 @@
             m.setAttribute("aria-hidden", "false");
             document.body.style.overflow = "hidden";
             if (window.lenis) window.lenis.stop();
+            window.dialogFocus.open(m, m.querySelector(".proj-close"));
         }
 
         function closeProject() {
@@ -6973,6 +7054,7 @@
             document.body.style.overflow = "";
             if (window.lenis) window.lenis.start();
             _openProj = null;
+            window.dialogFocus.close(m);
         }
 
         window.__refreshProjModal = function () {
@@ -7007,7 +7089,7 @@
                     ueFull: "Full video on LinkedIn", ueError: "Preview unavailable.", ueOpen: "Open video directly",
                     navHome: "Home", navWork: "Work", navAbout: "About", navContact: "Contact",
                     navCertifications: "Certifications", navGoals: "Goals", navBlender: "Blender", menuBlender: "Blender Work",
-                    navMenu: "Menu", navLabel: "Navigation",
+                    navMenu: "Menu", navLabel: "Navigation", skipLink: "Skip to content",
                     menuOpen: "Open menu", menuClose: "Close menu", menuRole: "Software Engineer",
                     menuExplore: "Explore the portfolio", menuWork: "Selected work", menuUnreal: "Unreal Engine",
                     menuLanguage: "Language", menuLocation: "Tokyo, Japan",
@@ -7177,7 +7259,7 @@
                     ueFull: "LinkedInでフル動画を見る", ueError: "プレビューを再生できません。", ueOpen: "動画を直接開く",
                     navHome: "ホーム", navWork: "実績", navAbout: "プロフィール", navContact: "お問い合わせ",
                     navCertifications: "資格・認定", navGoals: "今後の目標", navBlender: "Blender", menuBlender: "Blender 制作",
-                    navMenu: "メニュー", navLabel: "ナビゲーション",
+                    navMenu: "メニュー", navLabel: "ナビゲーション", skipLink: "本文へスキップ",
                     menuOpen: "メニューを開く", menuClose: "メニューを閉じる", menuRole: "ソフトウェアエンジニア",
                     menuExplore: "ポートフォリオ", menuWork: "制作実績", menuUnreal: "Unreal Engine",
                     menuLanguage: "言語", menuLocation: "日本・東京",
