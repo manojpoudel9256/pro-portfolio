@@ -74,7 +74,7 @@ offers "New website / Front-end help", which reads like a freelancer's site.
 **Fix:** Rewrite the contact headline, topics (e.g. "Job opportunity · 3D / simulation
 project · Collaboration · Just saying hi"), and hero CTA wording to fit. Update EN + 日本語.
 
-### Step 4b — Accent colour consistency 🟨 (decision: golden theme; hero burgundy lettering stays)
+### Step 4b — Accent colour consistency ✅ (decision: golden theme; hero burgundy lettering stays)
 **Problem:** The site accent is burgundy (`#9f1239`), but some sections still use a
 scoped amber/orange palette: contact icons + "Send message" button (`rgb(184,90,8)`,
 `#e8881d`), the mobile "MP" logo, and the Language Credentials block (`--lc-a:#df851d`).
@@ -83,7 +83,7 @@ That breaks the single-accent system that replaced orange in August.
 JLPT/TOEIC credential cards as an intentional "certificate gold".
 **Fix:** Point the scoped colours at `var(--accent)` (light + dark), screenshot each section.
 
-### Step 5 — Employer line ❓
+### Step 5 — Employer line 🟨 (default used: description; swap in real name if allowed)
 **Problem:** "Japanese Engineering Company · Tokyo" reads like the employer is hidden on purpose.
 **Decision:** Can the company be named? If not, use a descriptive line, e.g.
 "Industrial automation & DX company · Tokyo".
@@ -187,4 +187,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | 2 | ✅ | 2c7d394 | Clock pinned to Asia/Tokyo; label "Tokyo Time / 東京時間" |
 | 3 | ✅ | d567b64 | og-cover.jpg 1200×630, absolute OG/Twitter tags, canonical, JSON-LD Person, robots.txt + sitemap.xml |
 | 4 | ✅ | 3845c41 | Contact copy, topics, placeholder rewritten for employers (EN + 日本語); aria-pressed on topic pills |
-| 4b | 🟨 in review | b9a157c → (this commit) | v1 muted antique gold rejected ("not golden enough"); v2: saturated gold text #8f6b0a, metallic gradient fills, black-and-gold dark mode |
+| 4b | ✅ | e88a987 | v1 muted antique gold rejected ("not golden enough"); v2: saturated gold text #8f6b0a, metallic gradient fills, black-and-gold dark mode |
+| 5 | 🟨 in review | (this commit) | "Industrial Software & DX Company · Tokyo" / 産業向けソフトウェア・DX企業 · 東京 |
