@@ -25,27 +25,6 @@ MODELS = {
             "ja": "関節や素材の質感を作り分けた産業用ロボットアーム。工場や自動化設備のシーンを想定したモデル。",
         },
     },
-    "cardboard-box": {
-        "title": {"en": "Cardboard Box", "ja": "段ボール箱"},
-        "description": {
-            "en": "A textured cardboard box for packaging, warehouse, and material-handling scenes.",
-            "ja": "梱包、倉庫、搬送シーンに使える、テクスチャ付きの段ボール箱。",
-        },
-    },
-    "roller-conveyor": {
-        "title": {"en": "Roller Conveyor", "ja": "ローラーコンベヤー"},
-        "description": {
-            "en": "A roller conveyor with a supporting frame for warehouse layouts and material-flow visualizations.",
-            "ja": "支持フレームを備えたローラーコンベヤー。倉庫レイアウトや搬送フローの可視化を想定したモデル。",
-        },
-    },
-    "roll-cage": {
-        "title": {"en": "Roll Cage", "ja": "ロールボックスパレット"},
-        "description": {
-            "en": "A wheeled metal roll cage with a mesh frame for stock handling and warehouse scenes.",
-            "ja": "網状の金属フレームと車輪を備えたロールボックスパレット。在庫管理や倉庫シーン向けのモデル。",
-        },
-    },
 }
 COMPONENTS = {5120: ("b", 1), 5121: ("B", 1), 5122: ("h", 2),
               5123: ("H", 2), 5125: ("I", 4), 5126: ("f", 4)}

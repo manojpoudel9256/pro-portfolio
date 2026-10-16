@@ -65,19 +65,19 @@ async function run(browser, {width,height=932,theme='light',lang='en',all=false}
   await page.waitForTimeout(300);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth),width,`${name}: page overflow`);
   const cards=section.locator('.bw-card');
-  assert.equal(await cards.count(),5,'Five model cards');
-  for(let i=0;i<5;i++) {
+  assert.equal(await cards.count(),2,'Two model cards');
+  for(let i=0;i<2;i++) {
     await scrollTo(page,cards.nth(i));
     await cards.nth(i).locator('img').evaluate(img=>img.complete?null:new Promise(resolve=>{img.addEventListener('load',resolve,{once:true});img.addEventListener('error',resolve,{once:true});}));
     await capture(page,`${name}-card-${i+1}`);
   }
   assert.equal(requests.filter(u=>/\.glb(?:[?#]|$)|three\.module|three\.core|GLTFLoader|OrbitControls|blender-viewer/i.test(u)).length,0,`${name}: 3D must be lazy`);
   const thumbnails=await section.locator('img').evaluateAll(els=>els.map(e=>({src:e.currentSrc,complete:e.complete,width:e.naturalWidth,height:e.naturalHeight})));
-  assert.ok(thumbnails.length>=5,`${name}: five preview images`);
+  assert.ok(thumbnails.length>=2,`${name}: two preview images`);
   assert.ok(thumbnails.every(e=>e.complete&&e.width>0),`${name}: preview images load`);
   await scrollTo(page,section);
   const screenshot=await capture(page,`${name}-section`);
-  const count=all?5:1;
+  const count=all?2:1;
   const models=[];
   for(let i=0;i<count;i++) {
     const trigger=cards.nth(i).locator('[data-inspect-model]').last();

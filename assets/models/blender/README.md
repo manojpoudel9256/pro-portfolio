@@ -1,18 +1,15 @@
 # Blender model assets
 
-These five GLB files are unchanged copies of the portfolio owner's supplied
+These two GLB files are unchanged copies of the portfolio owner's supplied
 models. The filenames are normalized for web use; geometry, materials, textures,
 and original file quality are preserved. Their combined transfer size is
-11,457,700 bytes (10.93 MiB), so the viewer should load only the model a visitor
+7,866,780 bytes (7.50 MiB), so the viewer should load only the model a visitor
 chooses to inspect.
 
 | Model | File | Triangles | Exported vertices | File bytes |
 | --- | --- | ---: | ---: | ---: |
 | Delivery Truck | `delivery-truck.glb` | 7,876 | 10,860 | 7,715,084 |
 | Industrial Robot Arm | `industrial-robot-arm.glb` | 3,306 | 3,820 | 151,696 |
-| Cardboard Box | `cardboard-box.glb` | 12 | 24 | 1,647,220 |
-| Roller Conveyor | `roller-conveyor.glb` | 2,414 | 3,998 | 148,952 |
-| Roll Cage | `roll-cage.glb` | 3,140 | 3,833 | 1,794,748 |
 
 ## Metadata
 

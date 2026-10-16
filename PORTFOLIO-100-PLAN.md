@@ -96,7 +96,7 @@ spam and scraping.
 Move LINE/WhatsApp behind "available on request".
 **Fix:** Remove or obfuscate the chosen channels. Keep the layout balanced.
 
-### Step 7 — JLPT N1 presentation 🟨 (decision: a — B2 is on the report; score 128/180)
+### Step 7 — JLPT N1 presentation ✅ (decision: a — B2 is on the report; score 128/180)
 **Problem:** "N1 → CEFR B2" can look like it undersells N1 at a glance.
 **Decision:** Is B2 printed on the official score report? If yes, keep it but
 lead with the N1 score. If no, remove the CEFR line.
@@ -106,7 +106,11 @@ lead with the N1 score. If no, remove the CEFR line.
 
 ## Phase C — Proof of work
 
-### Step 8 — Replace AI previews in Blender Work with real renders ⬜
+### Step 8 — Blender Work: trim to the two strongest models 🟨
+**Decision (Manoj):** keep the AI previews (they match the models). Keep only Delivery Truck +
+Industrial Robot Arm; remove Cardboard Box, Roller Conveyor, Roll Cage to shorten the page.
+
+~~Original idea: replace AI previews with real renders~~
 **Problem:** The section says "AI-styled previews". On a 3D portfolio this makes
 visitors doubt the real work.
 **Fix:** Render each of the 5 GLBs (truck, robot arm, box, conveyor, roll cage) in
@@ -117,7 +121,7 @@ Remove the "AI-styled previews" disclaimer.
 **Verify:** Every card image visibly matches what the 3D inspector shows.
 
 ### Step 9 — Optimise the GLB files with GLB Forge ⬜
-**Problem:** Cardboard box = 12 triangles but 1.65 MB (oversized textures). Truck = 7.7 MB.
+**Problem:** (box/cage removed in Step 8) Truck = 7.7 MB with 45 textures for 7,876 triangles.
 Heavy downloads, and it undercuts the GLB optimisation tool shown on the same page.
 **Fix:** Run the models through GLB Forge / glTF-Transform. Resize textures (≤1024 or
 2048 for the truck), apply WebP/KTX2 texture compression, and meshopt where it's safe.
@@ -190,4 +194,5 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | 4b | ✅ | e88a987 | v1 muted antique gold rejected ("not golden enough"); v2: saturated gold text #8f6b0a, metallic gradient fills, black-and-gold dark mode |
 | 5 | ✅ | 9d35b3c | "Industrial Software & DX Company · Tokyo" / 産業向けソフトウェア・DX企業 · 東京 |
 | 6 | ✅ | 196f88b | Phone, WhatsApp, Telegram removed; LinkedIn card + GitHub icon added; LINE kept |
-| 7 | 🟨 in review | (this commit) | Result tile → Total Score 128 / 180 (Passed); CEFR B2 labelled "JLPT official guide" |
+| 7 | ✅ | 7f7f72a | Result tile → Total Score 128 / 180 (Passed); CEFR B2 labelled "JLPT official guide" |
+| 8 | 🟨 in review | (this commit) | 3 cards + their GLBs/previews/metadata removed (−3.6 MB GLB); tests updated to 2 cards |

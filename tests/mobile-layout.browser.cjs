@@ -13,8 +13,6 @@ const sections = [
   ['05-glb-analyzer','.pw-tool'], ['06-glb-optimizer','.pw-tool:last-child'],
   ['07-unreal','#unreal-projects'], ['08-warehouse','.ue-card:last-child'],
   ['08b-blender','#blender-work'], ['08c-robot-arm','.bw-card:nth-child(2)'],
-  ['08d-cardboard','.bw-card:nth-child(3)'], ['08e-conveyor','.bw-card:nth-child(4)'],
-  ['08f-roll-cage','.bw-card:nth-child(5)'],
   ['09-about','#about-me'], ['10-experience','.xp-item'],
   ['11-language-intro','.lang-cred'], ['12-jlpt','.lc-card'],
   ['13-jlpt-details','.lc-card .lc-tiles'], ['14-jlpt-capabilities','.lc-card .lc-perf'],
