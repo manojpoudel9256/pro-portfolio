@@ -173,7 +173,7 @@ focus, and keep `lang` in sync when switching to 日本語.
 "refinements" override into the rule it overrides. Screenshot before and after at
 375 / 768 / 1440 px in light and dark modes. Visuals must stay the same.
 
-### Step 15 — Repo tidy-up ⬜
+### Step 15 — Repo tidy-up 🟨
 **Fix:** Handle the untracked files (`GRADUATION-EDIT.md`, exports PNG). Move working
 notes into `docs/`. Update the README (stack, deploy rule: push to `pro`).
 
@@ -210,4 +210,6 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 > Measuring note: ESET antivirus on Manoj's work PC intercepts browser HTTPS ("ESET SSL Filter CA") and strips compression, so Lighthouse in Edge is skewed. Use chrome-headless-shell (not intercepted) against the live URL.
 | 13 | ✅ | 7890e00 | Lighthouse a11y 100 (mobile+desktop, light+dark). Real buttons on project/education cards, dialog focus in/trap/return, image viewer role=dialog + button close, skip link, focus ring, contrast fixes |
 | 14 | ✅ | c2aced7 | Removed 81 dead CSS rules (30 unused classes), dead text-modal/timeline/magnetic JS, 116 unused i18n entries, a stray `}`; −27 KB HTML. 20-state screenshot diff: identical |
-| F1–F3 | 🟨 in review | 7956a60, 65851c2, (this commit) | Nav lands exactly; GLB tools first; mobile density pass |
+| F1–F3 | ✅ | 7956a60, 65851c2, (this commit) | Nav lands exactly; GLB tools first; mobile density pass |
+| F4–F8 | ✅ | 64e9267 … abea24e | Animated menu icons, mobile popup scale, 2×2 certifications, no leftover focus ring after taps, popups open at top |
+| 15 | 🟨 in review | (this commit) | Notes → docs/, README rewritten for current site + new screenshot, .vercelignore (16 MB of source-only images, notes, tests no longer public) |

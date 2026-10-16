@@ -13,7 +13,7 @@
   <a href="https://www.linkedin.com/in/manojpoudel0429/">Connect on LinkedIn</a>
 </p>
 
-[![Desktop landing page of Manoj Poudel's portfolio, with burgundy SOFTWARE ENGINEER lettering behind a portrait and links to selected projects.](assets/images/documentation/portfolio-desktop-landing.webp)](https://pro-portfolio-mocha.vercel.app/)
+[![Desktop landing page of Manoj Poudel's portfolio, with burgundy SOFTWARE ENGINEER lettering behind a portrait, a short introduction and the main navigation.](assets/images/documentation/portfolio-desktop-landing.webp)](https://pro-portfolio-mocha.vercel.app/)
 
 <p align="center"><sub>Desktop landing page · Light theme · Captured from the live website</sub></p>
 
@@ -35,11 +35,11 @@ required to serve it. The applications and tools it showcases are separate proje
 
 | Project | Focus | Explore |
 | --- | --- | --- |
-| **Everest Travel Experience** | A bilingual travel website for Himalayan expeditions and curated adventures. | [Live website](https://travel-site-delta-five.vercel.app/) |
-| **Personal Finance App** | Budgeting, transaction tracking, receipt scanning, and spending insights. | [Live app](https://budget-tracker-v2-gamma.vercel.app/) |
-| **Salary Tracker App** | Salary records, earnings, and remittance tracking. | [Live app](https://salary-tracker-v3-six.vercel.app/) |
-| **GLB Insight — Analyzer** | Inspection of 3D model geometry, textures, file size, and exportable reports. | [Source code](https://github.com/manojpoudel9256/GLBAnalyzer) |
-| **GLB Forge — Optimizer** | Mesh simplification, texture optimization, and before/after inspection for real-time 3D workflows. | [Source code](https://github.com/manojpoudel9256/GLBOptimizer) |
+| **GLB Insight — Analyzer** | Used by my team at work to check 3D model geometry, textures and file size before Unreal Engine import, with exportable PDF reports. | [Source code](https://github.com/manojpoudel9256/GLBAnalyzer) |
+| **GLB Forge — Optimizer** | Mesh simplification and texture downscaling for AI-generated models (typically ~1M → ~100k triangles, ~20 MB → 4–5 MB) with a before/after viewer. | [Source code](https://github.com/manojpoudel9256/GLBOptimizer) |
+| **Everest Travel Experience** | A personal concept: a bilingual marketing site for Himalayan expeditions. | [Live website](https://travel-site-delta-five.vercel.app/) |
+| **Personal Finance App** | Budgeting, transaction tracking, receipt scanning and AI spending insights; rebuilt from my college PHP version and in daily use. | [Live app](https://budget-tracker-v2-gamma.vercel.app/) |
+| **Salary Tracker App** | Salary and remittance tracking for working in Japan; in daily use by me and a friend. | [Live app](https://salary-tracker-v3-six.vercel.app/) |
 | **Darts Game** | A third-person Unreal Engine game exploring aiming, scoring, and player interaction. | [Full video](https://www.linkedin.com/posts/manojpoudel0429_unrealengine-ue5-gamedev-activity-7488763663969865729-xFQf) |
 | **Warehouse Simulation** | An Unreal Engine simulation featuring conveyors, storage racks, and robotic equipment. | [Full video](https://www.linkedin.com/posts/manojpoudel0429_unrealengine-ue5-digitaltwin-activity-7505517491381489664-4iHa) |
 
@@ -47,15 +47,16 @@ required to serve it. The applications and tools it showcases are separate proje
 
 - **English and Japanese:** translated interface and project descriptions, with a saved language preference.
 - **Light and dark themes:** coordinated surfaces, typography, and accents, with a saved theme preference.
-- **Dedicated phone layouts:** readable stacked cards, larger touch targets, a compact navigation drawer, and inputs sized for mobile browsing.
+- **Dedicated phone layouts:** a mobile type scale, compact cards, a 2 × 2 certification grid, 44px touch targets, and a navigation drawer with animated section icons.
 - **On-demand video:** short 1080p Unreal Engine previews load after interaction. Touch phones use optimized MP4; desktop retains WebM-first playback with an MP4 fallback.
-- **Blender Work:** five original GLB assets with realistic AI-styled WebP previews and an on-demand Three.js inspector. Orbit, zoom, pan, switch lighting, view wireframes, and inspect measured geometry and file statistics.
-- **Project and photo viewers:** inspect project details or the original education photographs without scrolling the page behind the overlay.
-- **Considered motion:** a code-rendered `hello` introduction, scroll reveals, and reduced-motion handling. The introduction can be skipped.
+- **Blender Work:** two original GLB assets with AI-styled WebP previews and an on-demand Three.js inspector. Orbit, zoom, pan, switch lighting, view wireframes, and inspect measured geometry and file statistics.
+- **Project and photo viewers:** each project explains the problem, what I did and the result; dialogs trap focus, return it on close and always open at the top.
+- **Considered motion:** a code-rendered `hello` introduction (once per session, skippable), scroll reveals, and full reduced-motion handling.
+- **Accessible:** keyboard-operable cards and dialogs, a skip link, visible focus for keyboard users only, and AA colour contrast in both themes.
 - **Direct contact:** email, social profiles, and a contact form delivered through Formspree.
 
-The visual system combines a burgundy hero with warm ivory and copper content
-sections. Archivo Black and Playfair Display establish the hierarchy, supported
+The visual system combines a burgundy hero with champagne-cream and metallic gold
+content sections. Archivo Black and Playfair Display establish the hierarchy, supported
 by Satoshi body text and IBM Plex Mono labels. Phone refinements are isolated
 from the desktop composition.
 
@@ -64,18 +65,18 @@ from the desktop composition.
 | Layer | Implementation |
 | --- | --- |
 | Structure and content | Semantic HTML, project data, and EN/JA dictionaries in `index.html` |
-| Presentation | CSS custom properties, Grid, Flexbox, and focused stylesheets for shared and mobile layouts |
+| Presentation | CSS custom properties, Grid and Flexbox; render-critical CSS is inlined, below-the-fold section styles load asynchronously |
 | Interaction | Vanilla JavaScript for navigation, themes, translation, filters, dialogs, and playback |
-| Animation | GSAP, ScrollTrigger, and Lenis; standalone CSS/JavaScript for the preloader |
-| Media | WebP project covers, self-hosted WOFF2 fonts, and on-demand WebM/MP4 previews |
+| Animation | GSAP, ScrollTrigger and Lenis, loaded after the page is idle; inline CSS/JS for the intro and menu icons |
+| Media | Responsive WebP images (`srcset`), self-hosted WOFF2 fonts, and on-demand WebM/MP4 previews |
 | 3D inspection | Self-hosted Three.js r180, GLTFLoader, OrbitControls, and studio environment lighting; loaded only on request |
 | Contact delivery | Formspree |
-| Hosting | Vercel static deployment |
+| Hosting | Vercel static deployment (`vercel.json` cache headers, `.vercelignore`) |
 | Verification | Node's built-in test runner and optional Playwright browser checks |
 
-GSAP, ScrollTrigger, Lenis, and the Google-hosted display fonts require a network
-connection. Other fonts and portfolio media are served from this repository.
-The contact form requires Formspree connectivity.
+GSAP, ScrollTrigger and Lenis load from public CDNs; the page works without them
+(motion is optional). All fonts and portfolio media are served from this
+repository. The contact form requires Formspree connectivity.
 
 ## Run locally
 
@@ -101,20 +102,23 @@ http://localhost:4173/?nopreload=1&theme=light
 
 ```text
 .
-├── index.html                 # Page content, base styles, project data, translations
-├── mobile-menu.js              # Mobile navigation and focus/scroll handling
-│                                # (render-critical CSS — shared system, golden theme, mobile menu,
-│                                #  phone layouts — is inlined in index.html as <style id=…> blocks)
-├── (intro animation)            # Inlined in index.html (must run before first paint)
-├── unreal-projects.css / .js   # Unreal Engine cards and media lifecycle
-├── blender-work.css / .js      # Blender gallery, translations, and inspector dialog
-├── blender-viewer.js           # Lazy-loaded Three.js renderer and resource cleanup
+├── index.html                 # Content, project data, EN/JA dictionaries, and inline
+│                              # render-critical CSS (<style id=…>), intro and menu icons
+├── mobile-menu.js             # Mobile navigation drawer: focus and scroll handling
+├── unreal-projects.css / .js  # Unreal Engine cards and media lifecycle
+├── blender-work.css / .js     # Blender gallery, translations, and inspector dialog
+├── blender-viewer.js          # Lazy-loaded Three.js renderer and resource cleanup
+├── future-goals.css           # Future Goals section
 ├── manifest.json              # App metadata and home-screen icons
+├── vercel.json / .vercelignore# Cache headers; files kept out of the deployment
+├── robots.txt / sitemap.xml   # Search-engine metadata
+├── docs/                      # Design notes, mobile/Blender verification, improvement plan
 ├── fonts/                     # Self-hosted typefaces and mobile font instances
 ├── assets/
 │   ├── icons/                 # Favicons and app icons
 │   ├── logos/                 # Branding, technology, and certification marks
-│   ├── images/                # Portraits, projects, education, and documentation
+│   ├── images/                # Portraits, projects, education; archive/ and exports/
+│   │                          # hold source files and are not deployed
 │   └── videos/unreal-engine/  # Optimized project previews
 └── tests/                     # Interaction tests and optional browser checks
 ```
@@ -127,14 +131,16 @@ the `<style id="mobile-refinements" media="(max-width: 768px)">` block in
 Further documentation:
 
 - [Asset organization and naming](assets/README.md)
-- [Design decisions and project artwork](DESIGN-REFINEMENT.md)
-- [Mobile refinements and browser verification](MOBILE-REFINEMENT.md)
+- [Improvement plan and progress log](docs/PORTFOLIO-100-PLAN.md)
+- [Design decisions and project artwork](docs/DESIGN-REFINEMENT.md)
+- [Mobile refinements and browser verification](docs/MOBILE-REFINEMENT.md)
 - [Video encoding and delivery](assets/videos/unreal-engine/README.md)
 - [Unreal Engine cover artwork](assets/images/projects/unreal-engine/ARTWORK.md)
-- [Blender showcase and browser verification](BLENDER-WORK.md)
+- [Blender showcase and browser verification](docs/BLENDER-WORK.md)
 - [Original GLBs and measured statistics](assets/models/blender/README.md)
 - [Blender preview artwork](assets/images/projects/blender/ARTWORK.md)
 - [Mobile font instances](fonts/MOBILE-FONTS.md)
+- [Self-hosted Google Fonts and licence](fonts/GOOGLE-FONTS.md)
 
 ## Verification
 
@@ -151,7 +157,7 @@ Optional Playwright checks capture each section and inspect overflow, touch
 targets, dialogs, and video playback. The mobile review includes the iPhone 14
 Pro Max portrait viewport, smaller phone widths, English/Japanese, and both
 themes. Desktop regression checks compare screenshots and element layout at
-1024, 1440, and 1920px. See the [verification instructions](MOBILE-REFINEMENT.md#run-the-optional-browser-checks).
+1024, 1440, and 1920px. See the [verification instructions](docs/MOBILE-REFINEMENT.md#run-the-optional-browser-checks).
 Browser emulation complements physical-device testing; it does not replace it.
 
 ## Deployment
@@ -165,9 +171,10 @@ The repository can be served by a static host. For Vercel:
 | Build command | None |
 | Output directory | Repository root (`.`) |
 
-Publish the HTML, stylesheets, scripts, fonts, manifest, and asset directories
-together. No server process or environment variables are required by the
-portfolio itself.
+`vercel.json` sets long-lived caching for fonts and a one-day cache for assets.
+`.vercelignore` keeps documentation, tests, scripts and source-only images
+(`assets/images/archive/`, `assets/images/exports/`) out of the public deployment.
+No server process or environment variables are required by the portfolio itself.
 
 **Live:** [pro-portfolio-mocha.vercel.app](https://pro-portfolio-mocha.vercel.app/)
 

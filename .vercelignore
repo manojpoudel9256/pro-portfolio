@@ -1,0 +1,16 @@
+# Kept in Git, not published on the live site.
+# (Vercel otherwise serves every file in the repository.)
+
+# Documentation and working notes
+docs/
+README.md
+*.md
+
+# Tests and maintenance scripts
+tests/
+assets/models/blender/audit_metadata.py
+
+# Source-only images that no page uses (originals, old versions, 4K exports, README screenshot)
+assets/images/archive/
+assets/images/exports/
+assets/images/documentation/

@@ -7,9 +7,10 @@ directly to the section.
 
 ## Models and previews
 
-The five supplied models are Delivery Truck, Industrial Robot Arm, Cardboard Box,
-Roller Conveyor, and Roll Cage. Their GLB files are unchanged, with normalized
-filenames under [`assets/models/blender/`](assets/models/blender/README.md).
+The gallery shows two models, Delivery Truck and Industrial Robot Arm (the
+Cardboard Box, Roller Conveyor and Roll Cage were removed in October 2026 to keep
+the page focused). Their GLB files are unchanged, with normalized
+filenames under [`assets/models/blender/`](../assets/models/blender/README.md).
 
 Every preview was generated using a rendered view of its actual model as the
 image reference. The artwork presents the geometry in a realistic ivory studio
@@ -20,7 +21,7 @@ The image generator returned 1672 × 941 PNGs. The **3840 × 2160 WebP exports a
 upscaled**, not native 4K generations. Responsive 768 × 432 and 1536 × 864 copies
 avoid unnecessary 4K downloads on smaller screens. The 768px images range from
 9–36 KB; 4K exports range from 178–549 KB. See the
-[artwork prompts and conversion notes](assets/images/projects/blender/ARTWORK.md).
+[artwork prompts and conversion notes](../assets/images/projects/blender/ARTWORK.md).
 
 ## Inspector
 
@@ -68,7 +69,7 @@ node tests/blender-failures.browser.cjs
 ```
 
 `QA_URL` overrides the local server URL. `QA_OUTPUT` chooses the screenshot and
-report folder. Desktop checks inspect all five models; mobile checks use 430px
+report folder. Desktop checks inspect both models; mobile checks use 430px
 and 320px viewports, Japanese/dark and English/light, and screenshot each card.
 Assertions cover deferred GLB/library loading, exact model statistics, camera
 controls, lighting, wireframe, translation, modal focus, scroll locking, touch

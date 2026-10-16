@@ -46,7 +46,7 @@ Icon URLs include a version query so the previous icon is not reused from cache.
 See [Unreal Engine media notes](videos/unreal-engine/README.md) for sizes,
 encoding settings, playback behavior, and validation.
 
-The [Blender gallery](../BLENDER-WORK.md) uses responsive previews from
+The [Blender gallery](../docs/BLENDER-WORK.md) uses responsive previews from
 `images/projects/blender/`. Each model is downloaded only after a visitor selects
 **Inspect model**. The GLBs retain their original geometry, textures, and materials.
 
