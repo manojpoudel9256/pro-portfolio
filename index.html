@@ -1392,11 +1392,13 @@
             background: var(--ink);
             color: var(--bg);
             font: 600 14px var(--font-body);
+            opacity: 0;
             transform: translateY(-160%);
-            transition: transform 0.2s var(--ease);
+            transition: transform 0.2s var(--ease), opacity 0.2s var(--ease);
         }
 
         .skip-link:focus {
+            opacity: 1;
             transform: none;
         }
 
@@ -4656,6 +4658,51 @@
 
             <div class="pw-projects">
 
+                <!-- ROW 1: work tools used by the team (16:9 covers) — strongest proof for 3D / simulation roles -->
+                <div class="pw-row2">
+                    <article class="pw-card pw-tool" data-cat="web" onclick="openProject('glbAnalyzer')">
+                        <div class="pw-cover">
+                            <img src="assets/images/projects/glb-analyzer.webp" srcset="assets/images/projects/glb-analyzer-800.webp 800w, assets/images/projects/glb-analyzer.webp 1672w" sizes="(max-width: 768px) 92vw, 640px" alt="GLB Analyzer: understand every mesh. Geometry, textures and PDF reports." width="1672" height="941"
+                                loading="lazy">
+                        </div>
+                        <div class="pw-body">
+                            <h3 class="pw-name" id="pw-name-glbAnalyzer" data-i18n="pjAnalyzerName">GLB Insight</h3>
+                            <p class="pw-desc" data-i18n="pjAnalyzerShort">A browser-based analyzer for .glb 3D models —
+                                inspect texture sizes, polygon counts and data size at a glance.</p>
+                            <div class="pw-tags">
+                                <span class="pw-chip">JavaScript</span>
+                                <span class="pw-chip">Node.js</span>
+                                <span class="pw-chip">glTF</span>
+                                <span class="pw-chip">Three.js</span>
+                            </div>
+                            <button type="button" class="pw-view" aria-labelledby="pw-view-glbAnalyzer pw-name-glbAnalyzer"
+                            onclick="event.stopPropagation(); openProject('glbAnalyzer')"><span id="pw-view-glbAnalyzer" data-i18n="workViewProject">View project</span>
+                            <span aria-hidden="true">→</span></button>
+                        </div>
+                    </article>
+
+                    <article class="pw-card pw-tool" data-cat="web" onclick="openProject('glbForge')">
+                        <div class="pw-cover">
+                            <img src="assets/images/projects/glb-optimizer.webp" srcset="assets/images/projects/glb-optimizer-800.webp 800w, assets/images/projects/glb-optimizer.webp 1672w" sizes="(max-width: 768px) 92vw, 640px" alt="GLB Optimizer: lighter models, smoother scenes. Mesh reduction, texture resizing and UE5-ready assets." width="1672"
+                                height="941" loading="lazy">
+                        </div>
+                        <div class="pw-body">
+                            <h3 class="pw-name" id="pw-name-glbForge" data-i18n="pjForgeName">GLB Forge</h3>
+                            <p class="pw-desc" data-i18n="pjForgeShort">A 100% local .glb optimizer for Unreal Engine 5 —
+                                mesh simplification, texture downscaling and a live before/after 3D viewer.</p>
+                            <div class="pw-tags">
+                                <span class="pw-chip">Node.js</span>
+                                <span class="pw-chip">Three.js</span>
+                                <span class="pw-chip">glTF-Transform</span>
+                                <span class="pw-chip">meshoptimizer</span>
+                            </div>
+                            <button type="button" class="pw-view" aria-labelledby="pw-view-glbForge pw-name-glbForge"
+                            onclick="event.stopPropagation(); openProject('glbForge')"><span id="pw-view-glbForge" data-i18n="workViewProject">View project</span>
+                            <span aria-hidden="true">→</span></button>
+                        </div>
+                    </article>
+                </div>
+
                 <!-- EVEREST — large feature card -->
                 <article class="pw-card pw-hero" data-cat="web uiux" onclick="openProject('everest')">
                     <div class="pw-cover">
@@ -4722,50 +4769,6 @@
                     </div>
                 </article>
 
-                <!-- ROW 2: 3D tools (16:9 covers) -->
-                <div class="pw-row2">
-                    <article class="pw-card pw-tool" data-cat="web" onclick="openProject('glbAnalyzer')">
-                        <div class="pw-cover">
-                            <img src="assets/images/projects/glb-analyzer.webp" srcset="assets/images/projects/glb-analyzer-800.webp 800w, assets/images/projects/glb-analyzer.webp 1672w" sizes="(max-width: 768px) 92vw, 640px" alt="GLB Analyzer: understand every mesh. Geometry, textures and PDF reports." width="1672" height="941"
-                                loading="lazy">
-                        </div>
-                        <div class="pw-body">
-                            <h3 class="pw-name" id="pw-name-glbAnalyzer" data-i18n="pjAnalyzerName">GLB Insight</h3>
-                            <p class="pw-desc" data-i18n="pjAnalyzerShort">A browser-based analyzer for .glb 3D models —
-                                inspect texture sizes, polygon counts and data size at a glance.</p>
-                            <div class="pw-tags">
-                                <span class="pw-chip">JavaScript</span>
-                                <span class="pw-chip">Node.js</span>
-                                <span class="pw-chip">glTF</span>
-                                <span class="pw-chip">Three.js</span>
-                            </div>
-                            <button type="button" class="pw-view" aria-labelledby="pw-view-glbAnalyzer pw-name-glbAnalyzer"
-                            onclick="event.stopPropagation(); openProject('glbAnalyzer')"><span id="pw-view-glbAnalyzer" data-i18n="workViewProject">View project</span>
-                            <span aria-hidden="true">→</span></button>
-                        </div>
-                    </article>
-
-                    <article class="pw-card pw-tool" data-cat="web" onclick="openProject('glbForge')">
-                        <div class="pw-cover">
-                            <img src="assets/images/projects/glb-optimizer.webp" srcset="assets/images/projects/glb-optimizer-800.webp 800w, assets/images/projects/glb-optimizer.webp 1672w" sizes="(max-width: 768px) 92vw, 640px" alt="GLB Optimizer: lighter models, smoother scenes. Mesh reduction, texture resizing and UE5-ready assets." width="1672"
-                                height="941" loading="lazy">
-                        </div>
-                        <div class="pw-body">
-                            <h3 class="pw-name" id="pw-name-glbForge" data-i18n="pjForgeName">GLB Forge</h3>
-                            <p class="pw-desc" data-i18n="pjForgeShort">A 100% local .glb optimizer for Unreal Engine 5 —
-                                mesh simplification, texture downscaling and a live before/after 3D viewer.</p>
-                            <div class="pw-tags">
-                                <span class="pw-chip">Node.js</span>
-                                <span class="pw-chip">Three.js</span>
-                                <span class="pw-chip">glTF-Transform</span>
-                                <span class="pw-chip">meshoptimizer</span>
-                            </div>
-                            <button type="button" class="pw-view" aria-labelledby="pw-view-glbForge pw-name-glbForge"
-                            onclick="event.stopPropagation(); openProject('glbForge')"><span id="pw-view-glbForge" data-i18n="workViewProject">View project</span>
-                            <span aria-hidden="true">→</span></button>
-                        </div>
-                    </article>
-                </div>
 
             </div>
         </section>
