@@ -76,7 +76,7 @@
 
     <!-- Self-hosted variable fonts (preload the two above-the-fold faces) -->
     <link rel="preload" href="fonts/ClashDisplay-Variable.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin media="(min-width: 769px)">
     <style>
         /* ============================================================
            PRECISION GRAPHITE — design system
@@ -733,9 +733,9 @@
             flex: 0 0 auto;
         }
 
-        /* entrance */
+        /* entrance — the hero lettering is the LCP element, so it paints
+           immediately (no opacity fade); the portrait still fades in. */
         @media (prefers-reduced-motion: no-preference) {
-            .hero-bigtype,
             .hero-portrait {
                 animation: heroFade 1s var(--ease) both;
             }
@@ -3956,10 +3956,116 @@
 
     </style>
     <link rel="stylesheet" href="refinements.css">
-    <link rel="stylesheet" href="future-goals.css">
-    <link rel="stylesheet" href="blender-work.css">
-    <link rel="stylesheet" href="preloader.css">
-    <link rel="stylesheet" href="unreal-projects.css">
+    <!-- Below-the-fold section styles load without blocking first paint (cascade order is kept by link position). -->
+    <link rel="stylesheet" href="future-goals.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="blender-work.css" media="print" onload="this.media='all'">
+    <!-- Intro styles are inlined: they must apply before first paint. -->
+    <style>
+        /* Live typography inspired by the supplied Hello GIF; no video or image assets. */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            background: #f4f1ef;
+            color: #171614;
+            transition: transform 500ms cubic-bezier(.76, 0, .24, 1),
+                border-radius 500ms cubic-bezier(.76, 0, .24, 1);
+        }
+
+        .preloader[hidden] { display: none; }
+
+        .pl-word {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 1.4em;
+            margin: 0;
+            font-size: clamp(64px, 10vw, 112px);
+            line-height: 1;
+            user-select: none;
+        }
+
+        .pl-letter {
+            display: grid;
+            place-items: center;
+            width: .63em;
+            height: 1.15em;
+            font-family: "Satoshi", Arial, sans-serif;
+            font-weight: 300;
+            font-style: normal;
+        }
+        .pl-letter[data-letter="l"] { width: .32em; }
+        .pl-glyph { display: block; line-height: 1; }
+
+        .pl-letter[data-style="1"] { font-family: Georgia, serif; font-style: italic; }
+        .pl-letter[data-style="2"] { font-family: Georgia, serif; font-weight: 700; }
+        .pl-letter[data-style="3"] { font-family: "Clash Display", Arial, sans-serif; font-weight: 700; }
+        .pl-letter[data-style="4"] {
+            font-family: "Satoshi", Arial, sans-serif;
+            font-weight: 300;
+            color: transparent;
+            -webkit-text-stroke: .7px #171614;
+        }
+        .pl-letter[data-style="5"] {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-weight: 700;
+            transform: skewX(-9deg);
+        }
+        .pl-letter[data-style="6"] .pl-glyph {
+            background: #171614;
+            color: #f4f1ef;
+            padding: .035em .015em .065em;
+            font-family: "Satoshi", Arial, sans-serif;
+            font-weight: 500;
+        }
+        .pl-pixels { display: none; width: .57em; height: .8em; fill: currentColor; }
+        .pl-letter[data-style="7"] .pl-glyph { display: none; }
+        .pl-letter[data-style="7"] .pl-pixels { display: block; }
+        .pl-letter[data-letter="l"] .pl-pixels { width: .24em; }
+        .pl-letter[data-style="8"] {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-weight: 900;
+            letter-spacing: -.07em;
+        }
+
+        .pl-skip {
+            position: absolute;
+            right: max(24px, env(safe-area-inset-right));
+            bottom: max(24px, env(safe-area-inset-bottom));
+            min-height: 44px;
+            padding: 10px 16px;
+            border: 1px solid #d8d1ca;
+            border-radius: 999px;
+            background: transparent;
+            color: #625a53;
+            font: 400 12px "Satoshi", Arial, sans-serif;
+            cursor: pointer;
+        }
+        .pl-skip:hover { color: #171614; border-color: #171614; }
+        .pl-skip:focus-visible { outline: 2px solid #171614; outline-offset: 4px; }
+        .preloader.pl-done {
+            transform: translateY(-100%);
+            border-radius: 0 0 50% 50% / 0 0 10vh 10vh;
+            pointer-events: none;
+        }
+        .preloader.pl-done .pl-word,
+        .preloader.pl-done .pl-skip { opacity: 0; transition: opacity 180ms ease; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .preloader { display: none; transition: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="unreal-projects.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="future-goals.css">
+        <link rel="stylesheet" href="blender-work.css">
+        <link rel="stylesheet" href="unreal-projects.css">
+    </noscript>
     <link rel="stylesheet" href="mobile-menu.css">
     <link rel="stylesheet" href="mobile-refinements.css" media="(max-width: 768px)">
 </head>
@@ -3977,7 +4083,120 @@
         </p>
         <button class="pl-skip" type="button">Skip intro</button>
     </div>
-    <script src="preloader.js"></script>
+    <script>
+        /* A short, staggered type-style sequence. Independent of GSAP and CDN scripts. */
+        (function () {
+            'use strict';
+            var pre = document.getElementById('preloader');
+            if (!pre) return;
+            var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            var params = new URLSearchParams(window.location.search);
+            // Play once per browser session: reloads, back-navigation and deep links
+            // (e.g. a shared #contact URL) go straight to the content.
+            var seen = false;
+            try { seen = sessionStorage.getItem('pp_intro_seen') === '1'; } catch (e) { /* Storage is optional. */ }
+            if (params.has('nopreload') || motion.matches || seen || window.location.hash.length > 1) {
+                pre.remove();
+                return;
+            }
+            try { sessionStorage.setItem('pp_intro_seen', '1'); } catch (e) { /* Storage is optional. */ }
+
+            var letters = Array.from(pre.querySelectorAll('.pl-letter'));
+            var skip = pre.querySelector('.pl-skip');
+            var timers = [];
+            var done = false;
+            var oldOverflow = document.documentElement.style.overflow;
+            var oldBodyOverflow = document.body.style.overflow;
+            var pixelLetters = {
+                h: ['10000', '10000', '10110', '11001', '10001', '10001', '10001'],
+                e: ['00000', '00000', '01110', '10001', '11111', '10000', '01111'],
+                l: ['10', '10', '10', '10', '10', '10', '11'],
+                o: ['00000', '00000', '01110', '10001', '10001', '10001', '01110']
+            };
+
+            // Small SVG squares form the pixel-font phase, keeping the entire effect in code.
+            letters.forEach(function (letter) {
+                var rows = pixelLetters[letter.dataset.letter];
+                var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('viewBox', '0 0 ' + rows[0].length + ' 7');
+                svg.setAttribute('class', 'pl-pixels');
+                svg.setAttribute('shape-rendering', 'crispEdges');
+                svg.setAttribute('aria-hidden', 'true');
+                rows.forEach(function (row, y) {
+                    Array.from(row).forEach(function (pixel, x) {
+                        if (pixel !== '1') return;
+                        var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                        rect.setAttribute('x', x);
+                        rect.setAttribute('y', y);
+                        rect.setAttribute('width', '1');
+                        rect.setAttribute('height', '1');
+                        svg.appendChild(rect);
+                    });
+                });
+                letter.appendChild(svg);
+            });
+
+            var lang = params.get('lang');
+            if (!lang) {
+                try { lang = localStorage.getItem('pp_lang'); } catch (e) { /* Storage is optional. */ }
+            }
+            if (lang === 'ja') {
+                skip.textContent = '\u30b9\u30ad\u30c3\u30d7';
+                pre.setAttribute('aria-label', '\u30dd\u30fc\u30c8\u30d5\u30a9\u30ea\u30aa\u3092\u8aad\u307f\u8fbc\u307f\u4e2d');
+            }
+
+            function finish() {
+                pre.remove();
+                document.documentElement.style.overflow = oldOverflow;
+                document.body.style.overflow = oldBodyOverflow;
+            }
+
+            function dismiss(immediate) {
+                if (done) return;
+                done = true;
+                timers.forEach(clearTimeout);
+                document.removeEventListener('keydown', onKey, true);
+                window.removeEventListener('pagehide', onPageHide);
+                if (motion.removeEventListener) motion.removeEventListener('change', onMotionChange);
+                if (immediate) {
+                    finish();
+                } else {
+                    pre.classList.add('pl-done');
+                    setTimeout(finish, 520);
+                }
+            }
+
+            function onKey(event) {
+                if (event.key === 'Escape') dismiss(false);
+                if (event.key === 'Tab') {
+                    event.preventDefault();
+                    skip.focus();
+                }
+            }
+            function onMotionChange(event) { if (event.matches) dismiss(true); }
+            function onPageHide() { dismiss(true); }
+
+            skip.addEventListener('click', function () { dismiss(false); });
+            document.addEventListener('keydown', onKey, true);
+            window.addEventListener('pagehide', onPageHide);
+            if (motion.addEventListener) motion.addEventListener('change', onMotionChange);
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
+            pre.hidden = false;
+
+            // Changes travel left to right, producing mixed letterforms like the reference.
+            for (var style = 1; style <= 8; style++) {
+                letters.forEach(function (letter, index) {
+                    var nextStyle = style;
+                    timers.push(setTimeout(function () {
+                        letter.dataset.style = String(nextStyle);
+                    }, 120 * nextStyle + index * 35));
+                });
+            }
+            timers.push(setTimeout(function () { dismiss(false); }, 1200));
+            timers.push(setTimeout(function () { dismiss(true); }, 2500));
+        })();
+    </script>
 
     <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
     <aside class="menu-overlay" id="mobileMenu" role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle" aria-hidden="true" inert data-lenis-prevent>

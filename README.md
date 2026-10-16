@@ -105,7 +105,7 @@ http://localhost:4173/?nopreload=1&theme=light
 ├── refinements.css            # Shared visual system
 ├── mobile-refinements.css      # Phone layouts, scoped to 768px and below
 ├── mobile-menu.css / .js       # Mobile navigation and focus/scroll handling
-├── preloader.css / .js         # Opening typography animation
+├── (intro animation)            # Inlined in index.html (must run before first paint)
 ├── unreal-projects.css / .js   # Unreal Engine cards and media lifecycle
 ├── blender-work.css / .js      # Blender gallery, translations, and inspector dialog
 ├── blender-viewer.js           # Lazy-loaded Three.js renderer and resource cleanup
