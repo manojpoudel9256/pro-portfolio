@@ -6347,6 +6347,7 @@
             }
             document.documentElement.style.overflow = 'hidden';
             document.body.style.overflow = 'hidden';
+            modal.scrollTop = 0; // reused for every photo: start at the top
             modal.classList.add('active');
             modal.setAttribute('aria-hidden', 'false');
             window.dialogFocus.open(modal, modal.querySelector('.image-modal-close'));
@@ -6650,6 +6651,8 @@
             _openProj = id;
             renderProject();
             const m = document.getElementById("projModal");
+            // The dialog element is reused for every project: always start at the top.
+            m.querySelector(".proj-dialog").scrollTop = 0;
             m.classList.add("active");
             m.setAttribute("aria-hidden", "false");
             document.body.style.overflow = "hidden";
