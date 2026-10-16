@@ -29,6 +29,18 @@ has a separate phone-only media guard; desktop retains its existing behavior.
   avoids a WebKit failure where VP9 support is advertised but no frame arrives.
   Desktop retains WebM-first playback; neither format loads before interaction.
 
+## Compact navigation — October 16, 2026
+
+The phone menu uses a content-height panel capped at 360px wide, with 12px
+viewport margins and safe-area-aware dynamic height. Labels use Satoshi at
+`clamp(17px, 4.2vw, 18px)`; link rows remain 48px tall and controls at least 44px.
+Padding scales from 16–20px, with 16–20px gaps and a smaller 32px monogram.
+
+On short screens only the destination list scrolls. The header, close button,
+language options, and theme control remain visible. Current-section highlighting,
+focus trapping, and background scroll locking retain their existing behavior.
+Desktop navigation styles are unchanged.
+
 ## Browser verification
 
 Screenshots cover every section at 430 × 932 CSS pixels (iPhone 14 Pro Max
