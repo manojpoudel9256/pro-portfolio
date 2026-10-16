@@ -173,7 +173,7 @@ focus, and keep `lang` in sync when switching to 日本語.
 "refinements" override into the rule it overrides. Screenshot before and after at
 375 / 768 / 1440 px in light and dark modes. Visuals must stay the same.
 
-### Step 15 — Repo tidy-up 🟨
+### Step 15 — Repo tidy-up ✅
 **Fix:** Handle the untracked files (`GRADUATION-EDIT.md`, exports PNG). Move working
 notes into `docs/`. Update the README (stack, deploy rule: push to `pro`).
 
@@ -212,4 +212,4 @@ desktop, test real phones (iOS Safari + Android Chrome), and re-score.
 | 14 | ✅ | c2aced7 | Removed 81 dead CSS rules (30 unused classes), dead text-modal/timeline/magnetic JS, 116 unused i18n entries, a stray `}`; −27 KB HTML. 20-state screenshot diff: identical |
 | F1–F3 | ✅ | 7956a60, 65851c2, (this commit) | Nav lands exactly; GLB tools first; mobile density pass |
 | F4–F8 | ✅ | 64e9267 … abea24e | Animated menu icons, mobile popup scale, 2×2 certifications, no leftover focus ring after taps, popups open at top |
-| 15 | 🟨 in review | (this commit) | Notes → docs/, README rewritten for current site + new screenshot, .vercelignore (16 MB of source-only images, notes, tests no longer public) |
+| 15 | ✅ | e77c0ec | Notes → docs/, README rewritten for current site + new screenshot, .vercelignore (16 MB of source-only images, notes, tests no longer public) | Untracked AI-edited graduation photo + notes deleted at Manoj's request. |
