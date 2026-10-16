@@ -102,9 +102,9 @@ http://localhost:4173/?nopreload=1&theme=light
 ```text
 .
 ├── index.html                 # Page content, base styles, project data, translations
-├── refinements.css            # Shared visual system
-├── mobile-refinements.css      # Phone layouts, scoped to 768px and below
-├── mobile-menu.css / .js       # Mobile navigation and focus/scroll handling
+├── mobile-menu.js              # Mobile navigation and focus/scroll handling
+│                                # (render-critical CSS — shared system, golden theme, mobile menu,
+│                                #  phone layouts — is inlined in index.html as <style id=…> blocks)
 ├── (intro animation)            # Inlined in index.html (must run before first paint)
 ├── unreal-projects.css / .js   # Unreal Engine cards and media lifecycle
 ├── blender-work.css / .js      # Blender gallery, translations, and inspector dialog
@@ -121,8 +121,8 @@ http://localhost:4173/?nopreload=1&theme=light
 
 To update project content, edit the `PROJECTS` object and the corresponding
 English/Japanese entries in `index.html`. Keep phone styling in
-`mobile-refinements.css`; its stylesheet link and rules both use a 768px media
-guard. Update the Formspree action and personal links if adapting the site.
+the `<style id="mobile-refinements" media="(max-width: 768px)">` block in
+`index.html`; its rules also sit inside a 768px media query. Update the Formspree action and personal links if adapting the site.
 
 Further documentation:
 

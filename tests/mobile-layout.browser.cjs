@@ -157,10 +157,10 @@ async function desktop(browser,width,theme) {
       ...Object.fromEntries([...s].filter(key=>!key.startsWith('margin')).map(key=>[key,s.getPropertyValue(key)]))
     }};
   }));
-  await page.locator('link[href="mobile-refinements.css"]').evaluate(el=>el.disabled=true);
+  await page.locator('style#mobile-refinements').evaluate(el=>el.disabled=true);
   const imageBefore=await page.screenshot({path:path.join(dir,'before.png'),fullPage:true});
   const before=await styles();
-  await page.locator('link[href="mobile-refinements.css"]').evaluate(el=>el.disabled=false);
+  await page.locator('style#mobile-refinements').evaluate(el=>el.disabled=false);
   const imageAfter=await page.screenshot({path:path.join(dir,'after.png'),fullPage:true});
   const after=await styles();
   const changes=after.flatMap((item,i)=>Object.keys(item.properties).filter(key=>item.properties[key]!==before[i].properties[key]).map(key=>({element:item.element,key,before:before[i].properties[key],after:item.properties[key]})));

@@ -1,6 +1,7 @@
 # Mobile refinement — September 25, 2026
 
-The phone layout uses `mobile-refinements.css`. Its link has
+The phone layout uses the `<style id="mobile-refinements">` block in `index.html`
+(previously `mobile-refinements.css`, inlined Oct 2026 for first-paint speed). It has
 `media="(max-width: 768px)"`, and every declaration is inside the same media
 query. Desktop presentation and content are unchanged. Video format selection
 has a separate phone-only media guard; desktop retains its existing behavior.
