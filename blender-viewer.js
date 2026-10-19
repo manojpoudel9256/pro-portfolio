@@ -356,6 +356,10 @@ export async function createModelViewer(container, model, options = {}) {
       for (const clip of gltf.animations) {
         for (const track of clip.tracks) {
           if (!track.name.endsWith('.position')) continue;
+          // Only the top of the rig counts as "the whole model moving"; a child
+          // bone (e.g. the part a robot picks up) must never drag the camera.
+          const node = gltf.scene.getObjectByName(track.name.slice(0, -'.position'.length));
+          if (!node || node.parent?.isBone) continue;
           const v = track.values;
           let span = 0;
           for (let i = 3; i < v.length; i += 3) {
