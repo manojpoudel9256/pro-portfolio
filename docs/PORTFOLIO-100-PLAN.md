@@ -20,11 +20,11 @@ Legend: ⬜ todo · 🟨 in review · ✅ confirmed · ❓ needs a decision from
 - [x] Name, role and best work visible within seconds; intro once per session, ~1.7 s, skippable
 - [x] One audience and call to action (employers in robotics / simulation / 3D)
 - [x] Each project explains problem, role and result
-- [~] Maintainable CSS — dead code removed and section CSS split, but render-critical CSS is inlined in a large index.html (a deliberate performance trade-off)
+- [x] Maintainable source — the page is 36 focused files in `src/` (template, section partials, styles, scripts); `node build.mjs` stitches them into one fast index.html with critical CSS inlined (Oct 19: first build was byte-identical to the old file)
 
 Also verified: no horizontal overflow 320–1920px (EN/JA, light/dark), no duplicate IDs, all 201 i18n keys present in EN and JA, no failed requests or console errors, nav jumps land exactly under the header.
 
-**Score: 78 → 95 / 100.** Remaining points: AI-styled Blender previews (−2), large single-file index.html (−1), 8 MB truck GLB not optimised (−1), mobile performance can dip below 90 on slow runs (−1).
+**Score: 78 → 95 → 96 / 100.** Oct 19: the single-file point is resolved by the `src/` + `build.mjs` split. Remaining points: AI-styled Blender previews (−2), 8 MB truck GLB not optimised (−1), mobile performance can dip below 90 on slow runs (−1).
 
 ---
 

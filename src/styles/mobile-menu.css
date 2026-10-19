@@ -1,0 +1,243 @@
+/* Compact mobile navigation: 17–18px labels with generous 48px touch rows. */
+.mobile-brandmark { display: none; }
+.menu-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2400;
+    background: rgb(20 17 13 / 36%);
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .28s ease, visibility .28s;
+}
+.menu-backdrop.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+.menu-overlay {
+    position: fixed;
+    z-index: 2500;
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: auto;
+    width: min(360px, calc(100% - 24px));
+    max-height: calc(100dvh - max(12px, env(safe-area-inset-top)) - max(12px, env(safe-area-inset-bottom)));
+    padding: clamp(16px, 4.6vw, 20px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: hidden;
+    overscroll-behavior: contain;
+    border: 1px solid var(--hairline-strong);
+    border-radius: 20px;
+    color: var(--ink);
+    background: var(--bg);
+    box-shadow: 0 20px 80px rgb(35 25 10 / 18%);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(.985);
+    transform-origin: top right;
+    pointer-events: none;
+    transition: opacity .28s ease, transform .32s cubic-bezier(.2,.8,.2,1), visibility .32s;
+    scrollbar-width: thin;
+    scrollbar-color: var(--hairline-strong) transparent;
+}
+.menu-overlay.is-open { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
+.menu-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-shrink: 0; }
+.menu-brand { display: flex; align-items: center; gap: 9px; color: var(--ink); text-decoration: none; min-width: 0; min-height: 44px; }
+.menu-brand img { flex: none; width: 32px; height: 32px; object-fit: contain; }
+.menu-brand-copy { display: flex; flex-direction: column; gap: 4px; }
+.menu-brand-name { font: 600 14px var(--font-body); letter-spacing: -.015em; }
+.menu-brand-role { color: var(--ink-3); font: 400 10px var(--font-body); letter-spacing: .025em; }
+.menu-close { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--hairline); background: transparent; color: var(--ink); cursor: pointer; }
+.menu-close svg { width: 18px; height: 18px; }
+.menu-close:hover { color: var(--accent); border-color: var(--hairline-strong); }
+.menu-nav { margin: 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--hairline-strong) transparent; }
+.menu-kicker { color: var(--ink-3); font: 500 10px/1.4 var(--font-body); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; padding-inline: 8px; }
+.menu-links { list-style: none; margin: 0; padding: 0; }
+.menu-links li { border-bottom: 1px solid var(--hairline); }
+.menu-links li:last-child { border-bottom: 0; }
+.menu-link { display: grid; grid-template-columns: 18px minmax(0, 1fr) 16px; align-items: center; gap: 10px; min-height: 48px; padding: 10px 8px; border-radius: 8px; color: var(--ink); text-decoration: none; transition: color .2s ease, background-color .2s ease; }
+.menu-index { font: 400 10px var(--font-mono); color: var(--ink-3); letter-spacing: 0; }
+.menu-label { font-family: var(--font-body); font-size: clamp(17px, 4.2vw, 18px); font-weight: 500; line-height: 1.35; letter-spacing: -.015em; }
+.menu-arrow { color: var(--ink-3); font: 400 16px var(--font-body); }
+.menu-link:hover, .menu-link[aria-current="location"] { color: var(--accent); }
+.menu-link[aria-current="location"] { background: var(--accent-tint); }
+.menu-link[aria-current="location"] .menu-index, .menu-link[aria-current="location"] .menu-arrow { color: var(--accent); }
+.menu-footer { margin-top: 0; padding-top: 14px; border-top: 1px solid var(--hairline); flex-shrink: 0; }
+.menu-preferences { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.menu-language { display: inline-flex; align-items: center; padding: 3px; border: 1px solid var(--hairline); border-radius: 999px; }
+.menu-language-option { min-height: 44px; min-width: 48px; padding: 8px 12px; border: 0; border-radius: 999px; background: transparent; color: var(--ink-3); font: 500 12px var(--font-body); cursor: pointer; }
+.menu-language-option.active { background: var(--accent-tint); color: var(--accent); }
+.menu-theme { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--hairline); border-radius: 999px; color: var(--ink-2); background: transparent; font: 500 12px var(--font-body); cursor: pointer; }
+.menu-theme svg { width: 16px; height: 16px; }
+.menu-theme .ico-sun { display: none; }
+html[data-theme="dark"] .menu-theme .ico-moon { display: none; }
+html[data-theme="dark"] .menu-theme .ico-sun { display: block; }
+.menu-location { display: flex; align-items: center; gap: 6px; color: var(--ink-3); font: 400 11px var(--font-body); margin-top: 12px; }
+.menu-location svg { width: 13px; height: 13px; color: var(--accent); }
+html[lang="ja"] .menu-label { letter-spacing: 0; }
+@media (max-width: 768px) {
+    .top-nav { min-height: 68px; padding: 10px 20px; background: rgb(252 250 247 / 94%); border-color: rgb(193 118 43 / 17%); }
+    html[data-theme="dark"] .top-nav { background: rgb(25 23 20 / 94%); border-color: rgb(239 176 94 / 16%); }
+    .top-nav .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 14px; font-weight: 600; letter-spacing: -.02em; }
+    .top-nav .mobile-brandmark { display: block; width: 30px; height: 30px; object-fit: contain; }
+    .top-nav .menu-text { min-height: 44px; gap: 10px; padding: 9px 13px; font-size: 12px; font-weight: 500; border-color: rgb(201 162 39 / 35%); background: transparent; box-shadow: none; }
+    .menu-trigger-icon { width: 16px; height: 16px; color: #b8901f; }
+    html[data-theme="dark"] .menu-trigger-icon { color: #e6c15a; }
+}
+@media (max-height: 620px) { .menu-overlay { gap: 16px; } }
+/* Keep desktop destinations clear of the brand and controls on tablets. */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .top-nav { padding-inline: 20px; gap: 10px; }
+    .top-nav .np-link { padding-inline: 7px; font-size: 12px; }
+}
+@media (min-width: 769px) and (max-width: 820px) {
+    .top-nav .np-link { padding-inline: 5px; }
+}
+/* ── Animated menu icons ───────────────────────────────────────────
+   Built on the 12 principles of animation:
+   staging + overlapping action (cascade on open), anticipation, squash
+   & stretch, follow-through, arcs, slow-in/slow-out, secondary action,
+   timing, exaggeration, solid drawing and appeal. Each icon plays once
+   whenever the menu opens; the current section's icon keeps playing
+   slowly. Fully static under prefers-reduced-motion. */
+.menu-link { grid-template-columns: 28px minmax(0, 1fr) 16px; gap: 12px; }
+.menu-index { display: grid; place-items: center; width: 28px; height: 28px; color: var(--ink-2); }
+.menu-link[aria-current="location"] .menu-index, .menu-link:hover .menu-index { color: var(--accent); }
+.mi { width: 24px; height: 24px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.mi * { transform-box: fill-box; }
+.mi .mi-btn, .mi .mi-bull, .mi .mi-sat, .mi .mi-puff, .mi .mi-latch { fill: currentColor; stroke: none; }
+.mi-house, .mi-case, .mi-target { transform-origin: 50% 100%; }
+.mi-handle { transform-origin: 50% 100%; }
+.mi-pad { transform-origin: 50% 70%; }
+.mi-btn { transform-origin: 50% 50%; }
+.mi-cube { transform-origin: 50% 50%; }
+.mi-orbit { transform-origin: 12px 12px; transform-box: view-box; }
+.mi-head { transform-origin: 50% 100%; }
+.mi-arm { transform-origin: 0% 100%; }
+.mi-medal { transform-origin: 12px 9.6px; transform-box: view-box; }
+.mi-star { transform-origin: 50% 50%; }
+.mi-trail { stroke-dasharray: 1.4 2.2; }
+.mi-puff { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+    .menu-overlay.is-open .mi { --d: calc(var(--i, 0) * 70ms + 220ms); }
+    .menu-overlay.is-open .mi-house  { animation: mi-drop 900ms var(--d) cubic-bezier(.3, 0, .2, 1) both; }
+    .menu-overlay.is-open .mi-puff-1 { animation: mi-puff 1300ms calc(var(--d) + 500ms) ease-out both; }
+    .menu-overlay.is-open .mi-puff-2 { animation: mi-puff 1300ms calc(var(--d) + 750ms) ease-out both; }
+    .menu-overlay.is-open .mi-case   { animation: mi-hop 1000ms var(--d) cubic-bezier(.3, 0, .2, 1) both; }
+    .menu-overlay.is-open .mi-handle { animation: mi-hop-lag 1000ms calc(var(--d) + 70ms) cubic-bezier(.3, 0, .2, 1) both; }
+    .menu-overlay.is-open .mi-pad    { animation: mi-tilt 1100ms var(--d) cubic-bezier(.45, 0, .2, 1) both; }
+    .menu-overlay.is-open .mi-btn-a  { animation: mi-press 420ms calc(var(--d) + 350ms) ease-in-out both; }
+    .menu-overlay.is-open .mi-btn-b  { animation: mi-press 420ms calc(var(--d) + 560ms) ease-in-out both; }
+    .menu-overlay.is-open .mi-cube   { animation: mi-turn 1100ms var(--d) cubic-bezier(.65, 0, .35, 1) both; }
+    .menu-overlay.is-open .mi-orbit  { animation: mi-orbit 1400ms var(--d) cubic-bezier(.65, 0, .35, 1) both; }
+    .menu-overlay.is-open .mi-arm    { animation: mi-wave 1200ms var(--d) cubic-bezier(.4, 0, .2, 1) both; }
+    .menu-overlay.is-open .mi-head   { animation: mi-nod 1200ms calc(var(--d) + 60ms) ease-in-out both; }
+    .menu-overlay.is-open .mi-medal  { animation: mi-swing 1500ms var(--d) cubic-bezier(.4, 0, .2, 1) both; }
+    .menu-overlay.is-open .mi-star   { animation: mi-glint 600ms calc(var(--d) + 650ms) ease-out both; }
+    .menu-overlay.is-open .mi-arrow  { animation: mi-shoot 1000ms var(--d) cubic-bezier(.5, 0, .1, 1) both; }
+    .menu-overlay.is-open .mi-target { animation: mi-impact 1000ms var(--d) ease-out both; }
+    .menu-overlay.is-open .mi-plane  { animation: mi-fly 1500ms var(--d) cubic-bezier(.55, 0, .25, 1) both; }
+    .menu-overlay.is-open .mi-trail  { animation: mi-trail 1500ms var(--d) ease-in-out both; }
+
+    /* the current section keeps "breathing" its signature action */
+    .menu-overlay.is-open .menu-link[aria-current="location"] .mi * { animation-iteration-count: infinite; animation-duration: 2.8s; }
+}
+
+/* Home: stretch while falling, squash on landing, settle (squash & stretch, follow-through) */
+@keyframes mi-drop {
+    0%   { transform: translateY(-7px) scale(.9, 1.12); }
+    35%  { transform: translateY(0) scale(1.14, .84); }
+    55%  { transform: translateY(-1.5px) scale(.95, 1.06); }
+    75%  { transform: translateY(0) scale(1.03, .97); }
+    100% { transform: none; }
+}
+@keyframes mi-puff { 0% { opacity: 0; transform: translate(0, 2px) scale(.4); } 25% { opacity: .9; } 100% { opacity: 0; transform: translate(2.4px, -3px) scale(1.5); } }
+/* Work: crouch (anticipation) -> stretch up -> squash on landing; handle lags (overlapping action) */
+@keyframes mi-hop {
+    0%, 8% { transform: none; }
+    22%  { transform: scale(1.12, .82); }
+    42%  { transform: translateY(-5px) scale(.9, 1.12); }
+    62%  { transform: translateY(0) scale(1.12, .86); }
+    80%  { transform: scale(.97, 1.03); }
+    100% { transform: none; }
+}
+@keyframes mi-hop-lag {
+    0%, 8% { transform: none; }
+    22%  { transform: translateY(1.6px); }
+    42%  { transform: translateY(-4px) rotate(-10deg); }
+    62%  { transform: translateY(1px) rotate(8deg); }
+    82%  { transform: rotate(-3deg); }
+    100% { transform: none; }
+}
+/* Unreal: gamepad tilts on an arc with overshoot; buttons squash when pressed */
+@keyframes mi-tilt {
+    0%   { transform: none; }
+    25%  { transform: rotate(-14deg) translateY(-1px); }
+    55%  { transform: rotate(10deg) translateY(-1px); }
+    78%  { transform: rotate(-4deg); }
+    100% { transform: none; }
+}
+@keyframes mi-press { 0%, 100% { transform: none; } 40% { transform: scale(.4); } 70% { transform: scale(1.35); } }
+/* Blender: cube turns in depth (solid drawing), satellite orbits with slow-in/slow-out */
+@keyframes mi-turn {
+    0%   { transform: none; }
+    24%  { transform: scaleX(.15) scaleY(1.05); }
+    25%  { transform: scaleX(-.15) scaleY(1.05); }
+    50%  { transform: scaleX(-1); }
+    74%  { transform: scaleX(-.15) scaleY(1.05); }
+    75%  { transform: scaleX(.15) scaleY(1.05); }
+    92%  { transform: scaleX(1.05); }
+    100% { transform: none; }
+}
+@keyframes mi-orbit { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+/* About: arm waves on arcs, decaying overshoot; head tilts a beat later */
+@keyframes mi-wave {
+    0%   { transform: rotate(0); }
+    18%  { transform: rotate(-28deg); }
+    38%  { transform: rotate(22deg); }
+    56%  { transform: rotate(-20deg); }
+    74%  { transform: rotate(10deg); }
+    100% { transform: rotate(0); }
+}
+@keyframes mi-nod { 0%, 100% { transform: none; } 30% { transform: rotate(-8deg); } 60% { transform: rotate(5deg); } }
+/* Certifications: pendulum swing with decaying follow-through + star glint */
+@keyframes mi-swing {
+    0%   { transform: rotate(0); }
+    15%  { transform: rotate(22deg); }
+    35%  { transform: rotate(-15deg); }
+    55%  { transform: rotate(9deg); }
+    72%  { transform: rotate(-4deg); }
+    88%  { transform: rotate(1.5deg); }
+    100% { transform: rotate(0); }
+}
+@keyframes mi-glint { 0%, 100% { transform: none; } 45% { transform: scale(1.5) rotate(36deg); } }
+/* Goals: pull back (anticipation), fly in fast, impact squash + wobble (exaggeration) */
+@keyframes mi-shoot {
+    0%   { transform: translate(0, 0); opacity: 1; }
+    22%  { transform: translate(3px, -3px); }
+    23%  { transform: translate(9px, -9px); opacity: 0; }
+    30%  { transform: translate(7px, -7px); opacity: 1; }
+    52%  { transform: translate(0, 0); }
+    62%  { transform: translate(-1px, 1px); }
+    100% { transform: translate(0, 0); }
+}
+@keyframes mi-impact {
+    0%, 50% { transform: none; }
+    58%  { transform: scale(1.14, .86); }
+    72%  { transform: scale(.94, 1.06); }
+    86%  { transform: scale(1.03, .97); }
+    100% { transform: none; }
+}
+/* Contact: plane exits on an arc, loops back in from the opposite side; trail is drawn */
+@keyframes mi-fly {
+    0%   { transform: none; opacity: 1; }
+    12%  { transform: translate(-1.5px, 1.5px) rotate(-6deg); }
+    42%  { transform: translate(10px, -8px) rotate(14deg) scale(.7); opacity: 0; }
+    43%  { transform: translate(-10px, 8px) rotate(-14deg) scale(.7); opacity: 0; }
+    75%  { transform: translate(1.5px, -1.5px) rotate(4deg); opacity: 1; }
+    100% { transform: none; }
+}
+@keyframes mi-trail { 0% { stroke-dashoffset: 0; opacity: .9; } 50% { opacity: 0; } 100% { stroke-dashoffset: -14; opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .menu-overlay, .menu-backdrop, .menu-link { transition: none; } }

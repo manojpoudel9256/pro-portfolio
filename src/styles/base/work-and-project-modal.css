@@ -1,0 +1,670 @@
+/* WORK SECTION — light showcase grid */
+.work {
+    padding: clamp(3rem, 6vw, 5rem) 0 var(--section-pad);
+    background: var(--surface);
+}
+
+/* ── header row ───────────────────────────── */
+.pw-head {
+    max-width: var(--pw-maxw);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-5);
+}
+
+.pw-kicker {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-2);
+}
+
+.pw-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-display);
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: 0;
+    color: var(--ink);
+}
+
+.pw-sub {
+    margin-top: var(--space-3);
+    max-width: 54ch;
+    font-size: var(--fs-500);
+    line-height: var(--lh-body);
+    color: var(--ink-2);
+}
+
+.pw-viewall {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--fs-300);
+    color: var(--ink);
+    background: var(--elevated);
+    border: 1px solid var(--hairline-strong);
+    border-radius: 999px;
+    padding: 12px 22px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.25s var(--ease);
+}
+
+.pw-viewall svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.25s var(--ease);
+}
+
+.pw-viewall:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(159, 18, 57, 0.3);
+}
+
+.pw-viewall:hover svg {
+    transform: translateX(3px);
+}
+
+/* ── filter pills ─────────────────────────── */
+.pw-filters {
+    max-width: var(--pw-maxw);
+    margin: var(--space-5) auto 0;
+    padding: 0 var(--gutter);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.pw-fbtn {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: var(--fs-300);
+    color: var(--ink-2);
+    background: var(--elevated);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 9px 20px;
+    cursor: pointer;
+    transition: all 0.25s var(--ease);
+}
+
+.pw-fbtn:hover {
+    color: var(--ink);
+    border-color: var(--hairline-strong);
+    transform: translateY(-1px);
+}
+
+.pw-fbtn.active {
+    color: #fff;
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(159, 18, 57, 0.32);
+}
+
+/* ── projects layout ──────────────────────── */
+.pw-projects {
+    max-width: var(--pw-maxw);
+    margin: var(--space-6) auto 0;
+    padding: 0 var(--gutter);
+    display: grid;
+    grid-template-columns: 1.7fr 1fr 1fr;
+    gap: var(--space-3);
+    align-items: stretch;
+}
+
+/* hover one card → dim the others */
+.pw-projects:hover .pw-card:not(:hover) {
+    opacity: 0.42;
+    transform: scale(0.988);
+    filter: saturate(0.85);
+}
+
+.pw-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--elevated);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 12px 34px rgba(20, 20, 20, 0.08);
+    transition: opacity 0.4s var(--ease), transform 0.5s var(--ease),
+        box-shadow 0.4s var(--ease), border-color 0.4s var(--ease), filter 0.4s var(--ease);
+}
+
+.pw-card:hover {
+    border-color: var(--hairline-strong);
+    box-shadow: 0 30px 70px rgba(20, 20, 20, 0.18);
+    transform: translateY(-4px);
+}
+
+.pw-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.pw-card.pw-hide {
+    display: none;
+}
+
+/* full-bleed cover — grows so the row's cards match height */
+.pw-cover {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: clamp(300px, 30vw, 460px);
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.pw-cover img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.7s var(--ease);
+}
+
+.pw-card:hover .pw-cover img {
+    transform: scale(1.04);
+}
+
+/* second row — two 16:9 tool cards */
+.pw-row2 {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+}
+
+.pw-tool .pw-cover {
+    flex: none;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+}
+
+/* body */
+.pw-body {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+}
+
+.pw-name {
+    font-family: var(--font-display);
+    font-size: var(--fs-500);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.15;
+    color: var(--ink);
+}
+
+.pw-desc {
+    color: var(--ink-2);
+    font-size: var(--fs-300);
+    line-height: var(--lh-body);
+}
+
+.pw-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: var(--space-1);
+}
+
+.pw-chip {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding: 5px 13px;
+    border-radius: 999px;
+    color: var(--ink-2);
+    background: transparent;
+    border: 1px solid var(--hairline-strong);
+    white-space: nowrap;
+}
+
+.pw-view,
+.edu-more {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.pw-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    align-self: flex-end;
+    margin-top: var(--space-2);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--fs-300);
+    color: var(--accent);
+    white-space: nowrap;
+    transition: gap 0.25s var(--ease);
+}
+
+.pw-card:hover .pw-view {
+    gap: 13px;
+}
+
+/* tablet — tighten the row */
+@media (max-width: 1024px) {
+    .pw-projects {
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: var(--space-2);
+    }
+
+    .pw-cover {
+        min-height: clamp(230px, 32vw, 380px);
+    }
+
+    .pw-name {
+        font-size: var(--fs-400);
+    }
+
+    .pw-body {
+        padding: var(--space-3);
+    }
+}
+
+/* ── project detail modal ─────────────────── */
+.proj-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    background: color-mix(in srgb, #000 62%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s var(--ease), visibility 0.35s var(--ease);
+}
+
+.proj-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.proj-dialog {
+    position: relative;
+    width: min(920px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--bg);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.5);
+    transform: translateY(24px) scale(0.98);
+    transition: transform 0.4s var(--ease);
+    -webkit-overflow-scrolling: touch;
+}
+
+.proj-modal.active .proj-dialog {
+    transform: none;
+}
+
+.proj-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 3;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 50%;
+    background: rgba(16, 16, 18, 0.55);
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.proj-close:hover {
+    background: var(--accent);
+    transform: rotate(90deg);
+}
+
+.proj-media {
+    width: 100%;
+    max-height: 340px;
+    overflow: hidden;
+    background: var(--surface);
+    border-bottom: 1px solid var(--hairline);
+}
+
+.proj-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+.proj-media.is-app {
+    max-height: none;
+    display: grid;
+    place-items: center;
+    padding: var(--space-5);
+    background: radial-gradient(120% 90% at 50% 0%,
+            color-mix(in srgb, var(--accent) 12%, var(--surface)), var(--surface));
+}
+
+.proj-media.is-app img {
+    width: auto;
+    height: auto;
+    max-width: 240px;
+    max-height: 420px;
+    border-radius: 18px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* show the whole screenshot (no crop) — used for tool projects */
+.proj-media.is-full {
+    max-height: none;
+    background: var(--surface);
+}
+
+.proj-media.is-full img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.proj-content {
+    padding: var(--space-5) clamp(1.25rem, 4vw, 2.5rem) var(--space-6);
+}
+
+.proj-kind {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-2);
+}
+
+.proj-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-700);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: var(--space-3);
+}
+
+.proj-desc {
+    font-size: var(--fs-400);
+    line-height: var(--lh-body);
+    color: var(--ink-2);
+    margin-bottom: var(--space-4);
+}
+
+/* Dark mode: small hero accent text gets a slightly brighter red so it
+   passes 4.5:1 on black; the large SOFTWARE ENGINEER lettering keeps
+   the original #e11d48. */
+html[data-theme="dark"] :is(.hero-hi strong, .hero-cta) {
+    color: #f0405f;
+}
+
+/* In-page jumps (incl. direct #links) stop exactly under the fixed header. */
+html {
+    scroll-padding-top: var(--nav-h, 72px);
+}
+
+:is(section[id], footer[id], #certifications) {
+    scroll-margin-top: 0;
+}
+
+#main:focus {
+    outline: none;
+}
+
+.skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 10000;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: var(--ink);
+    color: var(--bg);
+    font: 600 14px var(--font-body);
+    opacity: 0;
+    transform: translateY(-160%);
+    transition: transform 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+.skip-link:focus {
+    opacity: 1;
+    transform: none;
+}
+
+/* Problem → What I did → Result */
+.proj-case {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0 0 var(--space-5);
+    padding: var(--space-4);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    background: var(--accent-tint, var(--surface));
+}
+
+.proj-case:empty {
+    display: none;
+}
+
+.proj-case div {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: var(--space-3);
+}
+
+.proj-case dt {
+    padding-top: 0.2em;
+    font-family: var(--font-mono);
+    font-size: var(--fs-200);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.proj-case dd {
+    margin: 0;
+    font-size: var(--fs-300);
+    line-height: var(--lh-body);
+    color: var(--ink);
+}
+
+@media (max-width: 600px) {
+    .proj-case div {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 4px;
+    }
+}
+
+.proj-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+}
+
+.proj-live,
+.proj-open {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--fs-300);
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 13px 26px;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
+        background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+
+.proj-live svg,
+.proj-open svg {
+    width: 16px;
+    height: 16px;
+}
+
+.proj-live {
+    color: #fff;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    box-shadow: 0 12px 30px rgba(159, 18, 57, 0.32);
+}
+
+.proj-live:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(159, 18, 57, 0.42);
+}
+
+.proj-open {
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--hairline-strong);
+}
+
+.proj-open:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.proj-h {
+    font-family: var(--font-body);
+    font-size: var(--fs-200);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 var(--space-3);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--hairline);
+}
+
+.proj-stack {
+    list-style: none;
+    margin: 0 0 var(--space-2);
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+}
+
+.proj-stack li {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+}
+
+.proj-stack .ps-name {
+    flex: 0 0 auto;
+    min-width: 148px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--fs-300);
+    color: var(--ink);
+}
+
+.proj-stack .ps-fn {
+    color: var(--ink-2);
+    font-size: var(--fs-300);
+    line-height: var(--lh-body);
+}
+
+.proj-install {
+    margin-top: var(--space-2);
+}
+
+.proj-note {
+    font-size: var(--fs-300);
+    color: var(--ink-2);
+    line-height: var(--lh-body);
+    margin-bottom: var(--space-4);
+}
+
+.proj-steps {
+    margin: 0 0 var(--space-4);
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+    display: grid;
+    gap: var(--space-3);
+}
+
+.proj-steps li {
+    position: relative;
+    padding-left: 46px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    font-size: var(--fs-300);
+    line-height: var(--lh-body);
+    color: var(--ink-2);
+}
+
+.proj-steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.82rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.proj-steps li strong {
+    color: var(--ink);
+    font-weight: 600;
+}
+

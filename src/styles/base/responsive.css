@@ -1,0 +1,284 @@
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 768px) {
+    .top-nav {
+        padding: 10px var(--gutter);
+        position: fixed;
+        width: 100%;
+        z-index: 2000;
+        align-items: center;
+    }
+
+    /* hide the full pill nav; show a menu button that opens the overlay */
+    .nav-pill {
+        display: none;
+    }
+
+    .top-nav .menu-text {
+        display: inline-flex;
+    }
+
+    /* theme + language toggles live inside the menu overlay on mobile,
+       so the nav stays clean: just logo + Menu */
+    .nav-right .lang-switch,
+    .nav-right .theme-toggle {
+        display: none;
+    }
+
+    /* hero mobile layout is handled in the hero block above */
+
+    .work {
+        padding: var(--space-7) 0;
+    }
+
+    .pw-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-4);
+    }
+
+    .pw-title {
+        font-size: clamp(2rem, 11vw, 3rem);
+    }
+
+    .pw-sub {
+        font-size: var(--fs-400);
+    }
+
+    .pw-viewall {
+        padding: 11px 20px;
+        font-size: var(--fs-200);
+    }
+
+    .pw-filters {
+        margin-top: var(--space-4);
+        gap: var(--space-1);
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .pw-filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .pw-fbtn {
+        font-size: var(--fs-200);
+        padding: 8px 16px;
+        white-space: nowrap;
+    }
+
+    .pw-projects {
+        margin-top: var(--space-5);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .pw-row2 {
+        display: contents;
+    }
+
+    /* no hover-dim on touch */
+    .pw-projects:hover .pw-card:not(:hover) {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+
+    /* Everest — cover matches the image ratio so the whole site shows */
+    .pw-hero .pw-cover {
+        flex: none;
+        aspect-ratio: 1600 / 805;
+        min-height: 0;
+    }
+
+    /* app cards — compact image-left / text-right (matches reference) */
+    .pw-app {
+        flex-direction: row;
+    }
+
+    .pw-app .pw-cover {
+        flex: 0 0 42%;
+        min-height: 0;
+        align-self: stretch;
+        border-right: 1px solid var(--hairline);
+    }
+
+    /* image fills the column from the top — no empty space, no side-crop */
+    .pw-app .pw-cover img {
+        object-fit: cover;
+        object-position: top center;
+    }
+
+    /* keep the text compact so the card doesn't stretch tall */
+    .pw-app .pw-body {
+        flex: 1 1 auto;
+        justify-content: center;
+        gap: var(--space-1);
+        padding: var(--space-3);
+    }
+
+    .pw-app .pw-name {
+        font-size: var(--fs-400);
+        line-height: 1.12;
+    }
+
+    .pw-app .pw-desc {
+        font-size: var(--fs-200);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .pw-app .pw-tags {
+        gap: 6px;
+        margin-top: 2px;
+    }
+
+    .pw-app .pw-chip {
+        font-size: 0.62rem;
+        padding: 3px 9px;
+    }
+
+    .pw-app .pw-view {
+        margin-top: var(--space-2);
+        font-size: var(--fs-200);
+    }
+
+    /* Everest (full-width) title stays larger */
+    .pw-hero .pw-name {
+        font-size: var(--fs-500);
+    }
+
+    .pw-body {
+        padding: var(--space-4);
+    }
+
+    .pw-view {
+        margin-top: var(--space-3);
+    }
+
+    /* project modal on mobile */
+    .proj-dialog {
+        max-height: 92vh;
+        border-radius: 20px;
+    }
+
+    .proj-media {
+        max-height: 240px;
+    }
+
+    .proj-media.is-app {
+        padding: var(--space-4);
+    }
+
+    .proj-media.is-app img {
+        max-width: 190px;
+        max-height: 340px;
+    }
+
+    .proj-modal {
+        padding: var(--space-2);
+    }
+
+    .proj-content {
+        padding: var(--space-4) var(--space-3) var(--space-5);
+    }
+
+    .proj-title {
+        font-size: var(--fs-600);
+    }
+
+    .proj-stack li {
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .proj-stack .ps-name {
+        min-width: 0;
+    }
+
+    /* Education cards stack on mobile */
+    .edu-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-3);
+    }
+
+    .edu-body {
+        padding: var(--space-3);
+    }
+
+    .about-me-section {
+        padding: var(--space-7) 0;
+    }
+
+    .about-me-header {
+        margin-bottom: var(--space-6);
+    }
+
+    /* Timeline mobile */
+
+    .footer {
+        padding: var(--space-7) var(--gutter) var(--space-4);
+        min-height: auto;
+    }
+
+    /* stack the two columns */
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: clamp(36px, 9vw, 56px);
+    }
+
+    .cl-contacts {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cl-contact {
+        width: 100%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-4);
+    }
+
+    .footer-info {
+        gap: clamp(20px, 6vw, 40px);
+    }
+
+    .footer-socials {
+        text-align: left;
+        width: 100%;
+    }
+
+    .social-links {
+        justify-content: flex-start;
+    }
+
+}
+
+@media (max-width: 400px) {
+    .cl-social {
+        width: 46px;
+        height: 46px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+

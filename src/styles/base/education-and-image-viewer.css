@@ -1,0 +1,231 @@
+/* TIMELINE (Work + Academic) */
+.timeline-section {
+    margin-bottom: var(--space-9);
+    padding: 0;
+}
+
+/* no trailing gap after the last block (Education) */
+.timeline-section:last-child {
+    margin-bottom: 0;
+}
+
+/* EDUCATION — premium slide-in cards */
+.edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.edu-card {
+    background: var(--elevated);
+    border: 1px solid var(--hairline);
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(20, 20, 20, 0.07);
+    transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
+        box-shadow 0.35s var(--ease);
+}
+
+.edu-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--hairline-strong);
+    box-shadow: 0 24px 54px rgba(20, 20, 20, 0.16);
+}
+
+.edu-photo {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.edu-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--ease);
+}
+
+.edu-card:hover .edu-photo img {
+    transform: scale(1.06);
+}
+
+/* soft scrim so the year chip reads on any photo */
+.edu-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(20, 20, 20, 0.38), transparent 42%);
+    pointer-events: none;
+}
+
+.edu-year {
+    position: absolute;
+    z-index: 2;
+    left: 14px;
+    bottom: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    color: #fff;
+    background: rgba(16, 16, 18, 0.5);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    padding: 4px 11px;
+}
+
+.edu-body {
+    padding: var(--space-4);
+}
+
+.edu-school {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-100);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    color: var(--ink-3);
+    margin-bottom: var(--space-1);
+}
+
+.edu-title {
+    font-family: var(--font-display);
+    font-size: var(--fs-600);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: var(--space-2);
+}
+
+.edu-desc {
+    color: var(--ink-2);
+    font-size: var(--fs-300);
+    line-height: var(--lh-body);
+    margin-bottom: var(--space-3);
+}
+
+.edu-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-200);
+    color: var(--accent);
+}
+
+.edu-more svg {
+    transition: transform 0.3s var(--ease);
+}
+
+.edu-card:hover .edu-more svg {
+    transform: translateX(4px);
+}
+
+/* FULLSCREEN IMAGE MODAL */
+.image-modal {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    overscroll-behavior: none;
+    background: rgba(20, 20, 20, 0.94);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+}
+
+.image-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.image-modal-content {
+    position: relative;
+    animation: zoomIn 0.3s var(--ease);
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.image-modal img {
+    max-width: 85vw;
+    max-height: 75vh;
+    display: block;
+    object-fit: contain;
+    border-radius: var(--radius);
+}
+
+.image-modal-close {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    position: absolute;
+    top: -50px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-modal-close::before,
+.image-modal-close::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    background: var(--on-dark);
+    transition: background 0.3s;
+}
+
+.image-modal-close:hover::before,
+.image-modal-close:hover::after {
+    background: var(--accent);
+}
+
+.image-modal-close::before {
+    transform: rotate(45deg);
+}
+
+.image-modal-close::after {
+    transform: rotate(-45deg);
+}
+
+.image-modal-info {
+    position: absolute;
+    bottom: -70px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: var(--on-dark);
+}
+
+.image-modal-info h3 {
+    font-size: var(--fs-500);
+    margin-bottom: var(--space-1);
+}
+
+.image-modal-info p {
+    font-family: var(--font-mono);
+    font-size: var(--fs-200);
+    color: var(--on-dark-2);
+}
+

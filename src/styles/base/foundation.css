@@ -1,0 +1,247 @@
+/* ============================================================
+   PRECISION GRAPHITE — design system
+   Self-hosted variable fonts, token-driven. Layout preserved
+   from the original; visual language rebuilt.
+   ============================================================ */
+
+@font-face {
+    font-family: "Archivo Black";
+    src: url("fonts/ArchivoBlack-latin.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "Archivo Black";
+    src: url("fonts/ArchivoBlack-latin-ext.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: "Playfair Display";
+    src: url("fonts/PlayfairDisplay-latin.woff2") format("woff2");
+    font-weight: 500 700;
+    font-display: swap;
+    font-style: normal;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "Playfair Display";
+    src: url("fonts/PlayfairDisplay-latin-ext.woff2") format("woff2");
+    font-weight: 500 700;
+    font-display: swap;
+    font-style: normal;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: "Clash Display";
+    src: url("fonts/ClashDisplay-Variable.woff2") format("woff2");
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Satoshi";
+    src: url("fonts/Satoshi-Variable.woff2") format("woff2");
+    font-weight: 300 900;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-400.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("fonts/IBMPlexMono-500.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+}
+
+:root {
+    /* Fonts */
+    --font-display: "Clash Display", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Satoshi", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --font-black: "Archivo Black", "Helvetica Neue", Arial, sans-serif;
+
+    /* Palette — near-monochrome, one accent */
+    --bg: #f2f1ee;
+    /* warm ivory */
+    --surface: #eceae4;
+    /* alternating section */
+    --elevated: #fbfaf8;
+    /* cards */
+    --ink: #141414;
+    /* graphite (never pure black) */
+    --ink-2: #55534e;
+    /* secondary text */
+    --ink-3: #8a8880;
+    /* muted / labels */
+    --hairline: rgba(20, 20, 20, 0.10);
+    --hairline-strong: rgba(20, 20, 20, 0.18);
+
+    /* Dark surfaces (footer, marquee, menu, intro) */
+    --dark: #141414;
+    --dark-2: #1c1c1c;
+    --on-dark: #f2f1ee;
+    --on-dark-2: rgba(242, 241, 238, 0.60);
+    --on-dark-hairline: rgba(242, 241, 238, 0.14);
+
+    /* Accent — used sparingly */
+    --accent: #9f1239;
+    --accent-ink: #ffffff;
+
+    /* Type scale (fluid) */
+    --fs-100: 0.75rem;
+    /* 12 — mono labels */
+    --fs-200: 0.875rem;
+    /* 14 */
+    --fs-300: 1rem;
+    /* 16 — body base */
+    --fs-400: 1.125rem;
+    /* 18 */
+    --fs-500: clamp(1.25rem, 1.6vw, 1.5rem);
+    --fs-600: clamp(1.5rem, 2.4vw, 2rem);
+    --fs-700: clamp(2rem, 3.4vw, 3rem);
+    --fs-800: clamp(2.5rem, 5vw, 4rem);
+    --fs-display: clamp(3rem, 8vw, 8rem);
+    --fs-mega: clamp(4rem, 11vw, 12rem);
+
+    --lh-tight: 1.05;
+    --lh-snug: 1.2;
+    --lh-body: 1.6;
+    --tracking-display: -0.03em;
+    --tracking-label: 0.14em;
+    --measure: 65ch;
+
+    /* Spacing — 8px scale */
+    --space-1: 0.5rem;
+    --space-2: 1rem;
+    --space-3: 1.5rem;
+    --space-4: 2rem;
+    --space-5: 3rem;
+    --space-6: 4rem;
+    --space-7: 6rem;
+    --space-8: 8rem;
+    --space-9: 10rem;
+
+    /* Layout */
+    --maxw: 1440px;
+    --pw-maxw: var(--maxw);
+    /* Shared content frame for all sections */
+    --gutter: clamp(1.25rem, 5vw, 6rem);
+    --section-pad: clamp(6rem, 12vw, 10rem);
+    --radius: 16px;
+    --radius-lg: 24px;
+
+    /* Motion */
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --dur: 0.7s;
+
+    color-scheme: light;
+}
+
+/* ===== Dark theme — token overrides (everything token-based flips) ===== */
+html[data-theme="dark"] {
+    --bg: #0f0f11;
+    --surface: #15151a;
+    --elevated: #1c1c22;
+    --ink: #f3f2ee;
+    --ink-2: #b7b5ad;
+    --ink-3: #8b897f;
+    --hairline: rgba(243, 242, 238, 0.12);
+    --hairline-strong: rgba(243, 242, 238, 0.22);
+    --dark: #1c1c22;
+    --accent: #e11d48;
+    color-scheme: dark;
+}
+
+/* smooth cross-fade when switching themes */
+html.theme-anim,
+html.theme-anim body,
+html.theme-anim .work,
+html.theme-anim .about-me-section,
+html.theme-anim .pw-card,
+html.theme-anim .edu-card {
+    transition: background-color 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* clip (not hidden): hidden makes html/body a scroll container on iOS,
+   which can swallow touch scrolling; clip only crops the overflow */
+html,
+body {
+    overflow-x: clip;
+}
+
+@supports not (overflow-x: clip) {
+
+    html,
+    body {
+        overflow-x: hidden;
+    }
+}
+
+html {
+    background: var(--bg);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--fs-300);
+    line-height: var(--lh-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    width: 100%;
+    max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--lh-tight);
+}
+
+a {
+    color: inherit;
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+html[data-input="pointer"] :focus-visible:not(input):not(textarea):not(select) {
+    outline: none;
+}
+

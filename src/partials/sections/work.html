@@ -1,0 +1,141 @@
+<section class="work" id="work">
+    <div class="pw-head">
+        <div class="pw-head-lead">
+            <span class="pw-kicker" data-i18n="workKicker">Portfolio</span>
+            <h2 class="pw-title" data-i18n="workTitle2">Selected Work</h2>
+            <p class="pw-sub" data-i18n="workSubtitle">A curated selection of products and digital
+                experiences designed to solve real problems with clarity and elegance.</p>
+        </div>
+        <a class="pw-viewall" href="https://github.com/manojpoudel9256?tab=repositories" target="_blank"
+            rel="noopener">
+            <span data-i18n="workViewAll">View all projects</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+        </a>
+    </div>
+
+    <div class="pw-filters" role="group" aria-label="Filter projects">
+        <button class="pw-fbtn active" type="button" data-filter="all" data-i18n="filterAll">All</button>
+        <button class="pw-fbtn" type="button" data-filter="web" data-i18n="filterWebShort">Web</button>
+        <button class="pw-fbtn" type="button" data-filter="apps" data-i18n="filterApps">Apps</button>
+        <button class="pw-fbtn" type="button" data-filter="uiux" data-i18n="filterUiux">UI/UX</button>
+    </div>
+
+    <div class="pw-projects">
+
+        <!-- ROW 1: work tools used by the team (16:9 covers) — strongest proof for 3D / simulation roles -->
+        <div class="pw-row2">
+            <article class="pw-card pw-tool" data-cat="web" onclick="openProject('glbAnalyzer')">
+                <div class="pw-cover">
+                    <img src="assets/images/projects/glb-analyzer.webp" srcset="assets/images/projects/glb-analyzer-800.webp 800w, assets/images/projects/glb-analyzer.webp 1672w" sizes="(max-width: 768px) 92vw, 640px" alt="GLB Analyzer: understand every mesh. Geometry, textures and PDF reports." width="1672" height="941"
+                        loading="lazy">
+                </div>
+                <div class="pw-body">
+                    <h3 class="pw-name" id="pw-name-glbAnalyzer" data-i18n="pjAnalyzerName">GLB Insight</h3>
+                    <p class="pw-desc" data-i18n="pjAnalyzerShort">A browser-based analyzer for .glb 3D models —
+                        inspect texture sizes, polygon counts and data size at a glance.</p>
+                    <div class="pw-tags">
+                        <span class="pw-chip">JavaScript</span>
+                        <span class="pw-chip">Node.js</span>
+                        <span class="pw-chip">glTF</span>
+                        <span class="pw-chip">Three.js</span>
+                    </div>
+                    <button type="button" class="pw-view" aria-labelledby="pw-view-glbAnalyzer pw-name-glbAnalyzer"
+                    onclick="event.stopPropagation(); openProject('glbAnalyzer')"><span id="pw-view-glbAnalyzer" data-i18n="workViewProject">View project</span>
+                    <span aria-hidden="true">→</span></button>
+                </div>
+            </article>
+
+            <article class="pw-card pw-tool" data-cat="web" onclick="openProject('glbForge')">
+                <div class="pw-cover">
+                    <img src="assets/images/projects/glb-optimizer.webp" srcset="assets/images/projects/glb-optimizer-800.webp 800w, assets/images/projects/glb-optimizer.webp 1672w" sizes="(max-width: 768px) 92vw, 640px" alt="GLB Optimizer: lighter models, smoother scenes. Mesh reduction, texture resizing and UE5-ready assets." width="1672"
+                        height="941" loading="lazy">
+                </div>
+                <div class="pw-body">
+                    <h3 class="pw-name" id="pw-name-glbForge" data-i18n="pjForgeName">GLB Forge</h3>
+                    <p class="pw-desc" data-i18n="pjForgeShort">A 100% local .glb optimizer for Unreal Engine 5 —
+                        mesh simplification, texture downscaling and a live before/after 3D viewer.</p>
+                    <div class="pw-tags">
+                        <span class="pw-chip">Node.js</span>
+                        <span class="pw-chip">Three.js</span>
+                        <span class="pw-chip">glTF-Transform</span>
+                        <span class="pw-chip">meshoptimizer</span>
+                    </div>
+                    <button type="button" class="pw-view" aria-labelledby="pw-view-glbForge pw-name-glbForge"
+                    onclick="event.stopPropagation(); openProject('glbForge')"><span id="pw-view-glbForge" data-i18n="workViewProject">View project</span>
+                    <span aria-hidden="true">→</span></button>
+                </div>
+            </article>
+        </div>
+
+        <!-- EVEREST — large feature card -->
+        <article class="pw-card pw-hero" data-cat="web uiux" onclick="openProject('everest')">
+            <div class="pw-cover">
+                <img src="assets/images/projects/everest-travel.webp" srcset="assets/images/projects/everest-travel-800.webp 800w, assets/images/projects/everest-travel.webp 1600w" sizes="(max-width: 768px) 92vw, 600px" alt="Everest travel website" width="1600" height="805"
+                    loading="lazy">
+            </div>
+            <div class="pw-body">
+                <h3 class="pw-name" id="pw-name-everest" data-i18n="pjEverestName">Everest Travel Experience</h3>
+                <p class="pw-desc" data-i18n="pjEverestShort">A premium travel website for curated Himalayan
+                    adventures and expeditions.</p>
+                <div class="pw-tags">
+                    <span class="pw-chip">UI/UX Design</span>
+                    <span class="pw-chip">HTML5</span>
+                    <span class="pw-chip">Tailwind CSS</span>
+                    <span class="pw-chip">JavaScript</span>
+                </div>
+                <button type="button" class="pw-view" aria-labelledby="pw-view-everest pw-name-everest"
+                    onclick="event.stopPropagation(); openProject('everest')"><span id="pw-view-everest" data-i18n="workViewProject">View project</span>
+                    <span aria-hidden="true">→</span></button>
+            </div>
+        </article>
+
+        <!-- PERSONAL FINANCE APP -->
+        <article class="pw-card pw-app" data-cat="apps uiux" onclick="openProject('budget')">
+            <div class="pw-cover">
+                <img src="assets/images/projects/personal-finance-app.webp" srcset="assets/images/projects/personal-finance-app-300.webp 300w, assets/images/projects/personal-finance-app-450.webp 450w, assets/images/projects/personal-finance-app.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Personal Finance App" width="900" height="1599"
+                    loading="lazy">
+            </div>
+            <div class="pw-body">
+                <h3 class="pw-name" id="pw-name-budget" data-i18n="pjBudgetName">Personal Finance App</h3>
+                <p class="pw-desc" data-i18n="pjBudgetShort">A smart finance app for budgeting, tracking,
+                    and insights.</p>
+                <div class="pw-tags">
+                    <span class="pw-chip">React</span>
+                    <span class="pw-chip">Vite</span>
+                    <span class="pw-chip">Tailwind CSS</span>
+                    <span class="pw-chip">Gemini AI</span>
+                </div>
+                <button type="button" class="pw-view" aria-labelledby="pw-view-budget pw-name-budget"
+                    onclick="event.stopPropagation(); openProject('budget')"><span id="pw-view-budget" data-i18n="workViewProject">View project</span>
+                    <span aria-hidden="true">→</span></button>
+            </div>
+        </article>
+
+        <!-- SALARY TRACKER APP -->
+        <article class="pw-card pw-app" data-cat="apps uiux" onclick="openProject('salary')">
+            <div class="pw-cover">
+                <img src="assets/images/projects/salary-tracker.webp" srcset="assets/images/projects/salary-tracker-300.webp 300w, assets/images/projects/salary-tracker-450.webp 450w, assets/images/projects/salary-tracker.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Salary Tracker App" width="900" height="1599"
+                    loading="lazy">
+            </div>
+            <div class="pw-body">
+                <h3 class="pw-name" id="pw-name-salary" data-i18n="pjSalaryName">Salary Tracker App</h3>
+                <p class="pw-desc" data-i18n="pjSalaryShort">A payroll and remittance app for tracking
+                    earnings and transfers.</p>
+                <div class="pw-tags">
+                    <span class="pw-chip">React</span>
+                    <span class="pw-chip">Vite</span>
+                    <span class="pw-chip">Tailwind CSS</span>
+                    <span class="pw-chip">Recharts</span>
+                </div>
+                <button type="button" class="pw-view" aria-labelledby="pw-view-salary pw-name-salary"
+                    onclick="event.stopPropagation(); openProject('salary')"><span id="pw-view-salary" data-i18n="workViewProject">View project</span>
+                    <span aria-hidden="true">→</span></button>
+            </div>
+        </article>
+
+
+    </div>
+</section>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Archivo Black (hero backdrop) is self-hosted and preloaded; no third-party font hosts. -->
+    <link rel="preload" href="fonts/ArchivoBlack-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- apply saved theme before paint to avoid a flash -->
+    <script>
+        /* @include scripts/theme-init.js */
+    </script>
+    <title>Manoj Poudel — Software Engineer, Mobility &amp; Robotics</title>
+    <meta name="description"
+        content="Manoj Poudel — Software Engineer specialising in Mobility &amp; Robotics, based in Tokyo, Japan. Selected work, engineering background, and contact.">
+    <meta name="author" content="Manoj Poudel">
+    <meta name="theme-color" content="#141414">
+    <link rel="canonical" href="https://pro-portfolio-mocha.vercel.app/">
+
+    <!-- Open Graph / social (absolute URLs: crawlers don't resolve relative paths) -->
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Manoj Poudel">
+    <meta property="og:url" content="https://pro-portfolio-mocha.vercel.app/">
+    <meta property="og:title" content="Manoj Poudel — Software Engineer, Mobility &amp; Robotics">
+    <meta property="og:description"
+        content="Software Engineer specialising in Mobility &amp; Robotics, based in Tokyo. Unreal Engine, Blender, and web projects.">
+    <meta property="og:image" content="https://pro-portfolio-mocha.vercel.app/assets/images/og-cover.jpg?v=20261016">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Manoj Poudel, Software Engineer in Mobility &amp; Robotics, Tokyo">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ja_JP">
+    <meta property="profile:first_name" content="Manoj">
+    <meta property="profile:last_name" content="Poudel">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@manojpoudel9256">
+    <meta name="twitter:title" content="Manoj Poudel — Software Engineer, Mobility &amp; Robotics">
+    <meta name="twitter:description" content="Software Engineer specialising in Mobility &amp; Robotics, based in Tokyo.">
+    <meta name="twitter:image" content="https://pro-portfolio-mocha.vercel.app/assets/images/og-cover.jpg?v=20261016">
+    <meta name="twitter:image:alt" content="Manoj Poudel, Software Engineer in Mobility &amp; Robotics, Tokyo">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Manoj Poudel",
+        "url": "https://pro-portfolio-mocha.vercel.app/",
+        "image": "https://pro-portfolio-mocha.vercel.app/assets/images/og-cover.jpg",
+        "jobTitle": "Software Engineer",
+        "description": "Software Engineer specialising in Mobility & Robotics, Unreal Engine, Blender, and web development.",
+        "address": { "@type": "PostalAddress", "addressLocality": "Tokyo", "addressCountry": "JP" },
+        "knowsLanguage": ["en", "ja"],
+        "knowsAbout": ["Unreal Engine", "Blender", "3D Simulation", "Robotics", "JavaScript", "Three.js", "C++"],
+        "sameAs": [
+            "https://www.linkedin.com/in/manojpoudel0429/",
+            "https://github.com/manojpoudel9256",
+            "https://x.com/manojpoudel9256"
+        ]
+    }
+    </script>
+
+    <link rel="icon" href="assets/icons/favicon.ico?v=portrait-20260918" sizes="16x16 32x32 48x48" type="image/x-icon">
+    <link rel="icon" href="assets/icons/favicon-16.png?v=portrait-20260918" sizes="16x16" type="image/png">
+    <link rel="icon" href="assets/icons/favicon-32.png?v=portrait-20260918" sizes="32x32" type="image/png">
+    <link rel="icon" href="assets/icons/favicon-48.png?v=portrait-20260918" sizes="48x48" type="image/png">
+    <link rel="manifest" href="manifest.json?v=portrait-20260918">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=portrait-20260918" sizes="180x180">
+
+    <!-- Self-hosted variable fonts (preload the two above-the-fold faces) -->
+    <link rel="preload" href="fonts/ClashDisplay-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin media="(min-width: 769px)">
+    <style>
+        /* @include styles/base/foundation.css */
+        /* @include styles/base/navigation.css */
+        /* @include styles/base/hero.css */
+        /* @include styles/base/work-and-project-modal.css */
+        /* @include styles/base/about-experience.css */
+        /* @include styles/base/credentials.css */
+        /* @include styles/base/education-and-image-viewer.css */
+        /* @include styles/base/contact-footer.css */
+        /* @include styles/base/responsive.css */
+    </style>
+    <!-- Shared visual system + golden section theme (inlined: render-critical) -->
+    <style id="refinements">
+        /* @include styles/golden-theme.css */
+    </style>
+    <!-- Below-the-fold section styles load without blocking first paint (cascade order is kept by link position). -->
+    <link rel="stylesheet" href="future-goals.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="blender-work.css" media="print" onload="this.media='all'">
+    <!-- Intro styles are inlined: they must apply before first paint. -->
+    <style>
+        /* @include styles/intro.css */
+    </style>
+    <link rel="stylesheet" href="unreal-projects.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="future-goals.css">
+        <link rel="stylesheet" href="blender-work.css">
+        <link rel="stylesheet" href="unreal-projects.css">
+    </noscript>
+    <!-- Mobile navigation (inlined: render-critical) -->
+    <style id="mobile-menu">
+        /* @include styles/mobile-menu.css */
+    </style>
+    <!-- Phone layouts (768px and below) (inlined: render-critical) -->
+    <style id="mobile-refinements" media="(max-width: 768px)">
+        /* @include styles/mobile.css */
+    </style>
+</head>
+
+<body>
+
+    <!-- Code-driven Hello intro. Hidden by default so no-JS visitors are never blocked. -->
+    <!-- @include partials/intro.html -->
+    <script>
+        /* @include scripts/intro.js */
+    </script>
+
+    <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+    <!-- @include partials/mobile-menu.html -->
+
+
+    <a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
+    <main id="main" tabindex="-1">
+        <!-- @include partials/top-nav.html -->
+
+        <!-- @include partials/sections/home.html -->
+
+        <!-- @include partials/sections/work.html -->
+
+        <!-- @include partials/sections/unreal-projects.html -->
+
+        <!-- PROJECT DETAIL MODAL -->
+        <!-- @include partials/project-modal.html -->
+
+
+        <!-- @include partials/sections/blender-work.html -->
+
+        <!-- @include partials/sections/about-me.html -->
+
+        <!-- @include partials/sections/future-goals.html -->
+
+        <!-- @include partials/sections/contact.html -->
+    </main>
+
+    <!-- Motion libraries (GSAP, ScrollTrigger, Lenis) only drive scroll effects, so they load
+         after the page has loaded and gone idle instead of competing with first paint.
+         window.__motion resolves once they are ready (and never if a CDN fails). -->
+    <script>
+        /* @include scripts/motion-loader.js */
+    </script>
+
+    <!-- One rule for every in-page jump (desktop nav, hero buttons, mobile menu, #links):
+         the section's top lands exactly at the fixed header's bottom edge. -->
+    <script>
+        /* @include scripts/scroll-to-section.js */
+    </script>
+    <script src="mobile-menu.js"></script>
+
+    <!-- THEME toggle (light / dark) -->
+    <script>
+        /* @include scripts/theme-toggle.js */
+    </script>
+
+    <!-- Portrait cursor parallax (subtle; pointer + reduced-motion aware) -->
+    <script>
+        /* @include scripts/portrait-parallax.js */
+    </script>
+
+
+
+    <!-- CRITICAL: Clock Logic Isolated -->
+    <script>
+        /* @include scripts/clock.js */
+    </script>
+
+    <script>
+        /* @include scripts/page.js */
+        /* @include scripts/image-viewer.js */
+        /* @include scripts/project-modal.js */
+    </script>
+
+    <!-- ===== i18n — English / 日本語 (authentic Japanese, not machine-translated) ===== -->
+    <script>
+        /* @include scripts/i18n.js */
+    </script>
+    <!-- @include partials/blender-inspector.html -->
+    <script src="unreal-projects.js"></script>
+    <script src="blender-work.js"></script>
+</body>
+
+</html>

@@ -28,8 +28,10 @@ Large editorial typography introduces the work; project previews, concise
 descriptions, and links provide a closer look at what each project does.
 
 Built with **HTML, CSS, and vanilla JavaScript**, the portfolio runs as a static
-site. There is no application framework, dependency installation, or build step
-required to serve it. The applications and tools it showcases are separate projects.
+site with no framework and no dependencies. The page is written as small source
+files in `src/`; a ~70-line Node script (`build.mjs`) stitches them into a single
+fast `index.html` with its critical CSS and JavaScript inlined. The applications
+and tools it showcases are separate projects.
 
 ## Selected work
 
@@ -64,14 +66,15 @@ from the desktop composition.
 
 | Layer | Implementation |
 | --- | --- |
-| Structure and content | Semantic HTML, project data, and EN/JA dictionaries in `index.html` |
+| Structure and content | Section partials in `src/partials/`, project data in `src/scripts/project-modal.js`, EN/JA dictionaries in `src/scripts/i18n.js` |
 | Presentation | CSS custom properties, Grid and Flexbox; render-critical CSS is inlined, below-the-fold section styles load asynchronously |
 | Interaction | Vanilla JavaScript for navigation, themes, translation, filters, dialogs, and playback |
 | Animation | GSAP, ScrollTrigger and Lenis, loaded after the page is idle; inline CSS/JS for the intro and menu icons |
 | Media | Responsive WebP images (`srcset`), self-hosted WOFF2 fonts, and on-demand WebM/MP4 previews |
 | 3D inspection | Self-hosted Three.js r180, GLTFLoader, OrbitControls, and studio environment lighting; loaded only on request |
 | Contact delivery | Formspree |
-| Hosting | Vercel static deployment (`vercel.json` cache headers, `.vercelignore`) |
+| Build | `node build.mjs` expands `@include` markers in `src/index.html` into `dist/index.html` and copies the static files; no dependencies |
+| Hosting | Vercel runs the build and serves `dist/` (`vercel.json`: build, cache headers; `.vercelignore`) |
 | Verification | Node's built-in test runner and optional Playwright browser checks |
 
 GSAP, ScrollTrigger and Lenis load from public CDNs; the page works without them
@@ -80,16 +83,18 @@ repository. The contact form requires Formspree connectivity.
 
 ## Run locally
 
-With Git and Python 3 installed:
+With Git, Node.js 18+ and Python 3 installed:
 
 ```bash
 git clone https://github.com/manojpoudel9256/pro-portfolio.git
 cd pro-portfolio
-python -m http.server 4173 --bind 127.0.0.1
+node build.mjs                                   # writes dist/
+python -m http.server 4173 --bind 127.0.0.1 --directory dist
 ```
 
-Open **[localhost:4173](http://localhost:4173/)**. A local HTTP server is recommended
-for consistent media loading and browser behavior.
+Open **[localhost:4173](http://localhost:4173/)**. Re-run `node build.mjs` after
+editing anything in `src/` (files outside `src/` are copied as they are).
+`node build.mjs --check` verifies every `@include` without writing files.
 
 For layout work, skip the opening animation with `?nopreload=1`. Add
 `&theme=light` or `&theme=dark` to inspect a specific theme:
@@ -102,15 +107,24 @@ http://localhost:4173/?nopreload=1&theme=light
 
 ```text
 .
-├── index.html                 # Content, project data, EN/JA dictionaries, and inline
-│                              # render-critical CSS (<style id=…>), intro and menu icons
+├── build.mjs                  # Builds dist/: expands src/index.html, copies static files
+├── src/                       # Page source (stitched into one index.html at build time)
+│   ├── index.html             # Page template: <head>, layout and @include markers
+│   ├── partials/              # top-nav, mobile-menu, intro, project-modal, blender-inspector
+│   │   └── sections/          # home, work, unreal-projects, blender-work, about-me,
+│   │                          # future-goals, contact
+│   ├── styles/                # Inlined CSS: golden-theme, mobile, mobile-menu, intro
+│   │   └── base/              # Foundation, navigation, hero, work, about, credentials,
+│   │                          # education, contact/footer, responsive
+│   └── scripts/               # Inlined JS: theme-init, intro, page, project-modal (project
+│                              # data), image-viewer, i18n (EN/JA), clock, scroll, motion
 ├── mobile-menu.js             # Mobile navigation drawer: focus and scroll handling
 ├── unreal-projects.css / .js  # Unreal Engine cards and media lifecycle
 ├── blender-work.css / .js     # Blender gallery, translations, and inspector dialog
 ├── blender-viewer.js          # Lazy-loaded Three.js renderer and resource cleanup
 ├── future-goals.css           # Future Goals section
 ├── manifest.json              # App metadata and home-screen icons
-├── vercel.json / .vercelignore# Cache headers; files kept out of the deployment
+├── vercel.json / .vercelignore# Build + cache headers; files kept out of the deployment
 ├── robots.txt / sitemap.xml   # Search-engine metadata
 ├── docs/                      # Design notes, mobile/Blender verification, improvement plan
 ├── fonts/                     # Self-hosted typefaces and mobile font instances
@@ -123,10 +137,11 @@ http://localhost:4173/?nopreload=1&theme=light
 └── tests/                     # Interaction tests and optional browser checks
 ```
 
-To update project content, edit the `PROJECTS` object and the corresponding
-English/Japanese entries in `index.html`. Keep phone styling in
-the `<style id="mobile-refinements" media="(max-width: 768px)">` block in
-`index.html`; its rules also sit inside a 768px media query. Update the Formspree action and personal links if adapting the site.
+To update project content, edit the `PROJECTS` object in
+`src/scripts/project-modal.js`, the card in `src/partials/sections/work.html`, and the
+English/Japanese text in `src/scripts/i18n.js`. Phone styling lives in
+`src/styles/mobile.css` (inlined into `<style id="mobile-refinements" media="(max-width: 768px)">`).
+Update the Formspree action and personal links if adapting the site.
 
 Further documentation:
 
@@ -144,9 +159,10 @@ Further documentation:
 
 ## Verification
 
-Run the interaction tests with Node.js:
+Check that the page source builds, then run the interaction tests with Node.js:
 
 ```bash
+node build.mjs --check
 node --test --test-isolation=none tests/mobile-menu.test.cjs tests/unreal-projects.test.cjs
 ```
 
@@ -168,8 +184,8 @@ The repository can be served by a static host. For Vercel:
 | --- | --- |
 | Framework preset | Other |
 | Root directory | Repository root |
-| Build command | None |
-| Output directory | Repository root (`.`) |
+| Build command | `node build.mjs` (set in `vercel.json`) |
+| Output directory | `dist` (set in `vercel.json`) |
 
 `vercel.json` sets long-lived caching for fonts and a one-day cache for assets.
 `.vercelignore` keeps documentation, tests, scripts and source-only images

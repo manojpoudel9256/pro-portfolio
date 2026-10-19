@@ -1,0 +1,370 @@
+/* HERO — editorial: giant type behind portrait cutout */
+.hero {
+    position: relative;
+    background: var(--bg);
+    overflow: hidden;
+    padding: clamp(84px, 12vh, 108px) var(--gutter) clamp(2rem, 5vh, 3rem);
+}
+
+.hero-stage {
+    position: relative;
+    max-width: var(--maxw);
+    margin: 0 auto;
+}
+
+/* giant SOFTWARE ENGINEER typography (behind everything) */
+.hero-bigtype {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-black);
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    color: var(--accent);
+    font-size: clamp(2.1rem, 15.3vw, 7rem);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+}
+
+.bt-line {
+    display: block;
+}
+
+/* subtle burgundy halftone dots behind the portrait */
+.hero-halftone {
+    position: absolute;
+    z-index: 2;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(86%, 460px);
+    aspect-ratio: 1 / 1.15;
+    background-image: radial-gradient(color-mix(in srgb, var(--accent) 32%, transparent) 1.1px, transparent 1.7px);
+    background-size: 11px 11px;
+    -webkit-mask-image: radial-gradient(58% 54% at 50% 44%, #000 28%, transparent 72%);
+    mask-image: radial-gradient(58% 54% at 50% 44%, #000 28%, transparent 72%);
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+/* portrait cutout — in front of the type */
+.hero-portrait {
+    position: relative;
+    z-index: 3;
+    width: min(86%, 430px);
+    margin: 0 auto;
+    padding-top: clamp(2.5rem, 15vw, 6rem);
+}
+
+.hero-portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 97%);
+    mask-image: linear-gradient(to bottom, #000 70%, transparent 97%);
+}
+
+/* intro */
+.hero-intro {
+    position: relative;
+    z-index: 4;
+    margin-top: clamp(0.75rem, 3vw, 1.25rem);
+}
+
+.hero-hi {
+    max-width: 330px;
+    font-size: clamp(0.98rem, 3.4vw, 1.06rem);
+    line-height: 1.55;
+    color: var(--ink-2);
+}
+
+.hero-hi strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-top: var(--space-4);
+}
+
+.hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.hero-cta-slash {
+    opacity: 0.65;
+}
+
+.hero-cta-arrow {
+    transition: transform 0.25s var(--ease);
+}
+
+.hero-cta:hover .hero-cta-arrow {
+    transform: translateX(6px);
+}
+
+.hero-contact {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--hairline-strong);
+    padding-bottom: 2px;
+    transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+
+.hero-contact:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* expertise list */
+.hero-expertise {
+    position: relative;
+    z-index: 4;
+    list-style: none;
+    margin: clamp(1.5rem, 5vw, 2rem) 0 0;
+    padding: 4px 0 4px 16px;
+    border-left: 2px solid color-mix(in srgb, var(--accent) 32%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.hero-expertise li {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.05rem, 4vw, 1.3rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink-2);
+    transition: color 0.25s var(--ease);
+}
+
+.hero-expertise li.is-active {
+    color: var(--ink);
+}
+
+.hero-expertise li:hover {
+    color: var(--accent);
+}
+
+/* tech strip */
+.hero-techstrip {
+    margin: clamp(2rem, 6vw, 3rem) auto 0;
+    overflow: hidden;
+    border-top: 1px solid var(--hairline);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.ts-track {
+    display: flex;
+    width: max-content;
+    animation: tsMarquee 70s linear infinite;
+    will-change: transform;
+}
+
+.ts-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes tsMarquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.ts-item {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 15px clamp(1.4rem, 3.4vw, 2.6rem);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--ink-2);
+    white-space: nowrap;
+    border-left: 1px solid var(--hairline);
+}
+
+.ts-item img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
+
+/* entrance — the hero lettering is the LCP element, so it paints
+   immediately (no opacity fade); the portrait still fades in. */
+@media (prefers-reduced-motion: no-preference) {
+    .hero-portrait {
+        animation: heroFade 1s var(--ease) both;
+    }
+
+    .hero-portrait {
+        animation-delay: 0.08s;
+    }
+
+    .hero-intro {
+        animation: heroUp 0.9s var(--ease) 0.24s both;
+    }
+
+    .hero-expertise {
+        animation: heroUp 0.9s var(--ease) 0.34s both;
+    }
+
+    .hero-techstrip {
+        animation: heroUp 0.9s var(--ease) 0.44s both;
+    }
+}
+
+@keyframes heroFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes heroUp {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ── tablet ─────────────────────────────── */
+@media (min-width: 768px) {
+    .hero-bigtype {
+        font-size: clamp(5rem, 16vw, 9rem);
+    }
+
+    .hero-portrait {
+        width: min(60%, 460px);
+        padding-top: clamp(3rem, 9vw, 6rem);
+    }
+
+}
+
+/* ── desktop / laptop: editorial absolute composition ── */
+@media (min-width: 1024px) {
+    .hero {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 0;
+    }
+
+    .hero-stage {
+        flex: 1 1 auto;
+        min-height: 0;
+        width: 100%;
+    }
+
+    .hero-bigtype {
+        top: clamp(18px, 4vh, 52px);
+        font-size: clamp(6rem, 14.5vw, 14rem);
+        line-height: 0.86;
+    }
+
+    .hero-halftone {
+        top: 50%;
+        transform: translate(-50%, -46%);
+        width: min(40vw, 540px);
+        aspect-ratio: 1 / 1;
+    }
+
+    .hero-portrait {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: min(47vw, 700px);
+        margin: 0;
+        padding: 0;
+    }
+
+    .hero-portrait img {
+        -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 99%);
+        mask-image: linear-gradient(to bottom, #000 82%, transparent 99%);
+    }
+
+    .hero-intro {
+        position: absolute;
+        z-index: 4;
+        left: 0;
+        bottom: clamp(2rem, 8vh, 4.5rem);
+        max-width: 320px;
+        margin: 0;
+    }
+
+    .hero-expertise {
+        position: absolute;
+        z-index: 4;
+        right: 0;
+        bottom: clamp(2rem, 8vh, 4.5rem);
+        margin: 0;
+    }
+
+    .hero-techstrip {
+        margin: 0;
+        flex: 0 0 auto;
+    }
+
+    .ts-item {
+        font-size: 0.85rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ts-track {
+        animation: none;
+    }
+}
+
+@media (min-width: 1440px) {
+    .hero-bigtype {
+        font-size: clamp(9rem, 13vw, 15rem);
+    }
+
+    .hero-portrait {
+        width: min(45vw, 760px);
+    }
+}
+
+

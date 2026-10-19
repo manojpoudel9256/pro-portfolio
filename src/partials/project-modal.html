@@ -1,0 +1,37 @@
+<div class="proj-modal" id="projModal" aria-hidden="true">
+    <div class="proj-dialog" role="dialog" aria-modal="true" aria-labelledby="pmTitle" data-lenis-prevent>
+        <button class="proj-close" type="button" onclick="closeProject()" aria-label="Close">&times;</button>
+        <div class="proj-media" id="pmMedia">
+            <img id="pmImg" src="" alt="">
+        </div>
+        <div class="proj-content">
+            <span class="proj-kind" id="pmKind"></span>
+            <h3 class="proj-title" id="pmTitle"></h3>
+            <p class="proj-desc" id="pmDesc"></p>
+            <dl class="proj-case" id="pmCase"></dl>
+            <div class="proj-actions">
+                <a class="proj-live" id="pmLive" href="#" target="_blank" rel="noopener">
+                    <span></span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M7 17L17 7M9 7h8v8" />
+                    </svg>
+                </a>
+            </div>
+            <h4 class="proj-h" id="pmBuilt"></h4>
+            <ul class="proj-stack" id="pmStack"></ul>
+            <div class="proj-install" id="pmInstall">
+                <h4 class="proj-h" id="pmInstallTitle"></h4>
+                <p class="proj-note" id="pmInstallNote"></p>
+                <ol class="proj-steps" id="pmSteps"></ol>
+                <a class="proj-open" id="pmOpen" href="#" target="_blank" rel="noopener">
+                    <span></span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M7 17L17 7M9 7h8v8" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

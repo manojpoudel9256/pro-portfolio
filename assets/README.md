@@ -1,6 +1,6 @@
 # Portfolio assets
 
-Use lowercase, descriptive, hyphen-separated filenames. Paths in `index.html` and `manifest.json` are relative to the project root.
+Use lowercase, descriptive, hyphen-separated filenames. Paths in the page (`src/`, built to `dist/index.html`) and `manifest.json` are relative to the site root.
 
 | Folder | Contents |
 | --- | --- |

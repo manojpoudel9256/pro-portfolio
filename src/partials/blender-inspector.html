@@ -1,0 +1,42 @@
+<dialog class="bi-dialog" id="blenderInspector" aria-labelledby="biTitle" data-state="loading" data-lenis-prevent>
+    <header class="bi-top">
+        <div><p class="bi-kicker" data-bw-text="viewer">Interactive model inspector</p><h2 class="bi-title" id="biTitle">3D model</h2></div>
+        <button class="bi-close" id="biClose" type="button" aria-label="Close model inspector" autofocus><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </header>
+    <div class="bi-layout">
+        <div class="bi-scene">
+            <div class="bi-stage">
+                <div class="bi-viewport" id="biViewport" aria-busy="true"></div>
+                <div class="bi-status" id="biStatus" role="status" aria-live="polite"><p id="biStatusText">Preparing your model…</p><progress class="bi-progress" id="biProgress" max="1" aria-label="Model loading"></progress><button class="bi-control" id="biRetry" type="button" data-bw-text="retry" hidden>Try again</button></div>
+            </div>
+            <div class="bi-anim" id="biAnim" hidden>
+                <button class="bi-control bi-play" id="biPlay" type="button" aria-pressed="false">
+                    <svg class="bi-ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+                    <svg class="bi-ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.5h3v13h-3zM13.5 5.5h3v13h-3z"/></svg>
+                    <span id="biPlayLabel" data-bw-text="play">Play animation</span>
+                </button>
+                <div class="bi-clips" id="biClips" role="group" aria-label="Animation" data-bw-aria="clips"></div>
+            </div>
+            <div class="bi-controls">
+                <button class="bi-control" id="biReset" type="button" data-bw-text="reset" disabled>Reset view</button>
+                <button class="bi-control" id="biWireframe" type="button" aria-pressed="false" data-bw-text="wireframe" disabled>Wireframe</button>
+                <button class="bi-control" id="biRotate" type="button" aria-pressed="false" data-bw-text="rotate" disabled>Auto-rotate</button>
+                <label class="bi-env"><span data-bw-text="environment">Lighting</span><select class="bi-control" id="biEnvironment" disabled><option value="studio" data-bw-text="studio">Studio</option><option value="dark" data-bw-text="dark">Dark studio</option></select></label>
+            </div>
+            <p class="bi-help" data-bw-text="help">Drag to orbit · Scroll or pinch to zoom · Right-drag or two-finger drag to pan. Keyboard: arrows to orbit, + / − to zoom, Home to reset.</p>
+        </div>
+        <aside class="bi-details">
+            <p class="bi-description" id="biDescription"></p>
+            <dl class="bi-stats">
+                <div><dt data-bw-text="triangles">Triangles</dt><dd data-bi-value="triangles">—</dd></div>
+                <div><dt data-bw-text="vertices">Exported vertices</dt><dd data-bi-value="vertices">—</dd></div>
+                <div><dt data-bw-text="meshes">Meshes</dt><dd data-bi-value="meshes">—</dd></div>
+                <div><dt data-bw-text="materials">Materials</dt><dd data-bi-value="materials">—</dd></div>
+                <div><dt data-bw-text="textures">Textures</dt><dd data-bi-value="textures">—</dd></div>
+                <div><dt data-bw-text="size">GLB file size</dt><dd data-bi-value="size">—</dd></div>
+                <div><dt data-bw-text="dimensions">Dimensions (X × Y × Z)</dt><dd data-bi-value="dimensions">—</dd></div>
+            </dl>
+            <p class="bi-stat-note" data-bw-text="statNote">GLB geometry is triangulated; original Blender quad counts are not retained. Counts include mesh instances. Dimensions use the exported scene’s meter units.</p>
+        </aside>
+    </div>
+</dialog>
