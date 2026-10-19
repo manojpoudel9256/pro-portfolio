@@ -76,6 +76,13 @@ export async function createModelViewer(container, model, options = {}) {
   let mixer = null;
   let action = null;
   let playing = false;
+  // Follow camera: when a clip moves the whole model (e.g. the truck drives 8 m),
+  // the orbit target, camera, cursor and key light travel with it.
+  let followNode = null;
+  let grid = null;
+  const followLast = new THREE.Vector3();
+  const followNow = new THREE.Vector3();
+  const followOffset = new THREE.Vector3();
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'default' });
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
@@ -122,12 +129,29 @@ export async function createModelViewer(container, model, options = {}) {
     if (disposed || document.hidden) return;
     const delta = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 1 / 60;
     lastTime = time;
+    if (mixer && playing) {
+      mixer.update(delta);
+      follow();
+    }
     controls.update(delta);
-    if (mixer && playing) mixer.update(delta);
     if (floor) floor.visible = camera.position.y >= floor.position.y;
     renderer.render(scene, camera);
     // Render continuously only while something moves; otherwise stay idle.
     if (controls.autoRotate || playing) invalidate();
+  }
+  function follow() {
+    if (!followNode) return;
+    followNode.getWorldPosition(followNow);
+    const shift = followNow.clone().sub(followLast);
+    if (shift.lengthSq() < 1e-12) return;
+    followLast.copy(followNow);
+    followOffset.add(shift);
+    controls.target.add(shift);
+    controls.cursor.add(shift);
+    camera.position.add(shift);
+    key.position.add(shift);
+    key.target.position.add(shift);
+    fill.position.add(shift);
   }
   function fitDistance() {
     const halfVertical = THREE.MathUtils.degToRad(camera.fov / 2);
@@ -136,11 +160,12 @@ export async function createModelViewer(container, model, options = {}) {
   }
   function reset() {
     if (disposed || !sceneReady) return;
-    controls.target.copy(center);
-    controls.cursor.copy(center);
+    const focus = center.clone().add(followOffset);
+    controls.target.copy(focus);
+    controls.cursor.copy(focus);
     defaultDistance = fitDistance();
-    camera.position.copy(center).addScaledVector(direction, defaultDistance);
-    camera.lookAt(center);
+    camera.position.copy(focus).addScaledVector(direction, defaultDistance);
+    camera.lookAt(focus);
     controls.minDistance = radius * 0.16;
     controls.maxDistance = defaultDistance * 4;
     controls.maxTargetRadius = radius * 1.8;
@@ -178,6 +203,10 @@ export async function createModelViewer(container, model, options = {}) {
     fill.intensity = dark ? 0.9 : 0.55;
     ambient.intensity = dark ? 0.3 : 0.25;
     if (floor) floor.material.color.set(dark ? '#30343a' : '#eeeae3');
+    if (grid) {
+      grid.material.color.set(dark ? '#5a6068' : '#cfc7b8');
+      grid.material.opacity = dark ? 0.5 : 0.6;
+    }
     invalidate();
   }
   function setWireframe(value) {
@@ -272,6 +301,7 @@ export async function createModelViewer(container, model, options = {}) {
     if (mixer && gltf) mixer.uncacheRoot(gltf.scene);
     disposeObjects(gltf ? gltf.scenes : []);
     if (floor) disposeObjects([floor]);
+    if (grid) { grid.geometry.dispose(); grid.material.dispose(); }
     environmentTarget?.dispose();
     key.shadow.map?.dispose();
     scene.clear();
@@ -319,7 +349,30 @@ export async function createModelViewer(container, model, options = {}) {
       if (object.isMesh) { object.castShadow = true; object.receiveShadow = true; }
     });
     scene.add(gltf.scene);
-    if (gltf.animations.length) mixer = new THREE.AnimationMixer(gltf.scene);
+    if (gltf.animations.length) {
+      mixer = new THREE.AnimationMixer(gltf.scene);
+      let best = null;
+      let bestSpan = 0;
+      for (const clip of gltf.animations) {
+        for (const track of clip.tracks) {
+          if (!track.name.endsWith('.position')) continue;
+          const v = track.values;
+          let span = 0;
+          for (let i = 3; i < v.length; i += 3) {
+            span = Math.max(span, Math.hypot(v[i] - v[0], v[i + 1] - v[1], v[i + 2] - v[2]));
+          }
+          if (span > bestSpan) { bestSpan = span; best = track.name.slice(0, -'.position'.length); }
+        }
+      }
+      // Bone tracks are named by node name; the scale of the move is checked
+      // in world units after the scene transform is applied below.
+      if (best) followNode = gltf.scene.getObjectByName(best) || null;
+      if (followNode) {
+        followNode.getWorldPosition(followLast);
+        const worldSpan = bestSpan * followNode.getWorldScale(new THREE.Vector3()).x;
+        if (worldSpan < radius * 0.05) followNode = null;
+      }
+    }
 
     const room = new RoomEnvironment();
     const pmrem = new THREE.PMREMGenerator(renderer);
@@ -332,6 +385,16 @@ export async function createModelViewer(container, model, options = {}) {
     floor.position.y = -radius * 0.002;
     floor.receiveShadow = true;
     scene.add(floor);
+    if (followNode) {
+      const cell = Math.max(0.5, Math.round(radius / 3));
+      const extent = cell * 60;
+      grid = new THREE.GridHelper(extent, 60, '#cfc7b8', '#cfc7b8');
+      grid.material.transparent = true;
+      grid.material.opacity = 0.6;
+      grid.material.depthWrite = false;
+      grid.position.y = floor.position.y + radius * 0.001;
+      scene.add(grid);
+    }
     key.position.set(radius * 3.5, radius * 5, radius * 3);
     key.target.position.copy(center);
     fill.position.set(-radius * 3, radius * 2, -radius * 3);
