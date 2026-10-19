@@ -347,6 +347,10 @@ export async function createModelViewer(container, model, options = {}) {
     camera.updateProjectionMatrix();
     gltf.scene.traverse(object => {
       if (object.isMesh) { object.castShadow = true; object.receiveShadow = true; }
+      // Skinned parts keep their bind-pose bounding sphere, so once an animation
+      // moves the rig (the truck drives 8 m) three.js would wrongly cull them
+      // (e.g. the rear wheels vanished). These models are small: always draw them.
+      if (object.isSkinnedMesh) object.frustumCulled = false;
     });
     scene.add(gltf.scene);
     if (gltf.animations.length) {
