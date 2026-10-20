@@ -34,7 +34,9 @@
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const controls = [$('biReset'), $('biWireframe'), $('biRotate'), $('biEnvironment')];
     function loadMetadata() {
-        return metadata ||= fetch('assets/models/blender/models.json').then(response => {
+        // no-cache: always revalidate (a cheap 304), so a phone never keeps an old
+        // model list (e.g. one without the animation clips) from a previous visit.
+        return metadata ||= fetch('assets/models/blender/models.json', { cache: 'no-cache' }).then(response => {
             if (!response.ok) throw new Error('Model metadata unavailable');
             return response.json();
         }).then(data => { models = data; translate(); return data; }).catch(error => {
