@@ -62,3 +62,4 @@ bounce: this is a precise-instrument portfolio, not a playful one.
 | 3 | ✅ | (this commit) | Hero small type redesigned (eyebrow, value statement, solid primary button, growing-underline link, numbered focus list; EN+JA). CSS entrance starts as the intro curtain lifts, ~1.1 s, lettering static |
 | 4 | ✅ | (this commit) | One batched reveal (24px rise, 70ms stagger, 640ms) for all cards; mask-line wipe for section headings; sideways education slide and scrubbed footer removed; desktop only; verified nothing stays hidden |
 | 5 | ✅ | (this commit) | Press feedback (97% dip, WAAPI on scale) on 24 control types; arrow nudges; one 260ms card hover; filter state transition (260ms, 40ms stagger) |
+| 6 | ✅ | (this commit) | Sliding nav pill (follows scroll-spy + language); project popup 260ms in / 180ms ease-in out; photo viewer + 3D inspector share the rise; backdrop fade |

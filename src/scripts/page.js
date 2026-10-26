@@ -82,6 +82,32 @@ document.querySelectorAll('.top-nav a[href^="#"], .hero a[href^="#"]').forEach(a
     }));
 })();
 
+// NAV INDICATOR — one pill slides to the active link (the scroll-spy in
+// i18n.js toggles .active; a MutationObserver follows it). It appears in place
+// on load, then animates; it re-measures on resize and language change.
+(function () {
+    const pill = document.querySelector(".top-nav .nav-pill");
+    if (!pill) return;
+    const ind = document.createElement("span");
+    ind.className = "np-indicator no-anim";
+    ind.setAttribute("aria-hidden", "true");
+    pill.prepend(ind);
+    pill.classList.add("has-indicator");
+    const place = () => {
+        const a = pill.querySelector(".np-link.active");
+        if (!a || !a.offsetParent) { ind.style.setProperty("--np-o", "0"); return; }
+        ind.style.setProperty("--np-x", a.offsetLeft + "px");
+        ind.style.setProperty("--np-w", a.offsetWidth + "px");
+        ind.style.setProperty("--np-o", "1");
+    };
+    new MutationObserver(place).observe(pill, { subtree: true, attributes: true, attributeFilter: ["class"] });
+    window.addEventListener("resize", place, { passive: true });
+    window.addEventListener("portfolio:languagechange", () => requestAnimationFrame(place));
+    if (document.fonts) document.fonts.ready.then(place);
+    place();
+    requestAnimationFrame(() => requestAnimationFrame(() => ind.classList.remove("no-anim")));
+})();
+
 // PRESS FEEDBACK — controls dip to 97 % while pressed and spring back on
 // release (WAAPI on the independent `scale` property, so it never overrides a
 // component's own CSS transitions or transforms).

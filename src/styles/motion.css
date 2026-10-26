@@ -31,3 +31,107 @@
         transition: none;
     }
 }
+
+/* ── State transitions ─────────────────────────────────────────────── */
+
+/* Desktop nav: one active pill that slides between links (positioned by
+   page.js) instead of the highlight jumping from link to link. */
+.nav-pill {
+    position: relative;
+}
+
+.np-link {
+    position: relative;
+    z-index: 1;
+}
+
+.nav-pill.has-indicator .np-link.active {
+    background: transparent;
+}
+
+.np-indicator {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 0;
+    width: var(--np-w, 0px);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ink) 7%, transparent);
+    translate: var(--np-x, 0px) 0;
+    opacity: var(--np-o, 0);
+    pointer-events: none;
+    transition: translate var(--dur-base) var(--ease-out), width var(--dur-base) var(--ease-out),
+        opacity var(--dur-fast) var(--ease-out);
+}
+
+.np-indicator.no-anim {
+    transition: none;
+}
+
+/* Project popup: arrives with a short rise (260 ms ease-out) and leaves
+   faster (180 ms ease-in), so closing feels immediate. */
+.proj-modal {
+    transition: opacity var(--dur-fast) var(--ease-in), visibility var(--dur-fast) var(--ease-in);
+}
+
+.proj-modal.active {
+    transition: opacity var(--dur-base) var(--ease-out), visibility var(--dur-base) var(--ease-out);
+}
+
+.proj-dialog {
+    transform: translateY(12px) scale(0.985);
+    transition: transform var(--dur-fast) var(--ease-in);
+}
+
+.proj-modal.active .proj-dialog {
+    transition: transform var(--dur-base) var(--ease-out);
+}
+
+/* Photo viewer and 3D inspector use the same rise. */
+@keyframes popupIn {
+    from {
+        opacity: 0;
+        translate: 0 12px;
+        scale: 0.985;
+    }
+
+    to {
+        opacity: 1;
+        translate: 0 0;
+        scale: 1;
+    }
+}
+
+@keyframes backdropIn {
+    from {
+        opacity: 0;
+    }
+}
+
+.image-modal-content {
+    animation: popupIn var(--dur-base) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .bi-dialog[open] {
+        animation: popupIn var(--dur-base) var(--ease-out);
+    }
+
+    .bi-dialog[open]::backdrop {
+        animation: backdropIn var(--dur-base) var(--ease-out);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .np-indicator,
+    .proj-modal,
+    .proj-modal.active,
+    .proj-dialog,
+    .proj-modal.active .proj-dialog {
+        transition: none;
+    }
+
+    .image-modal-content {
+        animation: none;
+    }
+}
