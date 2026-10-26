@@ -61,3 +61,4 @@ bounce: this is a precise-instrument portfolio, not a playful one.
 | 1–2 | ✅ | (this commit) | Motion tokens; hero/nav moved to the warm ivory/black of the sections — seam gone; contrast 7.2–17:1 |
 | 3 | ✅ | (this commit) | Hero small type redesigned (eyebrow, value statement, solid primary button, growing-underline link, numbered focus list; EN+JA). CSS entrance starts as the intro curtain lifts, ~1.1 s, lettering static |
 | 4 | ✅ | (this commit) | One batched reveal (24px rise, 70ms stagger, 640ms) for all cards; mask-line wipe for section headings; sideways education slide and scrubbed footer removed; desktop only; verified nothing stays hidden |
+| 5 | ✅ | (this commit) | Press feedback (97% dip, WAAPI on scale) on 24 control types; arrow nudges; one 260ms card hover; filter state transition (260ms, 40ms stagger) |

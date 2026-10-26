@@ -60,10 +60,12 @@ document.querySelectorAll('.top-nav a[href^="#"], .hero a[href^="#"]').forEach(a
     }
 })();
 
-// SELECTED WORK — category filters
+// SELECTED WORK — category filters. The cards that remain settle in with a
+// short rise (260 ms, 40 ms apart) so the change reads as a state transition.
 (function () {
     const btns = document.querySelectorAll(".pw-fbtn");
-    const cards = document.querySelectorAll(".pw-card");
+    const cards = [...document.querySelectorAll(".pw-card")];
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     btns.forEach(btn => btn.addEventListener("click", () => {
         btns.forEach(b => b.classList.toggle("active", b === btn));
         const f = btn.dataset.filter;
@@ -72,7 +74,40 @@ document.querySelectorAll('.top-nav a[href^="#"], .hero a[href^="#"]').forEach(a
             c.classList.toggle("pw-hide", !show);
         });
         if (window.ScrollTrigger) ScrollTrigger.refresh();
+        if (reduce.matches || !Element.prototype.animate) return;
+        cards.filter(c => !c.classList.contains("pw-hide")).forEach((c, i) => {
+            c.animate([{ opacity: 0, translate: "0 8px" }, { opacity: 1, translate: "0 0" }],
+                { duration: 260, delay: i * 40, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "backwards" });
+        });
     }));
+})();
+
+// PRESS FEEDBACK — controls dip to 97 % while pressed and spring back on
+// release (WAAPI on the independent `scale` property, so it never overrides a
+// component's own CSS transitions or transforms).
+(function () {
+    if (!Element.prototype.animate) return;
+    const PRESS = ".hero-cta, .pw-view, .pw-fbtn, .pw-viewall, .cred-btn, .cf-submit, .cf-topic, .bi-control, " +
+        ".proj-live, .proj-open, .ue-toggle, .menu-text, .theme-toggle, .lang-flag-btn, .edu-more, .bw-inspect, " +
+        ".cl-contact, .social-icon, .cl-social, .proj-close, .bi-close, .menu-link, .menu-language-option, .menu-theme";
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const ease = "cubic-bezier(0.22, 1, 0.36, 1)";
+    document.addEventListener("pointerdown", e => {
+        if (reduce.matches || e.button > 0) return;
+        const el = e.target.closest(PRESS);
+        if (!el || el.disabled) return;
+        if (el._press) el._press.cancel();
+        const down = el.animate([{ scale: 1 }, { scale: 0.97 }], { duration: 120, easing: ease, fill: "forwards" });
+        el._press = down;
+        const events = ["pointerup", "pointercancel", "pointerleave"];
+        const release = () => {
+            events.forEach(t => el.removeEventListener(t, release));
+            const now = getComputedStyle(el).scale;
+            down.cancel();
+            el._press = el.animate([{ scale: now === "none" ? 1 : now }, { scale: 1 }], { duration: 180, easing: ease });
+        };
+        events.forEach(t => el.addEventListener(t, release));
+    }, { passive: true });
 })();
 
 // SCROLL REVEALS — one motion language (docs/MOTION-PLAN.md): cards rise 24px

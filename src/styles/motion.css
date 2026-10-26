@@ -1,0 +1,33 @@
+/* Motion language — interaction layer (docs/MOTION-PLAN.md).
+   Hover and state changes use --dur-fast / --dur-base with --ease-out.
+   Press feedback (buttons dip to 97 %) lives in src/scripts/page.js, using the
+   Web Animations API on the independent `scale` property so it never overrides
+   a component's own transitions. Everything here is transform/opacity only. */
+
+/* Cards: one hover timing (was 0.4–0.5 s) — a quick, controlled lift. */
+.pw-card,
+.cred-card {
+    transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out),
+        box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+
+/* Imagery may drift slower than the card it sits in. */
+.pw-card .pw-cover img {
+    transition: transform 700ms var(--ease-out);
+}
+
+/* Arrows nudge in the direction they point. */
+:is(.cred-btn, .proj-live, .proj-open) svg {
+    transition: translate var(--dur-fast) var(--ease-out);
+}
+
+:is(.cred-btn, .proj-live, .proj-open):hover svg {
+    translate: 2px -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pw-card .pw-cover img,
+    :is(.cred-btn, .proj-live, .proj-open) svg {
+        transition: none;
+    }
+}
