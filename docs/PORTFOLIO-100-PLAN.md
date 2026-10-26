@@ -24,7 +24,7 @@ Legend: ⬜ todo · 🟨 in review · ✅ confirmed · ❓ needs a decision from
 
 Also verified: no horizontal overflow 320–1920px (EN/JA, light/dark), no duplicate IDs, all 201 i18n keys present in EN and JA, no failed requests or console errors, nav jumps land exactly under the header.
 
-**Score: 78 → 95 → 96 / 100.** Oct 19: the single-file point is resolved by the `src/` + `build.mjs` split. Remaining points: AI-styled Blender previews (−2), 8 MB truck GLB not optimised (−1), mobile performance can dip below 90 on slow runs (−1).
+**Score: 78 → 95 → 96 → 97 / 100.** Oct 26: motion & colour refinement (docs/MOTION-PLAN.md) — mobile performance now 91–93 in every run. Oct 19: the single-file point is resolved by the `src/` + `build.mjs` split. Remaining points: AI-styled Blender previews (−2), 8 MB truck GLB not optimised (−1), mobile performance can dip below 90 on slow runs (−1).
 
 ---
 

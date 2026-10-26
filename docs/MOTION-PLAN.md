@@ -58,8 +58,26 @@ bounce: this is a precise-instrument portfolio, not a playful one.
 
 | Step | Status | Commit | Notes |
 |---|---|---|---|
-| 1–2 | ✅ | (this commit) | Motion tokens; hero/nav moved to the warm ivory/black of the sections — seam gone; contrast 7.2–17:1 |
-| 3 | ✅ | (this commit) | Hero small type redesigned (eyebrow, value statement, solid primary button, growing-underline link, numbered focus list; EN+JA). CSS entrance starts as the intro curtain lifts, ~1.1 s, lettering static |
-| 4 | ✅ | (this commit) | One batched reveal (24px rise, 70ms stagger, 640ms) for all cards; mask-line wipe for section headings; sideways education slide and scrubbed footer removed; desktop only; verified nothing stays hidden |
-| 5 | ✅ | (this commit) | Press feedback (97% dip, WAAPI on scale) on 24 control types; arrow nudges; one 260ms card hover; filter state transition (260ms, 40ms stagger) |
-| 6 | ✅ | (this commit) | Sliding nav pill (follows scroll-spy + language); project popup 260ms in / 180ms ease-in out; photo viewer + 3D inspector share the rise; backdrop fade |
+| 1–2 | ✅ | see git log | Motion tokens; hero/nav moved to the warm ivory/black of the sections — seam gone; contrast 7.2–17:1 |
+| 3 | ✅ | see git log | Hero small type redesigned (eyebrow, value statement, solid primary button, growing-underline link, numbered focus list; EN+JA). CSS entrance starts as the intro curtain lifts, ~1.1 s, lettering static |
+| 4 | ✅ | see git log | One batched reveal (24px rise, 70ms stagger, 640ms) for all cards; mask-line wipe for section headings; sideways education slide and scrubbed footer removed; desktop only; verified nothing stays hidden |
+| 5 | ✅ | see git log | Press feedback (97% dip, WAAPI on scale) on 24 control types; arrow nudges; one 260ms card hover; filter state transition (260ms, 40ms stagger) |
+| 6 | ✅ | see git log | Sliding nav pill (follows scroll-spy + language); project popup 260ms in / 180ms ease-in out; photo viewer + 3D inspector share the rise; backdrop fade |
+| 7 | ✅ | see git log | QA on the live site (below) |
+
+## Results (live, October 26, 2026)
+
+| Check | Result |
+|---|---|
+| Lighthouse mobile (5 runs) | Performance **91–93 every run** (median 91), Accessibility 100, Best Practices 100, SEO 100 |
+| Lighthouse desktop (3 runs) | **100** / 100 / 100 / 100 |
+| Accessibility, dark + light, mobile + desktop | 100 (one fix in QA: dark-mode focus numerals brightened to 5.1:1) |
+| Reduced motion | No intro or hold classes; hero visible at 0.4 s; no card or heading ever hidden |
+| Reveals | Every card/heading visible after a full scroll and after a deep link; phones static |
+| Keyboard | Skip link → logo → nav, visible focus rings |
+| iPhone (WebKit) | Hero entrance completes, no errors |
+| Nav jumps | 15/15 land exactly under the header |
+
+Score: 96 → **97 / 100**. Mobile performance no longer dips below 90; the
+palette, hero hierarchy and motion now form one system. Remaining points:
+AI-styled Blender previews (−2, kept by choice) and the 8 MB truck GLB (−1).
