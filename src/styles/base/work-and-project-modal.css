@@ -463,11 +463,10 @@
     margin-bottom: var(--space-4);
 }
 
-/* Dark mode: small hero accent text gets a slightly brighter red so it
-   passes 4.5:1 on black; the large SOFTWARE ENGINEER lettering keeps
-   the original #e11d48. */
-html[data-theme="dark"] :is(.hero-hi strong, .hero-cta) {
-    color: #f0405f;
+/* Dark mode: the hero button keeps white text on the dark-mode red
+   (4.7:1); the large SOFTWARE ENGINEER lettering keeps #e11d48. */
+html[data-theme="dark"] .hero-cta {
+    color: #fff;
 }
 
 /* In-page jumps (incl. direct #links) stop exactly under the fixed header. */

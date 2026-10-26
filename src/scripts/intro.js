@@ -2,7 +2,8 @@
 (function () {
     'use strict';
     var pre = document.getElementById('preloader');
-    if (!pre) return;
+    var heroPlay = function () { if (window.__heroPlay) window.__heroPlay(); };
+    if (!pre) { heroPlay(); return; }
     var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     var params = new URLSearchParams(window.location.search);
     // Play once per browser session: reloads, back-navigation and deep links
@@ -11,6 +12,7 @@
     try { seen = sessionStorage.getItem('pp_intro_seen') === '1'; } catch (e) { /* Storage is optional. */ }
     if (params.has('nopreload') || motion.matches || seen || window.location.hash.length > 1) {
         pre.remove();
+        heroPlay();
         return;
     }
     try { sessionStorage.setItem('pp_intro_seen', '1'); } catch (e) { /* Storage is optional. */ }
@@ -68,6 +70,7 @@
     function dismiss(immediate) {
         if (done) return;
         done = true;
+        heroPlay(); // the hero entrance starts as the curtain lifts
         timers.forEach(clearTimeout);
         document.removeEventListener('keydown', onKey, true);
         window.removeEventListener('pagehide', onPageHide);

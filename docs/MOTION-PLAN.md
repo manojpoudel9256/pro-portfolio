@@ -59,3 +59,4 @@ bounce: this is a precise-instrument portfolio, not a playful one.
 | Step | Status | Commit | Notes |
 |---|---|---|---|
 | 1–2 | ✅ | (this commit) | Motion tokens; hero/nav moved to the warm ivory/black of the sections — seam gone; contrast 7.2–17:1 |
+| 3 | ✅ | (this commit) | Hero small type redesigned (eyebrow, value statement, solid primary button, growing-underline link, numbered focus list; EN+JA). CSS entrance starts as the intro curtain lifts, ~1.1 s, lettering static |

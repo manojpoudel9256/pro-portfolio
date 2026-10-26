@@ -79,92 +79,145 @@
     margin-top: clamp(0.75rem, 3vw, 1.25rem);
 }
 
+/* small type: eyebrow → statement → actions (the giant lettering is the headline) */
+.hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 14px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+}
+
+.hero-eyebrow-mark {
+    flex: none;
+    width: 18px;
+    height: 2px;
+    background: var(--accent);
+}
+
 .hero-hi {
-    max-width: 330px;
-    font-size: clamp(0.98rem, 3.4vw, 1.06rem);
-    line-height: 1.55;
+    max-width: 34ch;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    line-height: 1.6;
     color: var(--ink-2);
 }
 
 .hero-hi strong {
-    color: var(--accent);
-    font-weight: 700;
+    color: var(--ink);
+    font-weight: 600;
 }
 
 .hero-actions {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: 22px;
     flex-wrap: wrap;
-    margin-top: var(--space-4);
+    margin-top: 24px;
 }
 
+/* primary action: a solid button, so the main path is unmistakable */
 .hero-cta {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
+    gap: 10px;
+    min-height: 46px;
+    padding: 0 18px 0 22px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--accent-ink);
     font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.94rem;
+    letter-spacing: 0.01em;
     text-decoration: none;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 18%) inset, 0 6px 16px color-mix(in srgb, var(--accent) 22%, transparent);
+    transition: background-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
 }
 
-.hero-cta-slash {
-    opacity: 0.65;
+.hero-cta:hover {
+    background: color-mix(in srgb, var(--accent) 86%, #000);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 18%) inset, 0 10px 26px color-mix(in srgb, var(--accent) 32%, transparent);
 }
 
 .hero-cta-arrow {
-    transition: transform 0.25s var(--ease);
+    transition: translate var(--dur-fast) var(--ease-out);
 }
 
 .hero-cta:hover .hero-cta-arrow {
-    transform: translateX(6px);
+    translate: 3px 0;
 }
 
+/* secondary action: quiet text link whose accent underline grows on hover */
 .hero-contact {
     font-family: var(--font-body);
     font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--ink-2);
+    font-size: 0.92rem;
+    color: var(--ink);
     text-decoration: none;
-    border-bottom: 1px solid var(--hairline-strong);
-    padding-bottom: 2px;
-    transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+    padding-bottom: 3px;
+    background:
+        linear-gradient(var(--accent), var(--accent)) left bottom / 0% 1.5px no-repeat,
+        linear-gradient(var(--hairline-strong), var(--hairline-strong)) left bottom / 100% 1px no-repeat;
+    transition: color var(--dur-fast) var(--ease-out), background-size var(--dur-base) var(--ease-out);
 }
 
 .hero-contact:hover {
     color: var(--accent);
-    border-color: var(--accent);
+    background-size: 100% 1.5px, 100% 1px;
 }
 
-/* expertise list */
+/* focus list: labelled and numbered */
 .hero-expertise {
     position: relative;
     z-index: 4;
-    list-style: none;
     margin: clamp(1.5rem, 5vw, 2rem) 0 0;
-    padding: 4px 0 4px 16px;
+    padding: 2px 0 2px 16px;
     border-left: 2px solid color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+.hero-focus-label {
+    margin: 0 0 10px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+}
+
+.hero-focus-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 7px;
 }
 
 .hero-expertise li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
     font-family: var(--font-display);
     font-weight: 500;
     font-size: clamp(1.05rem, 4vw, 1.3rem);
     line-height: 1.1;
     letter-spacing: -0.01em;
-    color: var(--ink-2);
-    transition: color 0.25s var(--ease);
+    color: var(--ink);
+    transition: color var(--dur-fast) var(--ease-out);
 }
 
-.hero-expertise li.is-active {
-    color: var(--ink);
+.hx-num {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--accent);
 }
 
 .hero-expertise li:hover {
@@ -222,49 +275,64 @@
     flex: 0 0 auto;
 }
 
-/* entrance — the hero lettering is the LCP element, so it paints
-   immediately (no opacity fade); the portrait still fades in. */
+/* Entrance — one choreographed beat that starts as the intro curtain lifts
+   (html.hero-play, set by the intro). The SOFTWARE ENGINEER lettering is the
+   LCP element and never animates. Portrait leads; copy follows; ~1.1 s total.
+   html.hero-wait (set before first paint, motion allowed only) holds the
+   elements back until then; a timeout in theme-init.js guarantees release. */
 @media (prefers-reduced-motion: no-preference) {
-    .hero-portrait {
-        animation: heroFade 1s var(--ease) both;
+    html.hero-wait :is(.hero-portrait, .hero-eyebrow, .hero-hi, .hero-actions, .hero-focus-label, .hero-expertise li, .hero-techstrip) {
+        opacity: 0;
     }
 
-    .hero-portrait {
-        animation-delay: 0.08s;
+    html.hero-play .hero-portrait { animation: heroRise 780ms var(--ease-out) both; --rise: 28px; }
+    html.hero-play .hero-eyebrow { animation: heroRise var(--dur-reveal) var(--ease-out) 140ms both; }
+    html.hero-play .hero-hi { animation: heroWipe 700ms var(--ease-out) 200ms both; }
+    html.hero-play .hero-actions { animation: heroRise var(--dur-reveal) var(--ease-out) 330ms both; }
+    html.hero-play .hero-focus-label { animation: heroRise var(--dur-reveal) var(--ease-out) 260ms both; }
+    html.hero-play .hero-expertise li { animation: heroRise var(--dur-reveal) var(--ease-out) both; --rise: 10px; }
+    html.hero-play .hero-expertise li:nth-child(1) { animation-delay: 320ms; }
+    html.hero-play .hero-expertise li:nth-child(2) { animation-delay: 380ms; }
+    html.hero-play .hero-expertise li:nth-child(3) { animation-delay: 440ms; }
+    html.hero-play .hero-expertise li:nth-child(4) { animation-delay: 500ms; }
+    html.hero-play .hero-techstrip { animation: heroFadeIn 700ms var(--ease-out) 480ms both; }
+}
+
+/* `translate` (not `transform`) so the portrait keeps its centring transform */
+@keyframes heroRise {
+    from {
+        opacity: 0;
+        translate: 0 var(--rise, 16px);
     }
 
-    .hero-intro {
-        animation: heroUp 0.9s var(--ease) 0.24s both;
-    }
-
-    .hero-expertise {
-        animation: heroUp 0.9s var(--ease) 0.34s both;
-    }
-
-    .hero-techstrip {
-        animation: heroUp 0.9s var(--ease) 0.44s both;
+    to {
+        opacity: 1;
+        translate: 0 0;
     }
 }
 
-@keyframes heroFade {
+/* the statement is revealed top-down like a wipe, read as one phrase */
+@keyframes heroWipe {
+    from {
+        opacity: 0;
+        translate: 0 10px;
+        clip-path: inset(0 0 100% 0);
+    }
+
+    to {
+        opacity: 1;
+        translate: 0 0;
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes heroFadeIn {
     from {
         opacity: 0;
     }
 
     to {
         opacity: 1;
-    }
-}
-
-@keyframes heroUp {
-    from {
-        opacity: 0;
-        transform: translateY(22px);
-    }
-
-    to {
-        opacity: 1;
-        transform: none;
     }
 }
 
@@ -329,7 +397,7 @@
         z-index: 4;
         left: 0;
         bottom: clamp(2rem, 8vh, 4.5rem);
-        max-width: 320px;
+        max-width: 360px;
         margin: 0;
     }
 
