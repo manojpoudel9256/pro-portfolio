@@ -224,6 +224,11 @@
     color: var(--accent);
 }
 
+/* small numerals need the brighter dark-mode red to reach 4.5:1 */
+html[data-theme="dark"] .hx-num {
+    color: #f0405f;
+}
+
 /* tech strip */
 .hero-techstrip {
     margin: clamp(2rem, 6vw, 3rem) auto 0;
