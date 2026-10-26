@@ -80,27 +80,27 @@
     --font-black: "Archivo Black", "Helvetica Neue", Arial, sans-serif;
 
     /* Palette — near-monochrome, one accent */
-    --bg: #f2f1ee;
+    --bg: #faf6ee;
     /* warm ivory */
-    --surface: #eceae4;
+    --surface: #f3ece0;
     /* alternating section */
-    --elevated: #fbfaf8;
+    --elevated: #fffcf6;
     /* cards */
-    --ink: #141414;
+    --ink: #17140f;
     /* graphite (never pure black) */
-    --ink-2: #55534e;
+    --ink-2: #57524a;
     /* secondary text */
-    --ink-3: #8a8880;
+    --ink-3: #6f685b;
     /* muted / labels */
-    --hairline: rgba(20, 20, 20, 0.10);
-    --hairline-strong: rgba(20, 20, 20, 0.18);
+    --hairline: rgba(60, 44, 20, 0.11);
+    --hairline-strong: rgba(60, 44, 20, 0.2);
 
     /* Dark surfaces (footer, marquee, menu, intro) */
     --dark: #141414;
     --dark-2: #1c1c1c;
-    --on-dark: #f2f1ee;
-    --on-dark-2: rgba(242, 241, 238, 0.60);
-    --on-dark-hairline: rgba(242, 241, 238, 0.14);
+    --on-dark: #faf6ee;
+    --on-dark-2: rgba(250, 246, 238, 0.60);
+    --on-dark-hairline: rgba(250, 246, 238, 0.14);
 
     /* Accent — used sparingly */
     --accent: #9f1239;
@@ -152,21 +152,28 @@
     /* Motion */
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
     --dur: 0.7s;
+    /* Motion language (docs/MOTION-PLAN.md): one easing family, four durations. */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+    --dur-press: 120ms;
+    --dur-fast: 180ms;
+    --dur-base: 260ms;
+    --dur-reveal: 640ms;
 
     color-scheme: light;
 }
 
 /* ===== Dark theme — token overrides (everything token-based flips) ===== */
 html[data-theme="dark"] {
-    --bg: #0f0f11;
-    --surface: #15151a;
-    --elevated: #1c1c22;
-    --ink: #f3f2ee;
-    --ink-2: #b7b5ad;
-    --ink-3: #8b897f;
-    --hairline: rgba(243, 242, 238, 0.12);
-    --hairline-strong: rgba(243, 242, 238, 0.22);
-    --dark: #1c1c22;
+    --bg: #12100b;
+    --surface: #1a1710;
+    --elevated: #221e15;
+    --ink: #f6f0e3;
+    --ink-2: #c4bba8;
+    --ink-3: #a39a86;
+    --hairline: rgba(246, 240, 227, 0.12);
+    --hairline-strong: rgba(246, 240, 227, 0.22);
+    --dark: #221e15;
     --accent: #e11d48;
     color-scheme: dark;
 }
