@@ -80,27 +80,27 @@
     --font-black: "Archivo Black", "Helvetica Neue", Arial, sans-serif;
 
     /* Palette — near-monochrome, one accent */
-    --bg: #faf6ee;
+    --bg: #fafaf9;
     /* warm ivory */
-    --surface: #f3ece0;
+    --surface: #f5f5f4;
     /* alternating section */
-    --elevated: #fffcf6;
+    --elevated: #ffffff;
     /* cards */
-    --ink: #17140f;
+    --ink: #1c1917;
     /* graphite (never pure black) */
-    --ink-2: #57524a;
+    --ink-2: #57534e;
     /* secondary text */
-    --ink-3: #6f685b;
+    --ink-3: #6b655f;
     /* muted / labels */
-    --hairline: rgba(60, 44, 20, 0.11);
-    --hairline-strong: rgba(60, 44, 20, 0.2);
+    --hairline: rgba(28, 25, 23, 0.09);
+    --hairline-strong: rgba(28, 25, 23, 0.16);
 
     /* Dark surfaces (footer, marquee, menu, intro) */
     --dark: #141414;
     --dark-2: #1c1c1c;
-    --on-dark: #faf6ee;
-    --on-dark-2: rgba(250, 246, 238, 0.60);
-    --on-dark-hairline: rgba(250, 246, 238, 0.14);
+    --on-dark: #fafaf9;
+    --on-dark-2: rgba(250, 250, 249, 0.60);
+    --on-dark-hairline: rgba(250, 250, 249, 0.14);
 
     /* Accent — used sparingly */
     --accent: #9f1239;
@@ -165,15 +165,15 @@
 
 /* ===== Dark theme — token overrides (everything token-based flips) ===== */
 html[data-theme="dark"] {
-    --bg: #12100b;
-    --surface: #1a1710;
-    --elevated: #221e15;
-    --ink: #f6f0e3;
-    --ink-2: #c4bba8;
-    --ink-3: #a39a86;
-    --hairline: rgba(246, 240, 227, 0.12);
-    --hairline-strong: rgba(246, 240, 227, 0.22);
-    --dark: #221e15;
+    --bg: #0c0a09;
+    --surface: #141210;
+    --elevated: #1c1917;
+    --ink: #fafaf9;
+    --ink-2: #d6d3d1;
+    --ink-3: #a8a29e;
+    --hairline: rgba(250, 250, 249, 0.1);
+    --hairline-strong: rgba(250, 250, 249, 0.18);
+    --dark: #1c1917;
     --accent: #e11d48;
     color-scheme: dark;
 }

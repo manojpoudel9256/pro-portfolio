@@ -81,3 +81,26 @@ bounce: this is a precise-instrument portfolio, not a playful one.
 Score: 96 → **97 / 100**. Mobile performance no longer dips below 90; the
 palette, hero hierarchy and motion now form one system. Remaining points:
 AI-styled Blender previews (−2, kept by choice) and the 8 MB truck GLB (−1).
+
+## Colour v2 — "Ink, Ivory & Gilt" (October 26, 2026)
+
+Skill: **ui-ux-pro-max**. Its generic portfolio result (slate + orange) was
+off-brief, so it was narrowed to the colour domain; the **Luxury/Premium Brand**
+profile (stone ink `#1C1917` on `#FAFAF9`, white cards, gold `#A16207` as the
+accent only) and the **Winery** profile (burgundy + gold) set the direction.
+
+Diagnosis of the "dull" gold theme: gold was the environment instead of the
+jewellery — yellow-tinted cream surfaces, gold borders, gold tints and metallic
+gradients on every button flattened the contrast; gold text `#836208` read
+olive-brown; dark mode was a brown-black.
+
+| Token | Light | Dark |
+|---|---|---|
+| Background / surface / cards | `#FAFAF9` / `#F5F5F4` / `#FFFFFF` | `#0C0A09` / `#141210` / `#1C1917` |
+| Ink / secondary / muted | `#1C1917` / `#57534E` / `#6B655F` | `#FAFAF9` / `#D6D3D1` / `#A8A29E` |
+| Buttons & selected controls | solid ink, white text | solid ivory, ink text |
+| Gold text (labels, links) | `#A16207` (4.6–4.9:1) | `#E2B53A` (8–10:1) |
+| Gold decoration (rules, bars, icons) | `#E9C46A → #CA8A04` | `#F2D27A → #D4A72C` |
+| Hero lettering | burgundy `#9F1239` (unchanged) | `#E11D48` (unchanged) |
+
+Accessibility after the change: 100 in light and dark, mobile and desktop.

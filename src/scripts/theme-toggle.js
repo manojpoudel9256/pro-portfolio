@@ -5,7 +5,7 @@
         var japanese = document.documentElement.lang === 'ja';
         if (lm) lm.textContent = dark ? (japanese ? 'ライトモード' : 'Light mode') : (japanese ? 'ダークモード' : 'Dark mode');
         var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute("content", dark ? "#12100b" : "#faf6ee");
+        if (meta) meta.setAttribute("content", dark ? "#0c0a09" : "#fafaf9");
     }
     window.toggleTheme = function () {
         var cur = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";

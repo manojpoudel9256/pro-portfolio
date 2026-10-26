@@ -81,9 +81,9 @@ html[lang="ja"] .menu-label { letter-spacing: 0; }
     html[data-theme="dark"] .top-nav { background: rgb(25 23 20 / 94%); border-color: rgb(239 176 94 / 16%); }
     .top-nav .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 14px; font-weight: 600; letter-spacing: -.02em; }
     .top-nav .mobile-brandmark { display: block; width: 30px; height: 30px; object-fit: contain; }
-    .top-nav .menu-text { min-height: 44px; gap: 10px; padding: 9px 13px; font-size: 12px; font-weight: 500; border-color: rgb(201 162 39 / 35%); background: transparent; box-shadow: none; }
-    .menu-trigger-icon { width: 16px; height: 16px; color: #b8901f; }
-    html[data-theme="dark"] .menu-trigger-icon { color: #e6c15a; }
+    .top-nav .menu-text { min-height: 44px; gap: 10px; padding: 9px 13px; font-size: 12px; font-weight: 500; border-color: rgb(28 25 23 / 16%); background: transparent; box-shadow: none; }
+    .menu-trigger-icon { width: 16px; height: 16px; color: #a16207; }
+    html[data-theme="dark"] .menu-trigger-icon { color: #e2b53a; }
 }
 @media (max-height: 620px) { .menu-overlay { gap: 16px; } }
 /* Keep desktop destinations clear of the brand and controls on tablets. */

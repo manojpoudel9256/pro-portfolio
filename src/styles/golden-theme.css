@@ -17,41 +17,45 @@
 .footer,
 .proj-modal {
     --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-    /* Golden theme (Oct 2026). --accent is a saturated gold that stays
-       readable as small text (AA on cream); bright metallic gold is used for
-       fills (--accent-fill, dark text on top) and decoration (--accent-icon). */
-    --bg: #fcf8ee;
-    --surface: #f8f1e0;
-    --elevated: #fffcf4;
-    --ink: #1f1a0e;
-    --ink-2: #5b5442;
-    --ink-3: #6e6550;
-    --accent: #836208;
-    --accent-ink: #2a1f05;
-    --accent-icon: #c9a227;
-    --accent-tint: #fbf0d2;
-    --accent-fill: linear-gradient(135deg, #f3d77e 0%, #d9b240 48%, #b8901f 100%);
-    --accent-glow: rgba(201, 162, 39, 0.35);
-    --hairline: rgba(201, 162, 39, 0.24);
-    --hairline-strong: rgba(201, 162, 39, 0.46);
-    --card-shadow: 0 12px 34px rgba(120, 90, 10, 0.06);
+    /* "Ink, Ivory & Gilt" (Oct 2026, ui-ux-pro-max Luxury/Premium profile):
+       stone ink on crisp ivory/white, solid ink buttons, and gold used only as
+       jewellery — small labels, underlines, icons, rules and score bars.
+       --accent is the AA-safe gold for small text; --gold-fill decorates. */
+    --bg: #fafaf9;
+    --surface: #f5f5f4;
+    --elevated: #ffffff;
+    --ink: #1c1917;
+    --ink-2: #57534e;
+    --ink-3: #6b655f;
+    --accent: #a16207;
+    --accent-icon: #ca8a04;
+    --accent-tint: #fcf9f2;
+    --accent-fill: #1c1917;
+    --accent-ink: #ffffff;
+    --accent-glow: rgba(28, 25, 23, 0.18);
+    --gold-fill: linear-gradient(90deg, #e9c46a, #ca8a04);
+    --hairline: rgba(28, 25, 23, 0.08);
+    --hairline-strong: rgba(28, 25, 23, 0.15);
+    --card-shadow: 0 1px 2px rgba(28, 25, 23, 0.04), 0 12px 32px rgba(28, 25, 23, 0.06);
 }
 
 html[data-theme="dark"] :is(.work, .unreal-work, .blender-work, .bi-dialog, .menu-overlay, .about-me-section, .future-goals, .footer, .proj-modal) {
-    --bg: #12100b;
-    --surface: #1a1710;
-    --elevated: #221e15;
-    --ink: #f7efd9;
-    --ink-2: #cfc3a3;
-    --ink-3: #b3a682;
-    --accent: #e6c15a;
-    --accent-ink: #1f1703;
-    --accent-icon: #e6c15a;
-    --accent-tint: #2d2612;
-    --accent-fill: linear-gradient(135deg, #f7dc8a 0%, #e6c15a 48%, #c99f34 100%);
-    --accent-glow: rgba(230, 193, 90, 0.28);
-    --hairline: rgba(230, 193, 90, 0.18);
-    --hairline-strong: rgba(230, 193, 90, 0.36);
+    --bg: #0c0a09;
+    --surface: #141210;
+    --elevated: #1c1917;
+    --ink: #fafaf9;
+    --ink-2: #d6d3d1;
+    --ink-3: #a8a29e;
+    --accent: #e2b53a;
+    --accent-icon: #e2b53a;
+    --accent-tint: #1f1a12;
+    --accent-fill: #fafaf9;
+    --accent-ink: #1c1917;
+    --accent-glow: rgba(0, 0, 0, 0.45);
+    --gold-fill: linear-gradient(90deg, #f2d27a, #d4a72c);
+    --hairline: rgba(250, 250, 249, 0.08);
+    --hairline-strong: rgba(250, 250, 249, 0.16);
+    --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
 .work,
@@ -319,15 +323,20 @@ html[data-theme="dark"] .lang-cred {
     .pw-card:hover .pw-cover img { transform: none; }
 }
 
-/* Metallic gold fills for solid accent surfaces in the themed sections.
-   (Pseudo-elements can't go inside :is(), so they get their own selectors.) */
+/* Buttons and selected controls: solid ink (ivory in dark mode). */
 :is(.work, .unreal-work, .blender-work, .bi-dialog, .menu-overlay, .about-me-section, .future-goals, .footer, .proj-modal)
-    :is(.pw-fbtn.active, .pw-viewall:hover, .proj-live, .cf-submit, .cf-topic.active, .ue-toggle:hover, .cl-dot, .lc-rule, .lc-bar-fill),
+    :is(.pw-fbtn.active, .pw-viewall:hover, .proj-live, .cf-submit, .cf-topic.active, .ue-toggle:hover) {
+    background: var(--accent-fill);
+    color: var(--accent-ink);
+}
+
+/* Gold as jewellery: small rules, markers and score bars. */
+:is(.work, .unreal-work, .blender-work, .bi-dialog, .menu-overlay, .about-me-section, .future-goals, .footer, .proj-modal)
+    :is(.cl-dot, .lc-rule, .lc-bar-fill),
 :is(.work, .unreal-work, .blender-work, .about-me-section, .future-goals, .footer) .section-title::after,
 .about-me-section .xp-phases li::after,
 .about-me-section .cert-kicker::after {
-    background: var(--accent-fill);
-    color: var(--accent-ink);
+    background: var(--gold-fill);
 }
 :is(.work, .footer, .proj-modal) :is(.proj-live:hover, .cf-submit:hover) {
     box-shadow: 0 12px 30px var(--accent-glow);

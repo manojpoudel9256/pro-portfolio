@@ -24,7 +24,7 @@
 .ue-play-icon svg { width: 16px; height: 16px; margin-left: 2px; }
 .ue-card.is-ready .ue-play-icon { opacity: 0; }
 .ue-loading { display: none; position: absolute; z-index: 3; right: 18px; bottom: 18px; width: 44px; height: 44px; border-radius: 50%; background: #fffdfaf0; pointer-events: none; }
-.ue-loading::after { content: ''; position: absolute; inset: 13px; border: 2px solid #efe2bd; border-top-color: #c9a227; border-radius: 50%; animation: ue-spin .8s linear infinite; }
+.ue-loading::after { content: ''; position: absolute; inset: 13px; border: 2px solid #e7e5e4; border-top-color: #ca8a04; border-radius: 50%; animation: ue-spin .8s linear infinite; }
 .ue-card.is-loading .ue-loading { display: block; }
 @keyframes ue-spin { to { transform: rotate(360deg); } }
 .ue-body { display: flex; flex-direction: column; flex: 1; padding: clamp(18px, 2.5vw, 28px) clamp(10px, 1.5vw, 20px) 14px; }
