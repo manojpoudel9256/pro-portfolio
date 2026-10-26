@@ -41,7 +41,7 @@ and tools it showcases are separate projects.
 | **GLB Forge — Optimizer** | Mesh simplification and texture downscaling for AI-generated models (typically ~1M → ~100k triangles, ~20 MB → 4–5 MB) with a before/after viewer. | [Source code](https://github.com/manojpoudel9256/GLBOptimizer) |
 | **Everest Travel Experience** | A personal concept: a bilingual marketing site for Himalayan expeditions. | [Live website](https://travel-site-delta-five.vercel.app/) |
 | **Personal Finance App** | Budgeting, transaction tracking, receipt scanning and AI spending insights; rebuilt from my college PHP version and in daily use. | [Live app](https://budget-tracker-v2-gamma.vercel.app/) |
-| **Salary Tracker App** | Salary and remittance tracking for working in Japan; in daily use by me and a friend. | [Live app](https://salary-tracker-v3-six.vercel.app/) |
+| **Salary Tracker App** | Bilingual salary and remittance tracker for working in Japan: payslip/receipt scanning with Gemini, an AI money assistant whose numbers are computed on-device (100+ tests), installable and offline; in daily use by me and a friend. | [Live app](https://salary-tracker-v3-six.vercel.app/) |
 | **Darts Game** | A third-person Unreal Engine game exploring aiming, scoring, and player interaction. | [Full video](https://www.linkedin.com/posts/manojpoudel0429_unrealengine-ue5-gamedev-activity-7488763663969865729-xFQf) |
 | **Warehouse Simulation** | An Unreal Engine simulation featuring conveyors, storage racks, and robotic equipment. | [Full video](https://www.linkedin.com/posts/manojpoudel0429_unrealengine-ue5-digitaltwin-activity-7505517491381489664-4iHa) |
 

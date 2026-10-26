@@ -88,32 +88,40 @@ const PROJECTS = {
         }
     },
     salary: {
-        img: "assets/images/projects/salary-tracker.webp", cover: false, type: "app",
+        img: "assets/images/projects/salary-tracker-16x9.webp", cover: true, fullImg: true, type: "app",
         live: "https://salary-tracker-v3-six.vercel.app/",
         en: {
-            cs: ["Working in Japan, I needed one place to track my salary and the money I send home. My original PHP version from college went offline when the college's Lolipop server plan expired.", "Rebuilt it as a bilingual, mobile-first web app (React, Vite, Tailwind CSS, Recharts) with earnings, remittance totals, percentage sent and charts, and deployed it on Vercel.", "I use it every month — and a friend liked it so much that I showed her how to use it. She now tracks her own salary with it too."],
+            cs: ["Working in Japan, I needed one place to track my salary and the money I send home. My original PHP version from college went offline when the college's Lolipop server plan expired. Typing in every payslip by hand was also slow, and Japanese payslips are hard to read if Japanese isn't your first language.", ["I rebuilt it from scratch as an installable, offline-ready web app in plain JavaScript, with no framework and no build step. Features:", "Dashboard: earned, sent home and kept, plus monthly trends.", "Remittance hub: an animated transfer path from Japan to Nepal, a yearly goal ring, and fees and exchange rates for each transfer.", "Insights: lifetime and year-by-year views, a year-end forecast, and a report card you can save as an image to share.", "Smart import: upload a payslip PDF or receipt photo. Google Gemini reads it, translates each Japanese item, and shows a summary for you to check before anything is saved.", "AI Financial Assistant: ask “How much pension did I pay in 2026?” or “How much did I send to my mother last year?” The app works out every number on the device, so the AI never invents figures. Each answer shows how it was calculated. More than 100 automated tests check the answers stay correct.", "Everyday tools: search, backup reminders, and renaming workplaces or the people you send money to."], "I use it every month. A friend liked it so much that I showed her how to use it, and she now tracks her own salary with it too."],
             title: "Salary Tracker App",
-            desc: "A bilingual salary & remittance tracker built for working in Japan. See your total earnings, how much you’ve sent home, your remaining balance and the percentage sent — plus recent salaries, remittances and charts. Supports EN / 日本語 and light / dark themes, mobile-first.",
+            desc: "A bilingual salary and remittance tracker for people working in Japan. It shows what you've earned, what you've sent home, and what you kept. You can scan a payslip or receipt to add it, and ask an AI assistant questions about your money in plain English, Japanese or Romanised Nepali. Supports EN / 日本語 and light / dark themes, and is built mobile-first. Your data stays on your device.",
+            installExtra: "It also works offline.",
             stack: [
-                ["React", "Builds the interactive, component-based interface for salaries, remittances and stats."],
-                ["Vite", "Fast build tool and dev server that bundles and runs the app."],
-                ["Tailwind CSS", "Utility-first styling for the clean, responsive layout and light / dark themes."],
-                ["Recharts", "Renders the earnings and remittance charts on the Charts screen."],
-                ["Browser storage (localStorage)", "Saves your salary and remittance records privately on your device."],
-                ["Vercel", "Hosts and delivers the app globally."]
+                ["JavaScript, HTML and CSS", "No framework and no build step, so the app is small and fast."],
+                ["Custom SVG charts", "Hand-built charts with hover details and smooth animation."],
+                ["Canvas", "Draws the report-card images you can share."],
+                ["Browser storage (localStorage)", "Your records stay on your device, with backup and restore."],
+                ["Service worker and web app manifest", "You can install it and it works offline."],
+                ["Google Gemini API", "Reads payslips and receipts, and helps the assistant understand questions. Your amounts are never sent to it."],
+                ["Node.js test runner", "More than 100 automated tests for the calculations and the assistant."],
+                ["Content Security Policy", "Limits what the page is allowed to load, for security."],
+                ["Vercel", "Hosting, with automatic deploys from GitHub."]
             ]
         },
         ja: {
-            cs: ["日本で働くなかで、給料と仕送りを一か所で管理したいと考えました。学生時代に作った PHP 版は、学校の Lolipop サーバーの利用期間終了とともに使えなくなりました。", "React・Vite・Tailwind CSS・Recharts で、バイリンガル・モバイルファーストの Web アプリとして作り直しました。収入、送金額、送金割合、グラフを確認でき、Vercel で公開しています。", "毎月自分で使っています。友人も気に入ってくれたので使い方を教え、今では彼女も自分の給料管理に使っています。"],
+            cs: ["日本で働くなかで、給料と仕送りを一か所で管理したいと考えました。学生時代に作った PHP 版は、学校の Lolipop サーバーの利用期間終了とともに使えなくなりました。また、給与明細を毎回手入力するのは手間がかかり、日本語が母語でない人にとって日本の給与明細は読みにくいものです。", ["フレームワークもビルドも使わないプレーンな JavaScript で、インストールしてオフラインでも使えるウェブアプリとして一から作り直しました。主な機能：", "ダッシュボード：稼いだ金額・仕送り額・手元に残った金額と、月ごとの推移。", "送金ハブ：日本からネパールへの送金ルートのアニメーション、年間目標のリング、送金ごとの手数料と為替レート。", "インサイト：累計と年別の表示、年末の見込み、画像として保存して共有できるレポートカード。", "スマートインポート：給与明細の PDF やレシートの写真をアップロードすると、Google Gemini が読み取って日本語の各項目を翻訳し、保存前に確認できる要約を表示します。", "AI ファイナンシャルアシスタント：「2026年に年金をいくら払った？」「去年、母にいくら送った？」のように質問できます。数値はすべて端末内で計算するため、AI が数字を作り出すことはありません。回答ごとに計算の根拠を表示し、100以上の自動テストで回答の正しさを確認しています。", "日常のツール：検索、バックアップのリマインダー、勤務先や送金相手の名前の変更。"], "毎月自分で使っています。友人も気に入ってくれたので使い方を教え、今では彼女も自分の給料管理に使っています。"],
             title: "給料トラッカーアプリ",
-            desc: "日本で働く人のためのバイリンガル給料・送金管理アプリ。総収入、仕送り額、残高、送金の割合に加え、最近の給料・送金・グラフを確認できます。英語・日本語とライト／ダークテーマに対応し、モバイルファースト設計です。",
+            desc: "日本で働く人のためのバイリンガル給料・送金管理アプリ。稼いだ金額、仕送りした金額、手元に残った金額がひと目でわかります。給与明細やレシートをスキャンして登録でき、お金についての質問をAIアシスタントに英語・日本語・ローマ字表記のネパール語で気軽に聞けます。英語・日本語、ライト／ダークテーマに対応したモバイルファースト設計で、データは端末内にだけ保存されます。",
+            installExtra: "オフラインでも使えます。",
             stack: [
-                ["React", "給料・送金・統計を扱うインタラクティブなコンポーネントUIを構築します。"],
-                ["Vite", "アプリをバンドルして動かす、高速なビルドツール兼開発サーバーです。"],
-                ["Tailwind CSS", "クリーンでレスポンシブなレイアウトと、ライト／ダークテーマのためのスタイリングです。"],
-                ["Recharts", "チャート画面で収入・送金のグラフを描画します。"],
-                ["ブラウザストレージ（localStorage）", "給料・送金の記録を端末内にプライベートに保存します。"],
-                ["Vercel", "アプリを世界中に配信するホスティングです。"]
+                ["JavaScript・HTML・CSS", "フレームワークもビルドも使わないため、アプリは軽量で高速です。"],
+                ["自作の SVG チャート", "ホバー時の詳細表示となめらかなアニメーションを備えた手作りのグラフです。"],
+                ["Canvas", "共有できるレポートカード画像を描画します。"],
+                ["ブラウザストレージ（localStorage）", "記録は端末内に保存され、バックアップと復元にも対応します。"],
+                ["Service Worker とウェブアプリマニフェスト", "インストールでき、オフラインでも動作します。"],
+                ["Google Gemini API", "給与明細やレシートを読み取り、アシスタントが質問を理解するのを助けます。金額データが送信されることはありません。"],
+                ["Node.js テストランナー", "計算とアシスタントを確認する100以上の自動テストです。"],
+                ["コンテンツセキュリティポリシー（CSP）", "セキュリティのため、ページが読み込めるものを制限します。"],
+                ["Vercel", "GitHub からの自動デプロイによるホスティングです。"]
             ]
         }
     },
@@ -192,7 +200,21 @@ function renderProject() {
         [[t.csProblem, c.cs[0]], [t.csDid, c.cs[1]], [t.csResult, c.cs[2]]].forEach(function (row) {
             const d = document.createElement("div");
             const dt = document.createElement("dt"); dt.textContent = row[0];
-            const dd = document.createElement("dd"); dd.textContent = row[1];
+            const dd = document.createElement("dd");
+            if (Array.isArray(row[1])) {
+                const intro = document.createElement("p"); intro.textContent = row[1][0];
+                const list = document.createElement("ul");
+                row[1].slice(1).forEach(function (item) {
+                    const li = document.createElement("li");
+                    const cut = item.search(/[:：]/);
+                    if (cut > 0 && cut < 40) {
+                        const label = document.createElement("strong"); label.textContent = item.slice(0, cut + 1);
+                        li.append(label, " " + item.slice(cut + 1).trim());
+                    } else li.textContent = item;
+                    list.appendChild(li);
+                });
+                dd.append(intro, list);
+            } else dd.textContent = row[1];
             d.appendChild(dt); d.appendChild(dd); caseEl.appendChild(d);
         });
     }
@@ -212,7 +234,7 @@ function renderProject() {
     if (p.type === "app") {
         install.style.display = "";
         document.getElementById("pmInstallTitle").textContent = t.installTitle;
-        document.getElementById("pmInstallNote").textContent = t.installNote;
+        document.getElementById("pmInstallNote").textContent = t.installNote + (c.installExtra ? (lang === "ja" ? "" : " ") + c.installExtra : "");
         const steps = document.getElementById("pmSteps");
         steps.innerHTML = "";
         t.steps.forEach(function (s) { const li = document.createElement("li"); li.innerHTML = "<span>" + s + "</span>"; steps.appendChild(li); });

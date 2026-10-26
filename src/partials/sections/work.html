@@ -70,8 +70,53 @@
             </article>
         </div>
 
-        <!-- EVEREST — large feature card -->
-        <article class="pw-card pw-hero" data-cat="web uiux" onclick="openProject('everest')">
+        <!-- ROW 2: apps in daily use (the Finance card moves to 16:9 when its new image arrives) -->
+        <div class="pw-row2 pw-row-apps">
+            <!-- SALARY TRACKER APP — 16:9 cover, same card style as the GLB tools -->
+            <article class="pw-card pw-tool" data-cat="apps uiux" onclick="openProject('salary')">
+                <div class="pw-cover">
+                    <img src="assets/images/projects/salary-tracker-16x9.webp" srcset="assets/images/projects/salary-tracker-16x9-800.webp 800w, assets/images/projects/salary-tracker-16x9-1280.webp 1280w, assets/images/projects/salary-tracker-16x9.webp 1920w" sizes="(max-width: 768px) 92vw, (max-width: 1100px) 46vw, 820px" alt="Salary Tracker App: five phone screens showing salary records, money sent home, the dashboard, the AI assistant and insights" width="1920" height="1080"
+                        loading="lazy">
+                </div>
+                <div class="pw-body">
+                    <h3 class="pw-name" id="pw-name-salary" data-i18n="pjSalaryName">Salary Tracker App</h3>
+                    <p class="pw-desc" data-i18n="pjSalaryShort">A bilingual salary &amp; remittance tracker with payslip scanning and an AI money assistant.</p>
+                    <div class="pw-tags">
+                        <span class="pw-chip">JavaScript</span>
+                        <span class="pw-chip">Gemini API</span>
+                        <span class="pw-chip">PWA</span>
+                        <span class="pw-chip">SVG charts</span>
+                    </div>
+                    <button type="button" class="pw-view" aria-labelledby="pw-view-salary pw-name-salary"
+                        onclick="event.stopPropagation(); openProject('salary')"><span id="pw-view-salary" data-i18n="workViewProject">View project</span>
+                        <span aria-hidden="true">→</span></button>
+                </div>
+            </article>
+            <!-- PERSONAL FINANCE APP -->
+            <article class="pw-card pw-app" data-cat="apps uiux" onclick="openProject('budget')">
+                <div class="pw-cover">
+                    <img src="assets/images/projects/personal-finance-app.webp" srcset="assets/images/projects/personal-finance-app-300.webp 300w, assets/images/projects/personal-finance-app-450.webp 450w, assets/images/projects/personal-finance-app.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Personal Finance App" width="900" height="1599"
+                        loading="lazy">
+                </div>
+                <div class="pw-body">
+                    <h3 class="pw-name" id="pw-name-budget" data-i18n="pjBudgetName">Personal Finance App</h3>
+                    <p class="pw-desc" data-i18n="pjBudgetShort">A smart finance app for budgeting, tracking,
+                        and insights.</p>
+                    <div class="pw-tags">
+                        <span class="pw-chip">React</span>
+                        <span class="pw-chip">Vite</span>
+                        <span class="pw-chip">Tailwind CSS</span>
+                        <span class="pw-chip">Gemini AI</span>
+                    </div>
+                    <button type="button" class="pw-view" aria-labelledby="pw-view-budget pw-name-budget"
+                        onclick="event.stopPropagation(); openProject('budget')"><span id="pw-view-budget" data-i18n="workViewProject">View project</span>
+                        <span aria-hidden="true">→</span></button>
+                </div>
+            </article>
+        </div>
+
+        <!-- ROW 3: EVEREST — wide card (image left, text right) -->
+        <article class="pw-card pw-hero pw-wide" data-cat="web uiux" onclick="openProject('everest')">
             <div class="pw-cover">
                 <img src="assets/images/projects/everest-travel.webp" srcset="assets/images/projects/everest-travel-800.webp 800w, assets/images/projects/everest-travel.webp 1600w" sizes="(max-width: 768px) 92vw, 600px" alt="Everest travel website" width="1600" height="805"
                     loading="lazy">
@@ -92,49 +137,6 @@
             </div>
         </article>
 
-        <!-- PERSONAL FINANCE APP -->
-        <article class="pw-card pw-app" data-cat="apps uiux" onclick="openProject('budget')">
-            <div class="pw-cover">
-                <img src="assets/images/projects/personal-finance-app.webp" srcset="assets/images/projects/personal-finance-app-300.webp 300w, assets/images/projects/personal-finance-app-450.webp 450w, assets/images/projects/personal-finance-app.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Personal Finance App" width="900" height="1599"
-                    loading="lazy">
-            </div>
-            <div class="pw-body">
-                <h3 class="pw-name" id="pw-name-budget" data-i18n="pjBudgetName">Personal Finance App</h3>
-                <p class="pw-desc" data-i18n="pjBudgetShort">A smart finance app for budgeting, tracking,
-                    and insights.</p>
-                <div class="pw-tags">
-                    <span class="pw-chip">React</span>
-                    <span class="pw-chip">Vite</span>
-                    <span class="pw-chip">Tailwind CSS</span>
-                    <span class="pw-chip">Gemini AI</span>
-                </div>
-                <button type="button" class="pw-view" aria-labelledby="pw-view-budget pw-name-budget"
-                    onclick="event.stopPropagation(); openProject('budget')"><span id="pw-view-budget" data-i18n="workViewProject">View project</span>
-                    <span aria-hidden="true">→</span></button>
-            </div>
-        </article>
-
-        <!-- SALARY TRACKER APP -->
-        <article class="pw-card pw-app" data-cat="apps uiux" onclick="openProject('salary')">
-            <div class="pw-cover">
-                <img src="assets/images/projects/salary-tracker.webp" srcset="assets/images/projects/salary-tracker-300.webp 300w, assets/images/projects/salary-tracker-450.webp 450w, assets/images/projects/salary-tracker.webp 900w" sizes="(max-width: 768px) 40vw, 340px" alt="Salary Tracker App" width="900" height="1599"
-                    loading="lazy">
-            </div>
-            <div class="pw-body">
-                <h3 class="pw-name" id="pw-name-salary" data-i18n="pjSalaryName">Salary Tracker App</h3>
-                <p class="pw-desc" data-i18n="pjSalaryShort">A payroll and remittance app for tracking
-                    earnings and transfers.</p>
-                <div class="pw-tags">
-                    <span class="pw-chip">React</span>
-                    <span class="pw-chip">Vite</span>
-                    <span class="pw-chip">Tailwind CSS</span>
-                    <span class="pw-chip">Recharts</span>
-                </div>
-                <button type="button" class="pw-view" aria-labelledby="pw-view-salary pw-name-salary"
-                    onclick="event.stopPropagation(); openProject('salary')"><span id="pw-view-salary" data-i18n="workViewProject">View project</span>
-                    <span aria-hidden="true">→</span></button>
-            </div>
-        </article>
 
 
     </div>
