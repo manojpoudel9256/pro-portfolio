@@ -75,55 +75,35 @@ document.querySelectorAll('.top-nav a[href^="#"], .hero a[href^="#"]').forEach(a
     }));
 })();
 
+// SCROLL REVEALS — one motion language (docs/MOTION-PLAN.md): cards rise 24px
+// and fade in small batches; section headings reveal top-down from a mask line.
+// Desktop only (phones keep content static while swiping) and never under
+// reduced motion. Elements already on screen at load are left untouched.
 window.__motion.then(function () {
-    // SELECTED WORK — scroll reveal (skip under reduced motion)
-    if (!prefersReducedMotion) {
-        gsap.utils.toArray(".pw-card").forEach((card) => {
-            gsap.from(card, {
-                y: 60,
-                opacity: 0,
-                duration: 0.9,
-                ease: "power3.out",
-                scrollTrigger: { trigger: card, start: "top 85%" }
-            });
+    const CARDS = ".pw-card, .ue-card, .bw-card, .xp-item, .lc-card, .cred-card, .edu-card, .fg-card, .contact-card";
+    const HEADINGS = ".pw-title, #ue-title, .bw-title, .section-title, .lc-title, .cert-title, .fg-title, .cl-headline";
+    const below = el => el.getBoundingClientRect().top > window.innerHeight;
+    gsap.matchMedia().add("(min-width: 769px) and (prefers-reduced-motion: no-preference)", () => {
+        const cards = gsap.utils.toArray(CARDS).filter(below);
+        const heads = gsap.utils.toArray(HEADINGS).filter(below);
+        gsap.set(cards, { opacity: 0, y: 24 });
+        gsap.set(heads, { clipPath: "inset(0 0 100% 0)", y: 16 });
+        ScrollTrigger.batch(cards, {
+            start: "top 88%", once: true,
+            onEnter: batch => gsap.to(batch, {
+                opacity: 1, y: 0, duration: 0.64, ease: "power3.out", stagger: 0.07,
+                overwrite: true, clearProps: "opacity,transform"
+            })
         });
-
-        // EDUCATION — cards slide in from opposite sides
-        gsap.utils.toArray(".edu-card").forEach((card, i) => {
-            gsap.from(card, {
-                x: i % 2 === 0 ? -90 : 90,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-                scrollTrigger: { trigger: card, start: "top 85%" }
-            });
+        ScrollTrigger.batch(heads, {
+            start: "top 90%", once: true,
+            onEnter: batch => gsap.to(batch, {
+                clipPath: "inset(0 0 0% 0)", y: 0, duration: 0.7, ease: "power3.out", stagger: 0.08,
+                overwrite: true, clearProps: "clipPath,transform"
+            })
         });
-
-        // EXPERIENCE — card fades up, milestones stagger in
-        gsap.utils.toArray(".xp-item").forEach((card) => {
-            gsap.from(card, {
-                y: 40, opacity: 0, duration: 0.9, ease: "power3.out",
-                scrollTrigger: { trigger: card, start: "top 85%" }
-            });
-            gsap.from(card.querySelectorAll(".xp-phases li"), {
-                y: 18, opacity: 0, duration: 0.55, stagger: 0.1, ease: "power2.out",
-                scrollTrigger: { trigger: card.querySelector(".xp-phases"), start: "top 88%" }
-            });
-        });
-    }
-
-    // FOOTER ANIMATION
-    gsap.from(".footer-container", {
-        y: 100,
-        opacity: 0,
-        scrollTrigger: {
-            trigger: ".footer",
-            start: "top 80%",
-            end: "top 50%",
-            scrub: true
-        }
+        // leaving the breakpoint (resize to phone / reduced motion on) shows everything
+        return () => gsap.set([...cards, ...heads], { clearProps: "opacity,transform,clipPath" });
     });
 });
-
-
 
