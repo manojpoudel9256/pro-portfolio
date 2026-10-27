@@ -7,43 +7,136 @@
                 <p class="fg-intro" data-i18n="fgIntro">My work with web development and 3D simulation has sparked a deeper curiosity about how software understands and interacts with the world. I want to build on that foundation through robotics, digital twins, and AI-powered applications—turning each new concept into something I can build, test, and improve.</p>
             </header>
             <figure class="fg-art">
-                <img src="assets/images/future-goals/robotics-ai-digital-twin-concept-gold.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Concept illustration connecting a robotic workspace, a digital twin, document search, and a data dashboard." data-i18n-alt="fgArtAlt">
-                <figcaption data-i18n="fgArtCaption">Concept illustration · A vision for future exploration</figcaption>
+                <!-- Hand-coded system map: a robot cell and its digital twin stay in sync and report,
+                     with ROS 2 and RAG, to one dashboard. Ink line-art; gold only for the moving signals. -->
+                <svg class="fg-map" viewBox="0 0 640 420" role="img" aria-label="Animated line diagram: a robot arm and its digital twin moving in sync, both reporting to a dashboard that also draws on ROS 2 and a RAG knowledge search." data-i18n-aria="fgArtAlt">
+                    <defs>
+                        <pattern id="fg-dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".9" class="fg-dot"/></pattern>
+                    </defs>
+                    <rect width="640" height="420" fill="url(#fg-dots)"/>
+
+                    <g class="fg-note" aria-hidden="true">
+                        <text x="28" y="34">SYSTEM MAP</text>
+                        <text x="612" y="34" text-anchor="end">04 NODES</text>
+                    </g>
+
+                    <!-- wires (drawn on when the map scrolls in) -->
+                    <g class="fg-wires">
+                        <path id="fg-w-ros-dash" class="fg-wire" style="--i:0" pathLength="1" d="M156 73H250"/>
+                        <path id="fg-w-rag-dash" class="fg-wire" style="--i:0" pathLength="1" d="M484 73H390"/>
+                        <path id="fg-w-ros-arm" class="fg-wire" style="--i:1" pathLength="1" d="M106 90V310Q106 324 120 324H130"/>
+                        <path id="fg-w-arm-dash" class="fg-wire" style="--i:2" pathLength="1" d="M250 324H276Q290 324 290 310V120"/>
+                        <path id="fg-w-twin-dash" class="fg-wire" style="--i:2" pathLength="1" d="M390 324H364Q350 324 350 310V120"/>
+                        <path id="fg-w-sync" class="fg-wire" style="--i:3" pathLength="1" d="M250 338H390"/>
+                    </g>
+
+                    <!-- ROS 2 and RAG nodes -->
+                    <g class="fg-node" style="--i:0">
+                        <rect class="fg-chip" x="56" y="56" width="100" height="34" rx="8"/>
+                        <circle class="fg-chip-dot" cx="75" cy="73" r="3"/>
+                        <text class="fg-chip-label" x="87" y="77">ROS 2</text>
+                    </g>
+                    <g class="fg-node" style="--i:0">
+                        <rect class="fg-chip" x="484" y="56" width="100" height="34" rx="8"/>
+                        <circle class="fg-chip-dot" cx="503" cy="73" r="3"/>
+                        <text class="fg-chip-label" x="515" y="77">RAG</text>
+                    </g>
+
+                    <!-- dashboard -->
+                    <g class="fg-node" style="--i:1">
+                        <rect class="fg-chip" x="250" y="36" width="140" height="84" rx="10"/>
+                        <text class="fg-note-sm" x="264" y="56">TELEMETRY</text>
+                        <path class="fg-baseline" d="M264 108H376"/>
+                        <polyline class="fg-spark" points="264,100 280,94 294,97 308,85 322,89 336,77 350,81 364,71 376,74"/>
+                        <circle class="fg-live" cx="376" cy="74" r="2.6"/>
+                    </g>
+
+                    <!-- physical cell -->
+                    <g class="fg-node" style="--i:2">
+                        <rect class="fg-plinth" x="130" y="316" width="120" height="30" rx="4"/>
+                        <path class="fg-hatch" d="M134 356l8-10M144 356l8-10M154 356l8-10M164 356l8-10M174 356l8-10M184 356l8-10M194 356l8-10M204 356l8-10M214 356l8-10M224 356l8-10M234 356l8-10"/>
+                        <g class="fg-arm fg-arm--real">
+                            <path class="fg-body" d="M166 316L170 302H198L202 316Z"/>
+                            <g class="fg-j1">
+                                <line class="fg-link-o" x1="184" y1="296" x2="198" y2="226"/><line class="fg-link-i" x1="184" y1="296" x2="198" y2="226"/>
+                                <g class="fg-j2">
+                                    <line class="fg-link-o" x1="198" y1="226" x2="256" y2="212"/><line class="fg-link-i" x1="198" y1="226" x2="256" y2="212"/>
+                                    <g class="fg-j3">
+                                        <line class="fg-link-o fg-link-sm" x1="256" y1="212" x2="260" y2="236"/><line class="fg-link-i fg-link-sm" x1="256" y1="212" x2="260" y2="236"/>
+                                        <path class="fg-grip" d="M250 236H270M252 236V250M268 236V250"/>
+                                        <circle class="fg-joint" cx="256" cy="212" r="6"/>
+                                    </g>
+                                    <circle class="fg-joint" cx="198" cy="226" r="8"/><circle class="fg-pin" cx="198" cy="226" r="1.6"/>
+                                </g>
+                                <circle class="fg-joint" cx="184" cy="296" r="10"/><circle class="fg-pin" cx="184" cy="296" r="1.8"/>
+                            </g>
+                        </g>
+                        <text class="fg-note" x="190" y="378" text-anchor="middle">PHYSICAL CELL</text>
+                        <text class="fg-note-sm" x="190" y="394" text-anchor="middle">ros2_control</text>
+                    </g>
+
+                    <!-- digital twin: the same arm as a dashed skeleton, a beat behind -->
+                    <g class="fg-node" style="--i:3">
+                        <rect class="fg-plinth fg-ghost" x="390" y="316" width="120" height="30" rx="4"/>
+                        <g class="fg-arm fg-arm--twin">
+                            <path class="fg-bone" d="M426 316L430 302H458L462 316Z"/>
+                            <g class="fg-j1">
+                                <line class="fg-bone" x1="444" y1="296" x2="458" y2="226"/>
+                                <g class="fg-j2">
+                                    <line class="fg-bone" x1="458" y1="226" x2="516" y2="212"/>
+                                    <g class="fg-j3">
+                                        <line class="fg-bone" x1="516" y1="212" x2="520" y2="236"/>
+                                        <path class="fg-bone" d="M510 236H530M512 236V250M528 236V250"/>
+                                        <circle class="fg-bone-joint" cx="516" cy="212" r="6"/>
+                                    </g>
+                                    <circle class="fg-bone-joint" cx="458" cy="226" r="8"/>
+                                </g>
+                                <circle class="fg-bone-joint" cx="444" cy="296" r="10"/>
+                            </g>
+                        </g>
+                        <text class="fg-note" x="450" y="378" text-anchor="middle">DIGITAL TWIN</text>
+                        <text class="fg-note-sm" x="450" y="394" text-anchor="middle">isaac sim</text>
+                    </g>
+                    <text class="fg-note-sm fg-node" style="--i:3" x="320" y="358" text-anchor="middle">sync · Δ 12 ms</text>
+
+                    <!-- signals: the one place gold appears -->
+                    <g class="fg-signals" aria-hidden="true">
+                        <circle class="fg-live-ring" cx="376" cy="74" r="2.6">
+                            <animate attributeName="r" values="2.6;9" dur="2.4s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values=".55;0" dur="2.4s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle class="fg-pulse" r="2.6" opacity="0"><animateMotion dur="3.6s" begin="0s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;.62;1" calcMode="linear"><mpath href="#fg-w-ros-arm"/></animateMotion><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.08;.54;.62;1" dur="3.6s" begin="0s" repeatCount="indefinite"/></circle>
+                        <circle class="fg-pulse" r="2.6" opacity="0"><animateMotion dur="3.2s" begin="1.1s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;.6;1" calcMode="linear"><mpath href="#fg-w-arm-dash"/></animateMotion><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.08;.52;.6;1" dur="3.2s" begin="1.1s" repeatCount="indefinite"/></circle>
+                        <circle class="fg-pulse" r="2.6" opacity="0"><animateMotion dur="3.2s" begin="1.9s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;.6;1" calcMode="linear"><mpath href="#fg-w-twin-dash"/></animateMotion><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.08;.52;.6;1" dur="3.2s" begin="1.9s" repeatCount="indefinite"/></circle>
+                        <circle class="fg-pulse" r="2.6" opacity="0"><animateMotion dur="2.8s" begin=".5s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;.5;1" calcMode="linear"><mpath href="#fg-w-sync"/></animateMotion><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.06;.44;.5;1" dur="2.8s" begin=".5s" repeatCount="indefinite"/></circle>
+                        <circle class="fg-pulse" r="2.6" opacity="0"><animateMotion dur="4.4s" begin="2.4s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;.4;1" calcMode="linear"><mpath href="#fg-w-rag-dash"/></animateMotion><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.06;.34;.4;1" dur="4.4s" begin="2.4s" repeatCount="indefinite"/></circle>
+                        <circle class="fg-pulse" r="2.6" opacity="0"><animateMotion dur="4.4s" begin="3.3s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;.4;1" calcMode="linear"><mpath href="#fg-w-ros-dash"/></animateMotion><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.06;.34;.4;1" dur="4.4s" begin="3.3s" repeatCount="indefinite"/></circle>
+                    </g>
+                </svg>
+                <figcaption data-i18n="fgArtCaption">System sketch · How the four goals connect</figcaption>
             </figure>
         </div>
         <div class="fg-grid">
             <article class="fg-card" aria-labelledby="fg-robotics">
-                <div class="fg-card-top">
-                    <span class="fg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M3 11v4m18-4v4M9 19v2m6-2v2M9 15h6"/><circle cx="9" cy="11" r=".75"/><circle cx="15" cy="11" r=".75"/></svg></span>
-                    <span class="fg-number" aria-hidden="true">01</span>
-                </div>
+                <div class="fg-card-top"><span class="fg-number" aria-hidden="true">01</span><span class="fg-tag" aria-hidden="true">ROS 2</span></div>
                 <h3 id="fg-robotics" data-i18n="fg1Title">Build a Foundation in Robotics</h3>
                 <p class="fg-topics" data-i18n="fg1Topics">ROS 2 · Sensors · Robot Communication</p>
                 <p class="fg-description" data-i18n="fg1Desc">I want to understand how robots exchange information, interpret sensor data, and coordinate actions. My focus is learning ROS 2 through small, practical experiments, while exploring ROS 1 concepts when working with older projects.</p>
             </article>
             <article class="fg-card" aria-labelledby="fg-simulation">
-                <div class="fg-card-top">
-                    <span class="fg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5v8l-9 5-9-5V8l9-5Zm0 10 9-5M12 13 3 8m9 5v8M7.5 5.5l9 5"/></svg></span>
-                    <span class="fg-number" aria-hidden="true">02</span>
-                </div>
+                <div class="fg-card-top"><span class="fg-number" aria-hidden="true">02</span><span class="fg-tag" aria-hidden="true">Isaac Sim</span></div>
                 <h3 id="fg-simulation" data-i18n="fg2Title">Explore Simulation &amp; Digital Twins</h3>
                 <p class="fg-topics" data-i18n="fg2Topics">NVIDIA Isaac Sim · Digital Twins · Physical AI</p>
                 <p class="fg-description" data-i18n="fg2Desc">Building on my interest in 3D simulation, I want to explore NVIDIA Isaac Sim and understand how virtual environments help test robotic behaviour. Longer term, I hope to learn how digital twins stay connected to real systems and how Physical AI brings perception, reasoning, and action together.</p>
             </article>
             <article class="fg-card" aria-labelledby="fg-ai">
-                <div class="fg-card-top">
-                    <span class="fg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9l5 5v3M14 3v5h5M7 8h3M7 12h4m-4 4h3"/><circle cx="16" cy="16" r="4"/><path d="m19 19 3 3"/></svg></span>
-                    <span class="fg-number" aria-hidden="true">03</span>
-                </div>
+                <div class="fg-card-top"><span class="fg-number" aria-hidden="true">03</span><span class="fg-tag" aria-hidden="true">RAG</span></div>
                 <h3 id="fg-ai" data-i18n="fg3Title">Build Useful AI-Powered Web Experiences</h3>
                 <p class="fg-topics" data-i18n="fg3Topics">RAG · Knowledge Search · Evaluation</p>
                 <p class="fg-description" data-i18n="fg3Desc">I want to create web applications that help people find and use information more effectively. Through retrieval-augmented generation, I plan to learn how to connect AI responses to relevant documents and evaluate whether those responses are accurate, useful, and supported by evidence.</p>
             </article>
             <article class="fg-card" aria-labelledby="fg-connected">
-                <div class="fg-card-top">
-                    <span class="fg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M9 8v10m5 0v3m-6 0h8m-4-7 2-3 2 2 2-3"/></svg></span>
-                    <span class="fg-number" aria-hidden="true">04</span>
-                </div>
+                <div class="fg-card-top"><span class="fg-number" aria-hidden="true">04</span><span class="fg-tag" aria-hidden="true">Dashboard</span></div>
                 <h3 id="fg-connected" data-i18n="fg4Title">Connect Web, AI &amp; Robotics</h3>
                 <p class="fg-topics" data-i18n="fg4Topics">Interactive Dashboards · Simulation Data · Connected Systems</p>
                 <p class="fg-description" data-i18n="fg4Desc">My longer-term ambition is to bring these interests together in clear, useful interfaces. I want to explore tools that make robotics and simulation data easier to understand—from monitoring a virtual workspace to comparing experiments and investigating unexpected behaviour.</p>

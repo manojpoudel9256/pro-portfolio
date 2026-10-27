@@ -168,3 +168,21 @@ window.__motion.then(function () {
     });
 });
 
+
+// FUTURE GOALS MAP — the wires draw on when the map scrolls in (desktop,
+// motion allowed, and only if it starts below the fold); the arm/twin cycle
+// and signal pulses run only while the map is on screen. Reduced motion keeps
+// it a still drawing.
+(function () {
+    const art = document.querySelector(".fg-art");
+    const map = art && art.querySelector(".fg-map");
+    if (!map || !map.pauseAnimations) return;
+    map.pauseAnimations();
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (matchMedia("(min-width: 769px)").matches && art.getBoundingClientRect().top > window.innerHeight) art.classList.add("fg-armed");
+    new IntersectionObserver(([entry]) => {
+        art.classList.toggle("is-live", entry.isIntersecting);
+        if (entry.isIntersecting) { art.classList.add("fg-in"); map.unpauseAnimations(); }
+        else map.pauseAnimations();
+    }, { threshold: 0.15 }).observe(art);
+})();
