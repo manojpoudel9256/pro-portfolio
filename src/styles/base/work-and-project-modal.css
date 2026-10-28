@@ -199,15 +199,6 @@
     min-height: 0;
 }
 
-/* row 2 — a 16:9 app card next to a phone-screenshot app card */
-.pw-row-apps {
-    grid-template-columns: 1.55fr 1fr;
-}
-
-.pw-row-apps .pw-app .pw-cover {
-    flex: 1 1 auto;
-}
-
 /* row 3 — Everest as a wide card: image left, text right */
 @media (min-width: 769px) {
     .pw-wide {

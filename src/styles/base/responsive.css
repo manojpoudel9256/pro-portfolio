@@ -95,59 +95,10 @@
     }
 
     /* app cards — compact image-left / text-right (matches reference) */
-    .pw-app {
-        flex-direction: row;
-    }
-
-    .pw-app .pw-cover {
-        flex: 0 0 42%;
-        min-height: 0;
-        align-self: stretch;
-        border-right: 1px solid var(--hairline);
-    }
 
     /* image fills the column from the top — no empty space, no side-crop */
-    .pw-app .pw-cover img {
-        object-fit: cover;
-        object-position: top center;
-    }
 
     /* keep the text compact so the card doesn't stretch tall */
-    .pw-app .pw-body {
-        flex: 1 1 auto;
-        justify-content: center;
-        gap: var(--space-1);
-        padding: var(--space-3);
-    }
-
-    .pw-app .pw-name {
-        font-size: var(--fs-400);
-        line-height: 1.12;
-    }
-
-    .pw-app .pw-desc {
-        font-size: var(--fs-200);
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    .pw-app .pw-tags {
-        gap: 6px;
-        margin-top: 2px;
-    }
-
-    .pw-app .pw-chip {
-        font-size: 0.62rem;
-        padding: 3px 9px;
-    }
-
-    .pw-app .pw-view {
-        margin-top: var(--space-2);
-        font-size: var(--fs-200);
-    }
 
     /* Everest (full-width) title stays larger */
     .pw-hero .pw-name {

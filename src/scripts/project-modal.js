@@ -58,32 +58,44 @@ const PROJECTS = {
         }
     },
     budget: {
-        img: "assets/images/projects/personal-finance-app.webp", cover: false, type: "app",
+        img: "assets/images/projects/budget-tracker-16x9.webp", cover: true, fullImg: true, type: "app",
         live: "https://budget-tracker-v2-gamma.vercel.app/",
         en: {
-            cs: ["I first built this in PHP at vocational college to practise what I was learning, hosted on the college's Lolipop server. When that two-year server plan expired, the app went offline.", "Rebuilt it from the ground up as a modern JavaScript web app (React, Vite, Tailwind CSS), added receipt scanning and an AI spending advisor with Gemini, and moved it to Vercel.", "Back online and in daily use — I track my own income, expenses and budgets with it."],
-            title: "Personal Finance App",
-            desc: "A personal finance app that shows your money at a glance — balance, income and expenses on an elegant card, plus recent activity. You can add transactions, scan a receipt with your camera, set monthly budgets, and ask an AI advisor for spending insights. Built mobile-first, so it feels like a native app on your phone.",
+            cs: ["I first built this in PHP at vocational college to practise what I was learning, hosted on the college's Lolipop server. When that two-year plan expired, the app went offline. Typing in every receipt by hand was also slow, and Japanese payslips are hard to read when Japanese isn't your first language.", ["I rebuilt it from scratch as an installable, offline-ready web app in plain JavaScript, with no framework:", "Home at a glance: balance, income and spending, a budget line with a marker for today, safe-to-spend per day, a month-end forecast, and a comparison with last month.", "Add in seconds: your most-used categories are one tap away, with Undo instead of “are you sure?”.", "Scan receipts and salary slips (photo or PDF): read on your phone by default, with no account or key. Gemini can read harder documents more accurately, using your own free Google key, which the app tests before saving it. Take-home pay is recorded as income; deductions are kept as details.", "Budget Assistant: ask “How much did I spend on groceries this month?”, 今月の家賃以外の支出 or yo mahina kati kharcha?. Every number is calculated on the device and shows how it was worked out. Gemini only helps read an unusual question and never sees your amounts.", "Budgets and history: monthly limits per category, including for one month only, with a pace marker and a “spending fast” warning; search and filters across your whole history.", "Reports: a spending breakdown, monthly trends, and a shareable report image.", "Safe data: backup reminders, checked imports, and one step back after an import or reset."], "Back online and in daily use — I track my income, salary, spending and budgets with it every week."],
+            title: "Budget Tracker / 家計簿",
+            desc: "A calm, bilingual budget book for life in Japan. It shows your balance, what you've spent this month and what's safe to spend today. You can scan a receipt or a Japanese salary slip to add it, and ask questions about your money in English, 日本語 or Romanised Nepali. Designed like a Japanese account book — warm paper, ink and a red hanko-style stamp — and built mobile-first, so it feels like a native app on your phone. Your records stay on your device.",
+            installExtra: "It works offline too.",
             stack: [
-                ["React", "Builds the fast, component-based interface and keeps the screen in sync with your data."],
-                ["Vite", "The build tool and dev server — bundles the app and gives instant reloads while developing."],
-                ["Tailwind CSS", "Utility-first styling for the polished, responsive mobile design."],
-                ["Gemini AI (vision)", "Reads receipts from a photo and powers the AI Advisor’s spending insights."],
-                ["Browser storage (localStorage)", "Keeps your transactions and budgets privately on your own device."],
-                ["Vercel", "Hosts the app and serves it instantly worldwide."]
+                ["JavaScript, HTML and CSS", "No framework or build tooling for the app itself, so it stays light and fast."],
+                ["Custom design system (“Washi Ledger”)", "A self-hosted serif (Fraunces) and sans-serif (Instrument Sans), ruled ledger layouts, and chart colours checked for colour-blind readers."],
+                ["Custom SVG charts and Canvas", "Interactive charts, and the shareable report image."],
+                ["Tesseract.js and PDF.js", "Read English and Japanese receipts and PDFs on the device."],
+                ["Google Gemini API", "Optional, more accurate document reading; it also helps interpret unusual assistant questions."],
+                ["Vercel serverless function", "Keeps the Gemini key on the server and adds rate limits so the service can't be abused."],
+                ["Browser storage (localStorage)", "Your records stay on your own device, with exact money calculations and data checks."],
+                ["Service worker and web app manifest", "Install it like an app; it works offline."],
+                ["Node.js tests and Playwright", "Automated checks for the money calculations, the assistant, security, every screen at phone to desktop sizes, and real on-device scanning."],
+                ["Security headers", "A strict Content Security Policy, HSTS and protection against being embedded in other sites."],
+                ["Vercel", "Hosting, with automatic deploys from GitHub."]
             ]
         },
         ja: {
-            cs: ["専門学校で学んだ PHP の練習として最初に開発し、学校提供の Lolipop サーバーで公開していました。2年間の利用期間が終了し、アプリが使えなくなりました。", "React・Vite・Tailwind CSS でモダンな JavaScript の Web アプリとして一から作り直し、Gemini によるレシート読み取りと AI 支出アドバイザーを追加して、Vercel に移行しました。", "再び公開され、毎日使っています。自分の収入・支出・予算をこのアプリで管理しています。"],
-            title: "家計管理アプリ",
-            desc: "お金の状況をひと目で把握できる家計管理アプリ。残高・収入・支出を美しいカードに表示し、最近のアクティビティも確認できます。取引の追加、カメラでのレシート読み取り、月次予算の設定、AIアドバイザーへの支出相談まで可能。モバイルファーストで、スマホでネイティブアプリのように使えます。",
+            cs: ["専門学校で学んだ PHP の練習として最初に開発し、学校の Lolipop サーバーで公開していました。2年間の利用期間が終わるとアプリは使えなくなりました。また、レシートを毎回手入力するのは時間がかかり、日本語が母語でない人にとって日本の給与明細は読みにくいものです。", ["フレームワークを使わないプレーンな JavaScript で、インストールしてオフラインでも使えるウェブアプリとして一から作り直しました：", "ひと目でわかるホーム：残高、収入と支出、今日の位置を示す予算ライン、1日あたり安心して使える金額、月末の見込み、先月との比較。", "数秒で記録：よく使うカテゴリーはワンタップ。「本当に削除しますか？」の代わりに「元に戻す」で取り消せます。", "レシート・給与明細のスキャン（写真またはPDF）：標準ではアカウントもキーも不要で、スマホ上で読み取ります。読み取りにくい書類は、ご自身の無料 Google キーで Gemini を使うとより正確に読み取れます（キーは保存前にアプリが動作を確認します）。手取り額は収入として記録し、控除は内訳として残します。", "家計アシスタント：「How much did I spend on groceries this month?」「今月の家賃以外の支出」「yo mahina kati kharcha?」のように質問できます。数値はすべて端末内で計算し、計算の根拠も表示します。Gemini は珍しい質問の解釈を手伝うだけで、金額データを見ることはありません。", "予算と履歴：カテゴリーごとの月間上限（今月だけの設定も可能）、ペースマーカーと「使いすぎ」の警告、全履歴の検索とフィルター。", "レポート：支出の内訳、月ごとの推移、共有できるレポート画像。", "安全なデータ管理：バックアップのリマインダー、チェック付きのインポート、インポートやリセット後に1ステップ戻せる機能。"], "再び公開され、毎日使っています。毎週、収入・給料・支出・予算をこのアプリで管理しています。"],
+            title: "家計簿 / Budget Tracker",
+            desc: "日本での暮らしのための、落ち着いたバイリンガル家計簿。残高、今月の支出、今日安心して使える金額がひと目でわかります。レシートや日本の給与明細をスキャンして登録でき、お金についての質問を英語・日本語・ローマ字表記のネパール語でできます。温かみのある和紙、墨、赤いはんこ風のスタンプで日本の家計簿のようにデザインし、モバイルファーストで作っているので、スマホではネイティブアプリのように使えます。記録は端末内に保存されます。",
+            installExtra: "オフラインでも使えます。",
             stack: [
-                ["React", "コンポーネントベースの高速なUIを構築し、データと画面を常に同期します。"],
-                ["Vite", "ビルドツール兼開発サーバー。アプリをバンドルし、開発中は即時リロードを提供します。"],
-                ["Tailwind CSS", "洗練されたレスポンシブなモバイルデザインのためのユーティリティファーストなスタイリングです。"],
-                ["Gemini AI（ビジョン）", "写真からレシートを読み取り、AIアドバイザーの支出分析を実現します。"],
-                ["ブラウザストレージ（localStorage）", "取引や予算のデータを端末内にプライベートに保存します。"],
-                ["Vercel", "アプリを世界中へ瞬時に配信するホスティングです。"]
+                ["JavaScript・HTML・CSS", "アプリ本体はフレームワークもビルドツールも使わないため、軽量で高速です。"],
+                ["独自デザインシステム（Washi Ledger）", "セルフホストのセリフ体（Fraunces）とサンセリフ体（Instrument Sans）、罫線入りの帳簿レイアウト、色覚の多様性に配慮して確認したチャートの配色。"],
+                ["自作の SVG チャートと Canvas", "操作できるグラフと、共有できるレポート画像。"],
+                ["Tesseract.js と PDF.js", "英語・日本語のレシートや PDF を端末内で読み取ります。"],
+                ["Google Gemini API", "任意で使える、より正確な書類の読み取り。アシスタントへの珍しい質問の解釈も手伝います。"],
+                ["Vercel サーバーレス関数", "Gemini のキーをサーバー側で管理し、悪用を防ぐためのレート制限を加えています。"],
+                ["ブラウザストレージ（localStorage）", "記録はご自身の端末内に保存され、正確な金額計算とデータチェックを行います。"],
+                ["Service Worker とウェブアプリマニフェスト", "アプリのようにインストールでき、オフラインでも動作します。"],
+                ["Node.js テストと Playwright", "金額計算、アシスタント、セキュリティ、スマホからPCまでの全画面、端末上での実際のスキャンを自動でチェックします。"],
+                ["セキュリティヘッダー", "厳格なコンテンツセキュリティポリシー、HSTS、他サイトへの埋め込み防止。"],
+                ["Vercel", "GitHub からの自動デプロイによるホスティングです。"]
             ]
         }
     },
@@ -207,7 +219,7 @@ function renderProject() {
                 row[1].slice(1).forEach(function (item) {
                     const li = document.createElement("li");
                     const cut = item.search(/[:：]/);
-                    if (cut > 0 && cut < 40) {
+                    if (cut > 0 && cut < 60) {
                         const label = document.createElement("strong"); label.textContent = item.slice(0, cut + 1);
                         li.append(label, " " + item.slice(cut + 1).trim());
                     } else li.textContent = item;

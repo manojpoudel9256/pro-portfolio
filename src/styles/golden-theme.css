@@ -302,14 +302,6 @@ html[data-theme="dark"] .lang-cred {
 @media (max-width: 768px) {
     .pw-projects { gap: var(--space-3); }
     .pw-row2:has(> .pw-card:not(.pw-hide)) { display: contents; }
-    .pw-app .pw-body { min-width: 0; }
-    .pw-app .pw-cover {
-        flex: 0 0 38%;
-        border-radius: var(--radius-lg);
-        border-right: 0;
-        overflow: hidden;
-    }
-    .pw-app .pw-tags { gap: 5px; }
     .pw-chip { white-space: normal; overflow-wrap: anywhere; }
     .pw-body { padding: var(--space-3); }
     .pw-title { font-size: var(--section-heading); }
